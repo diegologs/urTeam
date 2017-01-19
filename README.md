@@ -6,8 +6,8 @@ __Nombre:__
 
 __Descripción:__ 
 * urTeam es una nueva aplicacion web para organizar tus encuentros deportivos, estara orientada sobre todo para deportes en ruta de exterior (ciclismo, running, patines...).  
-* La parte publica de la web constara  
-* La parte privada se encargara
+* La parte publica de la web constará de los eventos, los grupos y de la página personal de cada usuario.  
+* La parte privada se compone de el panel de control de cada usuario donde podrá modificar su perfil, añadir eventos y administrar sus grupos.
 
 __Entidades:__
 * ___Usuarios:___ Personas que se registran en la aplicacion con el animo de asistir y crear eventos de su deporte favorito.
