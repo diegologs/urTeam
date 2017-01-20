@@ -1,0 +1,26 @@
+.navbar-urTeam {
+    background-color: #5eba7d;
+    border-color: #9c89b8;
+    color: #9c89b8;
+}
+
+.icon-bar {
+    background-color: #9c89b8;
+}
+
+.minav {
+    margin: auto;
+}
+body{
+    background-color: black;
+    color: white;
+}
+
+.minav a{
+    color: white;
+    font-weight: bold;
+}
+.minav a:hover{
+    color: #9c89b8;
+}
+
