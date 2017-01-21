@@ -1,3 +1,5 @@
+/* CSS del navbar*/
+
 .navbar-urTeam {
     background-color: #5eba7d;
     border-color: #9c89b8;
@@ -11,10 +13,7 @@
 .minav {
     margin: auto;
 }
-body{
-    background-color: black;
-    color: white;
-}
+
 
 .minav a{
     color: white;
@@ -23,4 +22,56 @@ body{
 .minav a:hover{
     color: #9c89b8;
 }
+
+/* CSS del body y su contenido*/
+
+body{
+    background-color: black;
+    color: white;
+    background: linear-gradient( rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9) ), url('../images/bg.jpg');
+}
+
+
+
+/* Esto adapta la imagen al contenedor */
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* CSS de los eventos */
+
+.event{
+    background-color: black;
+    overflow: auto;
+    margin-bottom: 30px;
+    
+}
+
+.event_date{
+    padding-left: 10px;
+
+}
+
+.event_info{   
+    margin-top: 20px;
+     border-top: 1px solid white;
+     margin-bottom:20px;
+}
+
+.event_participants{
+   text-align: right;
+}
+
+
+
+.inline{
+    display: inline-block;
+}
+
+.sport_title{
+    color:#32bdf0;
+}
+
+
 
