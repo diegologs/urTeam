@@ -23,17 +23,20 @@
     border-bottom-color: transparent;
 }
 
-.minav li a:hover,
-.minav li a:focus {
-    color: #9c89b8;
+.minav li a:hover {
+    color: #32bdf0;
+    text-shadow: 2px 2px 5px black;
     background-color: transparent;
-    border-bottom-style: solid;
-    border-bottom-color: #9c89b8;
+}
+
+.minav .active a {
+    color: #32bdf0;
+    text-shadow: 2px 2px 5px black;
+    background-color: transparent;
 }
 
 
 /* CSS del body y su contenido*/
-
 
 body {
     background-color: black;
