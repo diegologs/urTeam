@@ -1,10 +1,5 @@
-# Pratica DAW: Diseña e implementa una aplicacion web
+# urTeam
 
-## Fase 1: Equipo de desarrollo y tematíca web
-__Nombre:__  
-* *urTeam*
-
-__Descripción:__ 
 * urTeam es una nueva aplicacion web para organizar tus encuentros deportivos, estara orientada sobre todo para deportes en ruta de exterior (ciclismo, running, patines...).  
 * La parte publica de la web constará de los eventos, los grupos y de la página personal de cada usuario.  
 * La parte privada se compone de el panel de control de cada usuario donde podrá modificar su perfil, añadir eventos y administrar sus grupos.
@@ -15,7 +10,7 @@ __Entidades:__
 * ___Deportes:___ Lista de deportes practicados por los usuarios de la aplicacion.
 * ___Eventos:___ Los eventos los podran crear tanto los usuarios a nivel particular asi como los _admin_ de los grupos. Estos eventos podran ser privados o publicos y constaran de un titulo una descripcion asi como del horario en el que se realizaran.
 
-__Integrantes del equipo:__
+__Equipo de desarrollo:__
 * Jose Miguel García Benayas
   * _email:_ jm.garciaben@alumnos.urjc.es
   * _GitHub:_ [JoseMiguel92](https://github.com/JoseMiguel92)
