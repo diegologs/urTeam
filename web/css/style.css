@@ -34,10 +34,11 @@
 
 /* CSS del body y su contenido*/
 
+
 body {
     background-color: black;
     color: white;
-    background: linear-gradient( rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url('../images/bg.jpg');
+    background: linear-gradient( rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), url('../images/bg.jpg');
 }
 
 
