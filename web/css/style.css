@@ -2,13 +2,13 @@
 
 .navbar-urTeam {
     background-color: #5eba7d;
-    border-color: #9c89b8;
     color: #9c89b8;
     margin: auto;
 }
 
 .icon-bar {
-    background-color: #9c89b8;
+    background-color: #32bdf0;
+    border-color: #32bdf0;
 }
 
 .minav {
@@ -24,15 +24,18 @@
 }
 
 .minav li a:hover {
-    color: #32bdf0;
-    text-shadow: 2px 2px 5px black;
+    text-decoration: underline;
     background-color: transparent;
 }
 
-.minav .active a {
+.minav .active a,
+.minav .active a:hover {
     color: #32bdf0;
-    text-shadow: 2px 2px 5px black;
+    border-bottom-style: solid;
+    border-bottom-color: #32bdf0;
+    text-shadow: 1px 1px #4f5b9d;
     background-color: transparent;
+    text-decoration: none;
 }
 
 

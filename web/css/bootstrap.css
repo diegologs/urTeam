@@ -1590,6 +1590,7 @@ pre code {
 @media (min-width: 768px) {
   .container {
     width: 750px;
+      align-content: center;
   }
 }
 @media (min-width: 992px) {
