@@ -1,0 +1,29 @@
+@media screen and (min-width: 480px) {
+
+    .profile-header-container{
+    margin: 0 auto;
+    text-align: center;
+    }
+}
+
+/**
+ * Profile image component
+ */
+.profile-header-container{
+    margin: 0 auto;
+    text-align: left;
+}
+
+.profile-header-img {
+    padding: 54px;
+}
+
+.profile-header-img > img.img-circle {
+    width: 200px;
+    height: 200px;
+    border: 4px solid  #5eba7d;
+}
+
+.profile-header {
+    margin-top: 43px;
+}
