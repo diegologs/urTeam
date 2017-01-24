@@ -1,0 +1,41 @@
+.group-header{
+    min-height: 200px;
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/talajara.jpg');
+    border-bottom: 5px solid #32bdf0;
+    position: relative;
+    overflow: auto;
+}
+
+.group-header-info{
+    margin-left: 30px;
+    margin-right: 30px;
+   max-width: 100%;
+    padding-top: 30px;
+}
+
+.group-name{
+    padding-left: 30px;
+    font-weight: bold;
+    
+}
+
+.group-members{
+    border-top: 2px solid white;
+    padding-top: 20px;
+}
+
+.group-btn{
+    margin-top: 40px;
+}
+
+.group-menu ul li{
+    display: inline;
+    padding: 10%;
+
+}
+
+.group-menu{
+    background-color: black;
+    height: 40px;
+    padding: 10px;
+}
