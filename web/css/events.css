@@ -10,14 +10,14 @@
 .name {
     display: block;
     font-size: 2em;
-    font-weight: 200;
+    font-weight: lighter;
     line-height: 1;
 }
 
 .year {
     display: block;
     font-size: 2em;
-    font-weight: 100;
+    font-weight: lighter;
     line-height: 1;
 }
 
@@ -28,7 +28,7 @@ sport {
 
 sport>p {
     font-size: 15pt;
-    font-weight: 100;
+    font-weight: lighter;
     line-height: 1;
 }
 
@@ -68,14 +68,14 @@ time>span {
 time>.day {
     display: block;
     font-size: 4em;
-    font-weight: 100;
+    font-weight: lighter;
     line-height: 1;
 }
 
 time>.month {
     display: block;
     font-size: 24pt;
-    font-weight: 900;
+    font-weight: bold;
     line-height: 1;
 }
 
