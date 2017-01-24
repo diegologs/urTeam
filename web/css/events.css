@@ -1,0 +1,107 @@
+.event-primary h2 {
+    margin-top: 10px;
+}
+
+.nopadding {
+    padding: 0 !important;
+    margin: 0!important;
+}
+
+.name {
+    display: block;
+    font-size: 2em;
+    font-weight: 200;
+    line-height: 1;
+}
+
+.year {
+    display: block;
+    font-size: 2em;
+    font-weight: 100;
+    line-height: 1;
+}
+
+sport {
+    padding-left: 15px;
+    display: block;
+}
+
+sport>p {
+    font-size: 15pt;
+    font-weight: 100;
+    line-height: 1;
+}
+
+time {
+    display: inline-block;
+    width: 100%;
+    color: rgb(255, 255, 255);
+    padding: 5px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+time.purple {
+    background-color: #9c89b8
+}
+
+time.blue {
+    background-color: #32bdf0
+}
+
+time.green {
+    background-color: #5eba7d
+}
+
+time.white {
+    background-color: #ffffff
+}
+
+time.black {
+    background-color: #000000
+}
+
+time>span {
+    display: none;
+}
+
+time>.day {
+    display: block;
+    font-size: 4em;
+    font-weight: 100;
+    line-height: 1;
+}
+
+time>.month {
+    display: block;
+    font-size: 24pt;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.panel {
+    margin-top: 20px;
+}
+
+.panel-primary>.panel-heading {
+    background-color: #32bdf0;
+    border-color: #32bdf0;
+    overflow: auto;
+}
+
+.panel-primary>.panel-body {
+    color: #fff!important;
+    background-color: #32bdf0;
+    border-color: #32bdf0;
+}
+
+.panel-primary>.panel-footer {
+    color: #fff!important;
+    background-color: #32bdf0;
+    border-color: #32bdf0;
+}
+
+.panel-primary>.panel-footer p,
+.panel-primary a {
+    color: #fff;
+}
