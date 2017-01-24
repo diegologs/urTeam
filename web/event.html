@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/event.css">
-
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
 
 </head>
 
@@ -47,39 +47,130 @@
         </div>
     </nav>
 
-
     <div class="container">
+        <!-- EVENT FAST INFO -->
         <div class="row panel">
             <div class="col-md-4 bg_blur ">
-                <a href="#" class="follow_btn">Follow</a>
+                <a href="#" class="follow_btn">Seguir</a>
             </div>
             <div class="col-md-8  col-xs-12">
                 <div class="header">
                     <h1>Nombre Evento</h1>
                     <h4><i class="fa fa-calendar-check-o "></i><span> Fecha</span></h4>
+                    <h4><i class="fa fa-map-marker "></i><span> Lugar</span></h4>
                     <h4>Tipo de deporte</h4>
-                    <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe a debitis quam corrupti voluptates ipsa, nostrum accusantium odio minus suscipit voluptatibus esse inventore distinctio fuga sapiente ut, officia numquam architecto.</span>
                 </div>
             </div>
         </div>
-
+        <!-- END EVENT FAST INFO -->
+        <!-- EVENT BAR -->
         <div class="row nav">
-            <div class="col-md-12 col-xs-12" style="margin: 0px;padding: 0px;">
-                <div class="col-md-4 col-xs-4 well"><i class="fa fa-users fa-lg"></i> 16</div>
+            <div class="col-md-12 col-xs-12">
+                <div class="col-md-3 col-xs-3 well">
+                    <i class="fa fa-users fa-lg"></i> 16
+                </div>
 
-                <div class="col-md-4 col-xs-4 well"><i class="fa fa-thumbs-o-up fa-lg"></i> 26</div>
-                <div class="col-md-4 col-xs-4 well"><i class="fa fa-eur fa-lg"></i> 14</div>
+                <div class="col-md-3 col-xs-3 well">
+                    <i class="fa fa-thumbs-o-up fa-lg"></i> 26
+                </div>
+
+                <div class="col-md-3 col-xs-3 well">
+                    <i class="fa fa-eur fa-lg"></i> 14
+                </div>
+
+                <div class="col-md-3 col-xs-3 well" data-toggle="modal" data-target="#modalShareEvent">
+                    <i class="fa fa-share-alt"></i>
+                </div>
             </div>
         </div>
+        <!-- END EVENT BAR -->
+        <!-- EVENT DESCRIPTION -->
+        <div class="info">
+            <h3>Información</h3>
+            <hr>
+            <div class="info-text">
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,
+            </div>
+        </div>
+        <!-- END EVENT DESCRIPTION -->
+        <h3>Fotos</h3>
+        <hr>
+        <!-- EVENT GALLERY -->
+        <div class='list-group gallery'>
+            <div class='col-sm-4 col-xs-6 col-md-3 col-lg-3'>
+                <a class="thumbnail fancybox" rel="ligthbox" href="http://placehold.it/300x320.png">
+                    <img class="img-responsive" alt="" src="http://placehold.it/320x320" />
+                    <!-- text-right / end -->
+                </a>
+            </div>
+            <!-- col-6 / end -->
+            <div class='col-sm-4 col-xs-6 col-md-3 col-lg-3'>
+                <a class="thumbnail fancybox" rel="ligthbox" href="http://placehold.it/300x320.png">
+                    <img class="img-responsive" alt="" src="http://placehold.it/320x320" />
+                    <!-- text-right / end -->
+                </a>
+            </div>
+            <!-- col-6 / end -->
+            <div class='col-sm-4 col-xs-6 col-md-3 col-lg-3'>
+                <a class="thumbnail fancybox" rel="ligthbox" href="http://placehold.it/300x320.png">
+                    <img class="img-responsive" alt="" src="http://placehold.it/320x320" />
+                    <!-- text-right / end -->
+                </a>
+            </div>
+            <!-- col-6 / end -->
+            <div class='col-sm-4 col-xs-6 col-md-3 col-lg-3'>
+                <a class="thumbnail fancybox" rel="ligthbox" href="http://placehold.it/300x320.png">
+                    <img class="img-responsive" alt="" src="http://placehold.it/320x320" />
+                    <!-- text-right / end -->
+                </a>
+            </div>
+            <!-- col-6 / end -->
+            <div class='col-sm-4 col-xs-6 col-md-3 col-lg-3'>
+                <a class="thumbnail fancybox" rel="ligthbox" href="http://placehold.it/300x320.png">
+                    <img class="img-responsive" alt="" src="http://placehold.it/320x320" />
+                    <!-- text-right / end -->
+                </a>
+            </div>
+            <!-- col-6 / end -->
+        </div>
+        <!-- list-group / end -->
+        <!-- END EVENT GALLERY -->
     </div>
 
 
 
 
 
+    <!-- MODAL SHARE SNIPP -->
+    <div class="modal fade" id="modalShareEvent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Cerrar</span></button>
+                    <h4 class="modal-title" id="myModalLabel"><i class="fa fa-share-alt"></i> Compartir</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        <a title="Facebook" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-facebook fa-stack-1x"></i></span></a>
+                        <a title="Twitter" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-twitter fa-stack-1x"></i></span></a>
+                        <a title="Google+" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-google-plus fa-stack-1x"></i></span></a>
+                        <a title="Reddit" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-reddit fa-stack-1x"></i></span></a>
+                        <a title="WordPress" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-wordpress fa-stack-1x"></i></span></a>
+                        <a title="Stumbleupon" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-stumbleupon fa-stack-1x"></i></span></a>
+                        <a title="E-mail" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-envelope fa-stack-1x"></i></span></a>
+                        <a title="Print" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-print fa-stack-1x"></i></span></a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END MODAL SHARE SNIPP -->
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+    <script src="js/fancybox.js"></script>
 </body>
 
 </html>
