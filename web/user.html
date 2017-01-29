@@ -40,51 +40,79 @@
 
             <ul class="nav navbar-nav navbar-right minav">
 
-                <li class="active"><a href="user.html">Jose Perez</a></li>
+                <li class="active"><a href="user.html">Jean Doe</a></li>
             </ul>
 
 
         </div>
     </nav>
     <div class="container">
-        <div class="row">
-            <!--Start of left column-->
-            <div class="col-md-4">
-                <div class="profile-header-container">
-                    <div class="profile-header-img">
-                        <img class="img-circle" src="http://lorempixel.com/output/people-q-c-200-200-1.jpg" />
+        <div class="row profile">
+
+            <div class="col-md-3">
+
+                <!-- Start of left column -->
+                <div class="profile-sidebar">
+                    <!-- SIDEBAR USERPIC -->
+                    <div class="profile-userpic">
+                        <img src="http://lorempixel.com/output/people-q-c-200-200-1.jpg" class="img-responsive" alt="">
                     </div>
-                    <h3>Jean Doe</h3>
-                    <div>
-                        <h3>Informacion</h3>
-                        <div><i class="fa fa-twitter" aria-hidden="true"> twitter</i></div>
-                        <div><i class="fa fa-home" aria-hidden="true"> Madrid, España</i></div>
+                    <!-- END SIDEBAR USERPIC -->
+                    <!-- SIDEBAR USER TITLE -->
+                    <div class="profile-usertitle">
+                        <div class="profile-usertitle-name">
+                            Jean Doe
+                        </div>
+                        <div class="profile-usertitle-job">
+                            CATEGORIA
+                        </div>
                     </div>
-                    <div>
-                        <h3>Deportes</h3>
-                        <div><i class="fa fa-bicycle" aria-hidden="true"> MTB</i></div>
+                    <!-- END SIDEBAR USER TITLE -->
+                    <!-- SIDEBAR BUTTONS -->
+                    <div class="profile-userbuttons">
+                        <button type="button" class="btn btn-success btn-sm">Añadir</button>
                     </div>
-                    <div>Logros</div>
+                    <!-- END SIDEBAR BUTTONS -->
+                    <!-- SIDEBAR MENU -->
+                    <div class="profile-usermenu">
+                        <ul class="nav">
+                            <li class="active">
+                                <a href="#">
+                                    <i class="glyphicon glyphicon-home"></i> Overview </a>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    <i class="glyphicon glyphicon-stats"></i> Progreso </a>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    <i class="glyphicon glyphicon-comment"></i> Comunidades </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="glyphicon glyphicon-flag"></i> Logros </a>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    <i class="glyphicon glyphicon-user"></i> Configuración </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- END MENU -->
                 </div>
             </div>
-            <!--End of left column -->
-            <!-- Start of right column-->
-            <div class="col-md-8">
-                <div>Progreso deportivo</div>
-                <div>Eventos Asistidos</div>
-                <div>Comunidades</div>
-
-
-
+            <div class="col-md-9">
+                <div class="profile-content">
+                    Some user related content goes here...
+                </div>
             </div>
-            <!-- End of right column-->
         </div>
     </div>
-
-
-
-
-
+    <br>
+    <br>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 </body>
