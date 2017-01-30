@@ -79,6 +79,7 @@ time>.month {
 
 .panel {
     margin-top: 20px;
+    border-color: #0a1612;
 }
 
 .panel-primary>.panel-heading {

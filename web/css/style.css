@@ -47,7 +47,7 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
-    padding-top: 70px;
+    padding-top: 53px;
 }
 
 
@@ -101,3 +101,34 @@ img {
     background-color: #c5a431;
     border-color: #c5a431;
 }
+
+
+/* VIDEO-BACKGROUND CODE */
+
+.video-box {
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+}
+
+#video-container {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+video {
+    position: absolute;
+    top: -50%;
+    z-index: 0;
+}
+
+video.fillWidth {
+    width: 100%;
+}
+
+
+/* END VIDEO-BACKGROUND CODE */
