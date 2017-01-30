@@ -8,6 +8,7 @@
 }
 
 .name {
+    color: #c5c0c1;
     display: block;
     font-size: 2em;
     font-weight: lighter;
@@ -15,6 +16,7 @@
 }
 
 .year {
+    color: #c5c0c1;
     display: block;
     font-size: 2em;
     font-weight: lighter;
@@ -35,30 +37,26 @@ sport>p {
 time {
     display: inline-block;
     width: 100%;
-    color: rgb(255, 255, 255);
+    color: #c5c0c1;
     padding: 5px;
     text-align: center;
     text-transform: uppercase;
 }
 
-time.purple {
-    background-color: #9c89b8
-}
-
 time.blue {
-    background-color: #32bdf0
+    background-color: #1a2930
 }
 
-time.green {
-    background-color: #5eba7d
+time.yellow {
+    background-color: #f7ce3e
 }
 
 time.white {
-    background-color: #ffffff
+    background-color: #c5c0c1
 }
 
 time.black {
-    background-color: #000000
+    background-color: #0a1612
 }
 
 time>span {
@@ -84,24 +82,27 @@ time>.month {
 }
 
 .panel-primary>.panel-heading {
-    background-color: #32bdf0;
-    border-color: #32bdf0;
+    background-color: #0a1612;
+    border-color: #0a1612;
     overflow: auto;
 }
 
 .panel-primary>.panel-body {
-    color: #fff!important;
-    background-color: #32bdf0;
-    border-color: #32bdf0;
+    color: #c5c0c1!important;
+    background-color: #0a1612;
+    border-color: #000;
 }
 
 .panel-primary>.panel-footer {
-    color: #fff!important;
-    background-color: #32bdf0;
-    border-color: #32bdf0;
+    color: #c5c0c1!important;
+    background-color: #0a1612;
+    border-color: #0a1612;
 }
 
-.panel-primary>.panel-footer p,
+.panel-primary>.panel-footer p {
+    color: #c5c0c1;
+}
+
 .panel-primary a {
-    color: #fff;
+    color: #0a1612;
 }

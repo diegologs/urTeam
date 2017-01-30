@@ -1,7 +1,7 @@
 /* CSS del navbar*/
 
 .navbar-urTeam {
-    background-color: #5eba7d;
+    background-color: #0a1612;
     color: #9c89b8;
     margin: auto;
 }
@@ -16,7 +16,7 @@
 }
 
 .minav a {
-    color: white;
+    color: #c5c1c0;
     font-weight: bold;
     margin: auto;
     border-bottom-style: solid;
@@ -30,10 +30,9 @@
 
 .minav .active a,
 .minav .active a:hover {
-    color: #32bdf0;
+    color: #f7ce3e;
     border-bottom-style: solid;
-    border-bottom-color: #32bdf0;
-    text-shadow: 1px 1px #4f5b9d;
+    border-bottom-color: #f7ce3e;
     background-color: transparent;
     text-decoration: none;
 }
@@ -42,17 +41,14 @@
 /* CSS del body y su contenido*/
 
 body {
-    background-color: black;
+    background-color: #1a2930;
     color: white;
-    background: linear-gradient( rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), url('../images/bg.jpg');
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/bg2.png');
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-position: center; 
-
-
+    background-position: center;
+    padding-top: 70px;
 }
-
-
 
 
 /* Esto adapta la imagen al contenedor */
@@ -90,5 +86,18 @@ img {
 }
 
 .sport_title {
-    color: #32bdf0;
+    color: #c5c0c1;
+}
+
+.mybtn-succes {
+    color: #0a1612;
+    background-color: #f7ce3e;
+    border-color: #f7ce3e;
+}
+
+.mybtn-succes:hover,
+.mybtn-succes:focus {
+    color: #0a1612;
+    background-color: #c5a431;
+    border-color: #c5a431;
 }
