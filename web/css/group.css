@@ -21,17 +21,20 @@
     
    margin: 0px auto;
    margin-top: 10px;
-    border: 4px solid  #5eba7d
+    border: 4px solid  #f7ce3e;
 }
 
 .group-members{
     border-top: 2px solid white;
     padding-top: 20px;
-    color: white;
+    color: #f7ce3e;
 }
 
 .group-members a{
-    color: white;
+    padding: 5px;
+    color: black;
+
+    background-color: #f7ce3e;
 }
 
 .group-btn{
@@ -46,7 +49,8 @@
 }
 
 .group-menu{
-    background-color: #32bdf0;
+    color: black;
+    background-color: #f7ce3e;;
     min-height: 40px;
     padding-top: 8px;
     font-size: 1.2em;

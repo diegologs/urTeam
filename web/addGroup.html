@@ -4,18 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <title>urTeam - Tu web del deporte</title>
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/addGroup.css">
-
-
 </head>
 
 <body>
-  <nav class="navbar navbar-urTeam" role="navigation">
+    <nav class="navbar-fixed-top navbar-urTeam" role="navigation">
         <!-- El logotipo y el icono que despliega el menú se agrupan
        para mostrarlos mejor en los dispositivos móviles -->
         <div class="navbar-header">
@@ -27,39 +24,94 @@
             </button>
             <a class="navbar-left" href="index.html"><img calt="urTeam" src="images/logo.png" width="150px"></a>
         </div>
-
         <!-- Agrupar los enlaces de navegación, los formularios y cualquier
        otro elemento que se pueda ocultar al minimizar la barra -->
         <div class="collapse navbar-collapse navbar-ex1-collapse navbar-inner">
-
             <ul class="nav navbar-nav minav">
                 <li class="active"><a href="events.html">Eventos</a></li>
                 <li><a href="groups.html">Comunidades</a></li>
-               
             </ul>
-               
             <ul class="nav navbar-nav navbar-right minav">
-               
                 <li><a href="user.html">Iniciar Sesión / Registro</a></li>
             </ul>
-
-            
         </div>
     </nav>
     <div class="container">
 
+    <div class="form-container">
+        <form class="form-group">
+            <div class="form-group">
+                <label for="groupName">Nombre del grupo*</label>
+                <input type="text" class="form-control" id="groupName" placeholder="Nombre">
+              
+            </div>
+            <div class="form-group">
+                <label for="groupLoc">Ubicación principal del grupo*</label>
+                <input type="text" class="form-control" id="groupLoc" placeholder="Ubicación">
+            </div>
+            <div class="form-group">
+                <label for="exampleSelect1">Deportes</label>
+                <select class="form-control" id="exampleSelect1">
+      <option>Mountain Bike</option>
+      <option>Runnig</option>
+      <option>Roller</option>
 
-   </div>
+
+    </select>
+            </div>
+            
+
+            <div class="form-group">
+                <label for="groupDesc">Descripcion del equipo</label>
+                <textarea class="form-control" id="groupDesc" rows="4"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="groupAvatar">Avatar</label>
+                <input type="file" class="form-control-file" id="groupAvatar" aria-describedby="fileHelp">
+                <small id="fileHelp" class="form-text text-muted">Tamaño recomendado 200px x 200px</small>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-11">
+                <label for="groupAvatar">Añadir miembros al grupo</label>
+               <input type="text" class="form-control" id="groupMember" placeholder="Nombre de usuario del miembro a añadir">
+
+                </div>
+
+                <div class="col-sm-1">
+                    <div class="addIcon">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                    </div>
+                    </div>
+            </div>
 
 
+            <fieldset class="form-group">
+                <legend></legend>
+                <div class="form-check">
+                    <label class="form-check-label">
+        <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+        Público
+      </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+        <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
+       Privado
+      </label>
+                </div>
+                
 
+            </fieldset>
+            <div style="text-align:center;">
+            <button type="submit" class="btn btn-primary btn-form">Crear grupo</button>
+            </div>
+        </form>
 
-
-
+           </div>
+    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 </body>
 
 </html>
-
-
