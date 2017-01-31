@@ -80,6 +80,9 @@ time>.month {
 .panel {
     margin-top: 20px;
     border-color: #0a1612;
+    background-color: #0a1612;
+    overflow: auto;
+    max-width: 400px;
 }
 
 .panel-primary>.panel-heading {
