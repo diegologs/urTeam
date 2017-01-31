@@ -47,7 +47,7 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
-    padding-top: 53px;
+    padding-top: 50px;
 }
 
 
@@ -109,6 +109,7 @@ img {
     height: 300px;
     position: relative;
     overflow: hidden;
+    border-bottom: 2px solid #f7ce3e;
 }
 
 #video-container {
@@ -132,3 +133,21 @@ video.fillWidth {
 
 
 /* END VIDEO-BACKGROUND CODE */
+
+.hr-yellow {
+    color: #f7ce3e;
+    background-color: #f7ce3e;
+    border-color: #f7ce3e;
+    height: auto;
+}
+
+.myicon {
+    max-height: 30px;
+    max-width: 30px;
+    color: #f7ce3e;
+    border-color: #f7ce3e;
+}
+
+.icon-roller {
+    content: "\images\skate.svg"
+}
