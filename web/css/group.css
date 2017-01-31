@@ -10,10 +10,12 @@
     margin-right: 30px;
    max-width: 100%;
     padding-top: 30px;
+    
 }
 
 .group-name{
     font-weight: bold;
+    
     
 }
 
@@ -62,7 +64,7 @@
 }
 
 .main-content{
-    background-color: black;
+    background-color: #0a1612;
     padding-left: 30px;
     padding-right: 30px;
     padding-top: 20px;
