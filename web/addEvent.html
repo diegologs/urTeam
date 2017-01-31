@@ -55,24 +55,13 @@
                     <input type="text" class="form-control" id="eventPrice" placeholder="EUR">
                 </div>
                 <div class="form-group">
-                    <label for="eventPrice">Inicio</label>
-                    <div class="input-group date" data-provide="datepicker">
-
-                        <input type="text" class="form-control" id="example">
-                        <div class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </div>
+                    <label for="eventRangeStart">Inicio y fin del evento</label>
+                    <div class="input-daterange input-group" id="datepicker">
+                        <input type="text" class="input-sm form-control" name="start" />
+                        <span class="input-group-addon">a</span>
+                        <input type="text" class="input-sm form-control" name="end" />
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="eventPrice">Fin</label>
-                    <div class="input-group date" data-provide="datepicker">
 
-                        <input type="text" class="form-control" id="example">
-                        <div class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </div>
-                    </div>
                 </div>
                 <div class="form-group">
                     <label for="sportSelect">Deporte</label>
@@ -82,8 +71,6 @@
                       <option>Roller</option>
                     </select>
                 </div>
-
-
                 <div class="form-group">
                     <label for="eventDesc">Descripcion del evento</label>
                     <textarea class="form-control" id="eventDesc" rows="4"></textarea>
@@ -95,7 +82,7 @@
                 </div>
 
                 <fieldset class="form-group">
-                    <label for="eventDesc">Tipo de evento</label>
+                    <label for="eventType">Tipo de evento</label>
                     <div class="form-check">
                         <label class="form-check-label">
                         <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" checked>
@@ -113,22 +100,13 @@
                     <button type="submit" class="btn btn-primary btn-form">Crear evento</button>
                 </div>
             </form>
-
         </div>
-        <!-- PRUEBA -->
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/bootstrap-datepicker.min.js"></script>
     <script src="js/bootstrap-datepicker.es.min.js"></script>
-
-    <script tyoe="text/javascript">
-        $('.datepicker').datepicker({
-            format: "dd/mm/yyyy",
-            language: "es"
-        });
-
-    </script>
+    <script src="js/urTeam-datepicker.js"></script>
 </body>
 
 </html>

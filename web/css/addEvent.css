@@ -3,6 +3,7 @@
     padding: 30px;
     background-color: #1a2930;
     border-radius: 4px;
+    overflow: hidden;
 }
 
 .btn-form {
@@ -31,4 +32,8 @@
 
 table {
     color: black;
+}
+
+.input-group-addon {
+    height: 10px;
 }
