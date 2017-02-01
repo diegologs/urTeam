@@ -4,5 +4,6 @@ $('.input-daterange').datepicker({
     todayBtn: "linked",
     language: "es",
     orientation: "bottom auto",
-    autoclose: true
+    autoclose: true,
+    todayHighlight: true
 });

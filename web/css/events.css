@@ -1,3 +1,7 @@
+.container {
+    position: relative;
+}
+
 .event-primary h2 {
     margin-top: 10px;
 }
@@ -5,6 +9,12 @@
 .nopadding {
     padding: 0 !important;
     margin: 0!important;
+}
+
+.btn-events {
+    position: absolute;
+    right: 0px;
+    top: 20px;
 }
 
 .name {
@@ -21,6 +31,7 @@
     font-size: 2em;
     font-weight: lighter;
     line-height: 1;
+    text-align: right;
 }
 
 sport {
@@ -68,6 +79,7 @@ time>.day {
     font-size: 4em;
     font-weight: lighter;
     line-height: 1;
+    overflow: hidden;
 }
 
 time>.month {
@@ -86,9 +98,10 @@ time>.month {
 }
 
 .panel-primary>.panel-heading {
+    padding: 5px;
     background-color: #0a1612;
     border-color: #0a1612;
-    overflow: auto;
+    overflow: hidden;
 }
 
 .panel-primary>.panel-body {
@@ -105,8 +118,14 @@ time>.month {
 
 .panel-primary>.panel-footer p {
     color: #c5c0c1;
+    text-align: justify;
 }
 
 .panel-primary a {
     color: #0a1612;
+}
+
+.panel-primary>.panel-body>img {
+    width: 400px;
+    height: 150px;
 }

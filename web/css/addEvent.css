@@ -23,17 +23,15 @@
     color: black;
 }
 
-.addIcon {
-    margin-top: 20px;
-    font-weight: bold;
-    color: #f7ce3e;
-    font-size: 2em;
-}
-
-table {
-    color: black;
-}
-
 .input-group-addon {
     height: 10px;
+}
+
+.datepicker {
+    background-color: white;
+    color: #1a2930;
+}
+
+.datepicker table tr td.range {
+    background-color: #f7ce3e;
 }
