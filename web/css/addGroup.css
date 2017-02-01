@@ -1,11 +1,10 @@
-.form-container{
-    margin-top:50px;
+.form-container {
+    margin-top: 50px;
     padding: 30px;
     background-color: #1a2930;
-
 }
 
-.btn-form{
+.btn-form {
     padding-left: 30px;
     padding-right: 30px;
     padding-top: 10px;
@@ -13,22 +12,18 @@
     font-weight: bold;
     font-size: 1.2em;
     margin: 0px auto;
-    background-color:#f7ce3e;
+    background-color: #f7ce3e;
     color: black;
-
 }
 
-.btn-form::hover{
-   
-    
-    background-color:#c5c1c0;
+.btn-form:hover {
+    background-color: #c5c1c0;
     color: black;
-
 }
 
-.addIcon{
+.addIcon {
     margin-top: 20px;
     font-weight: bold;
-    color:#f7ce3e;
+    color: #f7ce3e;
     font-size: 2em;
 }
