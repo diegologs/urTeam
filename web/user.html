@@ -48,7 +48,6 @@
                     <ul class="dropdown-menu">
                         <li>
                             <div class="navbar-content">
-
                                 <span>John Doe</span>
                                 <p class="text-muted small">
                                     johndoe@urteam.es</p>
@@ -57,8 +56,6 @@
                                 <a href="#" class="btn btn-default btn-sm mybtn-succes"><i class="fa fa-cogs" aria-hidden="true"></i> Configuración </a>
                                 <a href="index.html" class="btn btn-default btn-sm mybtn-succes"><i class="fa fa-power-off" aria-hidden="true"></i> Sign Out</a>
                             </div>
-
-
                         </li>
                     </ul>
                 </li>
@@ -83,8 +80,11 @@
                     <div class="profile-usertitle-name">
                         Jean Doe
                     </div>
+                    <div class="profile-usertitle-name">
+                        Madrid, España
+                    </div>
                     <div class="profile-usertitle-job">
-                        CATEGORIA
+                        Puntuación
                     </div>
                 </div>
                 <!-- END SIDEBAR USER TITLE -->
@@ -116,7 +116,7 @@
                         </li>
 
                         <li>
-                            <a href="">
+                            <a href="#friends" class="page-scroll">
                                 <i class="fa fa-address-book" aria-hidden="true"></i> Amigos </a>
                         </li>
                     </ul>
@@ -237,11 +237,40 @@
                     <br>
                     <br>
                 </div>
+                <div class="container-fluid info-box" id="friends">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h3><i class="fa fa-address-book" aria-hidden="true"></i> Amigos </h3>
+                        </div>
+                        <!--/row-->
+                        <hr class="hr-yellow">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="friend">
+                                    <div class="col-sm-3 friend-image">
+                                        <img class="img-circle img-responsive group-image" width="110px" src="http://lorempixel.com/200/200/people/9/">
+                                    </div>
+                                    <div class="col-sm-9 friend-name">
+                                        <h3>Katrina Bowman</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="friend">
+                                    <div class="col-sm-3 friend-image">
+                                        <img class="img-circle img-responsive group-image" width="110px" src="http://lorempixel.com/200/200/people/9/">
+                                    </div>
+                                    <div class="col-sm-9 friend-name">
+                                        <h3>Katrina Bowman</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <br>
-    <br>
 
     <footer>
         <div class="footer" id="footer">
@@ -298,6 +327,9 @@
         </div>
         <!--/.footer-bottom-->
     </footer>
+    <div class='back-to-top' id='back-to-top' title='Back to top'>
+        <i class='fa fa-chevron-up' />
+    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 
@@ -306,8 +338,9 @@
     <script src="js/scrolling-nav.js"></script>
 
     <!-- Profile Charts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.js"></script>
     <script src="js/profile-chart.js"></script>
+
+
     <!-- Navigation bar -->
     <script>
         $(function() {
