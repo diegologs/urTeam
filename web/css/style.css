@@ -37,6 +37,16 @@
     text-decoration: none;
 }
 
+.nav .open>a,
+.nav .open>a:focus,
+.nav .open>a:hover {
+    color: #f7ce3e;
+    border-bottom-style: solid;
+    border-bottom-color: #f7ce3e;
+    background-color: transparent;
+    text-decoration: none;
+}
+
 
 /* CSS del body y su contenido*/
 
@@ -129,14 +139,14 @@ img {
     height: 100%;
     width: 100%;
     overflow: hidden;
-     background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../images/talajara.jpg');
+    background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../images/talajara.jpg');
 }
 
 video {
-   position: relative;
-   top: -76%;
+    position: relative;
+    top: -76%;
     opacity: 0.5;
-       width: 100%;
+    width: 100%;
 }
 
 video.fillWidth {
