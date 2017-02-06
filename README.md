@@ -34,9 +34,17 @@ _events.html_ : Contiene un listado de todos los eventos disponibles y publicos.
 
 ![alt tag](http://i.imgur.com/QPsizLF.jpg)
 
+_event.html_ : Muestra informacion detallada del evento.   
+
+![alt tag](http://i.imgur.com/PcWoEmz.jpg)
+
 _groups.html_ : Contiene un listado de todos los grupos disponibles y publicos.  
 
-![alt tag](http://i.imgur.com/XxINME2.jpg)
+![alt tag](http://i.imgur.com/XxINME2.jpg)  
+
+_group.html_ : Muestra informacion detallada del grupo.   
+
+![alt tag](http://i.imgur.com/undefined.png)
 
 _login.html_ : Permite el inicio de sesion y registro de usuarios.  
 
