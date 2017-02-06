@@ -7,7 +7,7 @@ body {
     font-size: 14px;
     line-height: 1.42857143;
     color: #fff;
-    background-color: #F1F1F1;
+    background-color:#1a2930;
 }
 
 .container {
@@ -24,13 +24,14 @@ body {
 }
 
 .panel {
+    background-color:#1a2930;
     border-radius: 4px 4px 0px 0px !important;
     -moz-border-radius: 4px 4px 0px 0px;
     -webkit-border-radius: 4px 4px 0px 0px;
 }
 
 .header {
-    color: #808080;
+    color: white;
     margin-left: 2.5%;
     margin-top: 30px;
     padding-bottom: 20px;
@@ -44,6 +45,7 @@ col-xs-12 {
 }
 
 .well {
+    color: black;
     padding: 4px;
     margin-bottom: 0px;
     background-color: #f7ce3e;
