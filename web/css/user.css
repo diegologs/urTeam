@@ -32,7 +32,7 @@ body {}
 }
 
 .profile-usertitle-name {
-    color: #5a7391;
+    color: #f7ce3e;
     font-size: 16px;
     font-weight: 600;
     margin-bottom: 7px;
@@ -40,7 +40,7 @@ body {}
 
 .profile-usertitle-job {
     text-transform: uppercase;
-    color: #5b9bd1;
+    color: #f7ce3e;
     font-size: 12px;
     font-weight: 600;
     margin-bottom: 15px;
