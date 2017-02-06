@@ -24,34 +24,48 @@ __Equipo de desarrollo:__
   * _email:_ d.oliver@alumnos.urjc.es
   * _GitHub:_ [oly13](https://github.com/oly13)
   
- __Fase 2:__ 
-index.html : Muestra una informacion rapida de los eventos publicos disponibles ordenados por deporte.
+__Fase 2:__  
+ 
+_index.html_ : Muestra una informacion rapida de los eventos publicos disponibles ordenados por deporte.  
+
 ![alt tag](http://i.imgur.com/7vBDoQn.jpg)
 
-events.html : Contiene un listado de todos los eventos disponibles y publicos.
+_events.html_ : Contiene un listado de todos los eventos disponibles y publicos.  
+
 ![alt tag](http://i.imgur.com/QPsizLF.jpg)
 
-groups.html : Contiene un listado de todos los grupos disponibles y publicos.
+_groups.html_ : Contiene un listado de todos los grupos disponibles y publicos.  
+
 ![alt tag](http://i.imgur.com/XxINME2.jpg)
 
-login.html : Permite el inicio de sesion y registro de usuarios.
+_login.html_ : Permite el inicio de sesion y registro de usuarios.  
+
 ![alt tag](http://i.imgur.com/u9BQITg.jpg)
 ![alt tag](http://i.imgur.com/iBR1i12.jpg)
 
-user.html : Muestra la informacion del usuario.
+_user.html_ : Muestra la informacion del usuario.  
+
 ![alt tag](http://i.imgur.com/MX5rfb7.jpg)
 
-user.html : Muestra la informacion del usuario.
+_settings.html_ : Permite modificar tu perfil.  
+
 ![alt tag](http://i.imgur.com/oA7sAX8.jpg)
 
-addGroup.html : Permite añadir un grupo nuevo a la pagina.
-![alt tag](http://imgur.com/OggX35J)
+_addGroup.html_ : Permite añadir un grupo nuevo a la pagina.  
 
-addEvent.html : Permite añadir un evento nuevo a la pagina.
+![alt tag](http://imgur.com/OggX35J.jpg)
+
+_addEvent.html_ : Permite añadir un evento nuevo a la pagina.  
+
 ![alt tag](http://i.imgur.com/caaP6rp.png)
 
-controlPanel.html : Permite modificar los datos de la web.
-![alt tag](http://i.imgur.com/RsyGHxX.png)
+_controlPanel.html_ : Permite modificar los datos de la web con permisos de admin.  
+
+![alt tag](http://i.imgur.com/RsyGHxX.png)  
+
+_Diagrama:_  
+
+![alt tag](http://i.imgur.com/rC46Qbn.png)  
 
  __Plantillas__ 
  * Control Panel Template [control Panel template](https://www.creative-tim.com/product/light-bootstrap-dashboard)
