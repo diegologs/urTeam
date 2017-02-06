@@ -138,7 +138,9 @@ body {}
 /*Communities info*/
 .group{
     margin-top: 30px;
-    background-color: #0a1612;
+    background-color: #1a2930;
+    border: 1px solid #c5c1c0;
+
 
 
 
@@ -191,7 +193,43 @@ body {}
 
 
 }
-.skillBarContainer {
+.skillBarContainer {/* Back to top */
+
+.back-to-top {
+  visibility: hidden;
+  background-color: #444;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  line-height: 48px;
+  position: fixed;
+  bottom: 65px;
+  right: 35px;
+  z-index: 90;
+  cursor: pointer;
+  border-radius: 1px;
+  opacity: 0;
+  -webkit-transform: translateZ(0);
+  transition: all .6s;
+position: fixed
+}
+
+.back-to-top .fa {
+  font-size: 18px;
+  color: #fff;
+  vertical-align: middle;
+}
+
+.back-to-top:hover {
+  background-color: #fc4f3f;
+  opacity: 1
+}
+
+.back-to-top.show {
+  visibility: visible;
+  bottom: 35px;
+  opacity: 1;
+}
   width: 100%;
   max-width: 350px;
   height:26px;
@@ -272,4 +310,8 @@ body {}
 .friend-name{
     color: white;
 
+}
+
+.friendrow{
+    margin-top: 20px
 }
