@@ -84,3 +84,18 @@
     color: black;
 }
 
+
+.addButton{
+    margin: 0px auto;
+    text-align: center;
+
+}
+
+.btn_group2{
+    margin-bottom: 20px;
+}
+
+
+.modal-title{
+    color:black;
+}

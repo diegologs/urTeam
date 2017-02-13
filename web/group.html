@@ -64,6 +64,7 @@
         <div class="info">
             <h2><i class="fa fa-info" aria-hidden="true"></i> Información</h2>
             <hr>
+             <a data-toggle="modal" data-target="#myModal3"><button class="btn mybtn-succes btn_group2">Editar información</button></a>
             <div class="info-text">
                 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,
             </div>
@@ -71,6 +72,8 @@
             <div class="photos">
                 <h2><i class="fa fa-picture-o" aria-hidden="true"></i> Fotos</h2>
                 <hr>
+                <a data-toggle="modal" data-target="#myModal4"><button class="btn mybtn-succes btn_group2">Añadir imágenes</button></a>
+                
                 <div class="row">
                     <div class="col-sm-3"> <img src="images/talajara.jpg"></div>
                     <div class="col-sm-3"> <img src="images/talajara.jpg"></div>
@@ -81,7 +84,9 @@
             <br>
             <div class="news">
                 <h2><i class="fa fa-newspaper-o" aria-hidden="true"></i> Noticias</h2>
+              
                 <hr>
+                <a data-toggle="modal" data-target="#myModal2"><button class="btn mybtn-succes btn_group2">Añadir noticia</button></a>
                 <div class="new">
                     <h4>Título de la actualización</h4>
                     <div>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget</div>
@@ -113,6 +118,98 @@
 
 
             <!-- Modal -->
+            <div id="myModal2" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Actualización</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-container">
+                                <form class="form-group">
+                                     <label style="color:black;" for="groupName">Titulo de la actualización</label>
+                                      <input type="text" class="form-control" id="groupName" placeholder="Titulo de la actualización">
+                                       <label style="color:black;" for="textarea">Cuerpo de la actualización</label>
+                                      <textarea type="text" id="textarea" class="form-control" rows="15"></textarea>
+                                      <br>
+                                      <hr>
+                                        <div class="addButton">
+                                         <a data-toggle="modal" data-target="#myModal2"><button class="btn mybtn-succes addButton">Añadir noticia</button></a>
+                                        </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+             <!-- Modal -->
+            <div id="myModal3" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Información</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-container">
+                                <form class="form-group">
+                                    <label style="color:black;" for="textarea">Información</label>
+                                      <textarea type="text" id="textarea" class="form-control" rows="15"></textarea>
+                                      <br>
+                                      <hr>
+                                    <div class="addButton">
+                                         <a data-toggle="modal" data-target="#myModal2"><button class="btn mybtn-succes addButton">Editar información</button></a>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+             <div id="myModal4" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Imágenes</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-container">
+                                <form class="form-group">
+                                    <label style="color:black;" for="groupAvatar">Añadir imágen</label>
+                                    <input type="file" class="form-control-file" id="groupAvatar" aria-describedby="fileHelp">
+                                    <div class="addButton">
+                                         <a data-toggle="modal" data-target="#myModal2"><button class="btn mybtn-succes addButton">Añadir imágenes</button></a>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            
+
+
             <div id="myModal" class="modal fade" role="dialog">
                 <div class="modal-dialog">
 
@@ -133,6 +230,8 @@
                     </div>
                 </div>
             </div>
+
+
         </div>
     </div>
 
