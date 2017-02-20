@@ -1,0 +1,353 @@
+/* CSS del navbar*/
+
+.navbar-urTeam {
+    background-color: #0a1612;
+    color: #9c89b8;
+    margin: auto;
+}
+
+.icon-bar {
+    background-color: #32bdf0;
+    border-color: #32bdf0;
+}
+
+.minav {
+    margin: auto;
+}
+
+.minav a {
+    color: #c5c1c0;
+    font-weight: bold;
+    margin: auto;
+    border-bottom-style: solid;
+    border-bottom-color: transparent;
+}
+
+.minav li a:hover {
+    text-decoration: underline;
+    background-color: transparent;
+}
+
+.minav .active a,
+.minav .active a:hover {
+    color: #f7ce3e;
+    border-bottom-style: solid;
+    border-bottom-color: #f7ce3e;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+.nav .open>a,
+.nav .open>a:focus,
+.nav .open>a:hover {
+    color: #f7ce3e;
+    border-bottom-style: solid;
+    border-bottom-color: #f7ce3e;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+
+/* CSS del body y su contenido*/
+
+body {
+    background-color: #1a2930;
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/bg2.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    padding-top: 53px;
+    color: white;
+}
+
+.footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    background-color: #efefef;
+    text-align: center;
+}
+
+
+/* Esto adapta la imagen al contenedor */
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+
+/* CSS de los eventos */
+
+.event {
+    background-color: black;
+    overflow: auto;
+    margin-bottom: 30px;
+}
+
+.event_date {
+    padding-left: 10px;
+}
+
+.event_info {
+    margin-top: 20px;
+    border-top: 1px solid white;
+    margin-bottom: 20px;
+}
+
+.event_participants {
+    text-align: right;
+}
+
+.inline {
+    display: inline-block;
+}
+
+.sport_title {
+    color: #c5c0c1;
+}
+
+.mybtn-succes {
+    color: #0a1612;
+    background-color: #f7ce3e;
+    border-color: #f7ce3e;
+}
+
+.mybtn-succes:hover,
+.mybtn-succes:focus {
+    color: #0a1612;
+    background-color: #c5a431;
+    border-color: #c5a431;
+}
+
+
+/* VIDEO-BACKGROUND CODE */
+
+.video-box {
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 2px solid #f7ce3e;
+}
+
+#video-container {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../images/talajara.jpg');
+}
+
+video {
+    position: relative;
+    top: -76%;
+    opacity: 0.5;
+    width: 100%;
+}
+
+video.fillWidth {
+    width: 100%;
+}
+
+#video-container .container {
+    margin: 0px auto;
+    text-align: center;
+    z-index: 20;
+}
+
+#video-container h1 {
+    font-weight: bold;
+    color: #f7ce3e;
+}
+
+
+/* END VIDEO-BACKGROUND CODE */
+
+.hr-yellow {
+    color: #f7ce3e;
+    background-color: #f7ce3e;
+    border-color: #f7ce3e;
+    height: auto;
+}
+
+.myicon {
+    max-height: 30px;
+    max-width: 30px;
+    color: #f7ce3e;
+    border-color: #f7ce3e;
+}
+
+.icon-roller {
+    content: "\images\skate.svg"
+}
+
+
+/* CSS DEL FOOTER */
+
+.full {
+    width: 100%;
+}
+
+.gap {
+    height: 30px;
+    width: 100%;
+    clear: both;
+    display: block;
+}
+
+.footer {
+    background: #1a2930;
+    height: auto;
+    padding-bottom: 30px;
+    position: relative;
+    width: 100%;
+    border-bottom: 1px solid #0a1612;
+    border-top: 1px solid #f7ce3e;
+}
+
+.footer p {
+    margin: 0;
+}
+
+.footer img {
+    max-width: 100%;
+}
+
+.footer h3 {
+    border-bottom: 1px solid #f7ce3e;
+    color: #f7ce3e;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 27px;
+    padding: 40px 0 10px;
+    text-transform: uppercase;
+}
+
+.footer ul {
+    font-size: 13px;
+    list-style-type: none;
+    margin-left: 0;
+    padding-left: 0;
+    margin-top: 15px;
+    color: #1a2930;
+}
+
+.footer ul li a {
+    padding: 0 0 5px 0;
+    display: block;
+}
+
+.footer a {
+    color: #c5c1c0
+}
+
+.supportLi h4 {
+    font-size: 20px;
+    font-weight: lighter;
+    line-height: normal;
+    margin-bottom: 0 !important;
+    padding-bottom: 0;
+}
+
+.newsletter-box input#appendedInputButton {
+    background: #FFFFFF;
+    display: inline-block;
+    float: left;
+    height: 30px;
+    clear: both;
+    width: 100%;
+}
+
+.newsletter-box .btn {
+    border: medium none;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -o-border-radius: 3px;
+    -ms-border-radius: 3px;
+    border-radius: 3px;
+    display: inline-block;
+    height: 40px;
+    padding: 0;
+    width: 100%;
+    color: #fff;
+}
+
+.newsletter-box {
+    overflow: hidden;
+}
+
+.bg-gray {
+    background-image: -moz-linear-gradient(center bottom, #BBBBBB 0%, #F0F0F0 100%);
+    box-shadow: 0 1px 0 #B4B3B3;
+}
+
+.social {
+    display: inline-block;
+    text-align: center;
+}
+
+.social li {
+    background: none repeat scroll 0 0 #1a2930;
+    border: 2px solid #f7ce3e;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -o-border-radius: 50%;
+    -ms-border-radius: 50%;
+    border-radius: 50%;
+    float: left;
+    height: 36px;
+    line-height: 36px;
+    margin: 0 8px 0 0;
+    padding: 0;
+    text-align: center;
+    width: 36px;
+    transition: all 0.5s ease 0s;
+    -moz-transition: all 0.5s ease 0s;
+    -webkit-transition: all 0.5s ease 0s;
+    -ms-transition: all 0.5s ease 0s;
+    -o-transition: all 0.5s ease 0s;
+}
+
+.social li:hover {
+    transform: scale(1.15) rotate(360deg);
+    -webkit-transform: scale(1.1) rotate(360deg);
+    -moz-transform: scale(1.1) rotate(360deg);
+    -ms-transform: scale(1.1) rotate(360deg);
+    -o-transform: scale(1.1) rotate(360deg);
+}
+
+.social li a {
+    color: black;
+}
+
+.social li:hover,
+.social li a i:hover {
+    border: 2px solid #f7ce3e;
+    background: #f7ce3e;
+    color: #1a2930;
+}
+
+.social li a i {
+    font-size: 16px;
+    margin: 0 0 0 5px;
+    color: #f7ce3e;
+}
+
+.footer-bottom {
+    background: #1a2930;
+    border-top: 1px solid #f7ce3e;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.footer-bottom p.pull-left {
+    padding-top: 6px;
+}
+
+.payments {
+    font-size: 1.5em;
+}

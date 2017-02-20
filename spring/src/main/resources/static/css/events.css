@@ -1,0 +1,165 @@
+.container {
+    position: relative;
+}
+
+.event-primary h2 {
+    margin-top: 10px;
+}
+
+.nopadding {
+    padding: 0 !important;
+    margin: 0!important;
+}
+
+.btn-events {
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: right;
+}
+
+.name {
+    color: #c5c0c1;
+    display: block;
+    font-size: 2em;
+    font-weight: lighter;
+    line-height: 1;
+}
+
+.year {
+    color: #c5c0c1;
+    display: block;
+    font-size: 2em;
+    font-weight: lighter;
+    line-height: 1;
+    text-align: right;
+}
+
+sport {
+    padding-left: 15px;
+    display: block;
+}
+
+sport>p {
+    font-size: 15pt;
+    font-weight: lighter;
+    line-height: 1;
+}
+
+time {
+    display: inline-block;
+    width: 100%;
+    color: #c5c0c1;
+    padding: 5px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+time.blue {
+    background-color: #1a2930
+}
+
+time.yellow {
+    background-color: #f7ce3e
+}
+
+time.white {
+    background-color: #c5c0c1
+}
+
+time.black {
+    background-color: #0a1612
+}
+
+time>span {
+    display: none;
+}
+
+time>.day {
+    display: block;
+    font-size: 4em;
+    font-weight: lighter;
+    line-height: 1;
+    overflow: hidden;
+}
+
+time>.month {
+    display: block;
+    font-size: 24pt;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.panel {
+    border-color: #0a1612;
+    background-color: #0a1612;
+    overflow: auto;
+    max-width: 400px;
+}
+
+.panel-primary>.panel-heading {
+    padding: 5px;
+    background-color: #0a1612;
+    border-color: #0a1612;
+    overflow: hidden;
+}
+
+.panel-primary>.panel-body {
+    color: #c5c0c1!important;
+    background-color: #0a1612;
+    border-color: #000;
+}
+
+.panel-primary>.panel-footer {
+    color: #c5c0c1!important;
+    background-color: #0a1612;
+    border-color: #0a1612;
+}
+
+.panel-primary>.panel-footer p {
+    color: #c5c0c1;
+    text-align: justify;
+}
+
+.panel-primary a {
+    color: #0a1612;
+}
+
+.panel-primary>.panel-body>img {
+    width: 400px;
+    height: 150px;
+}
+
+.filterNav {
+    margin-top: 10px;
+    border-radius: 0;
+    background-color: #f7ce3e;
+    color: #0a1612;
+    height: auto;
+}
+
+.form-group .form-control {
+    background-color: #fae18b;
+    border-radius: 0;
+    border: none;
+}
+
+.form-group input:focus {
+    -webkit-box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0);
+    -moz-box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0);
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+.form-group button {
+    color: white;
+    background-color: #f7ce3e;
+}
+
+.form-group button:hover {
+    color: white;
+    background-color: #c5a431;
+}
+
+.form-group select {
+    height: 30px;
+}
