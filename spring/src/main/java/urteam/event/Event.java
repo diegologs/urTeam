@@ -17,10 +17,10 @@ public class Event {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	long id;
+	private long id;
 
 	private String name;
-	private Long price;
+	private long price;
 	private String info;
 	private String main_photo;
 	private String place;
@@ -28,7 +28,7 @@ public class Event {
 	private Date end_date;
 	
 	@OneToOne
-	private Long owner_id;
+	private User owner_id;
 	
 	@OneToMany
 	private List<User> participants_IDs;
@@ -109,11 +109,11 @@ public class Event {
 		this.end_date = end_date;
 	}
 
-	public Long getOwner_id() {
+	public User getOwner_id() {
 		return owner_id;
 	}
 
-	public void setOwner_id(Long owner_id) {
+	public void setOwner_id(User owner_id) {
 		this.owner_id = owner_id;
 	}
 
