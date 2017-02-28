@@ -9,12 +9,7 @@ import javax.persistence.Id;
 @Entity
 public class User {
 		
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", surname=" + surname + ", nickname=" + nickname + ", password="
-				+ password + ", email=" + email + ", bio=" + bio + ", city=" + city + ", country=" + country
-				+ ", score=" + score + ", avatar=" + avatar + ", role=" + role + "]";
-	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
@@ -103,4 +98,11 @@ public class User {
 	}
 	
 	//List<community.community> comunidades;
+	
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", surname=" + surname + ", nickname=" + nickname + ", password="
+				+ password + ", email=" + email + ", bio=" + bio + ", city=" + city + ", country=" + country
+				+ ", score=" + score + ", avatar=" + avatar + ", role=" + role + "]";
+	}
 }
