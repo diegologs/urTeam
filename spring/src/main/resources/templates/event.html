@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>urTeam - Tu web del deporte</title>
+  <link rel="shortcut icon" href="/images/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/event.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+</head>
+<body>
+    <nav class="navbar-fixed-top navbar-urTeam" role="navigation">
+        <!-- El logotipo y el icono que despliega el menú se agrupan
+       para mostrarlos mejor en los dispositivos móviles -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                  <span class="sr-only">Desplegar navegación</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-left" href="/index.html"><img alt="urTeam" src="/images/logo.png" width="150px"></a>
+        </div>
+        <!-- Agrupar los enlaces de navegación, los formularios y cualquier
+       otro elemento que se pueda ocultar al minimizar la barra -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse navbar-inner">
+            <ul class="nav navbar-nav minav">
+                <li class="active"><a href="/events.html">Eventos</a></li>
+                <li><a href="/groups.html">Comunidades</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right minav">
+                <li><a href="/user.html">Iniciar Sesión / Registro</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- EVENT FAST INFO -->
+        <div class="row panel">
+            <div class="col-md-4 bg_blur ">
+                <a href="#" class="follow_btn">Seguir</a>
+            </div>
+            <div class="col-md-8  col-xs-12">
+                <div class="header">
+                   <h1>{{event.name}}</h1>
+                    <hr class="hr-yellow">
+                    <h4><i class="fa fa-calendar-check-o "></i><span> {{event.start_date}}</span></h4>
+                    <h4><i class="fa fa-map-marker "></i><span> {{event.place}}</span></h4>
+                    <h4>{{event.sport}}</h4>
+                </div>
+            </div>
+        </div>
+        <!-- END EVENT FAST INFO -->
+        <!-- EVENT BAR -->
+        <div class="row nav">
+            <div class="col-md-12 col-xs-12">
+                <div class="col-md-3 col-xs-3 well">
+                    <i class="fa fa-users fa-lg"></i> 16
+                </div>
+
+                <div class="col-md-3 col-xs-3 well">
+                    <i class="fa fa-thumbs-o-up fa-lg"></i> 26
+                </div>
+
+                <div class="col-md-3 col-xs-3 well">
+                    <i class="fa fa-eur fa-lg"></i> 14
+                </div>
+
+                <div class="col-md-3 col-xs-3 well" data-toggle="modal" data-target="#modalShareEvent">
+                    <i class="fa fa-share-alt"></i>
+                </div>
+            </div>
+        </div>
+        <!-- END EVENT BAR -->
+        <!-- EVENT DESCRIPTION -->
+        <div class="info">
+            <h3><i class="fa fa-info" aria-hidden="true"></i> Información</h3>
+            <hr>
+            <div class="info-text">
+            	{{event.info}}
+            </div>
+        </div>
+        <!-- END EVENT DESCRIPTION -->
+        <h3><i class="fa fa-picture-o" aria-hidden="true"> </i>  Fotos</h3>
+        <hr>
+        <!-- EVENT GALLERY -->
+        <div class='list-group gallery'>
+            <div class='col-sm-4 col-xs-6 col-md-3 col-lg-3'>
+                <a class="thumbnail fancybox" rel="ligthbox" href="http://placehold.it/300x320.png">
+                    <img class="img-responsive" alt="" src="http://placehold.it/320x320" />
+                    <!-- text-right / end -->
+                </a>
+            </div>
+            <!-- col-6 / end -->
+            <div class='col-sm-4 col-xs-6 col-md-3 col-lg-3'>
+                <a class="thumbnail fancybox" rel="ligthbox" href="http://placehold.it/300x320.png">
+                    <img class="img-responsive" alt="" src="http://placehold.it/320x320" />
+                    <!-- text-right / end -->
+                </a>
+            </div>
+            <!-- col-6 / end -->
+            <div class='col-sm-4 col-xs-6 col-md-3 col-lg-3'>
+                <a class="thumbnail fancybox" rel="ligthbox" href="http://placehold.it/300x320.png">
+                    <img class="img-responsive" alt="" src="http://placehold.it/320x320" />
+                    <!-- text-right / end -->
+                </a>
+            </div>
+            <!-- col-6 / end -->
+            <div class='col-sm-4 col-xs-6 col-md-3 col-lg-3'>
+                <a class="thumbnail fancybox" rel="ligthbox" href="http://placehold.it/300x320.png">
+                    <img class="img-responsive" alt="" src="http://placehold.it/320x320" />
+                    <!-- text-right / end -->
+                </a>
+            </div>
+            <!-- col-6 / end -->
+            <div class='col-sm-4 col-xs-6 col-md-3 col-lg-3'>
+                <a class="thumbnail fancybox" rel="ligthbox" href="http://placehold.it/300x320.png">
+                    <img class="img-responsive" alt="" src="http://placehold.it/320x320" />
+                    <!-- text-right / end -->
+                </a>
+            </div>
+            <!-- col-6 / end -->
+        </div>
+        <!-- list-group / end -->
+        <!-- END EVENT GALLERY -->
+    </div>
+
+    <!-- MODAL SHARE SNIPP -->
+    <div class="modal fade" id="modalShareEvent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Cerrar</span></button>
+                    <h4 class="modal-title" id="myModalLabel"><i class="fa fa-share-alt"></i> Compartir</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        <a title="Facebook" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-facebook fa-stack-1x"></i></span></a>
+                        <a title="Twitter" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-twitter fa-stack-1x"></i></span></a>
+                        <a title="Google+" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-google-plus fa-stack-1x"></i></span></a>
+                        <a title="Reddit" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-reddit fa-stack-1x"></i></span></a>
+                        <a title="WordPress" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-wordpress fa-stack-1x"></i></span></a>
+                        <a title="Stumbleupon" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-stumbleupon fa-stack-1x"></i></span></a>
+                        <a title="E-mail" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-envelope fa-stack-1x"></i></span></a>
+                        <a title="Print" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-print fa-stack-1x"></i></span></a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END MODAL SHARE SNIPP -->
+
+    <footer>
+        <div class="footer" id="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3  col-md-3 col-sm-4 col-xs-6">
+                        <h3> Categorias </h3>
+                        <ul>
+                            <li> <a href="#"> Eventos </a> </li>
+                            <li> <a href="#"> Comunidades </a> </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3  col-md-3 col-sm-4 col-xs-6">
+                        <h3> Herramientas</h3>
+                        <ul>
+                            <li> <a href="#"> Crear evento </a> </li>
+                            <li> <a href="#"> Crear comunidad </a> </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3  col-md-3 col-sm-4 col-xs-6">
+                        <h3> Mi area </h3>
+                        <ul>
+                            <li> <a href="#"> Mi perfil </a> </li>
+                            <li> <a href="#"> Mis eventos </a> </li>
+                            <li> <a href="#"> Mis comunidades </a> </li>
+                            <li> <a href="#"> Notificaciones </a> </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3  col-md-3 col-sm-12 col-xs-6 ">
+                        <h3> Nuestras RRSS</h3>
+                        <ul class="social">
+                            <li>
+                                <a href="#"> <i class="fa fa-facebook">   </i> </a>
+                            </li>
+                            <li>
+                                <a href="#"> <i class="fa fa-twitter">   </i> </a>
+                            </li>
+                            <li>
+                                <a href="#"> <i class="fa fa-youtube">   </i> </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!--/.row-->
+            </div>
+            <!--/.container-->
+        </div>
+        <!--/.footer-->
+
+        <div class="footer-bottom">
+            <div class="container">
+                <p class="pull-left"> urTeam Web App. Under Apache 2.0 license. </p>
+            </div>
+        </div>
+        <!--/.footer-bottom-->
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+    <script src="/js/fancybox.js"></script>
+
+</body>
+
+</html>

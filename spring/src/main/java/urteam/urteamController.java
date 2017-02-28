@@ -1,11 +1,20 @@
 package urteam;
 
+<<<<<<< HEAD
+=======
+import java.sql.Date;
+
+>>>>>>> branch 'master' of https://github.com/Frostqui/urTeam.git
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import urteam.event.Event;
+import urteam.event.EventRepository;
 
 import urteam.community.*;
 import urteam.event.*;
@@ -40,12 +49,6 @@ public class urteamController {
 		}
 	}
 
-	@RequestMapping("/")
-	public String greeting(Model model) {
-
-		
-
-		return "index";
-	}
+	
 
 }
