@@ -30,11 +30,18 @@ public class eventController {
 		return "event";
 	}
 	
-	@RequestMapping("/events/add")
-	public String nuevoa(Model model, Event evento) {
+	@RequestMapping("/addEvent")
+	public String newEvent() {
+
+		return "addEvent";
+
+	}
+	
+	@RequestMapping("/EventAdded")
+	public String eventAdded(Model model, Event evento) {
 
 		eventRepo.save(evento);
-
+		model.addAttribute("eventos", eventRepo.findAll());
 		return "events";
 
 	}
