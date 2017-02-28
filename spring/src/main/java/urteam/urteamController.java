@@ -45,7 +45,7 @@ public class urteamController {
 	}
 	
 	@RequestMapping("/events/add")
-	public String addEvent(Model model, Event evento) {
+	public String nuevoa(Model model, Event evento) {
 
 		repository.save(evento);
 
