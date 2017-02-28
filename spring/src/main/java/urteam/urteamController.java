@@ -1,19 +1,14 @@
 package urteam;
 
 import java.sql.Date;
+
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 
-import urteam.event.Event;
-import urteam.event.EventRepository;
-
-import urteam.community.*;
 import urteam.event.*;
+import urteam.community.*;
 import urteam.user.*;
 
 @Controller
@@ -37,11 +32,20 @@ public class urteamController {
 		}
 		
 		for (int i = 0; i < 10; i++) {
-			eventRepo.save(new Event());
+			String name = String.valueOf(i);
+			String sport = String.valueOf(i);
+			double price= i;
+			String info = String.valueOf(i);
+			String place = String.valueOf(i);
+			Date start_date = new Date(i);
+			Date end_date = new Date(i);
+			eventRepo.save(new Event(name, sport, price, info, place, start_date, end_date));
 		}
 
 		for (int i = 0; i < 10; i++) {
-			communityRepo.save(new Community());
+			String name = String.valueOf(i);
+			String info = String.valueOf(i);
+			communityRepo.save(new Community(name, info));
 		}
 	}
 
