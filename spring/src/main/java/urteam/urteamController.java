@@ -1,7 +1,6 @@
 package urteam;
 
 import java.sql.Date;
-
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,44 +12,37 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import urteam.event.Event;
 import urteam.event.EventRepository;
 
+import urteam.community.*;
+import urteam.event.*;
+import urteam.user.*;
+
 @Controller
 public class urteamController {
 	
 	@Autowired
-	private EventRepository repository;
+	private UserRepository userRepo;
+	
+	@Autowired
+	private EventRepository eventRepo;
+	
+	@Autowired
+	private CommunityRepository communityRepo;	
 	
 	@PostConstruct
-	public void init() {
-		for(int i=1;i<=10;i++){
-		repository.save(new Event("Nombre Evento # "+i,"Running",20.0,"Información detallada Evento","Madrid",new Date(2017,03,01),new Date(2017,03,01))); 
+	public void init (){
+		for (int i = 0; i < 10; i++) {
+			String name = String.valueOf(i);
+			String surname = String.valueOf(i);
+			userRepo.save(new User(name, surname));
 		}
-	}
-
-	@RequestMapping("/events")
-	public String eventos(Model model) {
-
-		model.addAttribute("eventos", repository.findAll());
-
-		return "events";
-	}
-	
-	@RequestMapping("/event/{id}")
-	public String showEvent(Model model, @PathVariable long id) {
 		
-		Event event = repository.findOne(id);
+		for (int i = 0; i < 10; i++) {
+			eventRepo.save(new Event());
+		}
 
-		model.addAttribute("event", event);
-
-		return "event";
-	}
-	
-	@RequestMapping("/events/add")
-	public String nuevoa(Model model, Event evento) {
-
-		repository.save(evento);
-
-		return "events";
-
+		for (int i = 0; i < 10; i++) {
+			communityRepo.save(new Community());
+		}
 	}
 
 }
