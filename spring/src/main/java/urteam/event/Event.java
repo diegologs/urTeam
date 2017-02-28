@@ -68,6 +68,14 @@ public class Event {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public String getSport() {
+		return sport;
+	}
+
+	public void setSport(String sport) {
+		this.sport = sport;
+	}
 
 	public double getPrice() {
 		return price;
