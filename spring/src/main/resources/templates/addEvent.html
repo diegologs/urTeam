@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>urTeam - Tu web del deporte</title>
+      <link rel="shortcut icon" href="images/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/addEvent.css">
+
+</head>
+
+<body>
+    <nav class="navbar-fixed-top navbar-urTeam" role="navigation">
+        <!-- El logotipo y el icono que despliega el menú se agrupan
+       para mostrarlos mejor en los dispositivos móviles -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                  <span class="sr-only">Desplegar navegación</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-left" href="index.html"><img calt="urTeam" src="images/logo.png" width="150px"></a>
+        </div>
+        <!-- Agrupar los enlaces de navegación, los formularios y cualquier
+       otro elemento que se pueda ocultar al minimizar la barra -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse navbar-inner">
+            <ul class="nav navbar-nav minav">
+                <li class="active"><a href="events.html">Eventos</a></li>
+                <li><a href="groups.html">Comunidades</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right minav">
+                <li><a href="user.html">Iniciar Sesión / Registro</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="form-container">
+        <!--  
+            <form class="form-group">
+                <div class="form-group">
+                    <label for="eventName">Nombre del evento*</label>
+                    <input type="text" class="form-control" id="eventName" placeholder="Nombre">
+                </div>
+                <div class="form-group">
+                    <label for="eventLoc">Ubicación del evento*</label>
+                    <input type="text" class="form-control" id="eventLoc" placeholder="Ubicación">
+                </div>
+                <div class="form-group">
+                    <label for="eventPrice">Precio del evento</label>
+                    <input type="text" class="form-control" id="eventPrice" placeholder="EUR">
+                </div>
+                <div class="form-group">
+                    <label for="eventRangeStart">Inicio y fin del evento</label>
+                    <div class="input-daterange input-group" id="datepicker">
+                        <input type="text" class="input-sm form-control" name="start" />
+                        <span class="input-group-addon">a</span>
+                        <input type="text" class="input-sm form-control" name="end" />
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label for="sportSelect">Deporte</label>
+                    <select class="form-control" id="sportSelect">
+                      <option>Mountain Bike</option>
+                      <option>Runnig</option>
+                      <option>Roller</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="eventDesc">Descripcion del evento</label>
+                    <textarea class="form-control" id="eventDesc" rows="4"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="eventImage">Imagen</label>
+                    <input type="file" class="form-control-file" id="eventImage" aria-describedby="fileHelp">
+                    <small id="fileHelp" class="form-text text-muted">Tamaño recomendado 200px x 200px</small>
+                </div>
+
+                <fieldset class="form-group">
+                    <label for="eventType">Tipo de evento</label>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                        <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                        Público
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                        <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
+                        Privado
+                        </label>
+                    </div>
+                </fieldset>
+                <div style="text-align:center;">
+                    <input type="submit" class="btn btn-primary btn-form" value="Crear evento"/>
+                </div>
+            </form>
+            -->
+            <form action="events/add" method="post">
+				<p>Nombre: </p>
+				<input type='text' name='name'/>
+				<p>Deporte:</p>
+				<input type='text' name='sport'/>
+				<p>Comentario:</p>
+				<textarea name='info' rows=5 cols=40></textarea>
+				<input type='submit' value='Enviar'/>
+			</form>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-datepicker.min.js"></script>
+    <script src="js/bootstrap-datepicker.es.min.js"></script>
+    <script src="js/urTeam-datepicker.js"></script>
+</body>
+
+</html>

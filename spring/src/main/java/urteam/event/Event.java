@@ -18,9 +18,9 @@ public class Event {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-
 	private String name;
-	private long price;
+	private String sport;
+	private double price;
 	private String info;
 	private String main_photo;
 	private String place;
@@ -32,17 +32,25 @@ public class Event {
 	
 	@OneToMany
 	private List<User> participants_IDs;
+	
 
 	public Event() {
 	}
 
-	public Event(String name, Long price, String info, String place, Date start_date, Date end_date) {
+	public Event(String name, String sport, double price, String info, String place, Date start_date, Date end_date) {
 		this.name = name;
+		this.sport = sport;
 		this.price = price;
 		this.info = info;
 		this.place = place;
 		this.start_date = start_date;
 		this.end_date = end_date;
+	}
+	
+	public Event(String name, String sport, String info){
+		this.name = name;
+		this.sport = sport;
+		this.info = info;
 	}
 
 	public long getId() {
@@ -61,11 +69,11 @@ public class Event {
 		this.name = name;
 	}
 
-	public Long getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(Long price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 
