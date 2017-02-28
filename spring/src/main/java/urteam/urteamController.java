@@ -1,10 +1,6 @@
 package urteam;
 
-<<<<<<< HEAD
-=======
 import java.sql.Date;
-
->>>>>>> branch 'master' of https://github.com/Frostqui/urTeam.git
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
