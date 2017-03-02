@@ -13,10 +13,10 @@
 </head>
 
 <body>
+
     {{> navbar_template}}
 
     <!-- VIDEO-BACKGROUND -->
-
 
     <div class="video-box">
         <div id="video-container">
@@ -27,8 +27,6 @@
               <img alt="urTeam" src="/images/logo.png" width="250px">
                  <hr>
                  <h3>Conecta con comunidades y eventos de tus deportes favoritos</h3>
-
-
             </div>
            
         </div>
@@ -39,288 +37,27 @@
     <!-- END VIDEO-BACKGROUND -->
 
     <div class="container">
+    
         <!-- ----------------------------- Primera fila de los eventos ------------------------------ -->
         <h2 class="sport_title"><i class="fa fa-bicycle" aria-hidden="true" style="color:#c5c0c1;"></i> Mountain Bike </h2>
         <hr class="hr-yellow">
         <br>
-
-
-        <!-- Elemento de la izquiera -->
         <div class="row">
-            <!-- EVENT -->
-            <div class="col-sm-4 hidden-xs">
-                <div class="panel panel-primary event-primary">
-                    <div class="panel-heading">
-                        <div class="row nopadding">
-                            <div class="col-sm-9 nopadding">
-                                <span class="name">Nombre Evento</p>
-                            </div>
-                            <div class="col-sm-3 nopadding">
-                                <span class="year">2017</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-body nopadding">
-                        <sport>
-                            <p>Tipo de deporte</p>
-                        </sport>
-                        <img src="https://placehold.it/400x150" alt="event image" class="img-responsive" />
-                        <div class="row nopadding">
-                            <div class="col-sm-6 nopadding">
-                                <time class="start blue">
-                                Fecha <span class="day">31</span>
-                            <span class="month">Ene</span>
-                            </time>
-                            </div>
-                            <div class="col-sm-6 nopadding">
-                                <time class="end blue">
-                                Precio <span class="day">20</span>
-                                <span class ="month">EUR</span>
-                            </time>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-footer panel-primary">
-                        <p>Breve descripción del evento.
-                        </p>
-                        <a href="#" class="btn btn-success mybtn-succes">Más información</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- END EVENT -->
-
-
-            <!-- Elemento del centro -->
-
-            <div class="col-sm-4 hidden-xs">
-                <div class="panel panel-primary event-primary">
-                    <div class="panel-heading">
-                        <div class="row nopadding">
-                            <div class="col-sm-9 nopadding">
-                                <span class="name">Nombre Evento</p>
-                            </div>
-                            <div class="col-sm-3 nopadding">
-                                <span class="year">2017</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-body nopadding">
-                        <sport>
-                            <p>Tipo de deporte</p>
-                        </sport>
-                        <img src="https://placehold.it/400x150" alt="event image" class="img-responsive" />
-                        <div class="row nopadding">
-                            <div class="col-sm-6 nopadding">
-                                <time class="start blue">
-                                Fecha <span class="day">31</span>
-                            <span class="month">Ene</span>
-                            </time>
-                            </div>
-                            <div class="col-sm-6 nopadding">
-                                <time class="end blue">
-                                Precio <span class="day">20</span>
-                                <span class ="month">EUR</span>
-                            </time>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-footer panel-primary">
-                        <p>Breve descripción del evento.
-                        </p>
-                        <a href="#" class="btn btn-success mybtn-succes">Más información</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- END EVENT -->
-
-            <!-- Elemento de la derecha -->
-
-            <div class="col-sm-4 hidden-xs">
-                <div class="panel panel-primary event-primary">
-                    <div class="panel-heading">
-                        <div class="row nopadding">
-                            <div class="col-sm-9 nopadding">
-                                <span class="name">Nombre Evento</p>
-                            </div>
-                            <div class="col-sm-3 nopadding">
-                                <span class="year">2017</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-body nopadding">
-                        <sport>
-                            <p>Tipo de deporte</p>
-                        </sport>
-                        <img src="https://placehold.it/400x150" alt="event image" class="img-responsive" />
-                        <div class="row nopadding">
-                            <div class="col-sm-6 nopadding">
-                                <time class="start blue">
-                                Fecha <span class="day">31</span>
-                            <span class="month">Ene</span>
-                            </time>
-                            </div>
-                            <div class="col-sm-6 nopadding">
-                                <time class="end blue">
-                                Precio <span class="day">20</span>
-                                <span class ="month">EUR</span>
-                            </time>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-footer panel-primary">
-                        <p>Breve descripción del evento.
-                        </p>
-                        <a href="#" class="btn btn-success mybtn-succes">Más información</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- END EVENT -->
-
-        </div>
+	        {{# first_events}}
+	        	{{> event_template}}
+	        {{/ first_events}}
+		</div>
         <br>
 
         <!-- ----------------------------- Segunda fila de los eventos ------------------------------ -->
-
         <h2 class="sport_title"><i class="fa fa-road" aria-hidden="true" style="color:c5c1c0;"></i> Running</h2>
         <hr class="hr-yellow">
         <br>
 
         <div class="row">
-            <!-- EVENT -->
-            <div class="col-sm-4">
-                <div class="panel panel-primary event-primary">
-                    <div class="panel-heading">
-                        <div class="row nopadding">
-                            <div class="col-sm-9 nopadding">
-                                <span class="name">Nombre Evento</p>
-                            </div>
-                            <div class="col-sm-3 nopadding">
-                                <span class="year">2017</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-body nopadding">
-                        <sport>
-                            <p>Tipo de deporte</p>
-                        </sport>
-                        <img src="https://placehold.it/400x150" alt="event image" class="img-responsive" />
-                        <div class="row nopadding">
-                            <div class="col-sm-6 nopadding">
-                                <time class="start blue">
-                                Fecha <span class="day">31</span>
-                            <span class="month">Ene</span>
-                            </time>
-                            </div>
-                            <div class="col-sm-6 nopadding">
-                                <time class="end blue">
-                                Precio <span class="day">20</span>
-                                <span class ="month">EUR</span>
-                            </time>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-footer panel-primary">
-                        <p>Breve descripción del evento.
-                        </p>
-                        <a href="#" class="btn btn-success mybtn-succes">Más información</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- END EVENT -->
-
-
-            <!-- Elemento del centro -->
-
-            <div class="col-sm-4">
-                <div class="panel panel-primary event-primary">
-                    <div class="panel-heading">
-                        <div class="row nopadding">
-                            <div class="col-sm-9 nopadding">
-                                <span class="name">Nombre Evento</p>
-                            </div>
-                            <div class="col-sm-3 nopadding">
-                                <span class="year">2017</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-body nopadding">
-                        <sport>
-                            <p>Tipo de deporte</p>
-                        </sport>
-                        <img src="https://placehold.it/400x150" alt="event image" class="img-responsive" />
-                        <div class="row nopadding">
-                            <div class="col-sm-6 nopadding">
-                                <time class="start blue">
-                                Fecha <span class="day">31</span>
-                            <span class="month">Ene</span>
-                            </time>
-                            </div>
-                            <div class="col-sm-6 nopadding">
-                                <time class="end blue">
-                                Precio <span class="day">20</span>
-                                <span class ="month">EUR</span>
-                            </time>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-footer panel-primary">
-                        <p>Breve descripción del evento.
-                        </p>
-                        <a href="#" class="btn btn-success mybtn-succes">Más información</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- END EVENT -->
-
-            <!-- Elemento de la derecha -->
-
-            <div class="col-sm-4 hidden-xs-down">
-                <div class="panel panel-primary event-primary">
-                    <div class="panel-heading">
-                        <div class="row nopadding">
-                            <div class="col-sm-9 nopadding">
-                                <span class="name">Nombre Evento</p>
-                            </div>
-                            <div class="col-sm-3 nopadding">
-                                <span class="year">2017</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-body nopadding">
-                        <sport>
-                            <p>Tipo de deporte</p>
-                        </sport>
-                        <img src="https://placehold.it/400x150" alt="event image" class="img-responsive" />
-                        <div class="row nopadding">
-                            <div class="col-sm-6 nopadding">
-                                <time class="start blue">
-                                Fecha <span class="day">31</span>
-                            <span class="month">Ene</span>
-                            </time>
-                            </div>
-                            <div class="col-sm-6 nopadding">
-                                <time class="end blue">
-                                Precio <span class="day">20</span>
-                                <span class ="month">EUR</span>
-                            </time>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-footer panel-primary">
-                        <p>Breve descripción del evento.
-                        </p>
-                        <a href="#" class="btn btn-success mybtn-succes">Más información</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- END EVENT -->
-
+            {{# second_events}}
+	        	{{> event_template}}
+	        {{/ second_events}}
         </div>
         <br>
 
@@ -331,145 +68,13 @@
         <br>
 
         <div class="row">
-            <!-- EVENT -->
-            <div class="col-sm-4">
-                <div class="panel panel-primary event-primary">
-                    <div class="panel-heading">
-                        <div class="row nopadding">
-                            <div class="col-sm-9 nopadding">
-                                <span class="name">Nombre Evento</p>
-                            </div>
-                            <div class="col-sm-3 nopadding">
-                                <span class="year">2017</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-body nopadding">
-                        <sport>
-                            <p>Tipo de deporte</p>
-                        </sport>
-                        <img src="https://placehold.it/400x150" alt="event image" class="img-responsive" />
-                        <div class="row nopadding">
-                            <div class="col-sm-6 nopadding">
-                                <time class="start blue">
-                                Fecha <span class="day">31</span>
-                            <span class="month">Ene</span>
-                            </time>
-                            </div>
-                            <div class="col-sm-6 nopadding">
-                                <time class="end blue">
-                                Precio <span class="day">20</span>
-                                <span class ="month">EUR</span>
-                            </time>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-footer panel-primary">
-                        <p>Breve descripción del evento.
-                        </p>
-                        <a href="#" class="btn btn-success mybtn-succes">Más información</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- END EVENT -->
-
-
-            <!-- Elemento del centro -->
-
-            <div class="col-sm-4">
-                <div class="panel panel-primary event-primary">
-                    <div class="panel-heading">
-                        <div class="row nopadding">
-                            <div class="col-sm-9 nopadding">
-                                <span class="name">Nombre Evento</p>
-                            </div>
-                            <div class="col-sm-3 nopadding">
-                                <span class="year">2017</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-body nopadding">
-                        <sport>
-                            <p>Tipo de deporte</p>
-                        </sport>
-                        <img src="https://placehold.it/400x150" alt="event image" class="img-responsive" />
-                        <div class="row nopadding">
-                            <div class="col-sm-6 nopadding">
-                                <time class="start blue">
-                                Fecha <span class="day">31</span>
-                            <span class="month">Ene</span>
-                            </time>
-                            </div>
-                            <div class="col-sm-6 nopadding">
-                                <time class="end blue">
-                                Precio <span class="day">20</span>
-                                <span class ="month">EUR</span>
-                            </time>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-footer panel-primary">
-                        <p>Breve descripción del evento.
-                        </p>
-                        <a href="#" class="btn btn-success mybtn-succes">Más información</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- END EVENT -->
-
-            <!-- Elemento de la derecha -->
-
-            <div class="col-sm-4 hidden-xs-down">
-                <div class="panel panel-primary event-primary">
-                    <div class="panel-heading">
-                        <div class="row nopadding">
-                            <div class="col-sm-9 nopadding">
-                                <span class="name">Nombre Evento</p>
-                            </div>
-                            <div class="col-sm-3 nopadding">
-                                <span class="year">2017</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-body nopadding">
-                        <sport>
-                            <p>Tipo de deporte</p>
-                        </sport>
-                        <img src="https://placehold.it/400x150" alt="event image" class="img-responsive" />
-                        <div class="row nopadding">
-                            <div class="col-sm-6 nopadding">
-                                <time class="start blue">
-                                Fecha <span class="day">31</span>
-                            <span class="month">Ene</span>
-                            </time>
-                            </div>
-                            <div class="col-sm-6 nopadding">
-                                <time class="end blue">
-                                Precio <span class="day">20</span>
-                                <span class ="month">EUR</span>
-                            </time>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-footer panel-primary">
-                        <p>Breve descripción del evento.
-                        </p>
-                        <a href="#" class="btn btn-success mybtn-succes">Más información</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- END EVENT -->
-
+            {{# third_events}}
+	        	{{> event_template}}
+	        {{/ third_events}}
         </div>
     </div>
  	{{> footer_template}}
-    
 	
-
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
 </body>
