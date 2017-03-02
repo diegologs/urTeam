@@ -133,13 +133,15 @@ time>.month {
 .filterNav {
     margin-top: 10px;
     border-radius: 0;
-    background-color: #f7ce3e;
+    background-color: #1a2930;
+    border-bottom: 1px solid;
+    border-bottom-color: #f7ce3e;
     color: #0a1612;
     height: auto;
 }
 
 .form-group .form-control {
-    background-color: #fae18b;
+    background-color: white;
     border-radius: 0;
     border: none;
 }
@@ -162,4 +164,51 @@ time>.month {
 
 .form-group select {
     height: 30px;
+}
+
+
+/*
+PAGINACION
+*/
+
+.pagination {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    position: relative;
+}
+
+.pagination li {
+    float: left;
+    margin: 3px;
+}
+
+.pagination li a {
+    display: block;
+    padding: 3px 5px;
+    color: #1a2930;
+    background-color: #f7ce3e;
+    border-color: #f7ce3e;
+    text-decoration: none;
+}
+
+.pagination li a:hover {
+    display: block;
+    padding: 3px 5px;
+    color: #1a2930;
+    background-color: #c5a431;
+    border-color: #c5a431;
+    text-decoration: none;
+}
+
+.pagination li a.active {
+    border: 1px solid #c5a431;
+    color: #0a1612;
+    background-color: #c5a431;
+}
+
+.pagination li a.inactive {
+    background-color: #1a2930;
+    color: #c5c0c1;
+    border: 1px solid #1a2930;
 }
