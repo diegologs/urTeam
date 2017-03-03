@@ -9,6 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import urteam.user.*;
 
@@ -24,7 +29,9 @@ public class Event {
 	private String info;
 	private String main_photo;
 	private String place;
+	
 	private Date start_date;
+	
 	private Date end_date;
 	
 	@OneToOne
@@ -47,11 +54,11 @@ public class Event {
 		this.end_date = end_date;
 	}
 	
-	public Event(String name, String sport, String info, double price, String place){
-		this.name = name;
-		this.sport = sport;
-		this.info = info;
-	}
+//	public Event(String name, String sport, String info, double price, String place){
+//		this.name = name;
+//		this.sport = sport;
+//		this.info = info;
+//	}
 
 	public long getId() {
 		return id;

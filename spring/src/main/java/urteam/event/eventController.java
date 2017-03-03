@@ -1,10 +1,13 @@
 package urteam.event;
 
+import java.sql.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class eventController {
@@ -20,6 +23,7 @@ public class eventController {
 		return "events";
 	}
 	
+	
 	@RequestMapping("/event/{id}")
 	public String showEvent(Model model, @PathVariable long id) {
 		
@@ -30,16 +34,18 @@ public class eventController {
 		return "event";
 	}
 	
-	@RequestMapping("/addEvent")
+	@RequestMapping("addEvent")
 	public String newEvent() {
 
 		return "addEvent";
 
 	}
 	
-	@RequestMapping("/EventAdded")
+	@RequestMapping("EventAdded")
 	public String eventAdded(Model model, Event evento) {
-
+		
+		evento.setStart_date(new Date(3434));
+		evento.setEnd_date(new Date(3434));
 		eventRepo.save(evento);
 		model.addAttribute("eventos", eventRepo.findAll());
 		return "events";
