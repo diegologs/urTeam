@@ -23,7 +23,16 @@ public class Community {
 	private String info;
 	private String country;
 	private String city;
+	private String sport;
 	
+	public String getSport() {
+		return sport;
+	}
+
+	public void setSport(String sport) {
+		this.sport = sport;
+	}
+
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<User> admin_IDs = new ArrayList<>();
 	
@@ -33,7 +42,7 @@ public class Community {
 	public Community() {
 	}
 
-	public Community(String name, String info) {
+	public Community(String name, String info, String sport) {
 		this.name = name;
 		this.info = info;
 	}

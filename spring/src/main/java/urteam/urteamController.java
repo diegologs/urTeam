@@ -47,7 +47,7 @@ public class urteamController {
 		for (int i = 0; i < 10; i++) {
 			String name = String.valueOf(i);
 			String info = String.valueOf(i);
-			communityRepo.save(new Community(name, info));
+			communityRepo.save(new Community(name, info, "Running"));
 		}
 	}
 	

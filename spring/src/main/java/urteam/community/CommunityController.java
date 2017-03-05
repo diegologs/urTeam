@@ -1,5 +1,7 @@
 package urteam.community;
 
+import java.sql.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,11 +35,18 @@ public class CommunityController{
 		return "group";
 	}
 	
-	@RequestMapping("/groups/add")
-	public String addEvent(Model model, Community community) {
+	@RequestMapping("addGroup")
+	public String newEvent() {
 
+		return "addGroup";
+
+	}
+	
+	@RequestMapping("GroupAdded")
+	public String groupAdded(Model model, Community community) {
+		
 		communityRepo.save(community);
-
+		model.addAttribute("communitys", communityRepo.findAll());
 		return "groups";
 
 	}
