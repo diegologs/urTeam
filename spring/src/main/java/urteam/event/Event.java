@@ -54,11 +54,11 @@ public class Event {
 		this.end_date = end_date;
 	}
 	
-//	public Event(String name, String sport, String info, double price, String place){
-//		this.name = name;
-//		this.sport = sport;
-//		this.info = info;
-//	}
+	public Event(String name, String sport, String info, double price, String place){
+		this.name = name;
+		this.sport = sport;
+		this.info = info;
+	}
 
 	public long getId() {
 		return id;
