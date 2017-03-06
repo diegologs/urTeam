@@ -43,7 +43,7 @@
             </div>
         </nav>
         <!-- FIN FILTRO -->
-        <div class="btn-groups"><a href="addGroup.html"><button class="btn mybtn-succes">Crear comunidad</button></a></div>
+        <div class="btn-groups"><a href="/addGroup.html"><button class="btn mybtn-succes">Crear comunidad</button></a></div>
        
          {{#communitys}}
         <a href="/group/{{id}}" >
@@ -54,7 +54,9 @@
                     </div>
                     <div class="col-sm-8">
                         <h1 class="group-name">{{name}}</h1>
-                        <div class="badge">Mountain Bike</div>
+                        {{#sport}}
+                        <div class="badge">{{sport}}</div>
+                        {{/sport}}
                         <hr>
                         <div class="group-members">300 miembros</div>
                     </div>
