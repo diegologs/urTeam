@@ -5,6 +5,9 @@ import java.sql.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,11 +24,21 @@ public class eventController {
 	private EventRepository eventRepo;
 	
 	@RequestMapping("/events")
-	public String eventos(Model model) {
+	public String eventos(Model model, Pageable page) {
+		
+		String sortedBy;
+		
+		if(page.getSort() != null){
+			sortedBy = page.getSort().iterator().next().getProperty();
+		}else{
+			sortedBy = "name";
+			page = new PageRequest(page.getPageNumber(), page.getPageSize(), 
+					new Sort(new Order(Sort.DEFAULT_DIRECTION, "name")));
+		}
 		
 		Page<Event> eventos = eventRepo.findAll(new PageRequest(0,3));
-		
 		model.addAttribute("events", eventos);
+		model.addAttribute("sortedBy",sortedBy);
 		return "events";
 	}
 	
