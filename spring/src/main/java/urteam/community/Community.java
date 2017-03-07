@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import urteam.news.News;
 import urteam.user.*;
 
 @Entity
@@ -24,6 +25,9 @@ public class Community {
 	private String country;
 	private String city;
 	private String sport;
+	
+	@OneToMany(mappedBy="community")
+	private List<News> news;
 	
 	public String getSport() {
 		return sport;

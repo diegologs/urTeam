@@ -3,6 +3,8 @@ package urteam.community;
 import java.sql.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,8 +22,10 @@ public class CommunityController{
 	
 	@RequestMapping("/groups")
 	public String eventos(Model model) {
+		
+		Page<Community> groups = communityRepo.findAll(new PageRequest(0,3));
 
-		model.addAttribute("communitys", communityRepo.findAll());
+		model.addAttribute("communitys", groups);
 
 		return "groups";
 	}
@@ -37,6 +41,16 @@ public class CommunityController{
 		return "group";
 	}
 	
+	
+	@RequestMapping(value="/moreGroups")
+	public String moreAllShelf(Model model, @RequestParam int page){
+		
+		Page<Community> groups = communityRepo.findAll(new PageRequest(page,3));
+		
+		model.addAttribute("community", groups);
+		
+		return "listGroups";
+	}
 	
 	
 	@RequestMapping("/group/{id}/GroupEdited")
