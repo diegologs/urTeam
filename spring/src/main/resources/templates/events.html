@@ -46,20 +46,23 @@
             <!-- CONTENT -->
             <div id="content">
                 <!-- EVENT -->
-                {{#eventos}}
-                	{{> event_template}}
-                {{/eventos}}              
+                <div id="listEvents">
+	                {{#events}}{{> event_template}}{{/events}}
+                </div>     
                 <!-- END EVENT -->
             </div>
             <!-- END CONTENT -->
         </div>
         <!-- END ROW -->
+        <div class="styleMoreEvents">
+        	<div id="spinner"></div>
+        	<button id="btnMoreEvents" type="button" class="btn mybtn-succes btnMoreEvents">Ver más</button>
+        </div>
     </div>
     <!-- END CONTAINER -->
- 	{{> footer_template}}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="http://c.fzilla.com/1286136086-jquery.js"></script>
-    <script src="http://c.fzilla.com/1291523190-jpaginate.js"></script>
+ 	{{> footer_template}} 
+ 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="/js/moreContent.js"></script>
+    <script src="/js/bootstrap.min.js"></script>     
 </body>
 </html>

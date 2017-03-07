@@ -3,11 +3,16 @@ package urteam.event;
 import java.sql.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+
+
 
 @Controller
 public class eventController {
@@ -17,10 +22,21 @@ public class eventController {
 	
 	@RequestMapping("/events")
 	public String eventos(Model model) {
-
-		model.addAttribute("eventos", eventRepo.findAll());
-
+		
+		Page<Event> eventos = eventRepo.findAll(new PageRequest(0,3));
+		
+		model.addAttribute("events", eventos);
 		return "events";
+	}
+	
+	@RequestMapping(value="/moreContent")
+	public String moreAllShelf(Model model, @RequestParam int page){
+		
+		Page<Event> eventos = eventRepo.findAll(new PageRequest(page,3));
+		
+		model.addAttribute("event", eventos);
+		
+		return "listEvents";
 	}
 	
 	
