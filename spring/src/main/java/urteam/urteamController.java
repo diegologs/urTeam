@@ -1,13 +1,16 @@
 package urteam;
 
 import java.sql.Date;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import urteam.event.*;
 import urteam.community.*;
@@ -60,6 +63,44 @@ public class urteamController {
 	public String index(Model model) {
 
 		return "index";
+	}
+	
+	@RequestMapping("/adminPanel/edit")
+	public String edit(Model model,String action) {
+//		switch(action){
+//		case "edit": 
+//			model.addAttribute("siEdit",true);
+//			break;
+//		default: model.addAttribute("siEdit",false);
+//		}
+		model.addAttribute("edit_Section",true);
+		return "controlPanel-base";
+	}
+	
+	@RequestMapping("/adminPanel/changePass")
+	public String changePass(Model model,String action) {
+		model.addAttribute("changePass_Section",true);
+		return "controlPanel-base";
+	}
+	
+	@RequestMapping("/adminPanel/manageEvents")
+	public String manageEvents(Model model,String action) {
+		model.addAttribute("manageEvents_Section",true);
+		List<Event> event = eventRepo.findAll();
+		model.addAttribute("events",event);
+		return "controlPanel-base";
+	}
+	
+	@RequestMapping("/adminPanel/manageUsers")
+	public String manageUsers(Model model,String action) {
+		model.addAttribute("manageUsers_Section",true);
+		return "controlPanel-base";
+	}
+	
+	@RequestMapping("/adminPanel/manageGroups")
+	public String manageGroups(Model model,String action) {
+		model.addAttribute("manageGroups_Section",true);
+		return "controlPanel-base";
 	}
 
 }

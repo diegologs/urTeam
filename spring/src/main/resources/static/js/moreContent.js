@@ -7,7 +7,7 @@ $(document).ready(function(){
 		  page: coontAll
       })
       .done(function(data) {
-    	$('#spinner').empty()
+    	$('#spinner').empty();
         if (!$.trim(data)) {
           $("#btnMoreEvents").html("No hay más resultados");
         } else {
