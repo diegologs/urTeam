@@ -15,28 +15,33 @@ import urteam.user.*;
 
 @Controller
 public class urteamController {
-	
+
 	@Autowired
 	private UserRepository userRepo;
-	
+
 	@Autowired
 	private EventRepository eventRepo;
-	
+
 	@Autowired
-	private CommunityRepository communityRepo;	
-	
+	private CommunityRepository communityRepo;
+
 	@PostConstruct
-	public void init (){
-		for (int i = 0; i < 10; i++) {
-			String name = String.valueOf(i);
-			String surname = String.valueOf(i);
-			userRepo.save(new User(name, surname));
-		}
+	public void init() {
 		
+		
+		for (int i = 0; i < 10; i++) {
+			String name = "Usuario" + i;
+			String surname = "apellido" + i;
+			String nickname = "user" + surname.substring(1, 3) + i;
+			String password = "123456";
+			String email = name + surname + i + "@urteam.com";
+			userRepo.save(new User(name, surname, nickname, password, email));
+		}
+
 		for (int i = 0; i < 10; i++) {
 			String name = String.valueOf(i);
 			String sport = String.valueOf(i);
-			double price= i;
+			double price = i;
 			String info = String.valueOf(i);
 			String place = String.valueOf(i);
 			Date start_date = new Date(i);
@@ -50,11 +55,9 @@ public class urteamController {
 			communityRepo.save(new Community(name, info, "Running"));
 		}
 	}
-	
+
 	@RequestMapping("/")
 	public String index(Model model) {
-
-		
 
 		return "index";
 	}

@@ -1,108 +1,160 @@
 package urteam.user;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+
 
 
 @Entity
+@Table(name = "user_profile")
 public class User {
-		
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	private String username;
+	private String surname;
+	private String nickname;
+	private String password;
+	private String email;
+	private String bio;
+	private String city;
+	private String country;
+	private String score;
+	private String avatar;
+	private String role;
 	
-	private String name, surname, nickname, password, email, bio, city, country, score, avatar, role;
-
+//	@OneToMany(mapped)
+//	private List<User> friendList;
+	
 	public User() {
 	}
-	
-	public User(String name, String surname) {
-		this.name = name;
+
+
+
+	public User(String username, String surname, String nickname, String password, String email) {
+		this.username = username;
 		this.surname = surname;
+		this.nickname = nickname;
+		this.password = password;
+		this.email = email;
+		this.bio = "nada";
+		this.city = "nada";
+		this.country = "nada";
+		this.score = "nada";
+		this.avatar = "nada";
+		this.role = "nada";
+//		this.friendList = new ArrayList<>();
 	}
-		
+
 	public long getId() {
 		return id;
 	}
+
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getName() {
-		return name;
+
+	public String getUserName() {
+		return username;
 	}
-	public void setName(String name) {
-		this.name = name;
+
+	public void setUserName(String name) {
+		this.username = name;
 	}
+
 	public String getSurname() {
 		return surname;
 	}
+
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
+
 	public String getNickname() {
 		return nickname;
 	}
+
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
+
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	public String getBio() {
 		return bio;
 	}
+
 	public void setBio(String bio) {
 		this.bio = bio;
 	}
+
 	public String getCity() {
 		return city;
 	}
+
 	public void setCity(String city) {
 		this.city = city;
 	}
+
 	public String getCountry() {
 		return country;
 	}
+
 	public void setCountry(String country) {
 		this.country = country;
 	}
+
 	public String getScore() {
 		return score;
 	}
+
 	public void setScore(String score) {
 		this.score = score;
 	}
+
 	public String getAvatar() {
 		return avatar;
 	}
+
 	public void setAvatar(String avatar) {
 		this.avatar = avatar;
 	}
+
 	public String getRole() {
 		return role;
 	}
+
 	public void setRole(String role) {
 		this.role = role;
 	}
-	
-	//List<community.community> comunidades;
-	
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", surname=" + surname + ", nickname=" + nickname + ", password="
-				+ password + ", email=" + email + ", bio=" + bio + ", city=" + city + ", country=" + country
-				+ ", score=" + score + ", avatar=" + avatar + ", role=" + role + "]";
-	}
+
+//	public List<User> getFriendList() {
+//		return friendList;
+//	}
+//
+//	public void setFriendList(ArrayList<User> friendList) {
+//		this.friendList = friendList;
+//	}
+
 }
