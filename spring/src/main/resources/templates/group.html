@@ -22,8 +22,9 @@
             </div>
             <div class="col-sm-8 container group-text">
                 <h1 class="group-name">{{community.name}}</h1>
-                <div class="badge">Mountain Bike</div>
-                <div class="badge">Mountain Bike</div>
+                  {{#community.sport}}
+                        <div class="badge">{{community.sport}}</div>
+                  {{/community.sport}}
                 <h4 class="group-members"><a data-toggle="modal" data-target="#myModal">300 miembros</a></h4>
             </div>
             <div class="col-sm-2 container">
@@ -140,13 +141,13 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-container">
-                                <form class="form-group">
+                                <form class="form-group" action="/group/{{id}}/GroupEdited" method="post">
                                     <label style="color:black;" for="textarea">Información</label>
-                                      <textarea type="text" id="textarea" class="form-control" rows="15"></textarea>
+                                      <textarea type="text" id="textarea" class="form-control" rows="15" name="info"></textarea>
                                       <br>
                                       <hr>
                                     <div class="addButton">
-                                         <a data-toggle="modal" data-target="#myModal2"><button class="btn mybtn-succes addButton">Editar información</button></a>
+                                         <button type="submit" class="btn mybtn-succes addButton">Editar información</button>
                                     </div>
 
                                 </form>

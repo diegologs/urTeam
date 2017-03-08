@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>urTeam - Tu web del deporte</title>
+  <link rel="shortcut icon" href="images/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/user.css">
+    <link rel="stylesheet" href="/user-2.css">
+    <link rel="stylesheet" href="/css/scrolling-nav.css">
+
+</head>
+
+<body>
+    <nav class="navbar-fixed-top navbar-urTeam" role="navigation">
+        <!-- El logotipo y el icono que despliega el menú se agrupan
+       para mostrarlos mejor en los dispositivos móviles -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                  <span class="sr-only">Desplegar navegación</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-left" href="index.html"><img calt="urTeam" src="/images/logo.png" width="150px"></a>
+        </div>
+
+        <!-- Agrupar los enlaces de navegación, los formularios y cualquier
+       otro elemento que se pueda ocultar al minimizar la barra -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse navbar-inner">
+
+            <ul class="nav navbar-nav minav">
+                <li><a href="events.html">Eventos</a></li>
+                <li><a href="groups.html">Comunidades</a></li>
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right minav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="user-name">
+                                        John Doe
+                                    </span>
+                        <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <div class="navbar-content">
+                                <span>John Doe</span>
+                                <p class="text-muted small">
+                                    johndoe@urteam.es</p>
+                                <div class="divider">
+                                </div>
+                                <a href="settings.html" class="btn btn-default btn-sm mybtn-succes"><i class="fa fa-cogs" aria-hidden="true"></i> Configuración </a>
+                                <a href="index.html" class="btn btn-default btn-sm mybtn-succes"><i class="fa fa-power-off" aria-hidden="true"></i> Sign Out</a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+
+        </div>
+    </nav>
+    <div class="row profile">
+
+        <div class="col-md-3">
+
+            <!-- Start of left column -->
+            <div class="profile-sidebar">
+                <!-- SIDEBAR USERPIC -->
+                <div class="profile-userpic">
+                    <img src="http://lorempixel.com/output/people-q-c-200-200-1.jpg" class="img-responsive" alt="">
+                </div>
+                <!-- END SIDEBAR USERPIC -->
+                <!-- SIDEBAR USER TITLE -->
+                <div class="profile-usertitle">
+                    <div class="profile-usertitle-name">
+                        Jean Doe
+                    </div>
+                    <div class="profile-usertitle-name">
+                        @jeandoe
+                    </div>
+                    <div class="profile-usertitle-name">
+                        Madrid, España
+                    </div>
+                    <div class="profile-usertitle-job">
+                        Puntuación
+                    </div>
+                </div>
+                <!-- END SIDEBAR USER TITLE -->
+                <!-- SIDEBAR BUTTONS -->
+                <div class="profile-userbuttons">
+                    <button type="button" class="btn btn-sm mybtn-succes">Añadir</button>
+                </div>
+                <!-- END SIDEBAR BUTTONS -->
+                <!-- SIDEBAR MENU -->
+                <div class="profile-usermenu">
+                    <ul class="nav">
+                        <li class="active">
+                            <a href="#profile" class="page-scroll">
+                                <i class="fa fa-user-circle" aria-hidden="true"></i> Perfil </a>
+                        </li>
+
+                        <li>
+                            <a href="#progress" class="page-scroll">
+                                <i class="fa fa-line-chart" aria-hidden="true"></i> Progreso </a>
+                        </li>
+
+                        <li>
+                            <a href="#communities" class="page-scroll">
+                                <i class="fa fa-users" aria-hidden="true"></i> Mis Comunidades </a>
+                        </li>
+                        <li>
+                            <a href="#goals" class="page-scroll">
+                                <i class="fa fa-flag-checkered" aria-hidden="true"></i> Mis Logros </a>
+                        </li>
+
+                        <li>
+                            <a href="#friends" class="page-scroll">
+                                <i class="fa fa-address-book" aria-hidden="true"></i> Amigos </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- END MENU -->
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="profile-content">
+                <div class="container-fluid info-box" id="profile">
+                    <div class="row">
+                        <div class="col-sm-12">
+
+                            <h3><i class="fa fa-user-circle" aria-hidden="true"></i> Perfil
+                            </h3>
+
+                        </div>
+                    </div>
+                    <!--/row-->
+                    <hr class="hr-yellow">
+                    <div class="row">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </div>
+                    <br>
+                    <br>
+                </div>
+                <div class="container-fluid info-box" id="progress">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h3><i class="fa fa-line-chart" aria-hidden="true"></i> Progreso</h3>
+                        </div>
+                    </div>
+                    <!--/row-->
+                    <hr class="hr-yellow">
+                    <div class="row">
+                        <div class="form-control" id="chart"></div>
+                    </div>
+                    <br>
+                    <br>
+                </div>
+                <div class="container-fluid info-box" id="communities">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h3><i class="fa fa-users" aria-hidden="true"></i> Mis Comunidades</h3>
+                        </div>
+                    </div>
+                    <!--/row-->
+                    <hr class="hr-yellow">
+                    <div class="row">
+                        <div class="container-fluid">
+                            <div class="row group">
+                                <div class="group-info">
+                                    <div class="col-sm-2 group-image">
+                                        <img class="img-circle img-responsive group-image" width="110px" src="images/avatar.jpg">
+                                    </div>
+                                    <a href="group.html">
+                                        <div class="col-sm-8">
+                                            <h1 class="group-name">MTB Ilarcuris</h1>
+                                            <div class="badge">Mountain Bike</div>
+                                            <div class="badge">Mountain Bike</div>
+                                            <hr>
+                                            <div class="group-members">300 miembros</div>
+                                        </div>
+                                    </a>
+                                    <div class="col-sm-2 group-button">
+                                        <button class="btn btn-default group-btn">DEJAR</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row group">
+                                <div class="group-info">
+                                    <div class="col-sm-2 group-image">
+                                        <img class="img-circle img-responsive group-image" width="110px" src="http://lorempixel.com/200/200/sports/9/">
+                                    </div>
+                                    <a href="group.html">
+                                        <div class="col-sm-8">
+
+                                            <h1 class="group-name">Running Mostoles</h1>
+                                            <div class="badge">Run</div>
+
+                                            <hr>
+                                            <div class="group-members">15 miembros</div>
+
+                                        </div>
+                                    </a>
+                                    <div class="col-sm-2 group-button">
+                                        <button class="btn btn-default group-btn">DEJAR</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                </div>
+                <div class="container-fluid info-box" id="goals">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h3><i class="fa fa-flag-checkered" aria-hidden="true"></i> Mis Logros </h3>
+                        </div>
+                    </div>
+                    <!--/row-->
+                    <hr class="hr-yellow">
+                    <div class="row">
+                        <div class="skillBar">
+                            <h4>MTB Nivel 2</h4>
+                            <div class="skillBarContainer">
+                                <div class="skillBarValue value-50"></div>
+                            </div>
+                        </div>
+
+                        <div class="skillBar">
+                            <h4>Runner Nivel 3</h4>
+                            <div class="skillBarContainer">
+                                <div class="skillBarValue value-80"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                </div>
+                <div class="container-fluid info-box" id="friends">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h3><i class="fa fa-address-book" aria-hidden="true"></i> Amigos </h3>
+                        </div>
+                        <!--/row-->
+                        <hr class="hr-yellow">
+                        <div class="row friendrow">
+                            <div class="col-sm-6">
+                                <div class="friend">
+                                    <div class="col-sm-3 friend-image">
+                                        <img class="img-circle img-responsive group-image" width="110px" src="http://lorempixel.com/200/200/people/9/">
+                                    </div>
+                                    <div class="col-sm-9 friend-name">
+                                        <h3>Katrina Bowman</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="friend">
+                                    <div class="col-sm-3 friend-image">
+                                        <img class="img-circle img-responsive group-image" width="110px" src="http://lorempixel.com/200/200/people/9/">
+                                    </div>
+                                    <div class="col-sm-9 friend-name">
+                                        <h3>Katrina Bowman</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row friendrow">
+                            <div class="col-sm-6">
+                                <div class="friend">
+                                    <div class="col-sm-3 friend-image">
+                                        <img class="img-circle img-responsive group-image" width="110px" src="http://lorempixel.com/200/200/people/9/">
+                                    </div>
+                                    <div class="col-sm-9 friend-name">
+                                        <h3>Katrina Bowman</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="friend">
+                                    <div class="col-sm-3 friend-image">
+                                        <img class="img-circle img-responsive group-image" width="110px" src="http://lorempixel.com/200/200/people/9/">
+                                    </div>
+                                    <div class="col-sm-9 friend-name">
+                                        <h3>Katrina Bowman</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row friendrow">
+                            <div class="col-sm-6">
+                                <div class="friend">
+                                    <div class="col-sm-3 friend-image">
+                                        <img class="img-circle img-responsive group-image" width="110px" src="http://lorempixel.com/200/200/people/9/">
+                                    </div>
+                                    <div class="col-sm-9 friend-name">
+                                        <h3>Katrina Bowman</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="friend">
+                                    <div class="col-sm-3 friend-image">
+                                        <img class="img-circle img-responsive group-image" width="110px" src="http://lorempixel.com/200/200/people/9/">
+                                    </div>
+                                    <div class="col-sm-9 friend-name">
+                                        <h3>Katrina Bowman</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer" id="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3  col-md-3 col-sm-4 col-xs-6">
+                        <h3> Categorias </h3>
+                        <ul>
+                            <li> <a href="#"> Eventos </a> </li>
+                            <li> <a href="#"> Comunidades </a> </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3  col-md-3 col-sm-4 col-xs-6">
+                        <h3> Herramientas</h3>
+                        <ul>
+                            <li> <a href="#"> Crear evento </a> </li>
+                            <li> <a href="#"> Crear comunidad </a> </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3  col-md-3 col-sm-4 col-xs-6">
+                        <h3> Mi area </h3>
+                        <ul>
+                            <li> <a href="#"> Mi perfil </a> </li>
+                            <li> <a href="#"> Mis eventos </a> </li>
+                            <li> <a href="#"> Mis comunidades </a> </li>
+                            <li> <a href="#"> Notificaciones </a> </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3  col-md-3 col-sm-12 col-xs-6 ">
+                        <h3> Nuestras RRSS</h3>
+                        <ul class="social">
+                            <li>
+                                <a href="#"> <i class="fa fa-facebook">   </i> </a>
+                            </li>
+                            <li>
+                                <a href="#"> <i class="fa fa-twitter">   </i> </a>
+                            </li>
+                            <li>
+                                <a href="#"> <i class="fa fa-youtube">   </i> </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!--/.row-->
+            </div>
+            <!--/.container-->
+        </div>
+        <!--/.footer-->
+
+        <div class="footer-bottom">
+            <div class="container">
+                <p class="pull-left"> urTeam Web App. Under Apache 2.0 license. </p>
+            </div>
+        </div>
+        <!--/.footer-bottom-->
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <!--Page scroll-->
+    <script src="js/jquery.easing.min.js"></script>
+    <script src="js/scrolling-nav.js"></script>
+
+    <!-- Profile Charts -->
+    <script src="js/profile-chart.js"></script>
+
+
+    <!-- Navigation bar -->
+    <script>
+        $(function() {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+
+        $(function() {
+            $('[data-toggle="popover"]').popover()
+        })
+
+    </script>
+
+</body>
+
+</html>
