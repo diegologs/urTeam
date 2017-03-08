@@ -1,6 +1,9 @@
 package urteam;
 
-import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -8,9 +11,7 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import urteam.event.*;
 import urteam.community.*;
@@ -29,7 +30,7 @@ public class urteamController {
 	private CommunityRepository communityRepo;
 
 	@PostConstruct
-	public void init() {
+	public void init() throws ParseException {
 		
 		
 		for (int i = 0; i < 10; i++) {
@@ -47,9 +48,18 @@ public class urteamController {
 			double price = i;
 			String info = String.valueOf(i);
 			String place = String.valueOf(i);
-			Date start_date = new Date(6575);
-			Date end_date = new Date(6575);
-			eventRepo.save(new Event(name, sport, price, info, place, start_date, end_date));
+			
+			Date start_date = new SimpleDateFormat("dd/MM/yyyy").parse("02/11/2017");
+			Date end_date = new SimpleDateFormat("dd/MM/yyyy").parse("02/11/2017");
+			
+			Calendar cal = toCalendar(start_date);
+			
+			Event event = new Event(name, sport, price, info, place, start_date, end_date);
+			event.setDay_date(cal.get(Calendar.DAY_OF_MONTH));
+			event.setMonth_date(cal.get(Calendar.MONTH));
+			event.setYear_date(cal.get(Calendar.YEAR));
+			
+			eventRepo.save(event);			
 		}
 
 		for (int i = 0; i < 10; i++) {
@@ -100,5 +110,9 @@ public class urteamController {
 		model.addAttribute("communities",communities);
 		return "controlPanel-base";
 	}
-
+	private static Calendar toCalendar(Date date){ 
+		  Calendar cal = Calendar.getInstance();
+		  cal.setTime(date);
+		  return cal;
+		}
 }

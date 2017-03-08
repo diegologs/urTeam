@@ -1,6 +1,6 @@
 package urteam.event;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -13,7 +13,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import urteam.user.*;
 
@@ -30,9 +29,17 @@ public class Event {
 	private String main_photo;
 	private String place;
 	
+	@DateTimeFormat(pattern = "dd/MM")
+	@Temporal(TemporalType.DATE)
 	private Date start_date;
 	
+	@DateTimeFormat(pattern = "dd/MM")
+	@Temporal(TemporalType.DATE)
 	private Date end_date;
+	
+	private int day_date;
+	private String month_date;
+	private int year_date;
 	
 	@OneToOne
 	private User owner_id;
@@ -147,13 +154,29 @@ public class Event {
 	public void setParticipants_IDs(List<User> participants_IDs) {
 		this.participants_IDs = participants_IDs;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 
+	public int getDay_date() {
+		return day_date;
+	}
+
+	public void setDay_date(int day_date) {
+		this.day_date = day_date;
+	}
+
+	public String getMonth_date() {
+		return month_date;
+	}
+
+	public void setMonth_date(int month_date) {
+		String[] months = {"ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEPT", "OCT", "NOV", "DIC"};
+		this.month_date =  months[month_date];
+	}
+
+	public int getYear_date() {
+		return year_date;
+	}
+
+	public void setYear_date(int year_date) {
+		this.year_date = year_date;
+	}
 }
