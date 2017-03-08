@@ -65,32 +65,39 @@ public class urteamController {
 		return "index";
 	}
 	
-	@RequestMapping("/adminPanel/{action}")
-	public String goTo(Model model, @PathVariable String action){
-		switch(action){
-		case "edit":
-			model.addAttribute("edit_Section",true);
-			break;
-			
-		case "changePass":
-			model.addAttribute("changePass_Section",true);
-			break;
-		
-		case  "manageEvents":
-			model.addAttribute("manageEvents_Section",true);
-			break;
-			
-		case  "manageUsers":
-			model.addAttribute("manageUsers_Section",true);
-			break;
-			
-		case  "manageGroups":
-			model.addAttribute("manageGroups_Section",true);
-			break;
-			
-		default : model.addAttribute("edit_Section",true);
-		
-		}
+	@RequestMapping("/adminPanel/edit")
+	public String edit(Model model,String action) {
+		model.addAttribute("edit_Section",true);
+		return "controlPanel-base";
+	}
+	
+	@RequestMapping("/adminPanel/changePass")
+	public String changePass(Model model,String action) {
+		model.addAttribute("changePass_Section",true);
+		return "controlPanel-base";
+	}
+	
+	@RequestMapping("/adminPanel/manageEvents")
+	public String manageEvents(Model model,String action) {
+		model.addAttribute("manageEvents_Section",true);
+		List<Event> events = eventRepo.findAll();
+		model.addAttribute("events",events);
+		return "controlPanel-base";
+	}
+	
+	@RequestMapping("/adminPanel/manageUsers")
+	public String manageUsers(Model model,String action) {
+		model.addAttribute("manageUsers_Section",true);
+		List<User> users = userRepo.findAll();
+		model.addAttribute("users",users);
+		return "controlPanel-base";
+	}
+	
+	@RequestMapping("/adminPanel/manageGroups")
+	public String manageGroups(Model model,String action) {
+		model.addAttribute("manageGroups_Section",true);
+		List<Community> communities = communityRepo.findAll();
+		model.addAttribute("communities",communities);
 		return "controlPanel-base";
 	}
 
