@@ -1,5 +1,6 @@
 package urteam.event;
 
+import java.text.SimpleDateFormat;
 import java.sql.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,18 +35,27 @@ public class eventController {
 		return "event";
 	}
 	
-	@RequestMapping("addEvent")
+	@RequestMapping("/addEvent")
 	public String newEvent() {
 
 		return "addEvent";
 
 	}
 	
-	@RequestMapping("EventAdded")
-	public String eventAdded(Model model, Event evento) {
+	@RequestMapping("/eventAdded")
+	public String eventAdded(Model model, Event evento, @RequestParam String start_date, @RequestParam String end_date) {
 		
-		evento.setStart_date(new Date(3434));
-		evento.setEnd_date(new Date(3434));
+		System.out.println(start_date);
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		java.util.Date date = sdf.parse(start_date);
+		Date sqlStartDate = new Date(date.getTime());
+		
+		date = sdf.parse(end_date);
+		Date sqlEndDate = new Date(date.getTime());
+		
+		evento.setStart_date(sqlStartDate);
+		evento.setEnd_date(sqlEndDate);
 		eventRepo.save(evento);
 		model.addAttribute("eventos", eventRepo.findAll());
 		return "events";

@@ -39,8 +39,8 @@ public class urteamController {
 			double price= i;
 			String info = String.valueOf(i);
 			String place = String.valueOf(i);
-			Date start_date = new Date(i);
-			Date end_date = new Date(i);
+			Date start_date = new Date(6575);
+			Date end_date = new Date(6575);
 			eventRepo.save(new Event(name, sport, price, info, place, start_date, end_date));
 		}
 
