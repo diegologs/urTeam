@@ -1,6 +1,9 @@
 package urteam.event;
 
-import java.sql.Date;
+import java.util.Calendar;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -63,21 +66,36 @@ public class eventController {
 		return "event";
 	}
 	
-	@RequestMapping("addEvent")
+	@RequestMapping("/addEvent")
 	public String newEvent() {
 
 		return "addEvent";
 
 	}
 	
-	@RequestMapping("EventAdded")
-	public String eventAdded(Model model, Event evento) {
+	@RequestMapping("/eventAdded")
+	public String eventAdded(Model model, Event event, @RequestParam String start_date, @RequestParam String end_date) throws ParseException {
 		
-		evento.setStart_date(new Date(3434));
-		evento.setEnd_date(new Date(3434));
-		eventRepo.save(evento);
-		model.addAttribute("eventos", eventRepo.findAll());
+		Date final_start_date = new SimpleDateFormat("dd/MM/yyyy").parse(start_date);
+		event.setStart_date(final_start_date);
+		
+		Date final_end_date = new SimpleDateFormat("dd/MM/yyyy").parse(end_date);		
+		event.setEnd_date(final_end_date);		
+		
+		Calendar cal = toCalendar(event.getStart_date());		
+		event.setDay_date(cal.get(Calendar.DAY_OF_MONTH));
+		event.setMonth_date(cal.get(Calendar.MONTH));
+		event.setYear_date(cal.get(Calendar.YEAR));
+		
+		eventRepo.save(event);
+		Page<Event> eventos = eventRepo.findAll(new PageRequest(0,3));
+		model.addAttribute("events", eventos);
 		return "events";
-
 	}
+	
+	private static Calendar toCalendar(Date date){ 
+		  Calendar cal = Calendar.getInstance();
+		  cal.setTime(date);
+		  return cal;
+		}
 }
