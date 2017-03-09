@@ -67,11 +67,14 @@
               
                 <hr>
                 <a data-toggle="modal" data-target="#myModal2"><button class="btn mybtn-succes btn_group2">Añadir noticia</button></a>
+                
+                {{#community.news}}
                 <div class="new">
-                    <h4>Título de la actualización</h4>
-                    <div>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget</div>
+                    <h4>{{title}}</h4>
+                    <div>{{text}}</div>
                     <br>
                 </div>
+                {{/community.news}}
 
             </div>
             <div class="stats">
@@ -109,11 +112,11 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-container">
-                                <form class="form-group">
+                                <form class="form-group" action="/group/{{id}}/addNews" method="post">
                                      <label style="color:black;" for="groupName">Titulo de la actualización</label>
-                                      <input type="text" class="form-control" id="groupName" placeholder="Titulo de la actualización">
+                                      <input name="title" type="text" class="form-control" id="groupName" placeholder="Titulo de la actualización">
                                        <label style="color:black;" for="textarea">Cuerpo de la actualización</label>
-                                      <textarea type="text" id="textarea" class="form-control" rows="15"></textarea>
+                                      <textarea name="text" type="text" id="textarea" class="form-control" rows="15"></textarea>
                                       <br>
                                       <hr>
                                         <div class="addButton">

@@ -26,7 +26,7 @@ public class Community {
 	private String city;
 	private String sport;
 	
-	@OneToMany(mappedBy="community")
+	@OneToMany
 	private List<News> news;
 	
 	public String getSport() {
@@ -110,6 +110,11 @@ public class Community {
 	@Override
 	public String toString() {
 		return "Comunidad [id=" + id + ", Nombre=" + name + ", info=" + info + "]";
+	}
+
+	public void addNews(News news2) {
+		news.add(news2);
+		
 	}
 
 }

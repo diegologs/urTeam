@@ -13,12 +13,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import urteam.event.Event;
 import urteam.event.EventRepository;
+import urteam.news.News;
+import urteam.news.NewsRepository;
 
 @Controller
 public class CommunityController{
 	
 	@Autowired
 	private CommunityRepository communityRepo;	
+	
+	@Autowired
+	private NewsRepository newsRepo;	
 	
 	@RequestMapping("/groups")
 	public String eventos(Model model) {
@@ -60,6 +65,27 @@ public class CommunityController{
 		community.setInfo(info);
 		
 		communityRepo.save(community);
+		model.addAttribute("community", community);
+		return "group";
+
+	}
+
+	
+	@RequestMapping("/group/{id}/addNews")
+	public String groupEdited(Model model, @PathVariable long id, @RequestParam String title, @RequestParam String text) {
+		
+		Community community = communityRepo.findOne(id);
+		communityRepo.save(community);
+		
+		
+		
+		
+		News news = new News(title, text);
+		community.addNews(news);
+		
+	
+		
+		newsRepo.save(news);
 		model.addAttribute("community", community);
 		return "group";
 

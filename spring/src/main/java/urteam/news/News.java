@@ -18,7 +18,11 @@ public class News {
 	private String title;
 	private String text;
 	
-	@ManyToOne
-	 private Community community;
+		
+	public News(String title, String text){
+		this.title = title;
+		this.text = text;
+		
+	}
 	
 }
