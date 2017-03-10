@@ -11,7 +11,9 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 
 import urteam.event.*;
 import urteam.community.*;
@@ -39,7 +41,22 @@ public class urteamController {
 			String nickname = "user" + surname.substring(1, 3) + i;
 			String password = "123456";
 			String email = name + surname + i + "@urteam.com";
-			userRepo.save(new User(name, surname, nickname, password, email));
+			String bio = "Lorem ipsum dolor sit amet, "
+					+ "consectetur adipiscing elit, "
+					+ "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
+					+ "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris "
+					+ "nisi ut aliquip ex ea commodo consequat. "
+					+ "Duis aute irure dolor in reprehenderit in voluptate velit "
+					+ "esse cillum dolore eu fugiat nulla pariatur. "
+					+ "Excepteur sint occaecat cupidatat non proident, "
+					+ "sunt in culpa qui officia deserunt mollit anim id est laborum. "
+					+ "Lorem ipsum dolor sit amet, consectetur adipiscing elit, "
+					+ "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+			String score = "9999";
+			String city="Madrid";
+			String country ="España";
+			userRepo.save(new User(name, surname, nickname, password, email,bio,score,city,country));
+			
 		}
 
 		for (int i = 0; i < 10; i++) {
@@ -110,6 +127,14 @@ public class urteamController {
 		model.addAttribute("communities",communities);
 		return "controlPanel-base";
 	}
+	
+	@RequestMapping("/userprofile/{id}")
+	public String userProfile(Model model, @PathVariable Long id){
+		User user = userRepo.findOne(id);
+		model.addAttribute("user",user);
+		return "user";
+	}
+	
 	private static Calendar toCalendar(Date date){ 
 		  Calendar cal = Calendar.getInstance();
 		  cal.setTime(date);

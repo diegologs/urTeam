@@ -3,13 +3,12 @@ package urteam.user;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-
 
 @Entity
 @Table(name = "user_profile")
@@ -23,34 +22,35 @@ public class User {
 	private String nickname;
 	private String password;
 	private String email;
+	
+	@Column(columnDefinition = "TEXT")
 	private String bio;
 	private String city;
 	private String country;
 	private String score;
 	private String avatar;
 	private String role;
-	
-//	@OneToMany(mapped)
-//	private List<User> friendList;
-	
+
+	// @OneToMany(mapped)
+	// private List<User> friendList;
+
 	public User() {
 	}
 
-
-
-	public User(String username, String surname, String nickname, String password, String email) {
+	public User(String username, String surname, String nickname, String password, String email, String bio,
+			String score, String city, String country) {
 		this.username = username;
 		this.surname = surname;
 		this.nickname = nickname;
 		this.password = password;
 		this.email = email;
-		this.bio = "nada";
-		this.city = "nada";
-		this.country = "nada";
-		this.score = "nada";
+		this.bio = bio;
+		this.city = city;
+		this.country = country;
+		this.score = score;
 		this.avatar = "nada";
 		this.role = "nada";
-//		this.friendList = new ArrayList<>();
+		// this.friendList = new ArrayList<>();
 	}
 
 	public long getId() {
@@ -149,12 +149,12 @@ public class User {
 		this.role = role;
 	}
 
-//	public List<User> getFriendList() {
-//		return friendList;
-//	}
-//
-//	public void setFriendList(ArrayList<User> friendList) {
-//		this.friendList = friendList;
-//	}
+	// public List<User> getFriendList() {
+	// return friendList;
+	// }
+	//
+	// public void setFriendList(ArrayList<User> friendList) {
+	// this.friendList = friendList;
+	// }
 
 }
