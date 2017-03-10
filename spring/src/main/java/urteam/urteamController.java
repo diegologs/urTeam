@@ -42,14 +42,14 @@ public class urteamController {
 			userRepo.save(new User(name, surname, nickname, password, email));
 		}
 
-		for (int i = 0; i < 10; i++) {
-			String name = String.valueOf(i);
-			String sport = String.valueOf(i);
+		for (int i = 0; i < 18; i++) {
+			String name = "Evento de Prueba";
+			String sport = "Running";
 			double price = i;
-			String info = String.valueOf(i);
-			String place = String.valueOf(i);
+			String info = "Aqui va la descripcion de lso eventos";
+			String place = "Universidad Rey Juan Carlos I";
 			
-			Date start_date = new SimpleDateFormat("dd/MM/yyyy").parse("02/11/2017");
+			Date start_date = new SimpleDateFormat("dd/MM/yyyy").parse(String.valueOf(i)+"/05/2017");
 			Date end_date = new SimpleDateFormat("dd/MM/yyyy").parse("02/11/2017");
 			
 			Calendar cal = toCalendar(start_date);
