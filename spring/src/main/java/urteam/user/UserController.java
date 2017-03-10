@@ -17,9 +17,10 @@ public class UserController {
 	@Autowired
 	private CommunityRepository communityRepository;
 	
-	@RequestMapping("/user/{id}")
-	public String user(Model model, @PathVariable long id){
-		model.addAttribute("user", userRepository.findOne(id));
+	@RequestMapping("/userprofile/{id}")
+	public String userProfile(Model model, @PathVariable Long id){
+		User user = userRepository.findOne(id);
+		model.addAttribute("user",user);
 		return "user";
 	}
 }

@@ -42,15 +42,15 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <span class="user-name">
-                                        John Doe
+                                        {{user.nickname}}
                                     </span>
                         <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <div class="navbar-content">
-                                <span>John Doe</span>
+                                <span>{{user.nickname}}</span>
                                 <p class="text-muted small">
-                                    johndoe@urteam.es</p>
+                                    {{user.email}}</p>
                                 <div class="divider">
                                 </div>
                                 <a href="settings.html" class="btn btn-default btn-sm mybtn-succes"><i class="fa fa-cogs" aria-hidden="true"></i> Configuración </a>
@@ -78,16 +78,16 @@
                 <!-- SIDEBAR USER TITLE -->
                 <div class="profile-usertitle">
                     <div class="profile-usertitle-name">
-                        Jean Doe
+                        {{user.username}} {{user.surname}}
                     </div>
                     <div class="profile-usertitle-name">
-                        @jeandoe
+                        @{{user.nickname}}
                     </div>
                     <div class="profile-usertitle-name">
-                        Madrid, España
+                        {{user.city}}, {{user.country}}
                     </div>
                     <div class="profile-usertitle-job">
-                        Puntuación
+                        {{user.score}}
                     </div>
                 </div>
                 <!-- END SIDEBAR USER TITLE -->
@@ -141,7 +141,7 @@
                     <!--/row-->
                     <hr class="hr-yellow">
                     <div class="row">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    	{{user.bio}}
                     </div>
                     <br>
                     <br>
@@ -320,70 +320,16 @@
         </div>
     </div>
 
-    <footer>
-        <div class="footer" id="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3  col-md-3 col-sm-4 col-xs-6">
-                        <h3> Categorias </h3>
-                        <ul>
-                            <li> <a href="#"> Eventos </a> </li>
-                            <li> <a href="#"> Comunidades </a> </li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-3  col-md-3 col-sm-4 col-xs-6">
-                        <h3> Herramientas</h3>
-                        <ul>
-                            <li> <a href="#"> Crear evento </a> </li>
-                            <li> <a href="#"> Crear comunidad </a> </li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-3  col-md-3 col-sm-4 col-xs-6">
-                        <h3> Mi area </h3>
-                        <ul>
-                            <li> <a href="#"> Mi perfil </a> </li>
-                            <li> <a href="#"> Mis eventos </a> </li>
-                            <li> <a href="#"> Mis comunidades </a> </li>
-                            <li> <a href="#"> Notificaciones </a> </li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-3  col-md-3 col-sm-12 col-xs-6 ">
-                        <h3> Nuestras RRSS</h3>
-                        <ul class="social">
-                            <li>
-                                <a href="#"> <i class="fa fa-facebook">   </i> </a>
-                            </li>
-                            <li>
-                                <a href="#"> <i class="fa fa-twitter">   </i> </a>
-                            </li>
-                            <li>
-                                <a href="#"> <i class="fa fa-youtube">   </i> </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!--/.row-->
-            </div>
-            <!--/.container-->
-        </div>
-        <!--/.footer-->
-
-        <div class="footer-bottom">
-            <div class="container">
-                <p class="pull-left"> urTeam Web App. Under Apache 2.0 license. </p>
-            </div>
-        </div>
-        <!--/.footer-bottom-->
-    </footer>
+  	{{> footer_template}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
 
     <!--Page scroll-->
-    <script src="js/jquery.easing.min.js"></script>
-    <script src="js/scrolling-nav.js"></script>
+    <script src="/js/jquery.easing.min.js"></script>
+    <script src="/js/scrolling-nav.js"></script>
 
     <!-- Profile Charts -->
-    <script src="js/profile-chart.js"></script>
+    <script src="/js/profile-chart.js"></script>
 
 
     <!-- Navigation bar -->
