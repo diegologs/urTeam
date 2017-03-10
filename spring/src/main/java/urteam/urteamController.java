@@ -102,7 +102,7 @@ public class urteamController {
 
 	
 
-	@RequestMapping("image/upload")
+	@RequestMapping("/image/upload")
 	public String uploadImageFile(Model model, @RequestParam("file") MultipartFile file, String action) {
 
 		String fileName = "test.jpeg";
@@ -116,17 +116,17 @@ public class urteamController {
 				File uploadedFile = new File(filesFolder.getAbsolutePath(), fileName);
 				file.transferTo(uploadedFile);
 
-				return "index";
+				return "/events";
 
 			} catch (Exception e) {
 				model.addAttribute("fileName", fileName);
 				model.addAttribute("error", e.getClass().getName() + ":" + e.getMessage());
-				return "index";
+				return "/events";
 
 			}
 		} else {
 			model.addAttribute("error", "The file is empty");
-			return "index";
+			return "/events";
 		}
 
 	}
