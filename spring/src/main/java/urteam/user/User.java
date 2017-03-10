@@ -10,6 +10,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.apache.tomcat.util.bcel.classfile.Constant;
+
+import com.mysql.jdbc.Constants;
+
+import urteam.ConstantsUrTeam;
+
 @Entity
 @Table(name = "user_profile")
 public class User {
@@ -49,7 +55,7 @@ public class User {
 		this.country = country;
 		this.score = score;
 		this.avatar = "nada";
-		this.role = "nada";
+		this.role = ConstantsUrTeam.ADMIN_ROLE;
 		// this.friendList = new ArrayList<>();
 	}
 
