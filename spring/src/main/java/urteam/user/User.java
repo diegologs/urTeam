@@ -42,7 +42,7 @@ public class User {
 	 @ManyToMany(mappedBy="following")
 	 private List<User> followers = new ArrayList<>();
 	 
-	 @OneToMany
+	 @ManyToMany(mappedBy="communityUsers")
 	 private List<Community> communityList = new ArrayList<>();
 
 	public User() {}

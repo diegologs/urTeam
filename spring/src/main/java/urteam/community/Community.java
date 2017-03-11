@@ -3,15 +3,15 @@ package urteam.community;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import urteam.news.News;
-import urteam.user.*;
+import urteam.user.User;
 
 @Entity
 public class Community {
@@ -37,11 +37,10 @@ public class Community {
 		this.sport = sport;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<User> admin_IDs = new ArrayList<>();
+//	private User admin_IDs;
 	
-	@OneToMany
-	private List<User> users_IDs = new ArrayList<>();
+	@ManyToMany
+	private List<User> communityUsers = new ArrayList<>();
 
 	public Community() {
 	}
@@ -91,20 +90,13 @@ public class Community {
 		this.city = city;
 	}
 
-	public List<User> getAdmin_IDs() {
-		return admin_IDs;
-	}
-
-	public void setAdmin_IDs(List<User> admin_IDs) {
-		this.admin_IDs = admin_IDs;
-	}
 
 	public List<User> getUsers_IDs() {
-		return users_IDs;
+		return communityUsers;
 	}
 
 	public void setUsers_IDs(List<User> users_IDs) {
-		this.users_IDs = users_IDs;
+		this.communityUsers = users_IDs;
 	}
 	
 	@Override
