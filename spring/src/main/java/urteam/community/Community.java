@@ -3,6 +3,7 @@ package urteam.community;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,6 +20,9 @@ public class Community {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	
+	private String communityId;
+
 
 	private String name;
 	private String info;
@@ -26,6 +30,17 @@ public class Community {
 	private String city;
 	private String sport;
 	
+	@Basic
+	private ArrayList<String> communityImages = new ArrayList();
+	
+	public ArrayList<String> getCommunityImages() {
+		return communityImages;
+	}
+
+	public void setCommunityImages(ArrayList<String> communityImages) {
+		this.communityImages = communityImages;
+	}
+
 	@OneToMany
 	private List<News> news;
 	
@@ -48,6 +63,7 @@ public class Community {
 	public Community(String name, String info, String sport) {
 		this.name = name;
 		this.info = info;
+		this.sport = sport;
 	}
 
 	public long getId() {
@@ -116,4 +132,18 @@ public class Community {
 		this.news = news;
 	}
 
+
+	public String getCommunityId() {
+		return communityId;
+	}
+
+	public void setCommunityId(String communityId) {
+		this.communityId = communityId;
+	}
+	
+	public void addImage(String filename){
+		this.communityImages.add(filename);
+		
+	}
 }
+

@@ -92,10 +92,10 @@ public class DatabaseInitializer {
 			newsRepo.save(news);
 			
 			
-//			Community com = new Community(name, info, "Running");
-//			com.getNews().add(news);
-//
-//			communityRepo.save(com);
+			Community com = new Community(name, info, "Running");
+			
+
+			communityRepo.save(com);
 		}
 	}
 

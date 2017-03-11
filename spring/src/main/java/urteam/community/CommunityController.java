@@ -1,6 +1,8 @@
 package urteam.community;
 
-import java.sql.Date;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,7 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import urteam.ConstantsUrTeam;
+import urteam.urteamController;
 import urteam.event.Event;
 import urteam.event.EventRepository;
 import urteam.news.News;
@@ -18,6 +23,9 @@ import urteam.news.NewsRepository;
 
 @Controller
 public class CommunityController{
+	
+	@Autowired
+	private urteamController urteam;
 	
 	@Autowired
 	private CommunityRepository communityRepo;	
@@ -31,6 +39,7 @@ public class CommunityController{
 		Page<Community> groups = communityRepo.findAll(new PageRequest(0,3));
 
 		model.addAttribute("communitys", groups);
+		model.addAttribute("groups_active", true);
 
 		return "groups";
 	}
@@ -42,7 +51,8 @@ public class CommunityController{
 		Community community = communityRepo.findOne(id);
 
 		model.addAttribute("community", community);
-		model.addAttribute("community_news", community.getNews());
+		
+		
 
 		return "group";
 	}
@@ -67,7 +77,7 @@ public class CommunityController{
 		
 		communityRepo.save(community);
 		model.addAttribute("community", community);
-		return "redirect:group";
+		return "redirect:/group/{id}";
 
 	}
 
@@ -88,9 +98,32 @@ public class CommunityController{
 		
 		newsRepo.save(news);
 		model.addAttribute("community", community);
-		model.addAttribute("community_news", community.getNews());
 		
-		return "redirect:group";
+		
+		return "redirect:/group/{id}";
+
+	}
+	
+	
+	@RequestMapping("/community/{id}/addImage")
+	public String addImage(Model model, @PathVariable long id, @RequestParam("file") MultipartFile file) throws ParseException {
+		
+		
+		Community community  = communityRepo.findOne(id);
+		
+		//Filename formater
+		SimpleDateFormat formater = new SimpleDateFormat("mmddyyyy-hhMMss");
+		Date date = new Date();
+		
+		
+		String filename = "imageingallery-"+formater.format(date);
+		
+		if(urteam.uploadImageFile(model, file,filename,ConstantsUrTeam.COMMUNITY_IMGS, community.getCommunityId())){
+			community.addImage(filename);
+		}
+		
+		communityRepo.save(community);
+		return "redirect:/community/{id}";
 
 	}
 
@@ -111,7 +144,7 @@ public class CommunityController{
 	public String groupAdded(Model model, Community community) {
 		
 		communityRepo.save(community);
-		model.addAttribute("communitys", communityRepo.findAll());
+		model.addAttribute("groups_active", true);
 		return "redirect:groups";
 
 	}
