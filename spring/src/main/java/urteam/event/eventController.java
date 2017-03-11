@@ -51,7 +51,7 @@ public class eventController {
 		
 		Page<Event> eventos = eventRepo.findAll(new PageRequest(0,9));
 		model.addAttribute("events", eventos);
-		model.addAttribute("sortedBy",sortedBy);
+		model.addAttribute("sortedBy",sortedBy);		
 		return "events";
 	}
 	

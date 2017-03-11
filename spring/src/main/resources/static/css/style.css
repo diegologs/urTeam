@@ -28,8 +28,10 @@
     background-color: transparent;
 }
 
-.minav .active a,
-.minav .active a:hover {
+
+.minav li.active a,
+.minav li.active a,
+.minav  li.active a:hover {
     color: #f7ce3e;
     border-bottom-style: solid;
     border-bottom-color: #f7ce3e;
@@ -120,10 +122,6 @@ img {
     color: #0a1612;
     background-color: #c5a431;
     border-color: #c5a431;
-}
-
-.info-text{
-	margin-bottom: 20px;
 }
 
 
