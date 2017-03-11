@@ -51,7 +51,7 @@ public class CommunityController{
 		Community community = communityRepo.findOne(id);
 
 		model.addAttribute("community", community);
-		
+		model.addAttribute("communityGallery", community.getCommunityImages());
 		
 
 		return "group";
@@ -105,7 +105,7 @@ public class CommunityController{
 	}
 	
 	
-	@RequestMapping("/community/{id}/addImage")
+	@RequestMapping("/group/{id}/addImage")
 	public String addImage(Model model, @PathVariable long id, @RequestParam("file") MultipartFile file) throws ParseException {
 		
 		
@@ -123,11 +123,9 @@ public class CommunityController{
 		}
 		
 		communityRepo.save(community);
-		return "redirect:/community/{id}";
+		return "redirect:/group/{id}";
 
-	}
-
-	
+	}	
 	
 	
 	@RequestMapping("addGroup")
@@ -142,6 +140,10 @@ public class CommunityController{
 	
 	@RequestMapping("GroupAdded")
 	public String groupAdded(Model model, Community community) {
+		Date date = new Date();
+		SimpleDateFormat eventIdFormater = new SimpleDateFormat("mmddyyyy-hhMMss");
+		String eventId = eventIdFormater.format(date);
+		community.setCommunityId(eventId);
 		
 		communityRepo.save(community);
 		model.addAttribute("groups_active", true);

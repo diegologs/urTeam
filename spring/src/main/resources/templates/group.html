@@ -53,18 +53,11 @@
                 <h2><i class="fa fa-picture-o" aria-hidden="true"></i> Fotos</h2>
                 <hr>
                 <a data-toggle="modal" data-target="#myModal4"><button class="btn mybtn-succes btn_group2">Añadir imágenes</button></a>
-                
-                
                 {{#communityGallery}}
-	       	
-	       		  <div class="row">
-						 {{>groupGallery_template}}
-                </div>
-                
-	       	{{/communityGallery}}
-                <div class="row">
-
-                </div>
+	       		  	<div class="row">
+						{{>groupGallery_template}}
+                	</div>
+	       		{{/communityGallery}}
             </div>
             <br>
             <div class="news">
@@ -179,17 +172,18 @@
                             <h4 class="modal-title">Imágenes</h4>
                         </div>
                         <div class="modal-body">
-                            <div class="form-container">
-                                <form class="form-group">
-                                    <label style="color:black;" for="groupAvatar">Añadir imágen</label>
-                                   	<input style="color:grey;" type="file" class="form-control-file" name="file" aria-describedby="fileHelp">
-                                    <div class="addButton">
-                                         <button class="btn mybtn-succes addButton">Añadir imágenes</button>
-                                    </div>
-
-                                </form>
-                            </div>
-                        </div>
+		                    <div class="form-container">
+		                        <form class="form-group" action="/group/{{id}}/addImage" method="post"  enctype="multipart/form-data">
+		                            <div class="form-group">
+		                    			<label for="groupGallery">Imagen</label>
+		                    			<input type="file" class="form-control-file" name="file" aria-describedby="fileHelp">
+		                			</div>
+		                            <div class="addButton">
+		                                 <button type="submit" class="btn mybtn-succes addButton">Añadir Foto</button>
+		                            </div>
+		                        </form>
+		                    </div>
+                		</div>
                     </div>
                 </div>
             </div>
