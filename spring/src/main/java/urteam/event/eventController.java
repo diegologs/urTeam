@@ -39,7 +39,7 @@ public class eventController {
 					new Sort(new Order(Sort.DEFAULT_DIRECTION, "name")));
 		}
 		
-		Page<Event> eventos = eventRepo.findAll(new PageRequest(0,3));
+		Page<Event> eventos = eventRepo.findAll(new PageRequest(0,9));
 		model.addAttribute("events", eventos);
 		model.addAttribute("sortedBy",sortedBy);
 		return "events";
@@ -88,7 +88,7 @@ public class eventController {
 		event.setYear_date(cal.get(Calendar.YEAR));
 		
 		eventRepo.save(event);
-		Page<Event> eventos = eventRepo.findAll(new PageRequest(0,3));
+		Page<Event> eventos = eventRepo.findAll(new PageRequest(0,9));
 		model.addAttribute("events", eventos);
 		return "events";
 	}
