@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
 import urteam.event.Event;
 import urteam.event.EventRepository;
 
@@ -40,6 +41,8 @@ public class urteamController {
 
 		return "index";
 	}
+
+	
 
 	@RequestMapping(value = "/image/upload", method = RequestMethod.POST)
 	public String uploadImageFile(Model model, @RequestParam("file") MultipartFile file, String action) {
