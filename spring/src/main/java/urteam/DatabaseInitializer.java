@@ -54,14 +54,24 @@ public class DatabaseInitializer {
 			String score = "9999";
 			String city = "Madrid";
 			String country = "España";
-
-			userRepo.save(new User(name, surname, nickname, password, email, bio, score, city, country));
+			
+			User user = new User(name, surname, nickname, password, email, bio, score, city, country);
+			userRepo.save(user);
+//			userRepo.save(new User(name, surname, nickname, password, email, bio, score, city, country));
+			if(i>0){
+				User followerUser = userRepo.findOne((long) (i-1));
+				user.addFollower(followerUser);
+				user.addFollowing(followerUser);
+				userRepo.save(user);
+			}
+			
+			
 		}
 		
 		//Add followers
 		
-//		User user1= userRepo.findOne(1L);
-//		User user2= userRepo.findOne(2L);
+//		User user1= userRepo.findOne((long) 1);
+//		User user2= userRepo.findOne((long) 2);
 //		user1.addFollower(user2);
 //		user1.addFollowing(user2);
 //		user2.addFollower(user1);
