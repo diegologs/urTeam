@@ -60,7 +60,15 @@ public class DatabaseInitializer {
 		
 		//Add followers
 		
-
+		User user1= userRepo.findOne(1L);
+		User user2= userRepo.findOne(2L);
+		user1.addFollower(user2);
+		user1.addFollowing(user2);
+		user2.addFollower(user1);
+		user2.addFollowing(user1);
+		userRepo.save(user1);
+		userRepo.save(user2);
+		
 		// Sample events
 		for (int i = 0; i < 18; i++) {	
 			String name = "Evento de Prueba";
