@@ -84,9 +84,9 @@ public class DatabaseInitializer {
 		    user1.addFollowing(user2);
 		    user1.addFollowing(user4);
 		    user2.addFollowing(user3);
-		    user2.addFollowing(user1);
+//		    user2.addFollowing(user1);
 		    user3.addFollowing(user2);
-		    user3.addFollowing(user1);
+//		    user3.addFollowing(user1);
 		    
 		    userRepo.save(user1);    
 		    userRepo.save(user2);
