@@ -12,6 +12,8 @@ import org.springframework.stereotype.Component;
 
 import urteam.community.*;
 import urteam.event.*;
+import urteam.news.News;
+import urteam.news.NewsRepository;
 import urteam.user.*;
 
 @Component
@@ -25,6 +27,9 @@ public class DatabaseInitializer {
 
 	@Autowired
 	private CommunityRepository communityRepo;
+	
+	@Autowired
+	private NewsRepository newsRepo;
 
 	@PostConstruct
 	public void init() throws ParseException {
@@ -77,10 +82,17 @@ public class DatabaseInitializer {
 
 		// Sample communities
 		for (int i = 0; i < 10; i++) {
-			String name = String.valueOf(i);
-			String info = String.valueOf(i);
+			String name = "Comunidad  "+String.valueOf(i);
+			String info = "Información de la comunidad.";
+			
+			News news = new News("Titulo de ejemplo de la noticia", "Texto de ejemplo de la noticia.");
+			newsRepo.save(news);
+			
+			
+			Community com = new Community(name, info, "Running");
+			com.getNews().add(news);
 
-			communityRepo.save(new Community(name, info, "Running"));
+			communityRepo.save(com);
 		}
 	}
 

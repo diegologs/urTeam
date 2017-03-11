@@ -42,6 +42,7 @@ public class CommunityController{
 		Community community = communityRepo.findOne(id);
 
 		model.addAttribute("community", community);
+		model.addAttribute("community_news", community.getNews());
 
 		return "group";
 	}
@@ -66,7 +67,7 @@ public class CommunityController{
 		
 		communityRepo.save(community);
 		model.addAttribute("community", community);
-		return "group";
+		return "redirect:group";
 
 	}
 
@@ -81,13 +82,15 @@ public class CommunityController{
 		
 		
 		News news = new News(title, text);
-		community.addNews(news);
+		community.getNews().add(news);
 		
 	
 		
 		newsRepo.save(news);
 		model.addAttribute("community", community);
-		return "group";
+		model.addAttribute("community_news", community.getNews());
+		
+		return "redirect:group";
 
 	}
 
@@ -109,7 +112,7 @@ public class CommunityController{
 		
 		communityRepo.save(community);
 		model.addAttribute("communitys", communityRepo.findAll());
-		return "groups";
+		return "redirect:groups";
 
 	}
 }
