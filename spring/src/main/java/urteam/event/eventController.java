@@ -102,7 +102,7 @@ public class eventController {
 		Date date = new Date();
 		String filename = event.getId()+"-avatar-"+formater.format(date);
 		
-		if(urteam.uploadImageFile(model, file,filename,ConstantsUrTeam.EVENT_AVATAR, "dsgsdgsfg")){
+		if(urteam.uploadImageFile(model, file,filename,ConstantsUrTeam.EVENT_AVATAR, event.getId())){
 			event.setMain_photo("test");
 		}
 		

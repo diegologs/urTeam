@@ -41,7 +41,7 @@ public class urteamController {
 	}
 
 	
-	public Boolean uploadImageFile(Model model, MultipartFile file, String name,String type, String id) {
+	public Boolean uploadImageFile(Model model, MultipartFile file, String name,String type, long id) {
 		
 		String folderPath = "imgs";
 		
