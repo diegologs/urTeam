@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import urteam.ConstantsUrTeam;
 import urteam.urteamController;
 import urteam.community.Community;
 
@@ -96,21 +97,15 @@ public class eventController {
 		event.setMonth_date(cal.get(Calendar.MONTH));
 		event.setYear_date(cal.get(Calendar.YEAR));
 		
-		if(urteam.uploadImageFile(model, file, "action")){
+		if(urteam.uploadImageFile(model, file, ConstantsUrTeam.EVENT_AVATAR, "dsgsdgsfg")){
 			event.setMain_photo("test");
 		}
 		
 		eventRepo.save(event);
-<<<<<<< HEAD
-		//Page<Event> eventos = eventRepo.findAll(new PageRequest(0,3));
-		//model.addAttribute("events", eventos);
-		
-		return "redirect:/events";
-=======
 		Page<Event> eventos = eventRepo.findAll(new PageRequest(0,9));
 		model.addAttribute("events", eventos);
-		return "events";
->>>>>>> branch 'master' of https://github.com/Frostqui/urTeam.git
+		return "redirect:/events";
+
 	}
 	
 	private static Calendar toCalendar(Date date){ 
