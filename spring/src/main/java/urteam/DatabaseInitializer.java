@@ -59,10 +59,11 @@ public class DatabaseInitializer {
 			userRepo.save(user);
 //			userRepo.save(new User(name, surname, nickname, password, email, bio, score, city, country));
 			if(i>0){
-				User followerUser = userRepo.findOne((long) (i-1));
+				User followerUser = userRepo.findOne((long) (i));
 				user.addFollower(followerUser);
-				user.addFollowing(followerUser);
+				followerUser.addFollowing(user);
 				userRepo.save(user);
+				userRepo.save(followerUser);
 			}
 			
 			
