@@ -34,64 +34,7 @@ public class DatabaseInitializer {
 	@PostConstruct
 	public void init() throws ParseException {
 
-		// Sample users
-//		for (int i = 0; i < 10; i++) {
-//			String name = "Usuario" + i;
-//			String surname = "apellido" + i;
-//			String nickname = "user" + surname.substring(1, 3) + i;
-//			String password = "123456";
-//			String email = name + surname + i + "@urteam.com";
-//			String bio = "Lorem ipsum dolor sit amet, " + "consectetur adipiscing elit, "
-//					+ "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
-//					+ "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris "
-//					+ "nisi ut aliquip ex ea commodo consequat. "
-//					+ "Duis aute irure dolor in reprehenderit in voluptate velit "
-//					+ "esse cillum dolore eu fugiat nulla pariatur. "
-//					+ "Excepteur sint occaecat cupidatat non proident, "
-//					+ "sunt in culpa qui officia deserunt mollit anim id est laborum. "
-//					+ "Lorem ipsum dolor sit amet, consectetur adipiscing elit, "
-//					+ "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
-//			String score = "9999";
-//			String city = "Madrid";
-//			String country = "España";
-//			
-//			User user = new User(name, surname, nickname, password, email, bio, score, city, country);
-//			userRepo.save(user);
-////			userRepo.save(new User(name, surname, nickname, password, email, bio, score, city, country));
-//			if(i>0){
-//				User followerUser = userRepo.findOne((long) (i));
-//				user.addFollower(followerUser);
-//				followerUser.addFollowing(user);
-//				userRepo.save(user);
-//				userRepo.save(followerUser);
-//			}
-			
-			
-		//}
-//		
-		//Add followers
-		
-		 	User user1 = new User("username1", "surname1", "nickname1", "password1", "email1", "bio1","9999","Madrid","España");
-		    User user2 = new User("username2", "surname2", "nickname2", "password2", "email2", "bio2","9999","Madrid","España");
-		    User user3 = new User("username3", "surname3", "nickname3", "password3", "email3", "bio3","9999","Madrid","España");
-		    User user4 = new User("username4", "surname4", "nickname4", "password4", "email4", "bio4","9999","Madrid","España");
 
-		    userRepo.save(user1);    
-		    userRepo.save(user2);
-		    userRepo.save(user3);
-		    userRepo.save(user4);
-		    
-		    user1.addFollowing(user2);
-		    user1.addFollowing(user4);
-		    user2.addFollowing(user3);
-//		    user2.addFollowing(user1);
-		    user3.addFollowing(user2);
-//		    user3.addFollowing(user1);
-		    
-		    userRepo.save(user1);    
-		    userRepo.save(user2);
-		    userRepo.save(user3);
-		    userRepo.save(user4);
 		
 //		User user1= userRepo.findOne((long) 1);
 //		User user2= userRepo.findOne((long) 2);
@@ -139,6 +82,38 @@ public class DatabaseInitializer {
 
 			communityRepo.save(com);
 		}
+		
+		
+		// Sample users
+		
+	 	User user1 = new User("username1", "surname1", "nickname1", "password1", "email1", "bio1","9999","Madrid","España");
+	    User user2 = new User("username2", "surname2", "nickname2", "password2", "email2", "bio2","9999","Madrid","España");
+	    User user3 = new User("username3", "surname3", "nickname3", "password3", "email3", "bio3","9999","Madrid","España");
+	    User user4 = new User("username4", "surname4", "nickname4", "password4", "email4", "bio4","9999","Madrid","España");
+
+	    userRepo.save(user1);    
+	    userRepo.save(user2);
+	    userRepo.save(user3);
+	    userRepo.save(user4);
+	   
+	//Add followers
+	    
+	    user1.addFollowing(user2);
+	    user1.addFollowing(user4);
+	    user2.addFollowing(user3);
+//	    user2.addFollowing(user1);
+	    user3.addFollowing(user2);
+//	    user3.addFollowing(user1);
+	       
+	 //Add communities to users
+	    user1.addCommunity(communityRepo.findOne((long) 1));
+	    user1.addCommunity(communityRepo.findOne((long) 2));
+	    
+	    userRepo.save(user1);    
+	    userRepo.save(user2);
+	    userRepo.save(user3);
+	    userRepo.save(user4);
+	    
 	}
 
 	private static Calendar toCalendar(Date date) {

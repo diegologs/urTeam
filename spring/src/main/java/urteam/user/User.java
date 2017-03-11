@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import urteam.community.Community;
@@ -42,7 +41,7 @@ public class User {
 	@ManyToMany(mappedBy = "following")
 	private List<User> followers = new ArrayList<>();
 
-	@ManyToMany(mappedBy = "communityUsers")
+	@ManyToMany
 	private List<Community> communityList = new ArrayList<>();
 
 	public User() {
@@ -59,6 +58,7 @@ public class User {
 		this.city = city;
 		this.country = country;
 		this.score = score;
+		this.generatedId = null;
 		this.avatar = null;
 
 	}

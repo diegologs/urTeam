@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <title>urTeam - Tu web del deporte</title>
-<link rel="shortcut icon" href="images/favicon.ico" />
+<link rel="shortcut icon" href="/images/favicon.ico" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet"
@@ -80,7 +80,7 @@
 					<div class="profile-usertitle-name">{{user.username}}
 						{{user.surname}}</div>
 					<div class="profile-usertitle-name">@{{user.nickname}}</div>
-					<div class="profile-usertitle-name">{{numberOfFollowers}} Seguidores</div>
+					<div class="profile-usertitle-name">{{numberOfFollowers}} Seguidore/s</div>
 					<div class="profile-usertitle-name">{{user.city}},
 						{{user.country}}</div>
 					<div class="profile-usertitle-job">Puntuación: {{user.score}}</div>
@@ -170,10 +170,10 @@
 									</div>
 									<a href="group.html">
 										<div class="col-sm-8">
-											<h1 class="group-name">community.name</h1>
-											<div class="badge">community.sport</div>
+											<h1 class="group-name">{{name}}</h1>
+											<div class="badge">{{sport}}</div>
 											<hr>
-											<div class="group-members">300 miembros</div>
+											<div class="group-members">{{members}} miembros</div>
 										</div>
 									</a>
 									<div class="col-sm-2 group-button">
@@ -218,7 +218,7 @@
 					<div class="row">
 						<div class="col-sm-12">
 							<h3>
-								<i class="fa fa-address-book" aria-hidden="true"></i> Amigos
+								<i class="fa fa-address-book" aria-hidden="true"></i> Siguiendo
 							</h3>
 						</div>
 						<!--/row-->
@@ -232,7 +232,7 @@
 												width="110px" src="http://lorempixel.com/200/200/people/9/">
 										</div>
 										<div class="col-sm-9 friend-name">
-											<h3>{{username}}</h3>
+											<h3>{{username}} {{surname}}</h3>
 										</div>
 									</div>
 								</div>
