@@ -67,15 +67,16 @@ public class DatabaseInitializer {
 			String[] sports = {"Running", "Mountain Bike", "Roller"}; 
 			String sport = sports[i%3];
 			double price = i;
-			String info = "Aqui va la descripcion de lso eventos";
+			String info = "Aqui va la descripcion de los eventos";
 			String place = "Universidad Rey Juan Carlos I";
+			String main_photo = "http://lorempixel.com/400/200/sports/" + i%10;
 
 			Date start_date = new SimpleDateFormat("dd/MM/yyyy").parse(String.valueOf(i) + "/05/2017");
 			Date end_date = new SimpleDateFormat("dd/MM/yyyy").parse("02/11/2017");
 
 			Calendar cal = toCalendar(start_date);
 
-			Event event = new Event(name, sport, price, info, place, start_date, end_date);
+			Event event = new Event(name, sport, price, info, place, start_date, end_date, main_photo);
 			event.setDay_date(cal.get(Calendar.DAY_OF_MONTH));
 			event.setMonth_date(cal.get(Calendar.MONTH));
 			event.setYear_date(cal.get(Calendar.YEAR));
