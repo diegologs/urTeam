@@ -2,6 +2,7 @@ package urteam.event;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -153,6 +154,37 @@ public class eventController {
 		return "redirect:/event/{id}";
 
 	}
+	
+	@RequestMapping("/sortEventByName")
+	public String sortEventByName(Model model, @RequestParam String name) {
+		
+		
+		
+		List<Event> eventos = eventRepo.findAll();
+
+		eventos = eventRepo.findByName(name);
+		
+		
+		model.addAttribute("events", eventos);
+		
+
+		return "events";
+	}
+	
+	
+	@RequestMapping("/sortEventBySport")
+	public String sortEventBySport(Model model, @RequestParam String sport) {
+		
+		List<Event> eventos = eventRepo.findBySport(sport);
+
+		model.addAttribute("events", eventos);
+		
+		
+
+		return "events";
+	}
+	
+	
 	
 //	@PostMapping("/")
 //    public String checkPersonInfo(@Valid Event personForm, BindingResult bindingResult) {
