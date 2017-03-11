@@ -54,9 +54,10 @@ public class DatabaseInitializer {
 		}
 
 		// Sample events
-		for (int i = 0; i < 18; i++) {
+		for (int i = 0; i < 18; i++) {	
 			String name = "Evento de Prueba";
-			String sport = "Running";
+			String[] sports = {"Running", "Mountain Bike", "Roller"}; 
+			String sport = sports[i%3];
 			double price = i;
 			String info = "Aqui va la descripcion de lso eventos";
 			String place = "Universidad Rey Juan Carlos I";
