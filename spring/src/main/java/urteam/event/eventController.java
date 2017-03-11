@@ -101,9 +101,9 @@ public class eventController {
 		SimpleDateFormat formater = new SimpleDateFormat("mmddyyyy");
 		Date date = new Date();
 		String filename = event.getId()+"-avatar-"+formater.format(date);
-		
+		System.out.println(event.getId());
 		if(urteam.uploadImageFile(model, file,filename,ConstantsUrTeam.EVENT_AVATAR, event.getId())){
-			event.setMain_photo("test");
+			event.setMain_photo(filename);
 		}
 		
 		eventRepo.save(event);
