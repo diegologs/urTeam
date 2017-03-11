@@ -19,6 +19,7 @@ public class UserController {
 		model.addAttribute("user",user);
 		model.addAttribute("following",user.getFollowing());
 		model.addAttribute("communities",user.getCommunityList());
+		model.addAttribute("numberOfFollowers", user.getNumberOfFollower());
 		return "user";
 	}
 }
