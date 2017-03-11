@@ -14,8 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import urteam.event.Event;
@@ -43,32 +41,50 @@ public class urteamController {
 	}
 
 	
-
-	@RequestMapping(value = "/image/upload", method = RequestMethod.POST)
-	public String uploadImageFile(Model model, @RequestParam("file") MultipartFile file, String action) {
-
-		String fileName = "test.jpeg";
-
+	public Boolean uploadImageFile(Model model, MultipartFile file, String type, String id) {
+		
+		String folderPath = "imgs";
+		
 		if (!file.isEmpty()) {
+			String fileName = id+"-"+System.currentTimeMillis()+".jpeg";
 			try {
-				File filesFolder = new File("imgs");
+				switch (type) {
+				case ConstantsUrTeam.USER_AVATAR:
+						folderPath = ConstantsUrTeam.USERS_AVATAR_FOLDER;
+					break;
+				case ConstantsUrTeam.EVENT_AVATAR:
+					folderPath = ConstantsUrTeam.EVENTS_FOLDER+"/"+id;
+				break;
+				case ConstantsUrTeam.EVENT_IMGS:
+					folderPath = ConstantsUrTeam.EVENTS_FOLDER+"/"+id;
+				break;
+				case ConstantsUrTeam.COMMUNITY_AVATAR:
+					folderPath = ConstantsUrTeam.COMMUNITIES_FOLDER+"/"+id;
+				break;
+				case ConstantsUrTeam.COMMUNITY_IMGS:
+					folderPath = ConstantsUrTeam.COMMUNITIES_FOLDER+"/"+id;
+				break;
+				default:
+					break;
+				}
+				File filesFolder = new File(folderPath);
 				if (!filesFolder.exists()) {
 					filesFolder.mkdirs();
 				}
 				File uploadedFile = new File(filesFolder.getAbsolutePath(), fileName);
 				file.transferTo(uploadedFile);
 
-				return "/events";
+				return true;
 
 			} catch (Exception e) {
 				model.addAttribute("fileName", fileName);
 				model.addAttribute("error", e.getClass().getName() + ":" + e.getMessage());
-				return "/events";
+				return false;
 
 			}
 		} else {
 			model.addAttribute("error", "The file is empty");
-			return "/events";
+			return false;
 		}
 
 	}
