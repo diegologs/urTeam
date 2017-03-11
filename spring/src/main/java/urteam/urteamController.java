@@ -57,13 +57,13 @@ public class urteamController {
 					folderPath = ConstantsUrTeam.EVENTS_FOLDER+"/"+id;
 				break;
 				case ConstantsUrTeam.EVENT_IMGS:
-					folderPath = ConstantsUrTeam.EVENTS_FOLDER+"/"+id;
+					folderPath = ConstantsUrTeam.EVENTS_FOLDER+"/"+id+"/gallery";
 				break;
 				case ConstantsUrTeam.COMMUNITY_AVATAR:
 					folderPath = ConstantsUrTeam.COMMUNITIES_FOLDER+"/"+id;
 				break;
 				case ConstantsUrTeam.COMMUNITY_IMGS:
-					folderPath = ConstantsUrTeam.COMMUNITIES_FOLDER+"/"+id;
+					folderPath = ConstantsUrTeam.COMMUNITIES_FOLDER+"/"+id+"gallery";
 				break;
 				default:
 					break;
