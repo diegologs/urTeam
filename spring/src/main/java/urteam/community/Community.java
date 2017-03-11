@@ -27,16 +27,8 @@ public class Community {
 	private String sport;
 	
 	@OneToMany
-	private List<News> news = new ArrayList<>();
+	private List<News> news;
 	
-	public List<News> getNews() {
-		return news;
-	}
-
-	public void setNews(List<News> news) {
-		this.news = news;
-	}
-
 	public String getSport() {
 		return sport;
 	}
@@ -57,7 +49,6 @@ public class Community {
 	public Community(String name, String info, String sport) {
 		this.name = name;
 		this.info = info;
-		this.sport = sport;
 	}
 
 	public long getId() {

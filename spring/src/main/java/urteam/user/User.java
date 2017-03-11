@@ -8,13 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.apache.tomcat.util.bcel.classfile.Constant;
-
-import com.mysql.jdbc.Constants;
-
-import urteam.ConstantsUrTeam;
+import urteam.community.Community;
 
 @Entity
 @Table(name = "user_profile")
@@ -23,6 +21,7 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	private String generatedId;
 	private String username;
 	private String surname;
 	private String nickname;
@@ -37,11 +36,16 @@ public class User {
 	private String avatar;
 	private String role;
 
-	// @OneToMany(mapped)
-	// private List<User> friendList;
+	 @ManyToMany
+	 private List<User> following = new ArrayList<>();
+	 
+	 @ManyToMany(mappedBy="following")
+	 private List<User> followers = new ArrayList<>();
+	 
+	 @OneToMany
+	 private List<Community> communityList = new ArrayList<>();
 
-	public User() {
-	}
+	public User() {}
 
 	public User(String username, String surname, String nickname, String password, String email, String bio,
 			String score, String city, String country) {
@@ -54,9 +58,8 @@ public class User {
 		this.city = city;
 		this.country = country;
 		this.score = score;
-		this.avatar = "nada";
-		this.role = ConstantsUrTeam.ADMIN_ROLE;
-		// this.friendList = new ArrayList<>();
+		this.avatar = null;
+		
 	}
 
 	public long getId() {
@@ -154,13 +157,44 @@ public class User {
 	public void setRole(String role) {
 		this.role = role;
 	}
+	
+	public List<User> getFollowing() {
+		return following;
+	}
+	
+	public void addFollowing(User following) {
+		this.following.add(following);
+	}
+	
+	public List<User> getFollowers() {
+		return followers;
+	}
+	
+	public void addFollower(User follower) {
+		this.followers.add(follower);
+	}
+	
+	public int getNumberOfFollower(){
+		return this.followers.size();
+	}
 
-	// public List<User> getFriendList() {
-	// return friendList;
-	// }
-	//
-	// public void setFriendList(ArrayList<User> friendList) {
-	// this.friendList = friendList;
-	// }
+	public String getGeneratedId() {
+		return generatedId;
+	}
+
+	public void setGeneratedId(String generatedId) {
+		this.generatedId = generatedId;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
+	
+	
 
 }
