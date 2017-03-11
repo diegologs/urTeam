@@ -193,6 +193,15 @@ public class User {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
+	public List<Community> getCommunityList() {
+		return communityList;
+	}
+	
+	public void addCommunity (Community community){
+		this.communityList.add(community);
+	}
+
 	
 	
 	

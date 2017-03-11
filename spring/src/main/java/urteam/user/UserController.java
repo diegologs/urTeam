@@ -6,21 +6,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import urteam.community.CommunityRepository;
-
 @Controller
 public class UserController {
 
 	@Autowired
 	private UserRepository userRepository;
 	
-	@Autowired
-	private CommunityRepository communityRepository;
 	
 	@RequestMapping("/userprofile/{id}")
 	public String userProfile(Model model, @PathVariable Long id){
 		User user = userRepository.findOne(id);
 		model.addAttribute("user",user);
+		model.addAttribute("following",user.getFollowing());
+		model.addAttribute("communities",user.getCommunityList());
 		return "user";
 	}
 }

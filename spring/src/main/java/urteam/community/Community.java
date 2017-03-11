@@ -114,7 +114,14 @@ public class Community {
 
 	public void addNews(News news2) {
 		news.add(news2);
-		
+	}
+
+	public List<News> getNews() {
+		return news;
+	}
+
+	public void setNews(List<News> news) {
+		this.news = news;
 	}
 
 }

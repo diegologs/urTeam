@@ -57,6 +57,9 @@ public class DatabaseInitializer {
 
 			userRepo.save(new User(name, surname, nickname, password, email, bio, score, city, country));
 		}
+		
+		//Add followers
+		
 
 		// Sample events
 		for (int i = 0; i < 18; i++) {	
@@ -89,10 +92,10 @@ public class DatabaseInitializer {
 			newsRepo.save(news);
 			
 			
-			Community com = new Community(name, info, "Running");
-			com.getNews().add(news);
-
-			communityRepo.save(com);
+//			Community com = new Community(name, info, "Running");
+//			com.getNews().add(news);
+//
+//			communityRepo.save(com);
 		}
 	}
 
