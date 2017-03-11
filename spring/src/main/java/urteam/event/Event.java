@@ -1,8 +1,10 @@
 package urteam.event;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,7 +29,7 @@ public class Event {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	private String eventId;
+	private String eventId = "aleatorio";
 	
 	@NotNull
     @Size(min=1, max=20)
@@ -38,6 +40,9 @@ public class Event {
 	private String main_photo;
 	private String place;
 	
+	@Basic
+	private ArrayList<String> eventImages = new ArrayList();
+
 	@DateTimeFormat(pattern = "dd/MM")
 	@Temporal(TemporalType.DATE)
 	private Date start_date;
@@ -60,7 +65,9 @@ public class Event {
 	public Event() {
 	}
 
-	public Event(String name, String sport, double price, String info, String place, Date start_date, Date end_date) {
+	public Event(String name, String sport, double price, String info, String place, 
+			Date start_date, Date end_date) {
+		
 		this.name = name;
 		this.sport = sport;
 		this.price = price;
@@ -71,6 +78,7 @@ public class Event {
 	}
 	
 	public Event(String name, String sport, String info, double price, String place){
+		
 		this.name = name;
 		this.sport = sport;
 		this.info = info;
@@ -195,6 +203,18 @@ public class Event {
 
 	public void setEventId(String eventId) {
 		this.eventId = eventId;
+	}
+	
+	public List<String> getEventImages() {
+		return eventImages;
+	}
+
+	public void setEventImages(List<String> eventImages) {
+		this.eventImages = (ArrayList<String>) eventImages;
+	}
+	
+	public void addNewImageToGallery(String filename){
+		this.eventImages.add(filename);
 	}
 	
 }

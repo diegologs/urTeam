@@ -38,11 +38,11 @@
                 <div class="col-md-3 col-xs-3 well">
                     <i class="fa fa-users fa-lg"></i> {{event.participants}}
                 </div>
-
+				<!-- 
                 <div class="col-md-3 col-xs-3 well">
                     <i class="fa fa-thumbs-o-up fa-lg"></i> 26
                 </div>
-
+ 				-->
                 <div class="col-md-3 col-xs-3 well">
                 	{{event.price}} <i class="fa fa-eur fa-lg"></i>
                 </div>
@@ -64,46 +64,14 @@
         </div>
         <!-- END EVENT DESCRIPTION -->
         <h3><i class="fa fa-picture-o" aria-hidden="true"> </i>  Fotos</h3>
+        <a data-toggle="modal" data-target="#myModal_addPhotos"><button class="btn mybtn-succes">Añadir Fotos</button></a>
         <hr>
         <!-- EVENT GALLERY -->
         <div class='list-group gallery'>
-            <div class='col-sm-4 col-xs-6 col-md-3 col-lg-3'>
-                <a class="thumbnail fancybox" rel="ligthbox" href="http://placehold.it/300x320.png">
-                    <img class="img-responsive" alt="" src="http://placehold.it/320x320" />
-                    <!-- text-right / end -->
-                </a>
-            </div>
-            <!-- col-6 / end -->
-            <div class='col-sm-4 col-xs-6 col-md-3 col-lg-3'>
-                <a class="thumbnail fancybox" rel="ligthbox" href="http://placehold.it/300x320.png">
-                    <img class="img-responsive" alt="" src="http://placehold.it/320x320" />
-                    <!-- text-right / end -->
-                </a>
-            </div>
-            <!-- col-6 / end -->
-            <div class='col-sm-4 col-xs-6 col-md-3 col-lg-3'>
-                <a class="thumbnail fancybox" rel="ligthbox" href="http://placehold.it/300x320.png">
-                    <img class="img-responsive" alt="" src="http://placehold.it/320x320" />
-                    <!-- text-right / end -->
-                </a>
-            </div>
-            <!-- col-6 / end -->
-            <div class='col-sm-4 col-xs-6 col-md-3 col-lg-3'>
-                <a class="thumbnail fancybox" rel="ligthbox" href="http://placehold.it/300x320.png">
-                    <img class="img-responsive" alt="" src="http://placehold.it/320x320" />
-                    <!-- text-right / end -->
-                </a>
-            </div>
-            <!-- col-6 / end -->
-            <div class='col-sm-4 col-xs-6 col-md-3 col-lg-3'>
-                <a class="thumbnail fancybox" rel="ligthbox" href="http://placehold.it/300x320.png">
-                    <img class="img-responsive" alt="" src="http://placehold.it/320x320" />
-                    <!-- text-right / end -->
-                </a>
-            </div>
-            <!-- col-6 / end -->
+	       	{{#eventGallery}}
+	       		 {{>eventGallery_template}}
+	       	{{/eventGallery}}
         </div>
-        <!-- list-group / end -->
         <!-- END EVENT GALLERY -->
     </div>
     
@@ -131,7 +99,36 @@
                 </div>
             </div>
         </div>
-    </div>    
+    </div>
+    <!-- End Modal Edit Event Info -->    
+   
+    <!-- Modal Add Photos -->
+    <div id="myModal_addPhotos" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Añadir Fotos</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-container">
+                        <form class="form-group" action="/event/{{id}}/addImage" method="post"  enctype="multipart/form-data">
+                            <div class="form-group">
+                    			<label for="eventGallery">Imagen</label>
+                    			<input type="file" class="form-control-file" name="file" aria-describedby="fileHelp">
+                			</div>
+                            <div class="addButton">
+                                 <button type="submit" class="btn mybtn-succes addButton">Añadir Foto</button>
+                            </div>
+                        </form>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal Add Photos -->   
 
     <!-- MODAL SHARE SNIPP -->
     <div class="modal fade" id="modalShareEvent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

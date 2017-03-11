@@ -27,9 +27,6 @@ import urteam.ConstantsUrTeam;
 import urteam.urteamController;
 import urteam.community.Community;
 
-
-
-
 @Controller
 public class eventController {
 	
@@ -73,6 +70,7 @@ public class eventController {
 		
 		model.addAttribute("imagen",event.getMain_photo());
 		model.addAttribute("event.participants", event.getParticipants_IDs().size());
+		model.addAttribute("eventGallery", event.getEventImages());
 		return "event";
 	}
 	
@@ -133,9 +131,27 @@ public class eventController {
 		return "redirect:/event/{id}";
 	}
 	
-	@RequestMapping("/addimage")
-	public String addimage(){
-		return "addimage";
+	@RequestMapping("/event/{id}/addImage")
+	public String addImage(Model model, @PathVariable long id, @RequestParam("file") MultipartFile file) throws ParseException {
+		Event event = eventRepo.findOne(id);
+		
+		//Filename formater
+		SimpleDateFormat formater = new SimpleDateFormat("mmddyyyy-hhMMss");
+		Date date = new Date();
+		
+		//EventId generator
+//		SimpleDateFormat eventIdFormater = new SimpleDateFormat("mmddyyyy-hhMMss");
+//		String eventId = eventIdFormater.format(date);
+//		event.setEventId(eventId);
+		String filename = "imageingallery-"+formater.format(date);
+		
+		if(urteam.uploadImageFile(model, file,filename,ConstantsUrTeam.EVENT_IMGS, event.getEventId())){
+			event.addNewImageToGallery(filename);
+		}
+		
+		eventRepo.save(event);
+		return "redirect:/event/{id}";
+
 	}
 	
 //	@PostMapping("/")
