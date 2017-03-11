@@ -15,7 +15,6 @@ body {
 }
 
 .bg_blur {
-    background-image: url(http://lorempixel.com/400/200/);
     height: 200px;
     background-size: cover;
     border-radius: 4px 0px 0px 0px;
@@ -96,6 +95,7 @@ col-xs-12 {
     border: 4px solid #c5a431;
     border-radius: 5px;
 }
+
 
 .modal-header {
     color: #808080;

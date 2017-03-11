@@ -20,33 +20,33 @@
     <div class="container">
         <div class="form-container">
         
-            <form class="form-group" action="eventAdded" method="post">
+            <form class="form-group" action="/eventAdded" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="eventName">Nombre del evento*</label>
-                    <input type="text" class="form-control" name="name" placeholder="Nombre">
+                    <input type="text" class="form-control" name="name" required="required" placeholder="Nombre">
                 </div>
                 <div class="form-group">
                     <label for="eventLoc">Ubicación del evento*</label>
-                    <input type="text" class="form-control" name="place" placeholder="Ubicación">
+                    <input type="text" class="form-control" name="place" required="required" placeholder="Ubicación">
                 </div>
                 <div class="form-group">
                     <label for="eventPrice">Precio del evento</label>
-                    <input type="text" class="form-control" name="price" placeholder="EUR">
+                    <input type="text" class="form-control" name="price" required="required" placeholder="EUR">
                 </div>
                         
                  <div class="form-group">
                     <label for="eventRangeStart">Inicio y fin del evento</label>
                     <div class="input-daterange input-group" id="datepicker">
-                        <input class="input-sm form-control" name="start_date" type="date">
+                        <input class="input-sm form-control" name="start_date" type="date" required="required">
                         <span class="input-group-addon"> a </span>
-                        <input class="input-sm form-control" name="end_date" type="date">
+                        <input class="input-sm form-control" name="end_date" type="date" required="required">
                     </div>
                 </div> 
                 
                 
                 <div class="form-group">
                     <label for="sportSelect">Deporte</label>
-                    <select class="form-control" name="sport">
+                    <select class="form-control" name="sport" required="required">
                       <option>Mountain Bike</option>
                       <option>Running</option>
                       <option>Roller</option>
@@ -56,14 +56,14 @@
                     <label for="eventDesc">Descripcion del evento</label>
                     <textarea class="form-control" name="info" rows="4"></textarea>
                 </div>
-                
-                <!-- 
-                
+               
                 <div class="form-group">
                     <label for="eventImage">Imagen</label>
-                    <input type="file" class="form-control-file" name="main_photo" aria-describedby="fileHelp">
+                    <input type="file" class="form-control-file" name="file" aria-describedby="fileHelp">
                     <small id="fileHelp" class="form-text text-muted">Tamaño recomendado 200px x 200px</small>
+                    <!-- <div class="btn-events"><a href="#"><button class="btn mybtn-succes">Crear evento</button></a></div> -->
                 </div>
+                <!--  
                 <fieldset class="form-group">
                     <label for="eventType">Tipo de evento</label>
                     <div class="form-check">
@@ -78,8 +78,8 @@
                         Privado
                         </label>
                     </div>
-                     -->
                 </fieldset>
+                -->
                  
                 <div style="text-align:center;">
                     <input type="submit" class="btn btn-primary btn-form" value="Crear evento"/>

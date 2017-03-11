@@ -2,6 +2,9 @@ package urteam.event;
 
 import java.util.Calendar;
 import java.util.Date;
+
+import javax.validation.Valid;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -13,9 +16,15 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
+import urteam.urteamController;
+import urteam.community.Community;
 
 
 
@@ -25,6 +34,9 @@ public class eventController {
 	
 	@Autowired
 	private EventRepository eventRepo;
+	
+	@Autowired
+	private urteamController urteam;
 	
 	@RequestMapping("/events")
 	public String eventos(Model model, Pageable page) {
@@ -47,34 +59,31 @@ public class eventController {
 	
 	@RequestMapping(value="/moreContent")
 	public String moreAllShelf(Model model, @RequestParam int page){
-		
 		Page<Event> eventos = eventRepo.findAll(new PageRequest(page,3));
-		
 		model.addAttribute("event", eventos);
-		
 		return "listEvents";
 	}
 	
 	
 	@RequestMapping("/event/{id}")
 	public String showEvent(Model model, @PathVariable long id) {
-		
 		Event event = eventRepo.findOne(id);
-
 		model.addAttribute("event", event);
-
+		
+		model.addAttribute("imagen",event.getMain_photo());
+		model.addAttribute("event.participants", event.getParticipants_IDs().size());
 		return "event";
 	}
 	
 	@RequestMapping("/addEvent")
 	public String newEvent() {
-
 		return "addEvent";
 
 	}
 	
 	@RequestMapping("/eventAdded")
-	public String eventAdded(Model model, Event event, @RequestParam String start_date, @RequestParam String end_date) throws ParseException {
+	public String eventAdded(Model model, Event event, @RequestParam String start_date,
+			@RequestParam String end_date,  @RequestParam("file") MultipartFile file) throws ParseException {
 		
 		Date final_start_date = new SimpleDateFormat("dd/MM/yyyy").parse(start_date);
 		event.setStart_date(final_start_date);
@@ -87,15 +96,42 @@ public class eventController {
 		event.setMonth_date(cal.get(Calendar.MONTH));
 		event.setYear_date(cal.get(Calendar.YEAR));
 		
+		if(urteam.uploadImageFile(model, file, "action")){
+			event.setMain_photo("test");
+		}
+		
 		eventRepo.save(event);
-		Page<Event> eventos = eventRepo.findAll(new PageRequest(0,3));
-		model.addAttribute("events", eventos);
-		return "events";
+		//Page<Event> eventos = eventRepo.findAll(new PageRequest(0,3));
+		//model.addAttribute("events", eventos);
+		
+		return "redirect:/events";
 	}
 	
 	private static Calendar toCalendar(Date date){ 
 		  Calendar cal = Calendar.getInstance();
 		  cal.setTime(date);
 		  return cal;
-		}
+	}
+	
+	@RequestMapping("/event/{id}/EventEdited")
+	public String groupEdited(Model model, @PathVariable long id,  @RequestParam String info) {
+		Event event = eventRepo.findOne(id);
+		event.setInfo(info);
+		eventRepo.save(event);
+		model.addAttribute("event", event);
+		return "redirect:/event/{id}";
+	}
+	
+	@RequestMapping("/addimage")
+	public String addimage(){
+		return "addimage";
+	}
+	
+//	@PostMapping("/")
+//    public String checkPersonInfo(@Valid Event personForm, BindingResult bindingResult) {
+//        if (bindingResult.hasErrors()) {
+//            return "form";
+//        }
+//        return "redirect:/results";
+//    }
 }
