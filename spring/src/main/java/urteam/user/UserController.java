@@ -21,7 +21,6 @@ public class UserController {
 		model.addAttribute("user",user);
 		List<User> amigos= user.getFollowing(); 
 		model.addAttribute("following",amigos);
-		System.out.println(amigos.size());
 		model.addAttribute("communities",user.getCommunityList());
 		model.addAttribute("numberOfFollowers", user.getNumberOfFollower());
 		return "user";

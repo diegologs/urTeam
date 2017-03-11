@@ -27,7 +27,7 @@ public class User {
 	private String nickname;
 	private String password;
 	private String email;
-	
+
 	@Column(columnDefinition = "TEXT")
 	private String bio;
 	private String city;
@@ -36,16 +36,17 @@ public class User {
 	private String avatar;
 	private String role;
 
-	 @ManyToMany
-	 private List<User> following = new ArrayList<>();
-	 
-	 @ManyToMany(mappedBy="following")
-	 private List<User> followers = new ArrayList<>();
-	 
-	 @ManyToMany(mappedBy="communityUsers")
-	 private List<Community> communityList = new ArrayList<>();
+	@ManyToMany
+	private List<User> following = new ArrayList<>();
 
-	public User() {}
+	@ManyToMany(mappedBy = "following")
+	private List<User> followers = new ArrayList<>();
+
+	@ManyToMany(mappedBy = "communityUsers")
+	private List<Community> communityList = new ArrayList<>();
+
+	public User() {
+	}
 
 	public User(String username, String surname, String nickname, String password, String email, String bio,
 			String score, String city, String country) {
@@ -59,7 +60,7 @@ public class User {
 		this.country = country;
 		this.score = score;
 		this.avatar = null;
-		
+
 	}
 
 	public long getId() {
@@ -157,24 +158,24 @@ public class User {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	
+
 	public List<User> getFollowing() {
 		return following;
 	}
-	
+
 	public void addFollowing(User following) {
 		this.following.add(following);
 	}
-	
+
 	public List<User> getFollowers() {
 		return followers;
 	}
-	
+
 	public void addFollower(User follower) {
 		this.followers.add(follower);
 	}
-	
-	public int getNumberOfFollower(){
+
+	public int getNumberOfFollower() {
 		return this.followers.size();
 	}
 
@@ -197,13 +198,9 @@ public class User {
 	public List<Community> getCommunityList() {
 		return communityList;
 	}
-	
-	public void addCommunity (Community community){
+
+	public void addCommunity(Community community) {
 		this.communityList.add(community);
 	}
-
-	
-	
-	
 
 }
