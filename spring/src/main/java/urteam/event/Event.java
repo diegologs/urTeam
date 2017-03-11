@@ -11,12 +11,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import urteam.user.*;
+import urteam.user.User;
 
 @Entity
 public class Event {
@@ -24,6 +26,8 @@ public class Event {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	
+	private String eventId;
 	
 	@NotNull
     @Size(min=1, max=20)
@@ -184,4 +188,13 @@ public class Event {
 	public void setYear_date(int year_date) {
 		this.year_date = year_date;
 	}
+
+	public String getEventId() {
+		return eventId;
+	}
+
+	public void setEventId(String eventId) {
+		this.eventId = eventId;
+	}
+	
 }

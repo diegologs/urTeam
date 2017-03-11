@@ -40,7 +40,7 @@ public class urteamController {
 		return "index";
 	}
 
-	public Boolean uploadImageFile(Model model, MultipartFile file, String name, String type, long id) {
+	public Boolean uploadImageFile(Model model, MultipartFile file, String name, String type, String eventId) {
 
 		String folderPath = "imgs";
 
@@ -53,16 +53,16 @@ public class urteamController {
 					folderPath = ConstantsUrTeam.USERS_AVATAR_FOLDER;
 					break;
 				case ConstantsUrTeam.EVENT_AVATAR:
-					folderPath = ConstantsUrTeam.EVENTS_FOLDER + "/" + id;
+					folderPath = ConstantsUrTeam.EVENTS_FOLDER + "/" + eventId;
 					break;
 				case ConstantsUrTeam.EVENT_IMGS:
-					folderPath = ConstantsUrTeam.EVENTS_FOLDER + "/" + id + "/gallery";
+					folderPath = ConstantsUrTeam.EVENTS_FOLDER + "/" + eventId + "/gallery";
 					break;
 				case ConstantsUrTeam.COMMUNITY_AVATAR:
-					folderPath = ConstantsUrTeam.COMMUNITIES_FOLDER + "/" + id;
+					folderPath = ConstantsUrTeam.COMMUNITIES_FOLDER + "/" + eventId;
 					break;
 				case ConstantsUrTeam.COMMUNITY_IMGS:
-					folderPath = ConstantsUrTeam.COMMUNITIES_FOLDER + "/" + id + "gallery";
+					folderPath = ConstantsUrTeam.COMMUNITIES_FOLDER + "/" + eventId + "gallery";
 					break;
 				default:
 					break;
