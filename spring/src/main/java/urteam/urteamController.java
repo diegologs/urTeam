@@ -21,50 +21,49 @@ import urteam.event.EventRepository;
 
 @Controller
 public class urteamController {
-	
+
 	@Autowired
 	private EventRepository eventRepo;
 
 	@RequestMapping("/")
 	public String index(Model model) {
-		
+
 		List<Event> eventos = eventRepo.findFirst3BySport("Mountain Bike");
 		model.addAttribute("first_events", eventos);
-		
+
 		eventos = eventRepo.findFirst3BySport("Running");
 		model.addAttribute("second_events", eventos);
-		
+
 		eventos = eventRepo.findFirst3BySport("Roller");
 		model.addAttribute("third_events", eventos);
 
 		return "index";
 	}
 
-	
-	public Boolean uploadImageFile(Model model, MultipartFile file, String name,String type, long id) {
-		
+	public Boolean uploadImageFile(Model model, MultipartFile file, String name, String type, long id) {
+
 		String folderPath = "imgs";
-		
+
 		if (!file.isEmpty()) {
-//			String fileName = id+"-"+System.currentTimeMillis()+".jpeg";
-			String fileName = name +".jpeg";
+			// String fileName = id+"-"+System.currentTimeMillis()+".jpeg";
+			String fileName = name + ".jpeg";
 			try {
 				switch (type) {
 				case ConstantsUrTeam.USER_AVATAR:
-						folderPath = ConstantsUrTeam.USERS_AVATAR_FOLDER;
+					folderPath = ConstantsUrTeam.USERS_AVATAR_FOLDER;
 					break;
 				case ConstantsUrTeam.EVENT_AVATAR:
-					folderPath = ConstantsUrTeam.EVENTS_FOLDER+"/"+id;
-				break;
+					folderPath = ConstantsUrTeam.EVENTS_FOLDER + "/" + id;
+					break;
 				case ConstantsUrTeam.EVENT_IMGS:
-					folderPath = ConstantsUrTeam.EVENTS_FOLDER+"/"+id+"/gallery";
-				break;
+					folderPath = ConstantsUrTeam.EVENTS_FOLDER + "/" + id + "/gallery";
+					break;
 				case ConstantsUrTeam.COMMUNITY_AVATAR:
-					folderPath = ConstantsUrTeam.COMMUNITIES_FOLDER+"/"+id;
-				break;
+					folderPath = ConstantsUrTeam.COMMUNITIES_FOLDER + "/" + id;
+					break;
 				case ConstantsUrTeam.COMMUNITY_IMGS:
-					folderPath = ConstantsUrTeam.COMMUNITIES_FOLDER+"/"+id+"gallery";
-				break;
+					folderPath = ConstantsUrTeam.COMMUNITIES_FOLDER + "/" + id + "gallery";
+					break;
 				default:
 					break;
 				}
@@ -90,12 +89,13 @@ public class urteamController {
 
 	}
 
-	@RequestMapping("/image/{fileName}")
-	public void handleFileDownload(@PathVariable String fileName, HttpServletResponse res)
-			throws FileNotFoundException, IOException {
+	@RequestMapping("/image/{type}/{id}/{fileName}")
+	public void handleFileDownload(@PathVariable String type, @PathVariable long id, @PathVariable String fileName,
+			HttpServletResponse res) throws FileNotFoundException, IOException {
 
-		File file = new File("imgs", fileName + ".jpg");
-
+		String filePath = ConstantsUrTeam.EVENTS_FOLDER+"/"+id+"/"+fileName+".jpeg";
+		File file = new File(filePath);
+		
 		if (file.exists()) {
 			res.setContentType("image/jpeg");
 			res.setContentLength(new Long(file.length()).intValue());
