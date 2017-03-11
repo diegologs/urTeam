@@ -4,16 +4,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.security.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
-
-import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -23,77 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import urteam.community.Community;
-import urteam.community.CommunityRepository;
-import urteam.event.Event;
-import urteam.event.EventRepository;
-import urteam.user.User;
-import urteam.user.UserRepository;
-
 @Controller
 public class urteamController {
-
-	@Autowired
-	private UserRepository userRepo;
-
-	@Autowired
-	private EventRepository eventRepo;
-
-	@Autowired
-	private CommunityRepository communityRepo;
-
-	@PostConstruct
-	public void init() throws ParseException {
-
-		for (int i = 0; i < 10; i++) {
-			String name = "Usuario" + i;
-			String surname = "apellido" + i;
-			String nickname = "user" + surname.substring(1, 3) + i;
-			String password = "123456";
-			String email = name + surname + i + "@urteam.com";
-			String bio = "Lorem ipsum dolor sit amet, " + "consectetur adipiscing elit, "
-					+ "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
-					+ "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris "
-					+ "nisi ut aliquip ex ea commodo consequat. "
-					+ "Duis aute irure dolor in reprehenderit in voluptate velit "
-					+ "esse cillum dolore eu fugiat nulla pariatur. "
-					+ "Excepteur sint occaecat cupidatat non proident, "
-					+ "sunt in culpa qui officia deserunt mollit anim id est laborum. "
-					+ "Lorem ipsum dolor sit amet, consectetur adipiscing elit, "
-					+ "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
-			String score = "9999";
-			String city = "Madrid";
-			String country = "España";
-			userRepo.save(new User(name, surname, nickname, password, email, bio, score, city, country));
-
-		}
-
-		for (int i = 0; i < 10; i++) {
-			String name = String.valueOf(i);
-			String sport = String.valueOf(i);
-			double price = i;
-			String info = String.valueOf(i);
-			String place = String.valueOf(i);
-
-			Date start_date = new SimpleDateFormat("dd/MM/yyyy").parse("02/11/2017");
-			Date end_date = new SimpleDateFormat("dd/MM/yyyy").parse("02/11/2017");
-
-			Calendar cal = toCalendar(start_date);
-
-			Event event = new Event(name, sport, price, info, place, start_date, end_date);
-			event.setDay_date(cal.get(Calendar.DAY_OF_MONTH));
-			event.setMonth_date(cal.get(Calendar.MONTH));
-			event.setYear_date(cal.get(Calendar.YEAR));
-
-			eventRepo.save(event);
-		}
-
-		for (int i = 0; i < 10; i++) {
-			String name = String.valueOf(i);
-			String info = String.valueOf(i);
-			communityRepo.save(new Community(name, info, "Running"));
-		}
-	}
 
 	@RequestMapping("/")
 	public String index(Model model) {
@@ -102,32 +27,50 @@ public class urteamController {
 	}
 
 	
-
-	@RequestMapping(value = "/image/upload", method = RequestMethod.POST)
-	public String uploadImageFile(Model model, @RequestParam("file") MultipartFile file, String action) {
-
-		String fileName = "test.jpeg";
-
+	public Boolean uploadImageFile(Model model, MultipartFile file, String type, String id) {
+		
+		String folderPath = "imgs";
+		
 		if (!file.isEmpty()) {
+			String fileName = id+"-"+System.currentTimeMillis()+".jpeg";
 			try {
-				File filesFolder = new File("imgs");
+				switch (type) {
+				case ConstantsUrTeam.USER_AVATAR:
+						folderPath = ConstantsUrTeam.USERS_AVATAR_FOLDER;
+					break;
+				case ConstantsUrTeam.EVENT_AVATAR:
+					folderPath = ConstantsUrTeam.EVENTS_FOLDER+"/"+id;
+				break;
+				case ConstantsUrTeam.EVENT_IMGS:
+					folderPath = ConstantsUrTeam.EVENTS_FOLDER+"/"+id;
+				break;
+				case ConstantsUrTeam.COMMUNITY_AVATAR:
+					folderPath = ConstantsUrTeam.COMMUNITIES_FOLDER+"/"+id;
+				break;
+				case ConstantsUrTeam.COMMUNITY_IMGS:
+					folderPath = ConstantsUrTeam.COMMUNITIES_FOLDER+"/"+id;
+				break;
+				default:
+					break;
+				}
+				File filesFolder = new File(folderPath);
 				if (!filesFolder.exists()) {
 					filesFolder.mkdirs();
 				}
 				File uploadedFile = new File(filesFolder.getAbsolutePath(), fileName);
 				file.transferTo(uploadedFile);
 
-				return "/events";
+				return true;
 
 			} catch (Exception e) {
 				model.addAttribute("fileName", fileName);
 				model.addAttribute("error", e.getClass().getName() + ":" + e.getMessage());
-				return "/events";
+				return false;
 
 			}
 		} else {
 			model.addAttribute("error", "The file is empty");
-			return "/events";
+			return false;
 		}
 
 	}
@@ -145,11 +88,5 @@ public class urteamController {
 		} else {
 			res.sendError(404, "File" + fileName + "(" + file.getAbsolutePath() + ") does not exist");
 		}
-	}
-
-	private static Calendar toCalendar(Date date) {
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(date);
-		return cal;
 	}
 }
