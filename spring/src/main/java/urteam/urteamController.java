@@ -41,12 +41,13 @@ public class urteamController {
 	}
 
 	
-	public Boolean uploadImageFile(Model model, MultipartFile file, String type, String id) {
+	public Boolean uploadImageFile(Model model, MultipartFile file, String name,String type, String id) {
 		
 		String folderPath = "imgs";
 		
 		if (!file.isEmpty()) {
-			String fileName = id+"-"+System.currentTimeMillis()+".jpeg";
+//			String fileName = id+"-"+System.currentTimeMillis()+".jpeg";
+			String fileName = name +".jpeg";
 			try {
 				switch (type) {
 				case ConstantsUrTeam.USER_AVATAR:

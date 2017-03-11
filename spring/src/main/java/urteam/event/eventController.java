@@ -97,7 +97,12 @@ public class eventController {
 		event.setMonth_date(cal.get(Calendar.MONTH));
 		event.setYear_date(cal.get(Calendar.YEAR));
 		
-		if(urteam.uploadImageFile(model, file, ConstantsUrTeam.EVENT_AVATAR, "dsgsdgsfg")){
+		//Filename formater
+		SimpleDateFormat formater = new SimpleDateFormat("mmddyyyy");
+		Date date = new Date();
+		String filename = event.getId()+"-avatar-"+formater.format(date);
+		
+		if(urteam.uploadImageFile(model, file,filename,ConstantsUrTeam.EVENT_AVATAR, "dsgsdgsfg")){
 			event.setMain_photo("test");
 		}
 		
