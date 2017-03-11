@@ -98,7 +98,7 @@ public class eventController {
 		event.setYear_date(cal.get(Calendar.YEAR));
 		
 		//Filename formater
-		SimpleDateFormat formater = new SimpleDateFormat("mmddyyyy");
+		SimpleDateFormat formater = new SimpleDateFormat("mmddyyyy-hhMMss");
 		Date date = new Date();
 		
 		//EventId generator

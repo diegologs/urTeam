@@ -40,7 +40,7 @@ public class urteamController {
 		return "index";
 	}
 
-	public Boolean uploadImageFile(Model model, MultipartFile file, String name, String type, String eventId) {
+	public Boolean uploadImageFile(Model model, MultipartFile file, String name, String type, String generatedId) {
 
 		String folderPath = "imgs";
 
@@ -52,16 +52,16 @@ public class urteamController {
 					folderPath = ConstantsUrTeam.USERS_AVATAR_FOLDER;
 					break;
 				case ConstantsUrTeam.EVENT_AVATAR:
-					folderPath = ConstantsUrTeam.EVENTS_FOLDER + "/" + eventId;
+					folderPath = ConstantsUrTeam.EVENTS_FOLDER + "/" + generatedId;
 					break;
 				case ConstantsUrTeam.EVENT_IMGS:
-					folderPath = ConstantsUrTeam.EVENTS_FOLDER + "/" + eventId + "/gallery";
+					folderPath = ConstantsUrTeam.EVENTS_FOLDER + "/" + generatedId + "/gallery";
 					break;
 				case ConstantsUrTeam.COMMUNITY_AVATAR:
-					folderPath = ConstantsUrTeam.COMMUNITIES_FOLDER + "/" + eventId;
+					folderPath = ConstantsUrTeam.COMMUNITIES_FOLDER + "/" + generatedId;
 					break;
 				case ConstantsUrTeam.COMMUNITY_IMGS:
-					folderPath = ConstantsUrTeam.COMMUNITIES_FOLDER + "/" + eventId + "gallery";
+					folderPath = ConstantsUrTeam.COMMUNITIES_FOLDER + "/" + generatedId + "gallery";
 					break;
 				default:
 					break;
@@ -88,13 +88,33 @@ public class urteamController {
 
 	}
 
-	@RequestMapping("/image/{type}/{eventId}/{fileName}")
-	public void handleFileDownload(@PathVariable String type, @PathVariable String eventId, @PathVariable String fileName,
-			HttpServletResponse res) throws FileNotFoundException, IOException {
+	@RequestMapping("/image/{type}/{generatedId}/{fileName}")
+	public void handleFileDownload(@PathVariable String type, @PathVariable String generatedId,
+			@PathVariable String fileName, HttpServletResponse res) throws FileNotFoundException, IOException {
 
-		String filePath = ConstantsUrTeam.EVENTS_FOLDER+"/"+eventId+"/"+fileName+".jpeg";
+		String filePath = null;
+
+		switch (type) {
+		case ConstantsUrTeam.USER_AVATAR:
+			filePath = ConstantsUrTeam.USERS_AVATAR_FOLDER + "/" + fileName + ".jpeg";
+			break;
+		case ConstantsUrTeam.EVENT_AVATAR:
+			filePath = ConstantsUrTeam.EVENTS_FOLDER + "/" + generatedId + "/" + fileName + ".jpeg";
+			break;
+		case ConstantsUrTeam.EVENT_IMGS:
+			filePath = ConstantsUrTeam.EVENTS_FOLDER + "/" + generatedId + "/gallery/" + fileName + ".jpeg";
+			break;
+		case ConstantsUrTeam.COMMUNITY_AVATAR:
+			filePath = ConstantsUrTeam.COMMUNITIES_FOLDER + "/" + generatedId + "/" + fileName + ".jpeg";
+			break;
+		case ConstantsUrTeam.COMMUNITY_IMGS:
+			filePath = ConstantsUrTeam.COMMUNITIES_FOLDER + "/" + generatedId + "gallery" + fileName + ".jpeg";
+			break;
+		default:
+			break;
+		}
 		File file = new File(filePath);
-		
+
 		if (file.exists()) {
 			res.setContentType("image/jpeg");
 			res.setContentLength(new Long(file.length()).intValue());
