@@ -54,11 +54,16 @@
                 <hr>
                 <a data-toggle="modal" data-target="#myModal4"><button class="btn mybtn-succes btn_group2">Añadir imágenes</button></a>
                 
+                
+                {{#communityGallery}}
+	       	
+	       		  <div class="row">
+						 {{>groupGallery_template}}
+                </div>
+                
+	       	{{/communityGallery}}
                 <div class="row">
-                    <div class="col-sm-3"> <img src="images/talajara.jpg"></div>
-                    <div class="col-sm-3"> <img src="images/talajara.jpg"></div>
-                    <div class="col-sm-3"> <img src="images/talajara.jpg"></div>
-                    <div class="col-sm-3"> <img src="images/talajara.jpg"></div>
+
                 </div>
             </div>
             <br>
@@ -177,7 +182,7 @@
                             <div class="form-container">
                                 <form class="form-group">
                                     <label style="color:black;" for="groupAvatar">Añadir imágen</label>
-                                    <input type="file" class="form-control-file" id="groupAvatar" aria-describedby="fileHelp" name="file">
+                                   	<input style="color:grey;" type="file" class="form-control-file" name="file" aria-describedby="fileHelp">
                                     <div class="addButton">
                                          <button class="btn mybtn-succes addButton">Añadir imágenes</button>
                                     </div>
