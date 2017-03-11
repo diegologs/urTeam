@@ -51,7 +51,7 @@ public class eventController {
 					new Sort(new Order(Sort.DEFAULT_DIRECTION, "name")));
 		}
 		
-		Page<Event> eventos = eventRepo.findAll(new PageRequest(0,3));
+		Page<Event> eventos = eventRepo.findAll(new PageRequest(0,9));
 		model.addAttribute("events", eventos);
 		model.addAttribute("sortedBy",sortedBy);
 		return "events";
@@ -101,10 +101,16 @@ public class eventController {
 		}
 		
 		eventRepo.save(event);
+<<<<<<< HEAD
 		//Page<Event> eventos = eventRepo.findAll(new PageRequest(0,3));
 		//model.addAttribute("events", eventos);
 		
 		return "redirect:/events";
+=======
+		Page<Event> eventos = eventRepo.findAll(new PageRequest(0,9));
+		model.addAttribute("events", eventos);
+		return "events";
+>>>>>>> branch 'master' of https://github.com/Frostqui/urTeam.git
 	}
 	
 	private static Calendar toCalendar(Date date){ 
