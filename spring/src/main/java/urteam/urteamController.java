@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -14,11 +16,27 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+import urteam.event.Event;
+import urteam.event.EventRepository;
+
 @Controller
 public class urteamController {
+	
+	@Autowired
+	private EventRepository eventRepo;
 
 	@RequestMapping("/")
 	public String index(Model model) {
+		
+		List<Event> eventos = eventRepo.findFirst3BySport("Mountain Bike");
+		model.addAttribute("first_events", eventos);
+		
+		eventos = eventRepo.findFirst3BySport("Running");
+		model.addAttribute("second_events", eventos);
+		
+		eventos = eventRepo.findFirst3BySport("Roller");
+		model.addAttribute("third_events", eventos);
 
 		return "index";
 	}
