@@ -66,7 +66,7 @@ public class Event {
 	}
 
 	public Event(String name, String sport, double price, String info, String place, 
-			Date start_date, Date end_date) {
+			Date start_date, Date end_date, String main_photo) {
 		
 		this.name = name;
 		this.sport = sport;
@@ -75,6 +75,7 @@ public class Event {
 		this.place = place;		
 		this.start_date = start_date;
 		this.end_date = end_date;
+		this.main_photo = main_photo;
 	}
 	
 	public Event(String name, String sport, String info, double price, String place){

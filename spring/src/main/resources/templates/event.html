@@ -19,7 +19,7 @@
         <div class="row panel">
             <div class="col-md-4 bg_blur ">
                 <!-- <a href="#" class="follow_btn">Seguir</a> -->
-                <img src="/image/event-avatar/{{event.eventId}}/{{event.main_photo}}">
+                <img src="{{event.main_photo}}">
             </div>
             <div class="col-md-8  col-xs-12">
                 <div class="header">
@@ -35,7 +35,7 @@
         <!-- EVENT BAR -->
         <div class="row nav">
             <div class="col-md-12 col-xs-12">
-                <div class="col-md-3 col-xs-3 well">
+                <div class="col-md-4 col-xs-4 well">
                     <i class="fa fa-users fa-lg"></i> {{event.participants}}
                 </div>
 				<!-- 
@@ -43,11 +43,11 @@
                     <i class="fa fa-thumbs-o-up fa-lg"></i> 26
                 </div>
  				-->
-                <div class="col-md-3 col-xs-3 well">
+                <div class="col-md-4 col-xs-4 well">
                 	{{event.price}} <i class="fa fa-eur fa-lg"></i>
                 </div>
 
-                <div class="col-md-3 col-xs-3 well" data-toggle="modal" data-target="#modalShareEvent">
+                <div class="col-md-4 col-xs-4 well" data-toggle="modal" data-target="#modalShareEvent">
                     <i class="fa fa-share-alt"></i>
                 </div>
             </div>
