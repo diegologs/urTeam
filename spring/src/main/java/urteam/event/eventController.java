@@ -50,15 +50,17 @@ public class eventController {
 					new Sort(new Order(Sort.DEFAULT_DIRECTION, "name")));
 		}
 		
-		Page<Event> eventos = eventRepo.findAll(new PageRequest(0,9));
+		Page<Event> eventos = eventRepo.findAll(new PageRequest(0,6));
 		model.addAttribute("events", eventos);
-		model.addAttribute("sortedBy",sortedBy);		
+		model.addAttribute("sortedBy",sortedBy);
+		
+		model.addAttribute("events_active", true);
 		return "events";
 	}
 	
 	@RequestMapping(value="/moreContent")
 	public String moreAllShelf(Model model, @RequestParam int page){
-		Page<Event> eventos = eventRepo.findAll(new PageRequest(page,3));
+		Page<Event> eventos = eventRepo.findAll(new PageRequest(page,6));
 		model.addAttribute("event", eventos);
 		return "listEvents";
 	}
@@ -71,14 +73,17 @@ public class eventController {
 		
 		model.addAttribute("imagen",event.getMain_photo());
 		model.addAttribute("event.participants", event.getParticipants_IDs().size());
+		
 		model.addAttribute("eventGallery", event.getEventImages());
+		
+		model.addAttribute("events_active", true);
 		return "event";
 	}
 	
 	@RequestMapping("/addEvent")
-	public String newEvent() {
+	public String newEvent(Model model) {
+		model.addAttribute("events_active", true);
 		return "addEvent";
-
 	}
 	
 	@RequestMapping("/eventAdded")
@@ -113,6 +118,8 @@ public class eventController {
 		eventRepo.save(event);
 		Page<Event> eventos = eventRepo.findAll(new PageRequest(0,9));
 		model.addAttribute("events", eventos);
+		
+		model.addAttribute("events_active", true);
 		return "redirect:/events";
 
 	}
@@ -129,6 +136,8 @@ public class eventController {
 		event.setInfo(info);
 		eventRepo.save(event);
 		model.addAttribute("event", event);
+		
+		model.addAttribute("events_active", true);
 		return "redirect:/event/{id}";
 	}
 	

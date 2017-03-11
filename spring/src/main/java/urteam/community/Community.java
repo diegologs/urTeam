@@ -54,7 +54,7 @@ public class Community {
 
 //	private User admin_IDs;
 	
-	@ManyToMany
+	@ManyToMany(mappedBy = "communityList")
 	private List<User> communityUsers = new ArrayList<>();
 
 	public Community() {
