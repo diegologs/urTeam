@@ -45,7 +45,6 @@ public class urteamController {
 		String folderPath = "imgs";
 
 		if (!file.isEmpty()) {
-			// String fileName = id+"-"+System.currentTimeMillis()+".jpeg";
 			String fileName = name + ".jpeg";
 			try {
 				switch (type) {
@@ -89,11 +88,11 @@ public class urteamController {
 
 	}
 
-	@RequestMapping("/image/{type}/{id}/{fileName}")
-	public void handleFileDownload(@PathVariable String type, @PathVariable long id, @PathVariable String fileName,
+	@RequestMapping("/image/{type}/{eventId}/{fileName}")
+	public void handleFileDownload(@PathVariable String type, @PathVariable String eventId, @PathVariable String fileName,
 			HttpServletResponse res) throws FileNotFoundException, IOException {
 
-		String filePath = ConstantsUrTeam.EVENTS_FOLDER+"/"+id+"/"+fileName+".jpeg";
+		String filePath = ConstantsUrTeam.EVENTS_FOLDER+"/"+eventId+"/"+fileName+".jpeg";
 		File file = new File(filePath);
 		
 		if (file.exists()) {

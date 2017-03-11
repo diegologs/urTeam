@@ -100,15 +100,12 @@ public class eventController {
 		//Filename formater
 		SimpleDateFormat formater = new SimpleDateFormat("mmddyyyy");
 		Date date = new Date();
-		String filename = event.getEventId()+"-avatar-"+formater.format(date);
 		
 		//EventId generator
-		
 		SimpleDateFormat eventIdFormater = new SimpleDateFormat("mmddyyyy-hhMMss");
 		String eventId = eventIdFormater.format(date);
-		
 		event.setEventId(eventId);
-		
+		String filename = "avatar-"+formater.format(date);
 		
 		if(urteam.uploadImageFile(model, file,filename,ConstantsUrTeam.EVENT_AVATAR, event.getEventId())){
 			event.setMain_photo(filename);
