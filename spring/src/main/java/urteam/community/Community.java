@@ -155,5 +155,13 @@ public class Community {
 		this.communityImages.add(filename);
 		
 	}
+
+	public List<User> getCommunityUsers() {
+		return communityUsers;
+	}
+
+	public void setCommunityUsers(List<User> communityUsers) {
+		this.communityUsers = communityUsers;
+	}
 }
 

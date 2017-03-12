@@ -40,7 +40,7 @@ public class CommunityController{
 	private UserRepository userRepo;
 	
 	@RequestMapping("/groups")
-	public String eventos(Model model) {
+	public String getGroups(Model model) {
 		
 		Page<Community> groups = communityRepo.findAll(new PageRequest(0,3));
 
@@ -83,11 +83,9 @@ public class CommunityController{
 	    	model.addAttribute("following", false);
 	    
 	    }
-
+	    model.addAttribute("members",community.getCommunityUsers());
 		model.addAttribute("community", community);
 		model.addAttribute("communityGallery", community.getCommunityImages());
-		
-
 		return "group";
 	}
 	
