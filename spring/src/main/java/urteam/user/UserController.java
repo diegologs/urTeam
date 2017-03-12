@@ -51,9 +51,11 @@ public class UserController {
 		editedUser.setBio(bio);
 		editedUser.setCity(city);
 		editedUser.setCountry(country);
-
+		
+		
 		if (file != null){
-			String filename = editedUser.getAvatar();
+			String filename = "avatar-"+editedUser.getGeneratedId();
+			
 			if (urteamController.uploadImageFile(model, file, filename, ConstantsUrTeam.USER_AVATAR,
 					editedUser.getGeneratedId())) {
 				editedUser.setAvatar(filename);

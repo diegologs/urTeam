@@ -11,8 +11,33 @@
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/user.css">
-<link rel="stylesheet" href="/user-2.css">
 <link rel="stylesheet" href="/css/scrolling-nav.css">
+
+	<script type="text/javascript">
+		window.onload = function () {
+			var chart = new CanvasJS.Chart("chartContainer", {
+				title: {
+					text: "Basic Spline Chart"
+				},
+				data: [{
+					type: "spline",
+					dataPoints: [
+					  { x: 10, y: 230 },
+					  { x: 20, y: 0 },
+					  { x: 30, y: 380 },
+					  { x: 40, y: 567 },
+					  { x: 50, y: 280 },
+					  { x: 60, y: 507 },
+					  { x: 70, y: 680 },
+					  { x: 80, y: 287 },
+					  { x: 90, y: 460 },
+					  { x: 100, y: 509 }
+					]
+				}]
+			});
+			chart.render();
+		}
+	</script>
 
 </head>
 
@@ -53,6 +78,7 @@
 								<a data-toggle="modal" data-target="#profile-settings-modal">
 									<button class="btn btn-default btn-sm mybtn-succes">
 										<iclass ="fa fa-cogs" aria-hidden="true"> </i>Configuración
+
 
 
 
@@ -154,7 +180,9 @@
 					<!--/row-->
 					<hr class="hr-yellow">
 					<div class="row">
-						<div class="form-control" id="chart"></div>
+						<!-- start of chart -->
+						<div id="chartContainer" style="height: 400px; width: 100%;"></div>
+						<!-- end of chart -->
 					</div>
 					<br> <br>
 				</div>
@@ -271,8 +299,8 @@
 								action="/userprofile/{{id}}/edit" method="post"
 								enctype="multipart/form-data">
 								<div class="form-group">
-								<div class="col-md-9">
-									
+									<div class="col-md-9">
+
 										<div class="text-center">
 											<img src="/image/user-avatar/{{user.avatar}}"
 												class="avatar img-circle" alt="avatar">
@@ -282,7 +310,7 @@
 										</div>
 									</div>
 								</div>
-							
+
 
 
 								<div class="form-group">
@@ -375,8 +403,8 @@
 	<script src="/js/jquery.easing.min.js"></script>
 	<script src="/js/scrolling-nav.js"></script>
 
-	<!-- Profile Charts -->
-	<script src="/js/profile-chart.js"></script>
+	<!-- charts -->
+	<script src="/js/canvasjs.min.js"></script>
 
 
 	<!-- Navigation bar -->
