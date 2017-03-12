@@ -20,22 +20,18 @@
             <div class="container-fluid">
                 <form class="navbar-form navbar-left">
                     <div class="form-group filterSelects">
-                        <select>
+                        <select onChange="window.location.href=this.value">
                             <option value="">Ordenar por deporte...</option>
-                            <option value="mtb">Mountain Bike</option>
-                            <option value="running">Running</option>
-                            <option value="roller">Roller</option>
+                            <option value="/sortGroupBySport/?sport=mtb">Mountain Bike</option>
+                            <option value="/sortGroupBySport/?sport=running">Running</option>
+                            <option value="/sortGroupBySport/?sport=roller">Roller</option>
                         </select>
-                        <select>
-                            <option value="">Ordenar por fecha...</option>
-                            <option value="by-new">Más nuevo primero</option>
-                            <option value="by-old">Más viejo primero</option>
-                        </select>
+                       
                     </div>
                 </form>
-                <form class="navbar-form navbar-right">
+                <form class="navbar-form navbar-right" action="/sortGroupByName" method="get">
                     <div class="form-group ">
-                        <input type="text" class="form-control" placeholder="Buscar...">
+                        <input name="name" type="text" class="form-control" placeholder="Buscar...">
                         <button type="submit" class="btn fa fa-search" role="search"></button>
                     </div>
 

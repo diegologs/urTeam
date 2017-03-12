@@ -1,6 +1,7 @@
 package urteam.community;
 
 import java.util.Date;
+import java.util.List;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -44,6 +45,20 @@ public class CommunityController{
 		return "groups";
 	}
 	
+	@RequestMapping("/sortGroupByName")
+	public String sortGroupByName(Model model, @RequestParam String name) {
+		
+		
+		
+		List<Community> groups = communityRepo.findByName(name);
+
+			
+		model.addAttribute("communitys", groups);
+		model.addAttribute("groups_active", true);
+
+		return "groups";
+	}
+	
 	
 	@RequestMapping("/group/{id}")
 	public String editGroup(Model model, @PathVariable long id) {
@@ -57,6 +72,19 @@ public class CommunityController{
 		return "group";
 	}
 	
+	
+	@RequestMapping("/sortGroupBySport")
+	public String sortGroupBySport(Model model, @RequestParam String sport) {
+		
+		List<Community> community = communityRepo.findBySport(sport);
+
+		model.addAttribute("communitys", community);
+		model.addAttribute("groups_active", true);
+		
+		
+
+		return "groups";
+	}
 	
 	@RequestMapping(value="/moreGroups")
 	public String moreAllShelf(Model model, @RequestParam int page){

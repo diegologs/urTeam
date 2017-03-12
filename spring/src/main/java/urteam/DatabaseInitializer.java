@@ -75,12 +75,11 @@ public class DatabaseInitializer {
 			String main_photo = "http://lorempixel.com/400/200/sports/" + i%10;
 			News news = new News("Titulo de ejemplo de la noticia", "Texto de ejemplo de la noticia.");
 			newsRepo.save(news);
-			
-			
-			Community com = new Community(name, info, "Running", main_photo);
-			
+			Community com = new Community("MTB  "+String.valueOf(i), info, "Mtb",main_photo);
+			Community com2 = new Community("Running  "+String.valueOf(i), info, "Running",main_photo);
 
 			communityRepo.save(com);
+			communityRepo.save(com2);
 		}
 		
 		
