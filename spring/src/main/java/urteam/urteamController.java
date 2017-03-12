@@ -4,12 +4,14 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +25,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import urteam.event.Event;
-import urteam.event.EventRepository;
-import urteam.user.User;
-import urteam.user.UserRepository;
+import urteam.event.*;
+import urteam.user.*;
 
 @Controller
 public class urteamController {
@@ -34,8 +34,14 @@ public class urteamController {
 	@Autowired
 	private EventRepository eventRepo;
 
+	@Autowired
+	private UserComponent userComponent;
+
+	@Autowired
+	private UserRepository userRepo;
+
 	@RequestMapping("/")
-	public String index(Model model) {
+	public String index(Model model, HttpServletRequest request) {
 
 		List<Event> eventos = eventRepo.findFirst3BySport("Mountain Bike");
 		model.addAttribute("first_events", eventos);
@@ -46,12 +52,40 @@ public class urteamController {
 		eventos = eventRepo.findFirst3BySport("Roller");
 		model.addAttribute("third_events", eventos);
 
-		return "index";
+		if ((userComponent.isLoggedUser())) {
+			long id = userComponent.getLoggedUser().getId();
+			User user = userRepo.findOne(id);
+			model.addAttribute("user", user);
+			if (userComponent.getLoggedUser().getId() == user.getId()) {
+				model.addAttribute("logged", true);
+			}
+			model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
+			return "index";
+		} else {
+			return "index";
+		}
 	}
 
 	@RequestMapping("/login")
 	public String login() {
 		return "login";
+	}
+
+	@RequestMapping("/userprofile")
+	public String userloginView(Model model, HttpServletRequest request) {
+
+		if ((userComponent.isLoggedUser())) {
+			long id = userComponent.getLoggedUser().getId();
+			User user = userRepo.findOne(id);
+			model.addAttribute("user", user);
+			if (userComponent.getLoggedUser().getId() == user.getId()) {
+				model.addAttribute("isLoged", true);
+			}
+			model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
+			return "user";
+		} else {
+			return "redirect:/";
+		}
 	}
 
 	public Boolean uploadImageFile(Model model, MultipartFile file, String name, String type, String generatedId) {

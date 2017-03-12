@@ -1,10 +1,12 @@
 package urteam.user;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +14,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import urteam.community.*;
 import urteam.community.Community;
 import urteam.event.Event;
 import urteam.stats.Stats;
@@ -26,10 +31,8 @@ public class User {
 	private String generatedId = "aleatorio";
 	private String username;
 	private String surname;
-	
-	@Column(unique = true)
 	private String nickname;
-	private String password;
+	private String passwordHash;
 	private String email;
 
 	@Column(columnDefinition = "TEXT")
@@ -38,7 +41,9 @@ public class User {
 	private String country;
 	private String score = "0";
 	private String avatar = "avatar";
-	private String role;
+	
+	@ElementCollection(fetch = FetchType.EAGER) 
+	private List<String> roles;
 
 	@ManyToMany
 	private List<User> following = new ArrayList<>();
@@ -61,17 +66,20 @@ public class User {
 	public User() {}
 
 	public User(String username, String surname, String nickname, String password, String email, String bio,
-			String score, String city, String country, String avatar) {
+			String score, String city, String country,String avatar, String... roles) {
 		this.username = username;
 		this.surname = surname;
 		this.nickname = nickname;
-		this.password = password;
+		this.passwordHash = new BCryptPasswordEncoder().encode(password);
 		this.email = email;
 		this.bio = bio;
 		this.city = city;
 		this.country = country;
 		this.score = score;
 		this.avatar = avatar;
+		this.roles = new ArrayList<>(Arrays.asList(roles));
+		
+		
 	}
 	
 	public User(String username, String surname, String nickname, String password, String email,
@@ -79,7 +87,7 @@ public class User {
 		this.username = username;
 		this.surname = surname;
 		this.nickname = nickname;
-		this.password = password;
+		this.passwordHash = new BCryptPasswordEncoder().encode(password);
 		this.email = email;
 		this.city = city;
 		this.country = country;
@@ -117,12 +125,12 @@ public class User {
 		this.nickname = nickname;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getPasswordHash() {
+		return passwordHash;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPasswordHash(String password) {
+		this.passwordHash = new BCryptPasswordEncoder().encode(password);
 	}
 
 	public String getEmail() {
@@ -173,12 +181,12 @@ public class User {
 		this.avatar = avatar;
 	}
 
-	public String getRole() {
-		return role;
+	public List<String> getRoles() {
+		return roles;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+	public void setRoles(List<String> roles) {
+		this.roles = roles;
 	}
 
 	public List<User> getFollowing() {
