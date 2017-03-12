@@ -13,31 +13,87 @@
 <link rel="stylesheet" href="/css/user.css">
 <link rel="stylesheet" href="/css/scrolling-nav.css">
 
-	<script type="text/javascript">
-		window.onload = function () {
-			var chart = new CanvasJS.Chart("chartContainer", {
-				title: {
-					text: "Basic Spline Chart"
-				},
-				data: [{
-					type: "spline",
-					dataPoints: [
-					  { x: 10, y: 230 },
-					  { x: 20, y: 0 },
-					  { x: 30, y: 380 },
-					  { x: 40, y: 567 },
-					  { x: 50, y: 280 },
-					  { x: 60, y: 507 },
-					  { x: 70, y: 680 },
-					  { x: 80, y: 287 },
-					  { x: 90, y: 460 },
-					  { x: 100, y: 509 }
-					]
-				}]
-			});
-			chart.render();
-		}
-	</script>
+
+<script type="text/javascript">
+	window.onload = function() {
+		var chart = new CanvasJS.Chart(
+				"chartContainer",
+				{
+					title : {
+						text : "Deportes practicados"
+					},
+					animationEnabled : true,
+					data : [ {
+						type : "doughnut",
+						startAngle : 60,
+						toolTipContent : "{legendText}: {y} - <strong>#percent% </strong>",
+						showInLegend : true,
+						explodeOnClick : true, //**Change it to true
+						dataPoints : [ {
+							y : 5,
+							indexLabel : "Mountain Bike #percent%",
+							legendText : "Mountain Bike"
+						}, {
+							y : 1,
+							indexLabel : "Running #percent%",
+							legendText : "Running"
+						}, {
+							y : 2,
+							indexLabel : "Roller #percent%",
+							legendText : "Roller"
+						} ]
+					} ]
+				});
+		
+		var chart2 = new CanvasJS.Chart("chartContainer2", {
+			title : {
+				text : "Febrero"
+			},
+			data : [ {
+				type : "spline",
+				dataPoints : [ {
+					x : 10,
+					y : 230
+				}, {
+					x : 20,
+					y : 0
+				}, {
+					x : 30,
+					y : 380
+				}, {
+					x : 40,
+					y : 567
+				}, {
+					x : 50,
+					y : 280
+				}, {
+					x : 60,
+					y : 507
+				}, {
+					x : 70,
+					y : 680
+				}, {
+					x : 80,
+					y : 287
+				}, {
+					x : 90,
+					y : 460
+				}, {
+					x : 100,
+					y : 509
+				} ]
+			}]
+		});
+		chart2.render();
+		
+	}
+</script>
+
+
+
+<script type="text/javascript">
+
+</script>
 
 </head>
 
@@ -78,6 +134,7 @@
 								<a data-toggle="modal" data-target="#profile-settings-modal">
 									<button class="btn btn-default btn-sm mybtn-succes">
 										<iclass ="fa fa-cogs" aria-hidden="true"> </i>Configuración
+
 
 
 
@@ -182,6 +239,8 @@
 					<div class="row">
 						<!-- start of chart -->
 						<div id="chartContainer" style="height: 400px; width: 100%;"></div>
+						<br> <br>
+						<div id="chartContainer2" style="height: 400px; width: 100%;"></div>
 						<!-- end of chart -->
 					</div>
 					<br> <br>
