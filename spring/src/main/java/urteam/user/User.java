@@ -222,5 +222,14 @@ public class User {
 		this.communityList.remove(community);
 		
 	}
+	
+	
+	public List<Stats> getSportStats() {
+		return sportStats;
+	}
+
+	public void addStat(Stats stats){
+		this.getSportStats().add(stats);
+	}
 
 }

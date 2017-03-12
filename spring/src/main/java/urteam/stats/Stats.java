@@ -1,6 +1,6 @@
 package urteam.stats;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,13 +21,13 @@ public class Stats {
 	
 	@OneToOne
 	private Sport sport;
-	private float totalSesionTime;
+	private double totalSesionTime;
 	private Date date;
 	
 	public Stats(){}
 	
 	
-	public Stats(String userId, Sport sport, float totalSesionTime, Date date) {
+	public Stats(String userId, Sport sport, double totalSesionTime, Date date) {
 		super();
 		this.userId = userId;
 		this.sport = sport;
@@ -46,10 +46,10 @@ public class Stats {
 	public void setSport(Sport sport) {
 		this.sport = sport;
 	}
-	public float getTotalSesionTime() {
+	public double getTotalSesionTime() {
 		return totalSesionTime;
 	}
-	public void setTotalSesionTime(float totalSesionTime) {
+	public void setTotalSesionTime(double totalSesionTime) {
 		this.totalSesionTime = totalSesionTime;
 	}
 	public Date getDate() {
