@@ -25,6 +25,8 @@ public class User {
 	private String generatedId = "aleatorio";
 	private String username;
 	private String surname;
+	
+	@Column(unique = true)
 	private String nickname;
 	private String password;
 	private String email;
@@ -204,6 +206,11 @@ public class User {
 
 	public void addCommunity(Community community) {
 		this.communityList.add(community);
+	}
+
+	public void removeCommunity(Community community) {
+		this.communityList.remove(community);
+		
 	}
 
 }
