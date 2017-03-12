@@ -69,6 +69,20 @@ public class CommunityController{
 	public String editGroup(Model model, @PathVariable long id) {
 		
 		Community community = communityRepo.findOne(id);
+		
+		List<User> users = userRepo.findAll();    
+	    
+	    User user = users.get(0);
+	    
+	    if(user.getCommunityList().contains(community)){
+	      
+	    	model.addAttribute("following", true);
+	      
+	    }else{
+	    
+	    	model.addAttribute("following", false);
+	    
+	    }
 
 		model.addAttribute("community", community);
 		model.addAttribute("communityGallery", community.getCommunityImages());
@@ -211,6 +225,7 @@ public class CommunityController{
 	    }else{
 	    
 	      user.addCommunity(community);
+	      model.addAttribute("following", true);
 	    
 	    }
 	    
