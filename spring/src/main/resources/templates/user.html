@@ -52,8 +52,9 @@
 								<div class="divider"></div>
 								<a data-toggle="modal" data-target="#profile-settings-modal">
 									<button class="btn btn-default btn-sm mybtn-succes">
-										<iclass ="fa fa-cogs" aria-hidden="true">
-										</i>Configuración
+										<iclass ="fa fa-cogs" aria-hidden="true"> </i>Configuración
+
+										
 									</button>
 								</a> <a href="index.html"
 									class="btn btn-default btn-sm mybtn-succes"><i
@@ -172,7 +173,7 @@
 										<img class="img-circle img-responsive group-image"
 											width="110px" src="images/avatar.jpg">
 									</div>
-									<a href="group.html">
+									<a href="/group/{{id}}">
 										<div class="col-sm-8">
 											<h1 class="group-name">{{name}}</h1>
 											<div class="badge">{{sport}}</div>
@@ -194,8 +195,7 @@
 					<div class="row">
 						<div class="col-sm-12">
 							<h3>
-								<i class="fa fa-flag-checkered" aria-hidden="true"></i>
-								Logros
+								<i class="fa fa-flag-checkered" aria-hidden="true"></i> Logros
 							</h3>
 						</div>
 					</div>
@@ -230,15 +230,17 @@
 						<div class="row friendrow">
 							{{#following}}
 							<div class="col-sm-6">
-								<div class="friend">
-									<div class="col-sm-3 friend-image">
-										<img class="img-circle img-responsive group-image"
-											width="110px" src="http://lorempixel.com/200/200/people/9/">
+								<a href="/userprofile/{{id}}">
+									<div class="friend">
+										<div class="col-sm-3 friend-image">
+											<img class="img-circle img-responsive group-image"
+												width="110px" src="http://lorempixel.com/200/200/people/9/">
+										</div>
+										<div class="col-sm-9 friend-name">
+											<h3>{{username}} {{surname}}</h3>
+										</div>
 									</div>
-									<div class="col-sm-9 friend-name">
-										<h3>{{username}} {{surname}}</h3>
-									</div>
-								</div>
+								</a>
 							</div>
 							{{/following}}
 						</div>
@@ -251,7 +253,7 @@
 	<div id="profile-settings-modal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 			<!-- Modal content-->
-			<div class="container">
+			<div class="container modal-body">
 				<h2>Configuración de perfil</h2>
 				<div class="row">
 					<div class="col-md-3">
@@ -268,7 +270,7 @@
 							<div class="form-group">
 								<label for="firstName" class="col-sm-3 control-label">Nombre</label>
 								<div class="col-sm-9">
-									<input type="text" id="firstName" placeholder="Jean"
+									<input type="text" id="firstName" placeholder={{user.username}}
 										class="form-control" autofocus>
 
 								</div>
@@ -276,7 +278,7 @@
 							<div class="form-group">
 								<label for="lastName" class="col-sm-3 control-label">Apellidos</label>
 								<div class="col-sm-9">
-									<input type="text" id="lastName" placeholder="Doe"
+									<input type="text" id="lastName" placeholder={{user.surname}}
 										class="form-control" autofocus>
 
 								</div>
@@ -284,48 +286,50 @@
 							<div class="form-group">
 								<label for="email" class="col-sm-3 control-label">Email</label>
 								<div class="col-sm-9">
-									<input type="email" id="email" placeholder="jeandoe@urteam.es"
+									<input type="email" id="email" placeholder={{user.email}}
 										class="form-control">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="nickname" class="col-sm-3 control-label">Nickname</label>
 								<div class="col-sm-9">
-									<input type="text" id="password" placeholder="jeandoe"
-										class="form-control"> <span class="help-block">jeandoe,
-										jean_doe, jdoe</span>
+									<input type="text" id="password" placeholder={{user.nickname}}
+										class="form-control">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="bio" class="col-sm-3 control-label">Biografia</label>
 								<div class="col-sm-9">
-									<textarea class="form-control" rows="5"></textarea>
+									<textarea class="form-control" palceholder={{user.bio}}
+										rows="5"></textarea>
 								</div>
 							</div>
-							<div class="form-group">
+							<!--  <div class="form-group">
 								<label for="birthDate" class="col-sm-3 control-label">Fecha
 									de nacimiento</label>
 								<div class="col-sm-9">
 									<input type="date" id="birthDate" class="form-control">
 								</div>
+							</div> -->
+							<div class="form-group">
+								<label for="city" class="col-sm-3 control-label">Ciudad</label>
+								<div class="col-sm-9">
+									<input type="text" id="city" placeholder={{user.city}}
+										class="form-control">
+								</div>
 							</div>
 							<div class="form-group">
 								<label for="country" class="col-sm-3 control-label">Pais</label>
 								<div class="col-sm-9">
-									<select id="country" class="form-control">
-										<option>España</option>
-										<option>Portugal</option>
-										<option>Francia</option>
-									</select>
+									<input type="text" id="country" placeholder={{user.country}}
+										class="form-control">
 								</div>
 							</div>
-							<div class="form-group">
-								<div class="col-sm-9 col-sm-offset-3">
-									<button type="submit"
-										class="btn btn-primary btn-block mybtn-succes">Guardar</button>
-									<button type="submit"
-										class="btn btn-primary btn-block mybtn-succes">Cancelar</button>
-								</div>
+							<div class="col-sm-9 col-sm-offset-3">
+								<button type="submit"
+									class="btn btn-primary btn-block mybtn-succes">Guardar</button>
+								<button type="submit"
+									class="btn btn-primary btn-block mybtn-succes">Cancelar</button>
 							</div>
 						</form>
 						<!-- /form -->
