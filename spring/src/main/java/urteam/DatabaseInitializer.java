@@ -56,7 +56,7 @@ public class DatabaseInitializer {
 		sport1.setMultiplicator(0.75);
 		
 		Sport sport2 = new Sport();
-		sport2.setName("MTB");
+		sport2.setName("Mountain Bike");
 		sport2.setMultiplicator(0.95);
 		
 		Sport sport3 = new Sport();

@@ -159,7 +159,7 @@ public class eventController {
 
 	}
 	
-	@RequestMapping("/sortEventByName")
+	@RequestMapping("/sortEventByName/{name}")
 	public String sortEventByName(Model model, @RequestParam String name) {
 		
 		
@@ -172,7 +172,7 @@ public class eventController {
 		model.addAttribute("events", eventos);
 		
 
-		return "events";
+		return "redirect:/events";
 	}
 	
 	
@@ -185,7 +185,7 @@ public class eventController {
 		
 		
 
-		return "events";
+		return "redirect:/events";
 	}
 	
 	
