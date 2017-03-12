@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,11 +32,12 @@ public class Event {
 	
 	private String eventId = "aleatorio";
 	
-	@NotNull
-    @Size(min=1, max=20)
+	@Size(min = 2, max = 21)
 	private String name;
 	private String sport;
 	private double price;
+	
+	@Column(columnDefinition = "TEXT")
 	private String info;
 	private String main_photo;
 	private String place;
