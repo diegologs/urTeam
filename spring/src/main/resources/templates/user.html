@@ -135,6 +135,7 @@
 
 
 
+
 										
 									</button>
 								</a> <a href="index.html"
@@ -231,6 +232,25 @@
 						</div>
 					</div>
 					<!--/row-->
+					<div class="statsTable">
+
+						<table style="width: 100%">
+							<tr>
+								<th>Fecha</th>
+								<th>Sport</th>
+								<th>Tiempo</th>
+							</tr>
+							{{#rowsStats}}
+								<tr>
+									<td>{{date}}</td>
+									<td>{{sport}}</td>
+									<td>{{totalSesionTime}}</td>
+								</tr>
+							{{/rowsStats}}
+						</table>
+
+					</div>
+
 					<hr class="hr-yellow">
 					<div class="row">
 						<!-- start of chart -->
@@ -458,18 +478,17 @@
 				</div>
 				<div class="modal-body">
 					<div class="form-container">
-						<form class="form-group" action="/sfaf" method="post">
-							<label style="color: black;" for="sport">Deporte</label>
-							<select>
-							{{#sportList}}
-							<option value="{{name}}">{{name}}</option>
-							{{/sportList}}
-							</select>
-							<br>
-							<input type="text" id="stat" value="" class="form-control"
-								name="stat"> (En horas).
+						<form class="form-group" action="/add-user-stats" method="post">
+							<label style="color: black;" for="sport">Deporte</label> <select>
+								{{#sportList}}
+								<option value="{{name}}">{{name}}</option> {{/sportList}}
+							</select> <br> <label style="color: black;" for="sport">Fecha
+								de realización</label> <input type="text" class="form-control"
+								name="date"> <br> <label style="color: black;"
+								for="sport">Tiempo de sesión</label> <input type="text"
+								class="form-control" name="sesionTime">
 							<div class="addButton">
-							<br>
+								<br>
 								<button type="submit" class="btn mybtn-succes addButton">+</button>
 							</div>
 						</form>
@@ -480,11 +499,6 @@
 	</div>
 	<!-- End Modal Add Stat -->
 	{{> footer_template}}
-
-
-
-
-
 
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
