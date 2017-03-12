@@ -54,6 +54,9 @@
 									<button class="btn btn-default btn-sm mybtn-succes">
 										<iclass ="fa fa-cogs" aria-hidden="true"> </i>Configuración
 
+
+
+
 										
 									</button>
 								</a> <a href="index.html"
@@ -75,8 +78,8 @@
 			<div class="profile-sidebar">
 				<!-- SIDEBAR USERPIC -->
 				<div class="profile-userpic">
-					<img src="http://lorempixel.com/output/people-q-c-200-200-1.jpg"
-						class="img-responsive" alt="">
+					<img src="/image/user-avatar/{{user.avatar}}"
+						class="img-responsive" alt="avatar">
 				</div>
 				<!-- END SIDEBAR USERPIC -->
 				<!-- SIDEBAR USER TITLE -->
@@ -171,7 +174,8 @@
 								<div class="group-info">
 									<div class="col-sm-2 group-image">
 										<img class="img-circle img-responsive group-image"
-											width="110px" src="images/avatar.jpg">
+											width="110px"
+											src="/image/community-avatar/{{communityId}}/{{main_photo}}">
 									</div>
 									<a href="/group/{{id}}">
 										<div class="col-sm-8">
@@ -234,7 +238,8 @@
 									<div class="friend">
 										<div class="col-sm-3 friend-image">
 											<img class="img-circle img-responsive group-image"
-												width="110px" src="http://lorempixel.com/200/200/people/9/">
+												width="110px" src="/image/user-avatar/{{avatar}}"
+												alt="following avatar">
 										</div>
 										<div class="col-sm-9 friend-name">
 											<h3>{{username}} {{surname}}</h3>
@@ -253,92 +258,107 @@
 	<div id="profile-settings-modal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 			<!-- Modal content-->
-			<div class="container modal-body">
-				<h2>Configuración de perfil</h2>
-				<div class="row">
-					<div class="col-md-3">
-						<div class="text-center">
-							<img src="//placehold.it/100" class="avatar img-circle"
-								alt="avatar">
-							<h6>Cambiar avatar</h6>
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Configuración de tu perfil</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-9">
+							<form class="form-horizontal" role="form"
+								action="/userprofile/{{id}}/edit" method="post"
+								enctype="multipart/form-data">
+								<div class="col-md-3">
+									<div class="text-center">
+										<img src="/image/user-avatar/{{user.avatar}}"
+											class="avatar img-circle" alt="avatar">
+										<h6>Cambiar avatar</h6>
+										<input class="form-control" type="file" name="file"
+											aria-describedby="fileHelp">
+									</div>
+								</div>
 
-							<input class="form-control" type="file">
+								<div class="form-group">
+									<label for="eventGallery">Imagen</label> <input type="file"
+										class="form-control-file" name="file"
+										aria-describedby="fileHelp">
+								</div>
+
+
+								<div class="form-group">
+									<label for="firstName" class="col-sm-3 control-label">Nombre</label>
+									<div class="col-sm-9">
+										<input type="text" id="firstName" value="{{user.username}}"
+											class="form-control" autofocus required="required"
+											name="username">
+
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="lastName" class="col-sm-3 control-label">Apellidos</label>
+									<div class="col-sm-9">
+										<input type="text" id="lastName" value={{user.surname}}
+											class="form-control" autofocus required="required"
+											name="surname">
+									</div>
+								</div>
+						<div class="form-group">
+							<label for="email" class="col-sm-3 control-label">Email</label>
+							<div class="col-sm-9">
+								<input type="email" id="email" value={{user.email}}
+									class="form-control" required="required" name="email">
+							</div>
 						</div>
-					</div>
-					<div class="col-md-9">
-						<form class="form-horizontal" role="form">
-							<div class="form-group">
-								<label for="firstName" class="col-sm-3 control-label">Nombre</label>
-								<div class="col-sm-9">
-									<input type="text" id="firstName" placeholder={{user.username}}
-										class="form-control" autofocus>
-
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="lastName" class="col-sm-3 control-label">Apellidos</label>
-								<div class="col-sm-9">
-									<input type="text" id="lastName" placeholder={{user.surname}}
-										class="form-control" autofocus>
-
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="email" class="col-sm-3 control-label">Email</label>
-								<div class="col-sm-9">
-									<input type="email" id="email" placeholder={{user.email}}
-										class="form-control">
-								</div>
-							</div>
+						<!-- 
 							<div class="form-group">
 								<label for="nickname" class="col-sm-3 control-label">Nickname</label>
 								<div class="col-sm-9">
-									<input type="text" id="password" placeholder={{user.nickname}}
+									<input type="text" id="password" value={{user.nickname}}
 										class="form-control">
 								</div>
 							</div>
-							<div class="form-group">
-								<label for="bio" class="col-sm-3 control-label">Biografia</label>
-								<div class="col-sm-9">
-									<textarea class="form-control" palceholder={{user.bio}}
-										rows="5"></textarea>
-								</div>
+							 -->
+						<div class="form-group">
+							<label for="bio" class="col-sm-3 control-label">Biografia</label>
+							<div class="col-sm-9">
+								<textarea class="form-control" rows="5" name="bio">{{user.bio}}</textarea>
 							</div>
-							<!--  <div class="form-group">
+						</div>
+						<!--  <div class="form-group">
 								<label for="birthDate" class="col-sm-3 control-label">Fecha
 									de nacimiento</label>
 								<div class="col-sm-9">
 									<input type="date" id="birthDate" class="form-control">
 								</div>
 							</div> -->
-							<div class="form-group">
-								<label for="city" class="col-sm-3 control-label">Ciudad</label>
-								<div class="col-sm-9">
-									<input type="text" id="city" placeholder={{user.city}}
-										class="form-control">
-								</div>
+						<div class="form-group">
+							<label for="city" class="col-sm-3 control-label">Ciudad</label>
+							<div class="col-sm-9">
+								<input type="text" id="city" value={{user.city}}
+									class="form-control" name="city">
 							</div>
-							<div class="form-group">
-								<label for="country" class="col-sm-3 control-label">Pais</label>
-								<div class="col-sm-9">
-									<input type="text" id="country" placeholder={{user.country}}
-										class="form-control">
-								</div>
+						</div>
+						<div class="form-group">
+							<label for="country" class="col-sm-3 control-label">Pais</label>
+							<div class="col-sm-9">
+								<input type="text" id="country" value={{user.country}}
+									class="form-control" name="country">
 							</div>
-							<div class="col-sm-9 col-sm-offset-3">
-								<button type="submit"
-									class="btn btn-primary btn-block mybtn-succes">Guardar</button>
-								<button type="submit"
-									class="btn btn-primary btn-block mybtn-succes">Cancelar</button>
-							</div>
+						</div>
+						<div class="col-sm-9 col-sm-offset-3">
+							<button type="submit"
+								class="btn btn-primary btn-block mybtn-succes">Guardar</button>
+						</div>
 						</form>
 						<!-- /form -->
 					</div>
 				</div>
 				<!-- row -->
 			</div>
-
 		</div>
+
+	</div>
 	</div>
 
 	{{> footer_template}}

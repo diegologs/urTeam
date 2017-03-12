@@ -166,16 +166,28 @@ public class CommunityController{
 
 	
 	
-	@RequestMapping("GroupAdded")
-	public String groupAdded(Model model, Community community) {
+	@RequestMapping("/GroupAdded")
+	public String groupAdded(Model model, Community community, @RequestParam("file") MultipartFile file) throws ParseException {
+
+		//Filename formater
+		SimpleDateFormat formater = new SimpleDateFormat("mmddyyyy-hhMMss");
 		Date date = new Date();
-		SimpleDateFormat eventIdFormater = new SimpleDateFormat("mmddyyyy-hhMMss");
-		String eventId = eventIdFormater.format(date);
-		community.setCommunityId(eventId);
 		
+		//EventId generator
+		SimpleDateFormat communityIdFormater = new SimpleDateFormat("mmddyyyy-hhMMss");
+		String communitytId = communityIdFormater.format(date);
+		community.setCommunityId(communitytId);
+		String filename = "avatar-"+formater.format(date);
+	
+		
+		if(urteam.uploadImageFile(model, file,filename,ConstantsUrTeam.COMMUNITY_AVATAR, community.getCommunityId())){
+			community.setMain_photo(filename);
+		}
 		communityRepo.save(community);
+		
 		model.addAttribute("groups_active", true);
 		return "redirect:groups";
-
 	}
+	
+	
 }

@@ -1,13 +1,10 @@
 package urteam.event;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-
-import javax.validation.Valid;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,16 +14,14 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import urteam.ConstantsUrTeam;
 import urteam.urteamController;
-import urteam.community.Community;
+import urteam.sport.SportController;
 
 @Controller
 public class eventController {
@@ -36,6 +31,9 @@ public class eventController {
 	
 	@Autowired
 	private urteamController urteam;
+	
+	@Autowired
+	private SportController sportController;
 	
 	@RequestMapping("/events")
 	public String eventos(Model model, Pageable page) {
@@ -53,6 +51,8 @@ public class eventController {
 		Page<Event> eventos = eventRepo.findAll(new PageRequest(0,6));
 		model.addAttribute("events", eventos);
 		model.addAttribute("sortedBy",sortedBy);
+		model.addAttribute("sportList", sportController.getSportList());
+		
 		
 		model.addAttribute("events_active", true);
 		return "events";
@@ -148,11 +148,6 @@ public class eventController {
 		//Filename formater
 		SimpleDateFormat formater = new SimpleDateFormat("mmddyyyy-hhMMss");
 		Date date = new Date();
-		
-		//EventId generator
-//		SimpleDateFormat eventIdFormater = new SimpleDateFormat("mmddyyyy-hhMMss");
-//		String eventId = eventIdFormater.format(date);
-//		event.setEventId(eventId);
 		String filename = "imageingallery-"+formater.format(date);
 		
 		if(urteam.uploadImageFile(model, file,filename,ConstantsUrTeam.EVENT_IMGS, event.getEventId())){
@@ -164,7 +159,7 @@ public class eventController {
 
 	}
 	
-	@RequestMapping("/sortEventByName")
+	@RequestMapping("/sortEventByName/{name}")
 	public String sortEventByName(Model model, @RequestParam String name) {
 		
 		
@@ -177,7 +172,7 @@ public class eventController {
 		model.addAttribute("events", eventos);
 		
 
-		return "events";
+		return "redirect:/events";
 	}
 	
 	
@@ -190,7 +185,7 @@ public class eventController {
 		
 		
 
-		return "events";
+		return "redirect:/events";
 	}
 	
 	

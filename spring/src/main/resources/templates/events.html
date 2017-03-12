@@ -21,9 +21,9 @@
                        
                        <select onChange="window.location.href=this.value">
                             <option value="">Ordenar por deporte...</option>
-                            <option value="/sortEventBySport/?sport=Mountain Bike">Mountain Bike</option>
-                            <option value="/sortEventBySport/?sport=running">Running</option>
-                            <option value="/sortEventBySport/?sport=roller">Roller</option>
+                            {{#sportList}}
+                            <option value="?sport={{name}}">{{name}}</option>
+                            {{/sportList}}
                         </select>
                         <select>
                             <option value="">Ordenar por fecha...</option>
@@ -48,7 +48,9 @@
             <div id="content">
                 <!-- EVENT -->
                 <div id="listEvents">
-	                {{#events}}{{> event_template}}{{/events}}
+	                {{#events}}
+	                	{{> event_template}}
+	                {{/events}}
                 </div>     
                 <!-- END EVENT -->
             </div>

@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,11 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import urteam.user.User;
@@ -31,11 +29,15 @@ public class Event {
 	
 	private String eventId = "aleatorio";
 	
-	@NotNull
-    @Size(min=1, max=20)
+	@Size(min = 2, max = 21)
 	private String name;
+	
+	
 	private String sport;
+	
 	private double price;
+	
+	@Column(columnDefinition = "TEXT")
 	private String info;
 	private String main_photo;
 	private String place;

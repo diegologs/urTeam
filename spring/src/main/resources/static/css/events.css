@@ -114,11 +114,18 @@ time>.month {
     color: #c5c0c1!important;
     background-color: #0a1612;
     border-color: #0a1612;
+    
 }
 
 .panel-primary>.panel-footer p {
     color: #c5c0c1;
     text-align: justify;
+    
+}
+
+.panel-primary>.panel-footer>.infoBox{
+	height: 25px;
+	overflow: hidden;
 }
 
 .panel-primary a {
