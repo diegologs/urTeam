@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import urteam.community.Community;
+import urteam.event.Event;
 import urteam.stats.Stats;
 
 @Entity
@@ -47,6 +48,12 @@ public class User {
 
 	@ManyToMany
 	private List<Community> communityList = new ArrayList<>();
+	
+	@ManyToMany
+	private List<Event> eventList = new ArrayList<>();
+
+
+	
 
 	@OneToMany
 	private List<Stats> sportStats = new ArrayList<>();
@@ -221,6 +228,24 @@ public class User {
 	public void removeCommunity(Community community) {
 		this.communityList.remove(community);
 		
+	}
+
+	public void removeEvent(Event event) {
+		this.eventList.remove(event);
+		
+	}
+
+	public void addEvent(Event event) {
+		this.eventList.add(event);
+		
+	}
+	
+	public List<Event> getEventList() {
+		return eventList;
+	}
+
+	public void setEventList(List<Event> eventList) {
+		this.eventList = eventList;
 	}
 
 }

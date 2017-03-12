@@ -21,13 +21,20 @@ import org.springframework.web.multipart.MultipartFile;
 
 import urteam.ConstantsUrTeam;
 import urteam.urteamController;
+import urteam.community.Community;
 import urteam.sport.SportController;
+import urteam.user.User;
+import urteam.user.UserRepository;
 
 @Controller
 public class eventController {
 	
 	@Autowired
 	private EventRepository eventRepo;
+	
+	@Autowired
+	private UserRepository userRepo;
+	
 	
 	@Autowired
 	private urteamController urteam;
@@ -77,6 +84,28 @@ public class eventController {
 		model.addAttribute("eventGallery", event.getEventImages());
 		
 		model.addAttribute("events_active", true);
+		
+		List<User> users = userRepo.findAll();    
+		    
+		User user = users.get(0);
+		
+		model.addAttribute("numberOfMembers",event.getParticipants_IDs().size());
+		
+		    
+		
+		
+		if(user.getEventList().contains(event)){
+		      
+			 model.addAttribute("following", true);
+			    
+		      
+		    }else{
+		    
+		 
+		      model.addAttribute("following", false);
+		    
+		    }
+		
 		return "event";
 	}
 	
@@ -187,6 +216,37 @@ public class eventController {
 
 		return "redirect:/events";
 	}
+	
+	
+	@RequestMapping("/event/{id}/follow")
+	  public String follow(Model model, @PathVariable long id) {
+	    
+	    Event event = eventRepo.findOne(id);
+	    
+	    List<User> users = userRepo.findAll();    
+	    
+	    User user = users.get(0);
+	    
+	    eventRepo.save(event);
+	    
+	    if(user.getEventList().contains(event)){
+	      
+	      user.removeEvent(event);      
+	    }else{
+	    
+	      user.addEvent(event);
+	      model.addAttribute("following", true);
+	    
+	    }
+	    
+	    userRepo.save(user);
+	    
+	    model.addAttribute("event", event);
+	    
+	    
+	    return "redirect:/event/{id}";
+
+	  }
 	
 	
 	
