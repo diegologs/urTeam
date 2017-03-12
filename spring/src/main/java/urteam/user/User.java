@@ -53,7 +53,7 @@ public class User {
 	public User() {}
 
 	public User(String username, String surname, String nickname, String password, String email, String bio,
-			String score, String city, String country) {
+			String score, String city, String country, String avatar) {
 		this.username = username;
 		this.surname = surname;
 		this.nickname = nickname;
@@ -64,7 +64,7 @@ public class User {
 		this.country = country;
 		this.score = score;
 		this.generatedId = null;
-		this.avatar = null;
+		this.avatar = avatar;
 
 	}
 
