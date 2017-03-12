@@ -108,7 +108,7 @@ public class urteamController {
 			filePath = ConstantsUrTeam.COMMUNITIES_FOLDER + "/" + generatedId + "/" + fileName + ".jpeg";
 			break;
 		case ConstantsUrTeam.COMMUNITY_IMGS:
-			filePath = ConstantsUrTeam.COMMUNITIES_FOLDER + "/" + generatedId + "gallery" + fileName + ".jpeg";
+			filePath = ConstantsUrTeam.COMMUNITIES_FOLDER + "/" + generatedId + "/gallery/" + fileName + ".jpeg";
 			break;
 		default:
 			break;

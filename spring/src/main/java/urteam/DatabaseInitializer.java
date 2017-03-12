@@ -72,12 +72,12 @@ public class DatabaseInitializer {
 		for (int i = 0; i < 10; i++) {
 			String name = "Comunidad  "+String.valueOf(i);
 			String info = "Información de la comunidad.";
-			
+			String main_photo = "http://lorempixel.com/400/200/sports/" + i%10;
 			News news = new News("Titulo de ejemplo de la noticia", "Texto de ejemplo de la noticia.");
 			newsRepo.save(news);
 			
 			
-			Community com = new Community(name, info, "Running");
+			Community com = new Community(name, info, "Running", main_photo);
 			
 
 			communityRepo.save(com);

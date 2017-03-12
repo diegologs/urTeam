@@ -21,7 +21,7 @@ public class Community {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	private String communityId;
+	private String communityId = "aleatorio";
 
 
 	private String name;
@@ -29,7 +29,16 @@ public class Community {
 	private String country;
 	private String city;
 	private String sport;
+	private String main_photo;
 	
+	public String getMain_photo() {
+		return main_photo;
+	}
+
+	public void setMain_photo(String main_photo) {
+		this.main_photo = main_photo;
+	}
+
 	@Basic
 	private ArrayList<String> communityImages = new ArrayList();
 	
@@ -60,10 +69,11 @@ public class Community {
 	public Community() {
 	}
 
-	public Community(String name, String info, String sport) {
+	public Community(String name, String info, String sport, String main_photo) {
 		this.name = name;
 		this.info = info;
 		this.sport = sport;
+		this.main_photo = main_photo;
 	}
 
 	public long getId() {
