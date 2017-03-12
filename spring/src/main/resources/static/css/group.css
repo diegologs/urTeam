@@ -100,3 +100,21 @@
     color:black;
 }
 
+/*Modal*/
+.modal-header {
+    color: #808080;
+}
+
+.modal-body {
+    color: #808080;
+    text-align: center;
+}
+
+.modal-body>p>a {
+    color: #f7ce3e;
+}
+
+.modal-body>p>a:hover {
+    color: #c5a431;
+}
+

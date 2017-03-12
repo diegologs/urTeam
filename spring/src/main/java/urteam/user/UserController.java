@@ -1,6 +1,8 @@
 package urteam.user;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,16 +16,31 @@ import org.springframework.web.multipart.MultipartFile;
 import urteam.ConstantsUrTeam;
 import urteam.urteamController;
 import urteam.community.Community;
-import urteam.event.Event;
+import urteam.sport.SportController;
+import urteam.sport.SportRepository;
 
 @Controller
 public class UserController {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private SportController sportController;
 
 	@Autowired
 	private urteamController urteamController;
+	
+
+	@RequestMapping("/newUser")
+	public String eventAdded(Model model, User user) throws ParseException {
+		Date date = new Date();
+		SimpleDateFormat userIdFormater = new SimpleDateFormat("mmddyyyy-hhMMss");
+		String generatedId = userIdFormater.format(date);
+		user.setGeneratedId(generatedId);
+		userRepository.save(user);
+		return "redirect:/events";
+	}
 
 	@RequestMapping("/userprofile/{id}")
 	public String userProfile(Model model, @PathVariable Long id) {
@@ -38,6 +55,8 @@ public class UserController {
 		
 		model.addAttribute("user_active", true);
 		model.addAttribute("logged", true);
+		model.addAttribute("sportList",sportController.getSportList());
+		model.addAttribute("stats",user.getSportStats());
 		return "user";
 	}
 
@@ -55,8 +74,9 @@ public class UserController {
 		editedUser.setCity(city);
 		editedUser.setCountry(country);
 
-		if (file != null){
-			String filename = editedUser.getAvatar();
+		if (file != null) {
+			String filename = "avatar-" + editedUser.getGeneratedId();
+
 			if (urteamController.uploadImageFile(model, file, filename, ConstantsUrTeam.USER_AVATAR,
 					editedUser.getGeneratedId())) {
 				editedUser.setAvatar(filename);
@@ -67,4 +87,15 @@ public class UserController {
 		return "redirect:/userprofile/{id}";
 	}
 
+	@RequestMapping("user/{id}/follow/{toFollowUser}")
+	public String followSomeUser(Model model, @PathVariable long id, @PathVariable long toFollowUser) {
+
+		return "na";
+	}
+
+	@RequestMapping("user/{id}/unfollow/{toFollowUser}")
+	public String unfollowSomeUser(Model model, @PathVariable long id, @PathVariable long toFollowUser) {
+
+		return "na";
+	}
 }

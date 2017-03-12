@@ -21,6 +21,8 @@ import urteam.event.Event;
 import urteam.event.EventRepository;
 import urteam.news.News;
 import urteam.news.NewsRepository;
+import urteam.user.User;
+import urteam.user.UserRepository;
 
 @Controller
 public class CommunityController{
@@ -34,8 +36,11 @@ public class CommunityController{
 	@Autowired
 	private NewsRepository newsRepo;	
 	
+	@Autowired
+	private UserRepository userRepo;
+	
 	@RequestMapping("/groups")
-	public String eventos(Model model) {
+	public String getGroups(Model model) {
 		
 		Page<Community> groups = communityRepo.findAll(new PageRequest(0,3));
 
@@ -64,11 +69,24 @@ public class CommunityController{
 	public String editGroup(Model model, @PathVariable long id) {
 		
 		Community community = communityRepo.findOne(id);
-
+		
+		List<User> users = userRepo.findAll();    
+	    
+	    User user = users.get(0);
+	    
+	    if(user.getCommunityList().contains(community)){
+	      
+	    	model.addAttribute("following", true);
+	      
+	    }else{
+	    
+	    	model.addAttribute("following", false);
+	    
+	    }
+	    model.addAttribute("numberOfMembers",community.getCommunityUsers().size());
+	    model.addAttribute("members",community.getCommunityUsers());
 		model.addAttribute("community", community);
 		model.addAttribute("communityGallery", community.getCommunityImages());
-		
-
 		return "group";
 	}
 	
@@ -188,6 +206,36 @@ public class CommunityController{
 		model.addAttribute("groups_active", true);
 		return "redirect:groups";
 	}
+	
+	
+	@RequestMapping("/group/{id}/follow")
+	  public String follow(Model model, @PathVariable long id) {
+	    
+	    Community community = communityRepo.findOne(id);
+	    
+	    List<User> users = userRepo.findAll();    
+	    
+	    User user = users.get(0);
+	    
+	    if(user.getCommunityList().contains(community)){
+	      
+	      user.removeCommunity(community);
+	      
+	    }else{
+	    
+	      user.addCommunity(community);
+	      model.addAttribute("following", true);
+	    
+	    }
+	    
+	    userRepo.save(user);
+	    
+	    model.addAttribute("community", community);
+	    
+	    
+	    return "redirect:/group/{id}";
+
+	  }
 	
 	
 }

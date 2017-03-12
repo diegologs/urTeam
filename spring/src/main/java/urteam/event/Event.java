@@ -60,8 +60,8 @@ public class Event {
 	@OneToOne
 	private User owner_id;
 	
-	@OneToMany
-	private List<User> participants_IDs;
+	@OneToMany(mappedBy = "eventList")
+	private List<User> participants_IDs = new ArrayList<>();
 	
 
 	public Event() {

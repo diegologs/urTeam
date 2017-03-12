@@ -1,13 +1,9 @@
 package urteam.user;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,6 +13,9 @@ import javax.persistence.Table;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import urteam.community.*;
+import urteam.community.Community;
+import urteam.event.Event;
+import urteam.stats.Stats;
 
 @Entity
 @Table(name = "user_profile")
@@ -25,7 +24,7 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	private String generatedId;
+	private String generatedId = "aleatorio";
 	private String username;
 	private String surname;
 	private String nickname;
@@ -33,11 +32,11 @@ public class User {
 	private String email;
 
 	@Column(columnDefinition = "TEXT")
-	private String bio;
+	private String bio = "";
 	private String city;
 	private String country;
-	private String score;
-	private String avatar;
+	private String score = "0";
+	private String avatar = "avatar";
 	
 	@ElementCollection(fetch = FetchType.EAGER) 
 	private List<String> roles;
@@ -50,9 +49,17 @@ public class User {
 
 	@ManyToMany
 	private List<Community> communityList = new ArrayList<>();
+	
+	@ManyToMany
+	private List<Event> eventList = new ArrayList<>();
 
-	public User() {
-	}
+
+	
+
+	@OneToMany
+	private List<Stats> sportStats = new ArrayList<>();
+	
+	public User() {}
 
 	public User(String username, String surname, String nickname, String password, String email, String bio,
 			String score, String city, String country,String avatar, String... roles) {
@@ -65,12 +72,21 @@ public class User {
 		this.city = city;
 		this.country = country;
 		this.score = score;
-		this.generatedId = null;
 		this.avatar = avatar;
 		this.roles = new ArrayList<>(Arrays.asList(roles));
 		
 		
-
+	}
+	
+	public User(String username, String surname, String nickname, String password, String email,
+			String city, String country) {
+		this.username = username;
+		this.surname = surname;
+		this.nickname = nickname;
+		this.password = password;
+		this.email = email;
+		this.city = city;
+		this.country = country;
 	}
 
 	public long getId() {
@@ -211,6 +227,38 @@ public class User {
 
 	public void addCommunity(Community community) {
 		this.communityList.add(community);
+	}
+
+	public void removeCommunity(Community community) {
+		this.communityList.remove(community);
+		
+	}
+	
+	
+	public List<Stats> getSportStats() {
+		return sportStats;
+	}
+
+	public void addStat(Stats stats){
+		this.getSportStats().add(stats);
+	}
+
+	public void removeEvent(Event event) {
+		this.eventList.remove(event);
+		
+	}
+
+	public void addEvent(Event event) {
+		this.eventList.add(event);
+		
+	}
+	
+	public List<Event> getEventList() {
+		return eventList;
+	}
+
+	public void setEventList(List<Event> eventList) {
+		this.eventList = eventList;
 	}
 
 }

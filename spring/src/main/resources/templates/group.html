@@ -2,230 +2,261 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <title>urTeam - Tu web del deporte</title>
-      <link rel="shortcut icon" href="/images/favicon.ico" />
-  
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/group.css">
+<meta charset="UTF-8">
+<title>urTeam - Tu web del deporte</title>
+<link rel="shortcut icon" href="/images/favicon.ico" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/group.css">
 </head>
 
 <body>
-    {{> navbar_template}}
-    <div class="group-header">
-        <div class="row group-header-info">
-            <div class="col-sm-2 container">
-                <img class="img-circle img-responsive group-image" width="120px" src="/image/community-avatar/{{community.communityId}}/{{community.main_photo}}">
-            </div>
-            <div class="col-sm-8 container group-text">
-                <h1 class="group-name">{{community.name}}</h1>
-                  {{#community.sport}}
-                        <div class="badge">{{community.sport}}</div>
-                  {{/community.sport}}
-                <h4 class="group-members"><a data-toggle="modal" data-target="#myModal">300 miembros</a></h4>
-            </div>
-            <div class="col-sm-2 container">
-                <button class="btn btn-default group-btn">UNIRSE</button>
-            </div>
-        </div>
-    </div>
-    <div class="group-menu">
-        <ul class="menu-list">
-            <li><i class="fa fa-info" aria-hidden="true"></i> Información</li>
-            <li><i class="fa fa-picture-o" aria-hidden="true"></i> Fotos</li>
-            <li><i class="fa fa-newspaper-o" aria-hidden="true"></i> Noticias</li>
-            <li><i class="fa fa-bar-chart" aria-hidden="true"></i> Estadísticas</li>
-        </ul>
-    </div>
-    <div class="container main-content">
-        <div class="info">
-            <h2><i class="fa fa-info" aria-hidden="true"></i> Información</h2>
-            <hr>
-             <a data-toggle="modal" data-target="#myModal3"><button class="btn mybtn-succes btn_group2">Editar información</button></a>
-            <div class="info-text">
-               {{community.info}}
-            </div>
-            <br>
-            <div class="photos">
-                <h2><i class="fa fa-picture-o" aria-hidden="true"></i> Fotos</h2>
-                <hr>
-                <a data-toggle="modal" data-target="#myModal4"><button class="btn mybtn-succes btn_group2">Añadir imágenes</button></a>
-                {{#communityGallery}}
-	       		  	<div class="row">
-						{{>groupGallery_template}}
-                	</div>
-	       		{{/communityGallery}}
-            </div>
-            <br>
-            <div class="news">
-                <h2><i class="fa fa-newspaper-o" aria-hidden="true"></i> Noticias</h2>
-              
-                <hr>
-                <a data-toggle="modal" data-target="#myModal2"><button class="btn mybtn-succes btn_group2">Añadir noticia</button></a>
-                
-                {{#community.news}}
-                <div class="new">
-                    <h4>{{title}}</h4>
-                    <div>{{text}}</div>
-                    
-                    <br>
-                    
-                </div>
-                {{/community.news}}
-
-            </div>
-            <div class="stats">
-
-                <h2><i class="fa fa-bar-chart" aria-hidden="true"></i> Estadísticas</h2>
-                <hr>
-                <div class="row">
-                    <div class="col-md-6">
-                        <ul>
-                            <li>Eventos asistidos: 7</li>
-                            <li>Eventos creados: 2</li>
-                            <li>Kilómetros recorridos: 783</li>
-                        </ul>
-                    </div>
-                    <div class="col-md-6">
-                        <ul>
-                            <li>Fotos: 73</li>
-                            <li>Usuarios: 2</li>
-                            <li>Fecha de registro: 12/01/2017</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+	{{> navbar_template}}
+	<div class="group-header">
+		<div class="row group-header-info">
+			<div class="col-sm-2 container">
+				<img class="img-circle img-responsive group-image" width="120px"
+					src="/image/community-avatar/{{community.communityId}}/{{community.main_photo}}">
+			</div>
+			<div class="col-sm-8 container group-text">
+				<h1 class="group-name">{{community.name}}</h1>
+				{{#community.sport}}
+				<div class="badge">{{community.sport}}</div>
+				{{/community.sport}}
+				<h4 class="group-members">
+					<a data-toggle="modal" data-target="#myModal"><i class="fa fa-users" aria-hidden="true"></i>  {{numberOfMembers}}   Miembros</a>
+				</h4>
+			</div>
+			<div class="col-sm-2 container">
+				<form action="/group/{{id}}/follow" method="post">
 
 
-            <!-- Modal -->
-            <div id="myModal2" class="modal fade" role="dialog">
-                <div class="modal-dialog">
+					{{#following}} <input type="submit"
+						class="btn btn-default group-btn" value="Dejar de seguir">
+					{{/following}} {{^following}} <input type="submit"
+						class="btn btn-default group-btn" value="Seguir">
+					{{/following}}
 
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Actualización</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-container">
-                                <form class="form-group" action="/group/{{id}}/addNews" method="post">
-                                     <label style="color:black;" for="groupName">Titulo de la actualización</label>
-                                      <input name="title" type="text" class="form-control" id="groupName" placeholder="Titulo de la actualización">
-                                       <label style="color:black;" for="textarea">Cuerpo de la actualización</label>
-                                      <textarea name="text" type="text" id="textarea" class="form-control" rows="15"></textarea>
-                                      <br>
-                                      <hr>
-                                        <div class="addButton">
-                                         <button class="btn mybtn-succes addButton">Añadir noticia</button>
-                                        </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="group-menu">
+		<ul class="menu-list">
+			<li><i class="fa fa-info" aria-hidden="true"></i> Información</li>
+			<li><i class="fa fa-picture-o" aria-hidden="true"></i> Fotos</li>
+			<li><i class="fa fa-newspaper-o" aria-hidden="true"></i>
+				Noticias</li>
+			<li><i class="fa fa-bar-chart" aria-hidden="true"></i>
+				Estadísticas</li>
+		</ul>
+	</div>
+	<div class="container main-content">
+		<div class="info">
+			<h2>
+				<i class="fa fa-info" aria-hidden="true"></i> Información
+			</h2>
+			<hr>
+			<a data-toggle="modal" data-target="#myModal3"><button
+					class="btn mybtn-succes btn_group2">Editar información</button></a>
+			<div class="info-text">{{community.info}}</div>
+			<br>
+			<div class="photos">
+				<h2>
+					<i class="fa fa-picture-o" aria-hidden="true"></i> Fotos
+				</h2>
+				<hr>
+				<a data-toggle="modal" data-target="#myModal4"><button
+						class="btn mybtn-succes btn_group2">Añadir imágenes</button></a>
+				{{#communityGallery}}
+				<div class="row">{{>groupGallery_template}}</div>
+				{{/communityGallery}}
+			</div>
+			<br>
+			<div class="news">
+				<h2><i class="fa fa-newspaper-o" aria-hidden="true"></i> Noticias</h2>
+				<hr>
+				<a data-toggle="modal" data-target="#myModal2"><button class="btn mybtn-succes btn_group2">Añadir noticia</button></a>
+				<hr>
+				{{#community.news}}
+					<div class="col-sm-12">
+						<div class="new">
+							<h4>{{title}}</h4>
+							<div>{{text}}</div>
+							<hr>
+							<br>
+						</div>
+					</div>
+				{{/community.news}}
+			</div>
+			<div class="stats">
+				<h2>
+					<i class="fa fa-users" aria-hidden="true"></i> Miembros
+				</h2>
+				<hr>
+				<div class="row">
+					{{#members}}
+						<div class="col-sm-6">
+							<a href="/userprofile/{{id}}">
+								<div class="friend">
+									<div class="col-sm-3 friend-image">
+										<img class="img-circle img-responsive group-image"
+											width="110px" src="/image/user-avatar/{{avatar}}"
+											alt="following avatar">
+									</div>
+									<div class="col-sm-9 friend-name">
+										<h3>{{username}} {{surname}}</h3>
+									</div>
+								</div>
+							</a>
+						</div>
+					{{/members}}
+				</div>
+				<br>
+			</div>
+			</div>
 
 
+			<!-- Modal -->
+			<div id="myModal2" class="modal fade" role="dialog">
+				<div class="modal-dialog">
 
-
-             <!-- Modal -->
-            <div id="myModal3" class="modal fade" role="dialog">
-                <div class="modal-dialog">
-
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Información</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-container">
-                                <form class="form-group" action="/group/{{id}}/GroupEdited" method="post">
-                                    <label style="color:black;" for="textarea">Información</label>
-                                      <textarea type="text" id="textarea" class="form-control" rows="15" name="info"></textarea>
-                                      <br>
-                                      <hr>
-                                    <div class="addButton">
-                                         <button type="submit" class="btn mybtn-succes addButton">Editar información</button>
-                                    </div>
-
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-
-             <div id="myModal4" class="modal fade" role="dialog">
-                <div class="modal-dialog">
-
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Imágenes</h4>
-                        </div>
-                        <div class="modal-body">
-		                    <div class="form-container">
-		                        <form class="form-group" action="/group/{{id}}/addImage" method="post"  enctype="multipart/form-data">
-		                            <div class="form-group">
-		                    			<label for="groupGallery">Imagen</label>
-		                    			<input type="file" class="form-control-file" name="file" aria-describedby="fileHelp">
-		                			</div>
-		                            <div class="addButton">
-		                                 <button type="submit" class="btn mybtn-succes addButton">Añadir Foto</button>
-		                            </div>
-		                        </form>
-		                    </div>
-                		</div>
-                    </div>
-                </div>
-            </div>
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Actualización</h4>
+						</div>
+						<div class="modal-body">
+							<div class="form-container">
+								<form class="form-group" action="/group/{{id}}/addNews"
+									method="post">
+									<label style="color: black;" for="groupName">Titulo de
+										la actualización</label> <input name="title" type="text"
+										class="form-control" id="groupName"
+										placeholder="Titulo de la actualización"> <label
+										style="color: black;" for="textarea">Cuerpo de la
+										actualización</label>
+									<textarea name="text" type="text" id="textarea"
+										class="form-control" rows="15"></textarea>
+									<br>
+									<hr>
+									<div class="addButton">
+										<button class="btn mybtn-succes addButton">Añadir
+											noticia</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 
 
 
 
-            
+			<!-- Modal -->
+			<div id="myModal3" class="modal fade" role="dialog">
+				<div class="modal-dialog">
+
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Información</h4>
+						</div>
+						<div class="modal-body">
+							<div class="form-container">
+								<form class="form-group" action="/group/{{id}}/GroupEdited"
+									method="post">
+									<label style="color: black;" for="textarea">Información</label>
+									<textarea type="text" id="textarea" class="form-control"
+										rows="15" name="info"></textarea>
+									<br>
+									<hr>
+									<div class="addButton">
+										<button type="submit" class="btn mybtn-succes addButton">Editar
+											información</button>
+									</div>
+
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 
 
-            <div id="myModal" class="modal fade" role="dialog">
-                <div class="modal-dialog">
 
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Usuarios inscritos</h4>
-                        </div>
-                        <div class="modal-body">
-                            <ul>
-                                <li>Frost</li>
-                                <li>Frost</li>
-                                <li>Frost</li>
-                                <li>Frost</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+			<div id="myModal4" class="modal fade" role="dialog">
+				<div class="modal-dialog">
+
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Imágenes</h4>
+						</div>
+						<div class="modal-body">
+							<div class="form-container">
+								<form class="form-group" action="/group/{{id}}/addImage"
+									method="post" enctype="multipart/form-data">
+									<div class="form-group">
+										<label for="groupGallery">Imagen</label> <input type="file"
+											class="form-control-file" name="file"
+											aria-describedby="fileHelp">
+									</div>
+									<div class="addButton">
+										<button type="submit" class="btn mybtn-succes addButton">Añadir
+											Foto</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 
 
-        </div>
-    </div>
 
-    <br>
-    <br>
 
-    {{> footer_template}}
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
+
+
+			<div id="myModal" class="modal fade" role="dialog">
+				<div class="modal-dialog">
+
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Usuarios inscritos</h4>
+						</div>
+						<div class="modal-body">
+							<ul>
+								{{#community.communityUsers}}
+
+								<li>{{username}}</li> {{/community.communityUsers}}
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+
+	<br>
+	<br> {{> footer_template}}
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
 </body>
 
 </html>

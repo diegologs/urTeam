@@ -11,7 +11,6 @@
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/user.css">
-<link rel="stylesheet" href="/user-2.css">
 <link rel="stylesheet" href="/css/scrolling-nav.css">
 
 </head>
@@ -26,7 +25,7 @@
 			<div class="profile-sidebar">
 				<!-- SIDEBAR USERPIC -->
 				<div class="profile-userpic">
-					<img src="/image/user-avatar/{{user.avatar}}"
+					<img src="/image/user-avatar/{{user.generatedId}}/{{user.avatar}}"
 						class="img-responsive" alt="avatar">
 				</div>
 				<!-- END SIDEBAR USERPIC -->
@@ -96,12 +95,37 @@
 							<h3>
 								<i class="fa fa-line-chart" aria-hidden="true"></i> Progreso
 							</h3>
+							<a data-toggle="modal" data-target="#myModal_addStat"><button
+									class="btn mybtn-succes">Añadir sesión</button></a>
 						</div>
 					</div>
 					<!--/row-->
+					<div class="statsTable">
+
+						<table style="width: 100%">
+							<tr>
+								<th>Fecha</th>
+								<th>Sport</th>
+								<th>Tiempo</th>
+							</tr>
+							{{#rowsStats}}
+								<tr>
+									<td>{{date}}</td>
+									<td>{{sport}}</td>
+									<td>{{totalSesionTime}}</td>
+								</tr>
+							{{/rowsStats}}
+						</table>
+
+					</div>
+
 					<hr class="hr-yellow">
 					<div class="row">
-						<div class="form-control" id="chart"></div>
+						<!-- start of chart -->
+						<div id="chartContainer" style="height: 400px; width: 100%;"></div>
+						<br> <br>
+						<div id="chartContainer2" style="height: 400px; width: 100%;"></div>
+						<!-- end of chart -->
 					</div>
 					<br> <br>
 				</div>
@@ -217,21 +241,19 @@
 							<form class="form-horizontal" role="form"
 								action="/userprofile/{{id}}/edit" method="post"
 								enctype="multipart/form-data">
-								<div class="col-md-3">
-									<div class="text-center">
-										<img src="/image/user-avatar/{{user.avatar}}"
-											class="avatar img-circle" alt="avatar">
-										<h6>Cambiar avatar</h6>
-										<input class="form-control" type="file" name="file"
-											aria-describedby="fileHelp">
+								<div class="form-group">
+									<div class="col-md-9">
+
+										<div class="text-center">
+											<img src="/image/user-avatar/{{user.avatar}}"
+												class="avatar img-circle" alt="avatar">
+											<h6>Cambiar avatar</h6>
+											<input class="form-control" type="file" name="file"
+												aria-describedby="fileHelp">
+										</div>
 									</div>
 								</div>
 
-								<div class="form-group">
-									<label for="eventGallery">Imagen</label> <input type="file"
-										class="form-control-file" name="file"
-										aria-describedby="fileHelp">
-								</div>
 
 
 								<div class="form-group">
@@ -251,14 +273,14 @@
 											name="surname">
 									</div>
 								</div>
-						<div class="form-group">
-							<label for="email" class="col-sm-3 control-label">Email</label>
-							<div class="col-sm-9">
-								<input type="email" id="email" value={{user.email}}
-									class="form-control" required="required" name="email">
-							</div>
-						</div>
-						<!-- 
+								<div class="form-group">
+									<label for="email" class="col-sm-3 control-label">Email</label>
+									<div class="col-sm-9">
+										<input type="email" id="email" value={{user.email}}
+											class="form-control" required="required" name="email">
+									</div>
+								</div>
+								<!-- 
 							<div class="form-group">
 								<label for="nickname" class="col-sm-3 control-label">Nickname</label>
 								<div class="col-sm-9">
@@ -267,54 +289,83 @@
 								</div>
 							</div>
 							 -->
-						<div class="form-group">
-							<label for="bio" class="col-sm-3 control-label">Biografia</label>
-							<div class="col-sm-9">
-								<textarea class="form-control" rows="5" name="bio">{{user.bio}}</textarea>
-							</div>
-						</div>
-						<!--  <div class="form-group">
+								<div class="form-group">
+									<label for="bio" class="col-sm-3 control-label">Biografia</label>
+									<div class="col-sm-9">
+										<textarea class="form-control" rows="5" name="bio">{{user.bio}}</textarea>
+									</div>
+								</div>
+								<!-- 
+								 <div class="form-group">
 								<label for="birthDate" class="col-sm-3 control-label">Fecha
 									de nacimiento</label>
 								<div class="col-sm-9">
 									<input type="date" id="birthDate" class="form-control">
 								</div>
-							</div> -->
-						<div class="form-group">
-							<label for="city" class="col-sm-3 control-label">Ciudad</label>
-							<div class="col-sm-9">
-								<input type="text" id="city" value={{user.city}}
-									class="form-control" name="city">
 							</div>
+							 -->
+								<div class="form-group">
+									<label for="city" class="col-sm-3 control-label">Ciudad</label>
+									<div class="col-sm-9">
+										<input type="text" id="city" value={{user.city}}
+											class="form-control" name="city">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="country" class="col-sm-3 control-label">Pais</label>
+									<div class="col-sm-9">
+										<input type="text" id="country" value={{user.country}}
+											class="form-control" name="country">
+									</div>
+								</div>
+								<div class="col-sm-9 col-sm-offset-3">
+									<button type="submit"
+										class="btn btn-primary btn-block mybtn-succes">Guardar</button>
+								</div>
+							</form>
+							<!-- /form -->
 						</div>
-						<div class="form-group">
-							<label for="country" class="col-sm-3 control-label">Pais</label>
-							<div class="col-sm-9">
-								<input type="text" id="country" value={{user.country}}
-									class="form-control" name="country">
+					</div>
+					<!-- row -->
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<!-- End Modal Edit User -->
+
+	<!-- Modal Add Stat -->
+	<div id="myModal_addStat" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Información</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-container">
+						<form class="form-group" action="/add-user-stats" method="post">
+							<label style="color: black;" for="sport">Deporte</label> <select>
+								{{#sportList}}
+								<option value="{{name}}">{{name}}</option> {{/sportList}}
+							</select> <br> <label style="color: black;" for="sport">Fecha
+								de realización</label> <input type="text" class="form-control"
+								name="date"> <br> <label style="color: black;"
+								for="sport">Tiempo de sesión</label> <input type="text"
+								class="form-control" name="sesionTime">
+							<div class="addButton">
+								<br>
+								<button type="submit" class="btn mybtn-succes addButton">+</button>
 							</div>
-						</div>
-						<div class="col-sm-9 col-sm-offset-3">
-							<button type="submit"
-								class="btn btn-primary btn-block mybtn-succes">Guardar</button>
-						</div>
 						</form>
-						<!-- /form -->
 					</div>
 				</div>
-				<!-- row -->
 			</div>
 		</div>
-
 	</div>
-	</div>
-
+	<!-- End Modal Add Stat -->
 	{{> footer_template}}
-
-
-
-
-
 
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -324,8 +375,8 @@
 	<script src="/js/jquery.easing.min.js"></script>
 	<script src="/js/scrolling-nav.js"></script>
 
-	<!-- Profile Charts -->
-	<script src="/js/profile-chart.js"></script>
+	<!-- charts -->
+	<script src="/js/canvasjs.min.js"></script>
 
 
 	<!-- Navigation bar -->
