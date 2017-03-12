@@ -16,7 +16,7 @@ public class Sport {
 	@Column(unique = true)
 	private String name;
 	
-	private float multiplicator;
+	private double multiplicator;
 	
 	
 	public Sport(){}
@@ -35,12 +35,12 @@ public class Sport {
 		this.name = name;
 	}
 
-	public float getMultiplicator() {
+	public double getMultiplicator() {
 		return multiplicator;
 	}
 
-	public void setMultiplicator(float multiplicator) {
-		this.multiplicator = multiplicator;
+	public void setMultiplicator(double d) {
+		this.multiplicator = d;
 	}
 	
 	

@@ -14,11 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import urteam.user.User;
@@ -34,7 +31,10 @@ public class Event {
 	
 	@Size(min = 2, max = 21)
 	private String name;
+	
+	
 	private String sport;
+	
 	private double price;
 	
 	@Column(columnDefinition = "TEXT")
