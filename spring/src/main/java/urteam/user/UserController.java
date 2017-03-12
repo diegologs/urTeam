@@ -16,17 +16,22 @@ import org.springframework.web.multipart.MultipartFile;
 import urteam.ConstantsUrTeam;
 import urteam.urteamController;
 import urteam.community.Community;
-import urteam.event.Event;
+import urteam.sport.SportController;
+import urteam.sport.SportRepository;
 
 @Controller
 public class UserController {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private SportController sportController;
 
 	@Autowired
 	private urteamController urteamController;
 	
+
 	@RequestMapping("/newUser")
 	public String eventAdded(Model model, User user) throws ParseException {
 		Date date = new Date();
@@ -47,6 +52,7 @@ public class UserController {
 		model.addAttribute("communities", communities);
 		model.addAttribute("members", communities.size());
 		model.addAttribute("numberOfFollowers", user.getNumberOfFollower());
+		model.addAttribute("sportList",sportController.getSportList());
 		return "user";
 	}
 
@@ -63,11 +69,10 @@ public class UserController {
 		editedUser.setBio(bio);
 		editedUser.setCity(city);
 		editedUser.setCountry(country);
-		
-		
-		if (file != null){
-			String filename = "avatar-"+editedUser.getGeneratedId();
-			
+
+		if (file != null) {
+			String filename = "avatar-" + editedUser.getGeneratedId();
+
 			if (urteamController.uploadImageFile(model, file, filename, ConstantsUrTeam.USER_AVATAR,
 					editedUser.getGeneratedId())) {
 				editedUser.setAvatar(filename);
@@ -78,4 +83,15 @@ public class UserController {
 		return "redirect:/userprofile/{id}";
 	}
 
+	@RequestMapping("user/{id}/follow/{toFollowUser}")
+	public String followSomeUser(Model model, @PathVariable long id, @PathVariable long toFollowUser) {
+
+		return "na";
+	}
+
+	@RequestMapping("user/{id}/unfollow/{toFollowUser}")
+	public String unfollowSomeUser(Model model, @PathVariable long id, @PathVariable long toFollowUser) {
+
+		return "na";
+	}
 }
