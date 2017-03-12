@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,16 +16,24 @@ import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import urteam.event.Event;
-import urteam.event.EventRepository;
+import urteam.event.*;
+import urteam.user.*;
+
 
 @Controller
 public class urteamController {
 
 	@Autowired
 	private EventRepository eventRepo;
+	
+	@Autowired
+	private UserComponent userComponent;
+	
+	@Autowired
+	private UserRepository userRepo;
 
 	@RequestMapping("/")
 	public String index(Model model) {
@@ -41,8 +51,34 @@ public class urteamController {
 	}
 	
 	@RequestMapping("/login")
-	public String login(Model model) {
+	public String login() {
 		return "login";
+	}
+	
+	@RequestMapping("/userprofile")
+	 public String userloginView(Model model, HttpServletRequest request){
+	  
+	  if((userComponent.isLoggedUser())){
+	   long id = userComponent.getLoggedUser().getId(); 
+	   User user = userRepo.findOne(id);
+	   model.addAttribute("user", user);
+	   if(userComponent.getLoggedUser().getId() == user.getId()){
+	    model.addAttribute("isLoged",true);   
+	   }
+	   model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
+	   return "user";
+	  }else{
+	   return "redirect:/";
+	  }
+	 }
+	@RequestMapping("/home")
+	public String home(Model model, HttpServletRequest request) {
+		
+		Principal p = request.getUserPrincipal();
+    	User user = userRepo.findByUsername(p.getName());
+		
+    	String id = String.valueOf(user.getId());
+		return ("redirect:userprofile/" + id);
 	}
 
 	public Boolean uploadImageFile(Model model, MultipartFile file, String name, String type, String generatedId) {

@@ -108,15 +108,17 @@ public class DatabaseInitializer {
 		
 		// Sample users
 		String avatar = "avatar";
-	 	User user1 = new User("username1", "surname1", "nickname1", "password1", "email1", "bio1","9999","Madrid","España",avatar);
-	    User user2 = new User("username2", "surname2", "nickname2", "password2", "email2", "bio2","9999","Madrid","España",avatar);
-	    User user3 = new User("username3", "surname3", "nickname3", "password3", "email3", "bio3","9999","Madrid","España",avatar);
-	    User user4 = new User("username4", "surname4", "nickname4", "password4", "email4", "bio4","9999","Madrid","España",avatar);
+	 	User user1 = new User("username1", "surname1", "nickname1", "password1", "email1", "bio1","9999","Madrid","España",avatar, ConstantsUrTeam.USER_ROLE);
+	    User user2 = new User("username2", "surname2", "nickname2", "password2", "email2", "bio2","9999","Madrid","España",avatar, ConstantsUrTeam.USER_ROLE);
+	    User user3 = new User("username3", "surname3", "nickname3", "password3", "email3", "bio3","9999","Madrid","España",avatar, ConstantsUrTeam.USER_ROLE);
+	    User user4 = new User("username4", "surname4", "nickname4", "password4", "email4", "bio4","9999","Madrid","España",avatar, ConstantsUrTeam.USER_ROLE);
+	    User user_admin = new User("admin_name", "admin_surname", "admin_nickname", "admin", "email4", "bio4","9999","Madrid","España", ConstantsUrTeam.USER_ROLE, ConstantsUrTeam.ADMIN_ROLE);
 
 	    userRepo.save(user1);    
 	    userRepo.save(user2);
 	    userRepo.save(user3);
 	    userRepo.save(user4);
+	    userRepo.save(user_admin);
 	   
 	//Add followers
 	    

@@ -1,4 +1,4 @@
-package urteam.user;
+package urteam.security;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,16 +14,21 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import urteam.user.*;
+
 @Component
 public class UserRepositoryAuthenticationProvider implements AuthenticationProvider {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private UserComponent userComponent;
 
 	@Override
 	public Authentication authenticate(Authentication auth) throws AuthenticationException {
 
-		User user = userRepository.findByNickname(auth.getName());
+		User user = userRepository.findByUsername(auth.getName());
 
 		if (user == null) {
 			throw new BadCredentialsException("User not found");
@@ -33,6 +38,8 @@ public class UserRepositoryAuthenticationProvider implements AuthenticationProvi
 		if (!new BCryptPasswordEncoder().matches(password, user.getPasswordHash())) {
 			throw new BadCredentialsException("Wrong password");
 		}
+		
+		userComponent.setLoggedUser(user);
 
 		List<GrantedAuthority> roles = new ArrayList<>();
 		for (String role : user.getRoles()) {

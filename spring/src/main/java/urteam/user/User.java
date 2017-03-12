@@ -12,13 +12,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import urteam.community.Community;
-import urteam.stats.Stats;
+import urteam.community.*;
 
 @Entity
 @Table(name = "user_profile")
@@ -53,17 +51,11 @@ public class User {
 	@ManyToMany
 	private List<Community> communityList = new ArrayList<>();
 
-	@OneToMany
-	private List<Stats> sportStats = new ArrayList<>();
-	
-	public User() {}
+	public User() {
+	}
 
 	public User(String username, String surname, String nickname, String password, String email, String bio,
-<<<<<<< HEAD
-			String score, String city, String country, String... roles) {
-=======
-			String score, String city, String country, String avatar) {
->>>>>>> branch 'master' of https://github.com/Frostqui/urTeam.git
+			String score, String city, String country,String avatar, String... roles) {
 		this.username = username;
 		this.surname = surname;
 		this.nickname = nickname;
@@ -74,14 +66,10 @@ public class User {
 		this.country = country;
 		this.score = score;
 		this.generatedId = null;
-<<<<<<< HEAD
-		this.avatar = null;
+		this.avatar = avatar;
 		this.roles = new ArrayList<>(Arrays.asList(roles));
 		
 		
-=======
-		this.avatar = avatar;
->>>>>>> branch 'master' of https://github.com/Frostqui/urTeam.git
 
 	}
 

@@ -1,4 +1,4 @@
-package urteam;
+package urteam.security;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

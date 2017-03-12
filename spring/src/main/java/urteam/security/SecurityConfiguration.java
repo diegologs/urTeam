@@ -1,4 +1,4 @@
-package urteam;
+package urteam.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -7,7 +7,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-import urteam.user.UserRepositoryAuthenticationProvider;
+import urteam.ConstantsUrTeam;
 
 @Configuration
 @EnableGlobalMethodSecurity(securedEnabled = true)
@@ -33,7 +33,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.formLogin().loginPage("/login");
         http.formLogin().usernameParameter("username");
         http.formLogin().passwordParameter("password");
-        http.formLogin().defaultSuccessUrl("/");
+        http.formLogin().defaultSuccessUrl("/userprofile");
         http.formLogin().failureUrl("/loginerror");
 
         // Logout
