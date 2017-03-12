@@ -53,6 +53,7 @@ public class UserController {
 		model.addAttribute("members", communities.size());
 		model.addAttribute("numberOfFollowers", user.getNumberOfFollower());
 		model.addAttribute("sportList",sportController.getSportList());
+		model.addAttribute("stats",user.getSportStats());
 		return "user";
 	}
 
