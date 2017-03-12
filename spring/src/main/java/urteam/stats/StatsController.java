@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -25,7 +26,7 @@ public class StatsController {
 	@Autowired
 	CommunityRepository communityRepository;
 
-	@RequestMapping("/add-user-stats")
+	@RequestMapping("/add-user-stats/{id}")
 	public String addUserStats(@RequestParam long id, @RequestParam Sport sport, @RequestParam String date,
 			@RequestParam double sesionTime) {
 		User user = userRepository.getOne(id);
