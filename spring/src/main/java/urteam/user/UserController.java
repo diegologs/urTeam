@@ -1,6 +1,8 @@
 package urteam.user;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,16 @@ public class UserController {
 
 	@Autowired
 	private urteamController urteamController;
+	
+	@RequestMapping("/newUser")
+	public String eventAdded(Model model, User user) throws ParseException {
+		Date date = new Date();
+		SimpleDateFormat userIdFormater = new SimpleDateFormat("mmddyyyy-hhMMss");
+		String generatedId = userIdFormater.format(date);
+		user.setGeneratedId(generatedId);
+		userRepository.save(user);
+		return "redirect:/events";
+	}
 
 	@RequestMapping("/userprofile/{id}")
 	public String userProfile(Model model, @PathVariable Long id) {
@@ -51,9 +63,11 @@ public class UserController {
 		editedUser.setBio(bio);
 		editedUser.setCity(city);
 		editedUser.setCountry(country);
-
+		
+		
 		if (file != null){
-			String filename = editedUser.getAvatar();
+			String filename = "avatar-"+editedUser.getGeneratedId();
+			
 			if (urteamController.uploadImageFile(model, file, filename, ConstantsUrTeam.USER_AVATAR,
 					editedUser.getGeneratedId())) {
 				editedUser.setAvatar(filename);

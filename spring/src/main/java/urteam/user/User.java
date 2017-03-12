@@ -25,16 +25,18 @@ public class User {
 	private String generatedId = "aleatorio";
 	private String username;
 	private String surname;
+	
+	@Column(unique = true)
 	private String nickname;
 	private String password;
 	private String email;
 
 	@Column(columnDefinition = "TEXT")
-	private String bio;
+	private String bio = "";
 	private String city;
 	private String country;
-	private String score;
-	private String avatar;
+	private String score = "0";
+	private String avatar = "avatar";
 	private String role;
 
 	@ManyToMany
@@ -63,7 +65,17 @@ public class User {
 		this.country = country;
 		this.score = score;
 		this.avatar = avatar;
-
+	}
+	
+	public User(String username, String surname, String nickname, String password, String email,
+			String city, String country) {
+		this.username = username;
+		this.surname = surname;
+		this.nickname = nickname;
+		this.password = password;
+		this.email = email;
+		this.city = city;
+		this.country = country;
 	}
 
 	public long getId() {
@@ -204,6 +216,11 @@ public class User {
 
 	public void addCommunity(Community community) {
 		this.communityList.add(community);
+	}
+
+	public void removeCommunity(Community community) {
+		this.communityList.remove(community);
+		
 	}
 
 }
