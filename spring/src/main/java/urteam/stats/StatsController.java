@@ -28,7 +28,7 @@ public class StatsController {
 	
 	
 	
-	@RequestMapping("/add-user-stats/{id}/{sport}/{date}/{sesionTime}")
+	@RequestMapping("/add-user-stats")
 	public String addUserStats(Model model, @RequestParam long id,
 			@RequestParam Sport sport, @RequestParam String date,@RequestParam double sesionTime) {
 				User user = userRepository.getOne(id);
