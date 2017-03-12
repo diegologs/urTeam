@@ -207,4 +207,9 @@ public class User {
 		this.communityList.add(community);
 	}
 
+	public void removeCommunity(Community community) {
+		this.communityList.remove(community);
+		
+	}
+
 }
