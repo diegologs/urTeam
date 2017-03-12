@@ -4,8 +4,8 @@ public final class ConstantsUrTeam {
 	
 	
 	//Role string 
-	public final static String ADMIN_ROLE = "ADMIN_ROLE";
-	public final static String USER_ROLE = "USER_ROLE";
+	public final static String ADMIN_ROLE = "ADMIN";
+	public final static String USER_ROLE = "USER";
 	
 	
 	//Types for image uploader
