@@ -77,10 +77,12 @@ public class DatabaseInitializer {
 			newsRepo.save(news);
 			
 			
-			Community com = new Community(name, info, "Running");
+			Community com = new Community("MTB  "+String.valueOf(i), info, "Mtb");
+			Community com2 = new Community("Running  "+String.valueOf(i), info, "Running");
 			
 
 			communityRepo.save(com);
+			communityRepo.save(com2);
 		}
 		
 		
