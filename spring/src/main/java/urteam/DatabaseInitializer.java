@@ -14,6 +14,8 @@ import urteam.community.*;
 import urteam.event.*;
 import urteam.news.News;
 import urteam.news.NewsRepository;
+import urteam.sport.Sport;
+import urteam.sport.SportRepository;
 import urteam.user.*;
 
 @Component
@@ -30,6 +32,9 @@ public class DatabaseInitializer {
 	
 	@Autowired
 	private NewsRepository newsRepo;
+	
+	@Autowired
+	private SportRepository sportRepo;
 
 	@PostConstruct
 	public void init() throws ParseException {
@@ -44,6 +49,24 @@ public class DatabaseInitializer {
 //		user2.addFollowing(user1);
 //		userRepo.save(user1);
 //		userRepo.save(user2);
+		
+		//Sport init
+		Sport sport1 = new Sport();
+		sport1.setName("Running");
+		sport1.setMultiplicator(0.75);
+		
+		Sport sport2 = new Sport();
+		sport2.setName("Mountain Bike");
+		sport2.setMultiplicator(0.95);
+		
+		Sport sport3 = new Sport();
+		sport3.setName("Roller");
+		sport3.setMultiplicator(0.95);
+		
+		sportRepo.save(sport1);
+		sportRepo.save(sport2);
+		sportRepo.save(sport3);
+		
 		
 		// Sample events
 		for (int i = 0; i < 18; i++) {	
@@ -72,14 +95,11 @@ public class DatabaseInitializer {
 		for (int i = 0; i < 10; i++) {
 			String name = "Comunidad  "+String.valueOf(i);
 			String info = "Información de la comunidad.";
-			
+			String main_photo = "http://lorempixel.com/400/200/sports/" + i%10;
 			News news = new News("Titulo de ejemplo de la noticia", "Texto de ejemplo de la noticia.");
 			newsRepo.save(news);
-			
-			
-			Community com = new Community("MTB  "+String.valueOf(i), info, "Mtb");
-			Community com2 = new Community("Running  "+String.valueOf(i), info, "Running");
-			
+			Community com = new Community("MTB  "+String.valueOf(i), info, "Mtb",main_photo);
+			Community com2 = new Community("Running  "+String.valueOf(i), info, "Running",main_photo);
 
 			communityRepo.save(com);
 			communityRepo.save(com2);
@@ -87,11 +107,11 @@ public class DatabaseInitializer {
 		
 		
 		// Sample users
-		
-	 	User user1 = new User("username1", "surname1", "nickname1", "password1", "email1", "bio1","9999","Madrid","España");
-	    User user2 = new User("username2", "surname2", "nickname2", "password2", "email2", "bio2","9999","Madrid","España");
-	    User user3 = new User("username3", "surname3", "nickname3", "password3", "email3", "bio3","9999","Madrid","España");
-	    User user4 = new User("username4", "surname4", "nickname4", "password4", "email4", "bio4","9999","Madrid","España");
+		String avatar = "avatar";
+	 	User user1 = new User("username1", "surname1", "nickname1", "password1", "email1", "bio1","9999","Madrid","España",avatar);
+	    User user2 = new User("username2", "surname2", "nickname2", "password2", "email2", "bio2","9999","Madrid","España",avatar);
+	    User user3 = new User("username3", "surname3", "nickname3", "password3", "email3", "bio3","9999","Madrid","España",avatar);
+	    User user4 = new User("username4", "surname4", "nickname4", "password4", "email4", "bio4","9999","Madrid","España",avatar);
 
 	    userRepo.save(user1);    
 	    userRepo.save(user2);

@@ -39,6 +39,11 @@ public class urteamController {
 
 		return "index";
 	}
+	
+	@RequestMapping("/login")
+	public String login(Model model) {
+		return "login";
+	}
 
 	public Boolean uploadImageFile(Model model, MultipartFile file, String name, String type, String generatedId) {
 

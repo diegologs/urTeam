@@ -1,15 +1,20 @@
 package urteam.user;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import urteam.community.Community;
 
@@ -24,7 +29,7 @@ public class User {
 	private String username;
 	private String surname;
 	private String nickname;
-	private String password;
+	private String passwordHash;
 	private String email;
 
 	@Column(columnDefinition = "TEXT")
@@ -33,7 +38,9 @@ public class User {
 	private String country;
 	private String score;
 	private String avatar;
-	private String role;
+	
+	@ElementCollection(fetch = FetchType.EAGER) 
+	private List<String> roles;
 
 	@ManyToMany
 	private List<User> following = new ArrayList<>();
@@ -48,11 +55,11 @@ public class User {
 	}
 
 	public User(String username, String surname, String nickname, String password, String email, String bio,
-			String score, String city, String country) {
+			String score, String city, String country, String... roles) {
 		this.username = username;
 		this.surname = surname;
 		this.nickname = nickname;
-		this.password = password;
+		this.passwordHash = new BCryptPasswordEncoder().encode(password);
 		this.email = email;
 		this.bio = bio;
 		this.city = city;
@@ -60,6 +67,9 @@ public class User {
 		this.score = score;
 		this.generatedId = null;
 		this.avatar = null;
+		this.roles = new ArrayList<>(Arrays.asList(roles));
+		
+		
 
 	}
 
@@ -95,12 +105,12 @@ public class User {
 		this.nickname = nickname;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getPasswordHash() {
+		return passwordHash;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPasswordHash(String password) {
+		this.passwordHash = new BCryptPasswordEncoder().encode(password);
 	}
 
 	public String getEmail() {
@@ -151,12 +161,12 @@ public class User {
 		this.avatar = avatar;
 	}
 
-	public String getRole() {
-		return role;
+	public List<String> getRoles() {
+		return roles;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+	public void setRoles(List<String> roles) {
+		this.roles = roles;
 	}
 
 	public List<User> getFollowing() {
