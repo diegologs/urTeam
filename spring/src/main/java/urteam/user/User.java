@@ -9,9 +9,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import urteam.community.Community;
+import urteam.stats.Stats;
 
 @Entity
 @Table(name = "user_profile")
@@ -44,8 +47,10 @@ public class User {
 	@ManyToMany
 	private List<Community> communityList = new ArrayList<>();
 
-	public User() {
-	}
+	@OneToMany
+	private List<Stats> sportStats = new ArrayList<>();
+	
+	public User() {}
 
 	public User(String username, String surname, String nickname, String password, String email, String bio,
 			String score, String city, String country) {
