@@ -44,7 +44,7 @@
 						} ]
 					} ]
 				});
-		
+
 		var chart2 = new CanvasJS.Chart("chartContainer2", {
 			title : {
 				text : "Febrero"
@@ -82,19 +82,12 @@
 					x : 100,
 					y : 509
 				} ]
-			}]
+			} ]
 		});
 		chart2.render();
-		
+
 	}
 </script>
-
-
-
-<script type="text/javascript">
-
-</script>
-
 </head>
 
 <body>
@@ -134,6 +127,7 @@
 								<a data-toggle="modal" data-target="#profile-settings-modal">
 									<button class="btn btn-default btn-sm mybtn-succes">
 										<iclass ="fa fa-cogs" aria-hidden="true"> </i>Configuración
+
 
 
 
@@ -232,6 +226,8 @@
 							<h3>
 								<i class="fa fa-line-chart" aria-hidden="true"></i> Progreso
 							</h3>
+							<a data-toggle="modal" data-target="#myModal_addStat"><button
+									class="btn mybtn-succes">Añadir sesión</button></a>
 						</div>
 					</div>
 					<!--/row-->
@@ -343,6 +339,7 @@
 		</div>
 	</div>
 
+	<!-- Modal Edit User -->
 	<div id="profile-settings-modal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 			<!-- Modal content-->
@@ -411,13 +408,15 @@
 										<textarea class="form-control" rows="5" name="bio">{{user.bio}}</textarea>
 									</div>
 								</div>
-								<!--  <div class="form-group">
+								<!-- 
+								 <div class="form-group">
 								<label for="birthDate" class="col-sm-3 control-label">Fecha
 									de nacimiento</label>
 								<div class="col-sm-9">
 									<input type="date" id="birthDate" class="form-control">
 								</div>
-							</div> -->
+							</div>
+							 -->
 								<div class="form-group">
 									<label for="city" class="col-sm-3 control-label">Ciudad</label>
 									<div class="col-sm-9">
@@ -446,7 +445,40 @@
 
 		</div>
 	</div>
+	<!-- End Modal Edit User -->
 
+	<!-- Modal Add Stat -->
+	<div id="myModal_addStat" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Información</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-container">
+						<form class="form-group" action="/sfaf" method="post">
+							<label style="color: black;" for="sport">Deporte</label>
+							<select>
+							{{#sportList}}
+							<option value="{{name}}">{{name}}</option>
+							{{/sportList}}
+							</select>
+							<br>
+							<input type="text" id="stat" value="" class="form-control"
+								name="stat"> (En horas).
+							<div class="addButton">
+							<br>
+								<button type="submit" class="btn mybtn-succes addButton">+</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Modal Add Stat -->
 	{{> footer_template}}
 
 

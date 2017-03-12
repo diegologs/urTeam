@@ -83,6 +83,7 @@ public class CommunityController{
 	    	model.addAttribute("following", false);
 	    
 	    }
+	    model.addAttribute("numberOfMembers",community.getCommunityUsers().size());
 	    model.addAttribute("members",community.getCommunityUsers());
 		model.addAttribute("community", community);
 		model.addAttribute("communityGallery", community.getCommunityImages());

@@ -130,6 +130,7 @@ public class DatabaseInitializer {
 	 //Add communities to users
 	    user1.addCommunity(communityRepo.findOne((long) 1));
 	    user1.addCommunity(communityRepo.findOne((long) 2));
+	    user2.addCommunity(communityRepo.findOne((long) 1));
 	    
 	    userRepo.save(user1);    
 	    userRepo.save(user2);
