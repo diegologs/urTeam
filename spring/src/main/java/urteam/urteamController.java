@@ -4,20 +4,29 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import urteam.event.Event;
 import urteam.event.EventRepository;
+import urteam.user.User;
+import urteam.user.UserRepository;
 
 @Controller
 public class urteamController {
@@ -38,6 +47,11 @@ public class urteamController {
 		model.addAttribute("third_events", eventos);
 
 		return "index";
+	}
+
+	@RequestMapping("/login")
+	public String login() {
+		return "login";
 	}
 
 	public Boolean uploadImageFile(Model model, MultipartFile file, String name, String type, String generatedId) {
