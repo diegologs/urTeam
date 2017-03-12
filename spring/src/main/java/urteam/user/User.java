@@ -22,7 +22,7 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	private String generatedId;
+	private String generatedId = "aleatorio";
 	private String username;
 	private String surname;
 	private String nickname;
@@ -62,7 +62,6 @@ public class User {
 		this.city = city;
 		this.country = country;
 		this.score = score;
-		this.generatedId = null;
 		this.avatar = avatar;
 
 	}
