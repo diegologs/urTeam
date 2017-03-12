@@ -42,16 +42,11 @@ public class Community {
 	@Basic
 	private ArrayList<String> communityImages = new ArrayList();
 	
-	public ArrayList<String> getCommunityImages() {
-		return communityImages;
-	}
-
-	public void setCommunityImages(ArrayList<String> communityImages) {
-		this.communityImages = communityImages;
-	}
-
 	@OneToMany
 	private List<News> news;
+	
+	@ManyToMany(mappedBy = "communityList")
+	private List<User> communityUsers = new ArrayList<>();
 	
 	public String getSport() {
 		return sport;
@@ -63,8 +58,6 @@ public class Community {
 
 //	private User admin_IDs;
 	
-	@ManyToMany(mappedBy = "communityList")
-	private List<User> communityUsers = new ArrayList<>();
 
 	public Community() {
 	}
@@ -162,6 +155,14 @@ public class Community {
 
 	public void setCommunityUsers(List<User> communityUsers) {
 		this.communityUsers = communityUsers;
+	}
+	
+	public ArrayList<String> getCommunityImages() {
+		return communityImages;
+	}
+
+	public void setCommunityImages(ArrayList<String> communityImages) {
+		this.communityImages = communityImages;
 	}
 }
 

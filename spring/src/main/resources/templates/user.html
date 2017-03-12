@@ -91,64 +91,7 @@
 </head>
 
 <body>
-	<nav class="navbar-fixed-top navbar-urTeam" role="navigation">
-		<!-- El logotipo y el icono que despliega el menú se agrupan
-       para mostrarlos mejor en los dispositivos móviles -->
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse"
-				data-target=".navbar-ex1-collapse">
-				<span class="sr-only">Desplegar navegación</span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
-			</button>
-			<a class="navbar-left" href="index.html"><img calt="urTeam"
-				src="/images/logo.png" width="150px"></a>
-		</div>
-
-		<!-- Agrupar los enlaces de navegación, los formularios y cualquier
-       otro elemento que se pueda ocultar al minimizar la barra -->
-		<div class="collapse navbar-collapse navbar-ex1-collapse navbar-inner">
-
-			<ul class="nav navbar-nav minav">
-				<li><a href="events.html">Eventos</a></li>
-				<li><a href="groups.html">Comunidades</a></li>
-
-			</ul>
-			<ul class="nav navbar-nav navbar-right minav">
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown"> <span class="user-name">
-							{{user.nickname}} </span> <b class="caret"></b></a>
-					<ul class="dropdown-menu">
-						<li>
-							<div class="navbar-content">
-								<span>{{user.nickname}}</span>
-								<p class="text-muted small">{{user.email}}</p>
-								<div class="divider"></div>
-								<a data-toggle="modal" data-target="#profile-settings-modal">
-									<button class="btn btn-default btn-sm mybtn-succes">
-										<iclass ="fa fa-cogs" aria-hidden="true"> </i>Configuración
-
-
-
-
-
-
-
-
-
-										
-									</button>
-								</a> <a href="index.html"
-									class="btn btn-default btn-sm mybtn-succes"><i
-									class="fa fa-power-off" aria-hidden="true"></i> Sign Out</a>
-							</div>
-						</li>
-					</ul></li>
-			</ul>
-
-
-		</div>
-	</nav>
+	{{> navbar_template}}
 	<div class="row profile">
 
 		<div class="col-md-3">
@@ -478,11 +421,14 @@
 				</div>
 				<div class="modal-body">
 					<div class="form-container">
-						<form class="form-group" action="/add-user-stats" method="post">
+						<form class="form-group" action="/add-user-stats/{{user.id}}" method="post">
 							<label style="color: black;" for="sport">Deporte</label> <select>
 								{{#sportList}}
-								<option value="{{name}}">{{name}}</option> {{/sportList}}
-							</select> <br> <label style="color: black;" for="sport">Fecha
+									<option value="{{name}}">{{name}}</option> 
+								{{/sportList}}
+							</select>
+							<br>
+							<label style="color: black;" for="sport">Fecha
 								de realización</label> <input type="text" class="form-control"
 								name="date"> <br> <label style="color: black;"
 								for="sport">Tiempo de sesión</label> <input type="text"
