@@ -28,6 +28,19 @@
                     <h4><i class="fa fa-calendar-check-o "></i><span> {{event.start_date}} </span><i class="fa fa-calendar-check-o "></i><span> {{event.end_date}} </span></h4>
                     <h4><i class="fa fa-map-marker "></i><span> {{event.place}}</span></h4>
                     <h4>{{event.sport}}</h4>
+                    
+                    <form action="/event/{{id}}/follow" method="post">
+
+
+					{{#following}} <input type="submit"
+						class="btn btn-default group-btn" value="Dejar de seguir">
+					{{/following}} {{^following}} <input type="submit"
+						class="btn btn-default group-btn" value="Seguir">
+					{{/following}}
+
+				</form>
+				
+                    
                 </div>
             </div>
         </div>
@@ -35,7 +48,7 @@
         <!-- EVENT BAR -->
         <div class="row nav">
             <div class="col-md-12 col-xs-12">
-                <div class="col-md-3 col-xs-3 well">
+                <div class="col-md-4 col-xs-3 well">
                     <i class="fa fa-users fa-lg"></i> {{event.participants}}
                 </div>
 				<!-- 
@@ -43,11 +56,11 @@
                     <i class="fa fa-thumbs-o-up fa-lg"></i> 26
                 </div>
  				-->
-                <div class="col-md-3 col-xs-3 well">
+                <div class="col-md-4 col-xs-3 well">
                 	{{event.price}} <i class="fa fa-eur fa-lg"></i>
                 </div>
 
-                <div class="col-md-3 col-xs-3 well" data-toggle="modal" data-target="#modalShareEvent">
+                <div class="col-md-4 col-xs-3 well" data-toggle="modal" data-target="#modalShareEvent">
                     <i class="fa fa-share-alt"></i>
                 </div>
             </div>
