@@ -2,6 +2,9 @@ package urteam.community;
 
 import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -22,6 +25,7 @@ import urteam.event.EventRepository;
 import urteam.news.News;
 import urteam.news.NewsRepository;
 import urteam.user.User;
+import urteam.user.UserComponent;
 import urteam.user.UserRepository;
 
 @Controller
@@ -39,15 +43,29 @@ public class CommunityController{
 	@Autowired
 	private UserRepository userRepo;
 	
+	@Autowired
+	private UserComponent userComponent;
+	
 	@RequestMapping("/groups")
-	public String getGroups(Model model) {
+	public String getGroups(Model model, HttpServletRequest request) {
 		
 		Page<Community> groups = communityRepo.findAll(new PageRequest(0,3));
 
 		model.addAttribute("communitys", groups);
 		model.addAttribute("groups_active", true);
 
-		return "groups";
+		if ((userComponent.isLoggedUser())) {
+			long idUser = userComponent.getLoggedUser().getId();
+			User userLogged = userRepo.findOne(idUser);
+			model.addAttribute("user", userLogged);
+			if (userComponent.getLoggedUser().getId() == userLogged.getId()) {
+				model.addAttribute("logged", true);
+			}
+			model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
+			return "groups";
+		} else {
+			return "groups";
+		}
 	}
 	
 	@RequestMapping("/sortGroupByName")
@@ -66,7 +84,7 @@ public class CommunityController{
 	
 	
 	@RequestMapping("/group/{id}")
-	public String editGroup(Model model, @PathVariable long id) {
+	public String editGroup(Model model, HttpServletRequest request,@PathVariable long id) {
 		
 		Community community = communityRepo.findOne(id);
 		
@@ -87,7 +105,22 @@ public class CommunityController{
 	    model.addAttribute("members",community.getCommunityUsers());
 		model.addAttribute("community", community);
 		model.addAttribute("communityGallery", community.getCommunityImages());
-		return "group";
+		
+		if ((userComponent.isLoggedUser())) {
+			long idUser = userComponent.getLoggedUser().getId();
+			User userLogged = userRepo.findOne(idUser);
+			model.addAttribute("user", userLogged);
+			if (userComponent.getLoggedUser().getId() == userLogged.getId()) {
+				model.addAttribute("logged", true);
+			}
+			model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
+			return "group";
+		} else {
+			return "group";
+		}
+		
+		
+		
 	}
 	
 	
@@ -116,43 +149,59 @@ public class CommunityController{
 	
 	
 	@RequestMapping("/group/{id}/GroupEdited")
-	public String groupEdited(Model model, @PathVariable long id,  @RequestParam String info) {
+	public String groupEdited(Model model, @PathVariable long id,  @RequestParam String info, HttpServletRequest request) {
 		
 		Community community = communityRepo.findOne(id);
 		community.setInfo(info);
 		
 		communityRepo.save(community);
 		model.addAttribute("community", community);
-		return "redirect:/group/{id}";
+		
+		
+		if ((userComponent.isLoggedUser())) {
+			long idUser = userComponent.getLoggedUser().getId();
+			User userLogged = userRepo.findOne(idUser);
+			model.addAttribute("user", userLogged);
+			if (userComponent.getLoggedUser().getId() == userLogged.getId()) {
+				model.addAttribute("logged", true);
+			}
+			model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
+			return "redirect:/group/{id}";
+		} else {
+			return "redirect:/group/{id}";
+		}
 
 	}
 
 	
 	@RequestMapping("/group/{id}/addNews")
-	public String groupEdited(Model model, @PathVariable long id, @RequestParam String title, @RequestParam String text) {
+	public String groupEdited(Model model, @PathVariable long id, @RequestParam String title, @RequestParam String text, HttpServletRequest request) {
 		
 		Community community = communityRepo.findOne(id);
-		communityRepo.save(community);
-		
-		
-		
-		
+		communityRepo.save(community);		
 		News news = new News(title, text);
 		community.getNews().add(news);
-		
-	
-		
 		newsRepo.save(news);
 		model.addAttribute("community", community);
-		
-		
-		return "redirect:/group/{id}";
+
+		if ((userComponent.isLoggedUser())) {
+			long idUser = userComponent.getLoggedUser().getId();
+			User userLogged = userRepo.findOne(idUser);
+			model.addAttribute("user", userLogged);
+			if (userComponent.getLoggedUser().getId() == userLogged.getId()) {
+				model.addAttribute("logged", true);
+			}
+			model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
+			return "redirect:/group/{id}";
+		} else {
+			return "redirect:/group/{id}";
+		}
 
 	}
 	
 	
 	@RequestMapping("/group/{id}/addImage")
-	public String addImage(Model model, @PathVariable long id, @RequestParam("file") MultipartFile file) throws ParseException {
+	public String addImage(Model model, @PathVariable long id, @RequestParam("file") MultipartFile file, HttpServletRequest request) throws ParseException {
 		
 		
 		Community community  = communityRepo.findOne(id);
@@ -169,7 +218,21 @@ public class CommunityController{
 		}
 		
 		communityRepo.save(community);
-		return "redirect:/group/{id}";
+		
+		if ((userComponent.isLoggedUser())) {
+			long idUser = userComponent.getLoggedUser().getId();
+			User userLogged = userRepo.findOne(idUser);
+			model.addAttribute("user", userLogged);
+			if (userComponent.getLoggedUser().getId() == userLogged.getId()) {
+				model.addAttribute("logged", true);
+			}
+			model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
+			return "redirect:/group/{id}";
+		} else {
+			return "redirect:/group/{id}";
+		}
+		
+		
 
 	}	
 	
@@ -181,11 +244,8 @@ public class CommunityController{
 
 	}
 	
-
-	
-	
 	@RequestMapping("/GroupAdded")
-	public String groupAdded(Model model, Community community, @RequestParam("file") MultipartFile file) throws ParseException {
+	public String groupAdded(Model model, Community community, @RequestParam("file") MultipartFile file, HttpServletRequest request) throws ParseException {
 
 		//Filename formater
 		SimpleDateFormat formater = new SimpleDateFormat("mmddyyyy-hhMMss");
@@ -204,12 +264,25 @@ public class CommunityController{
 		communityRepo.save(community);
 		
 		model.addAttribute("groups_active", true);
-		return "redirect:groups";
+		
+		if ((userComponent.isLoggedUser())) {
+			long idUser = userComponent.getLoggedUser().getId();
+			User userLogged = userRepo.findOne(idUser);
+			model.addAttribute("user", userLogged);
+			if (userComponent.getLoggedUser().getId() == userLogged.getId()) {
+				model.addAttribute("logged", true);
+			}
+			model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
+			return "redirect:groups";
+		} else {
+			return "redirect:groups";
+		}
+		
 	}
 	
 	
 	@RequestMapping("/group/{id}/follow")
-	  public String follow(Model model, @PathVariable long id) {
+	  public String follow(Model model, @PathVariable long id, HttpServletRequest request) {
 	    
 	    Community community = communityRepo.findOne(id);
 	    
@@ -233,7 +306,19 @@ public class CommunityController{
 	    model.addAttribute("community", community);
 	    
 	    
-	    return "redirect:/group/{id}";
+	    if ((userComponent.isLoggedUser())) {
+			long idUser = userComponent.getLoggedUser().getId();
+			User userLogged = userRepo.findOne(idUser);
+			model.addAttribute("user", userLogged);
+			if (userComponent.getLoggedUser().getId() == userLogged.getId()) {
+				model.addAttribute("logged", true);
+			}
+			model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
+			return "redirect:/group/{id}";
+		} else {
+			return "redirect:/group/{id}";
+		}
+	    
 
 	  }
 	

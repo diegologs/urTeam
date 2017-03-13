@@ -3,6 +3,8 @@ package urteam.stats;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,7 @@ import urteam.community.CommunityRepository;
 import urteam.sport.Sport;
 import urteam.sport.SportRepository;
 import urteam.user.User;
+import urteam.user.UserComponent;
 import urteam.user.UserRepository;
 
 @Controller
@@ -30,10 +33,13 @@ public class StatsController {
 
 	@Autowired
 	CommunityRepository communityRepository;
+	
+	@Autowired
+	private UserComponent userComponent;
 
 	@RequestMapping("/add-user-stats/{id}")
 	public String addUserStats(@PathVariable long id, @RequestParam String sport, @RequestParam String date,
-			@RequestParam double sesionTime) {
+			@RequestParam double sesionTime , Model model, HttpServletRequest request) {
 		User user = userRepository.findOne(id);
 		Stats newStats = new Stats();
 		newStats.setDate(new Date());
@@ -42,7 +48,20 @@ public class StatsController {
 		user.addStat(newStats);
 		userRepository.save(user);
 		computeUserScore(id);
-		return "/userprofile/{id}";
+		
+		if ((userComponent.isLoggedUser())) {
+			long idUser = userComponent.getLoggedUser().getId();
+			User userLogged = userRepository.findOne(idUser);
+			model.addAttribute("user", userLogged);
+			if (userComponent.getLoggedUser().getId() == userLogged.getId()) {
+				model.addAttribute("logged", true);
+			}
+			model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
+			return "/userprofile/{id}";
+		} else {
+			return "/userprofile/{id}";
+		}
+		
 	}
 
 	public void computeUserScore(long id) {
