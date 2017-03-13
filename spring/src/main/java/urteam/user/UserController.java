@@ -2,7 +2,6 @@ package urteam.user;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -43,11 +42,8 @@ public class UserController {
 		Date date = new Date();
 		SimpleDateFormat userIdFormater = new SimpleDateFormat("mmddyyyy-hhMMss");
 		String generatedId = userIdFormater.format(date);
-		user.setPasswordHash(password);
-		ArrayList<String> roles = new ArrayList<String>();
-		roles.add("ROLE_USER");
-		user.setRoles(roles);
 		user.setGeneratedId(generatedId);
+		user.setPasswordHash(password);
 		userRepository.save(user);
 		return "redirect:/events";
 	}
@@ -72,8 +68,11 @@ public class UserController {
 
 	@RequestMapping("/userprofile/{id}")
 	public String userProfile(Model model, @PathVariable Long id, HttpServletRequest request) {
-		User user = userRepository.findOne(id);
-		model.addAttribute("user", user);
+		
+		User me = userRepository.findOne(userComponent.getLoggedUser().getId());
+		User user = userRepository.findOne(id);		
+		model.addAttribute("userpage", user);
+		
 		List<User> friends = user.getFollowing();
 		List<Community> communities = user.getCommunityList();
 		model.addAttribute("following", friends);
@@ -86,10 +85,20 @@ public class UserController {
 		model.addAttribute("sportList",sportController.getSportList());
 		model.addAttribute("stats",user.getSportStats());
 		
+		model.addAttribute("buttonfollowing", me.getId()!=user.getId());
+		if(me.getFollowing().contains(user)){
+		      
+	    	model.addAttribute("isfollowed", true);
+	      
+	    }else{
+	    
+	    	model.addAttribute("isfollowed", false);
+	    
+	    }
+		
 		if ((userComponent.isLoggedUser())) {
-			long idUser = userComponent.getLoggedUser().getId();
-			User userLogged = userRepository.findOne(idUser);
-			model.addAttribute("usuario", userLogged);
+			User userLogged = userRepository.findOne(me.getId());
+			model.addAttribute("user", me);
 			if (userComponent.getLoggedUser().getId() == userLogged.getId()) {
 				model.addAttribute("logged", true);
 			}
@@ -97,9 +106,7 @@ public class UserController {
 			return "user";
 		} else {
 			return "user";
-		}
-		
-		
+		}		
 	}
 
 	@RequestMapping("/userprofile/{id}/edit")
@@ -130,40 +137,38 @@ public class UserController {
 	}
 
 	@RequestMapping("/userprofile/{id}/follow")
-	  public String follow(Model model, @PathVariable long id, HttpServletRequest request) {
-	    
-	    User user = userRepository.findOne(id);   
-	    
-	    User me = userRepository.findOne(userComponent.getLoggedUser().getId());
-	    
-	    if(me.getFollowing().contains(user)){
-	      
-	      me.getFollowing().remove(user);
-	      
-	    }else{
-	    	me.getFollowers().add(user);
-	    	model.addAttribute("following", true);
-	    
-	    }
-	    
-	    userRepository.save(me);
-	    
-	    model.addAttribute("user", me);
-	    
-	    
-	    if ((userComponent.isLoggedUser())) {
-			long idUser = userComponent.getLoggedUser().getId();
-			User userLogged = userRepository.findOne(idUser);
-			model.addAttribute("user", userLogged);
-			if (userComponent.getLoggedUser().getId() == userLogged.getId()) {
-				model.addAttribute("logged", true);
-			}
-			model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
-			return "redirect:/userprofile/{id}";
-		} else {
-			return "redirect:/userprofile/{id}";
-		}
-	    
-
-	  }
+    public String follow(Model model, @PathVariable long id, HttpServletRequest request) {
+      
+      User user = userRepository.findOne(id);   
+      
+      User me = userRepository.findOne(userComponent.getLoggedUser().getId());
+      
+      if(me.getFollowing().contains(user)){
+        
+        me.getFollowing().remove(user);
+        
+      }else{
+        me.getFollowing().add(user);
+        model.addAttribute("buttonfollowing", true);
+      
+      }
+      
+      userRepository.save(me);
+      
+      model.addAttribute("user", me);
+      
+      
+      if ((userComponent.isLoggedUser())) {
+      long idUser = userComponent.getLoggedUser().getId();
+      User userLogged = userRepository.findOne(idUser);
+      model.addAttribute("user", userLogged);
+      if (userComponent.getLoggedUser().getId() == userLogged.getId()) {
+        model.addAttribute("logged", true);
+      }
+      model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
+      return "redirect:/userprofile/{id}";
+    } else {
+      return "redirect:/userprofile/{id}";
+    }
+	}
 }
