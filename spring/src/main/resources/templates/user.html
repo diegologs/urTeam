@@ -12,7 +12,80 @@
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/user.css">
 <link rel="stylesheet" href="/css/scrolling-nav.css">
+<script type="text/javascript">
+	window.onload = function() {
+		var chart = new CanvasJS.Chart(
+				"chartContainer",
+				{
+					title : {
+						text : "Deportes practicados"
+					},
+					animationEnabled : true,
+					data : [ {
+						type : "doughnut",
+						startAngle : 60,
+						toolTipContent : "{legendText}: {y} - <strong>#percent% </strong>",
+						showInLegend : true,
+						explodeOnClick : true, //**Change it to true
+						dataPoints : [ {
+							y : 5,
+							indexLabel : "Mountain Bike #percent%",
+							legendText : "Mountain Bike"
+						}, {
+							y : 1,
+							indexLabel : "Running #percent%",
+							legendText : "Running"
+						}, {
+							y : 2,
+							indexLabel : "Roller #percent%",
+							legendText : "Roller"
+						} ]
+					} ]
+				});
 
+		var chart2 = new CanvasJS.Chart("chartContainer2", {
+			title : {
+				text : "Febrero"
+			},
+			data : [ {
+				type : "spline",
+				dataPoints : [ {
+					x : 10,
+					y : 230
+				}, {
+					x : 20,
+					y : 0
+				}, {
+					x : 30,
+					y : 380
+				}, {
+					x : 40,
+					y : 567
+				}, {
+					x : 50,
+					y : 280
+				}, {
+					x : 60,
+					y : 507
+				}, {
+					x : 70,
+					y : 680
+				}, {
+					x : 80,
+					y : 287
+				}, {
+					x : 90,
+					y : 460
+				}, {
+					x : 100,
+					y : 509
+				} ]
+			} ]
+		});
+		chart2.render();
+
+	}
+</script>
 </head>
 
 <body>
@@ -321,6 +394,7 @@
 								<div class="col-sm-9 col-sm-offset-3">
 									<button type="submit"
 										class="btn btn-primary btn-block mybtn-succes">Guardar</button>
+										<input type="hidden" name="_csrf" value="{{token}}"/>
 								</div>
 							</form>
 							<!-- /form -->
@@ -360,6 +434,7 @@
 							<div class="addButton">
 								<br>
 								<button type="submit" class="btn mybtn-succes addButton">+</button>
+								<input type="hidden" name="_csrf" value="{{token}}"/>
 							</div>
 						</form>
 					</div>
