@@ -6,6 +6,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,9 +24,8 @@ import org.springframework.web.multipart.MultipartFile;
 import urteam.ConstantsUrTeam;
 import urteam.urteamController;
 import urteam.community.Community;
-import urteam.sport.SportController;
-import urteam.user.User;
-import urteam.user.UserRepository;
+import urteam.sport.*;
+import urteam.user.*;
 
 @Controller
 public class eventController {
@@ -42,8 +43,11 @@ public class eventController {
 	@Autowired
 	private SportController sportController;
 	
+	@Autowired
+	private UserComponent userComponent;
+	
 	@RequestMapping("/events")
-	public String eventos(Model model, Pageable page) {
+	public String eventos(Model model, Pageable page,  HttpServletRequest request) {
 		
 		String sortedBy;
 		
@@ -62,7 +66,20 @@ public class eventController {
 		
 		
 		model.addAttribute("events_active", true);
-		return "events";
+		
+		if ((userComponent.isLoggedUser())) {
+			long id = userComponent.getLoggedUser().getId();
+			User user = userRepo.findOne(id);
+			model.addAttribute("user", user);
+			if (userComponent.getLoggedUser().getId() == user.getId()) {
+				model.addAttribute("logged", true);
+			}
+			model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
+			return "events";
+		} else {
+			return "events";
+		}
+		
 	}
 	
 	@RequestMapping(value="/moreContent")
@@ -74,7 +91,7 @@ public class eventController {
 	
 	
 	@RequestMapping("/event/{id}")
-	public String showEvent(Model model, @PathVariable long id) {
+	public String showEvent(Model model, @PathVariable long id, HttpServletRequest request) {
 		Event event = eventRepo.findOne(id);
 		model.addAttribute("event", event);
 		
@@ -106,18 +123,43 @@ public class eventController {
 		    
 		    }
 		
-		return "event";
+		
+		if ((userComponent.isLoggedUser())) {
+			id = userComponent.getLoggedUser().getId();
+			user = userRepo.findOne(id);
+			model.addAttribute("user", user);
+			if (userComponent.getLoggedUser().getId() == user.getId()) {
+				model.addAttribute("logged", true);
+			}
+			model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
+			return "event";
+		} else {
+			return "event";
+		}
+		
 	}
 	
 	@RequestMapping("/addEvent")
-	public String newEvent(Model model) {
+	public String newEvent(Model model, HttpServletRequest request) {
 		model.addAttribute("events_active", true);
-		return "addEvent";
+		
+		if ((userComponent.isLoggedUser())) {
+			long idUser = userComponent.getLoggedUser().getId();
+			User userLogged = userRepo.findOne(idUser);
+			model.addAttribute("user", userLogged);
+			if (userComponent.getLoggedUser().getId() == userLogged.getId()) {
+				model.addAttribute("logged", true);
+			}
+			model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
+			return "addEvent";
+		} else {
+			return "addEvent";
+		}		
 	}
 	
 	@RequestMapping("/eventAdded")
 	public String eventAdded(Model model, Event event, @RequestParam String start_date,
-			@RequestParam String end_date,  @RequestParam("file") MultipartFile file) throws ParseException {
+			@RequestParam String end_date,  @RequestParam("file") MultipartFile file, HttpServletRequest request) throws ParseException {
 		
 		Date final_start_date = new SimpleDateFormat("dd/MM/yyyy").parse(start_date);
 		event.setStart_date(final_start_date);
@@ -149,7 +191,20 @@ public class eventController {
 		model.addAttribute("events", eventos);
 		
 		model.addAttribute("events_active", true);
-		return "redirect:/events";
+		
+		if ((userComponent.isLoggedUser())) {
+			long id = userComponent.getLoggedUser().getId();
+			User user = userRepo.findOne(id);
+			model.addAttribute("user", user);
+			if (userComponent.getLoggedUser().getId() == user.getId()) {
+				model.addAttribute("logged", true);
+			}
+			model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
+			return "redirect:/events";
+		} else {
+			return "redirect:/events";
+		}
+		
 
 	}
 	
@@ -160,18 +215,31 @@ public class eventController {
 	}
 	
 	@RequestMapping("/event/{id}/EventEdited")
-	public String groupEdited(Model model, @PathVariable long id,  @RequestParam String info) {
+	public String groupEdited(Model model, @PathVariable long id,  @RequestParam String info, HttpServletRequest request) {
 		Event event = eventRepo.findOne(id);
 		event.setInfo(info);
 		eventRepo.save(event);
 		model.addAttribute("event", event);
 		
 		model.addAttribute("events_active", true);
-		return "redirect:/event/{id}";
+		
+		if ((userComponent.isLoggedUser())) {
+			long idUser = userComponent.getLoggedUser().getId();
+			User userLogged = userRepo.findOne(idUser);
+			model.addAttribute("user", userLogged);
+			if (userComponent.getLoggedUser().getId() == userLogged.getId()) {
+				model.addAttribute("logged", true);
+			}
+			model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
+			return "redirect:/event/{id}";
+		} else {
+			return "redirect:/event/{id}";
+		}
+		
 	}
 	
 	@RequestMapping("/event/{id}/addImage")
-	public String addImage(Model model, @PathVariable long id, @RequestParam("file") MultipartFile file) throws ParseException {
+	public String addImage(Model model, @PathVariable long id, @RequestParam("file") MultipartFile file, HttpServletRequest request) throws ParseException {
 		Event event = eventRepo.findOne(id);
 		
 		//Filename formater
@@ -184,8 +252,19 @@ public class eventController {
 		}
 		
 		eventRepo.save(event);
-		return "redirect:/event/{id}";
-
+		
+		if ((userComponent.isLoggedUser())) {
+			long idUser = userComponent.getLoggedUser().getId();
+			User userLogged = userRepo.findOne(idUser);
+			model.addAttribute("user", userLogged);
+			if (userComponent.getLoggedUser().getId() == userLogged.getId()) {
+				model.addAttribute("logged", true);
+			}
+			model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
+			return "redirect:/event/{id}";
+		} else {
+			return "redirect:/event/{id}";
+		}
 	}
 	
 	@RequestMapping("/sortEventByName/{name}")
@@ -219,7 +298,7 @@ public class eventController {
 	
 	
 	@RequestMapping("/event/{id}/follow")
-	  public String follow(Model model, @PathVariable long id) {
+	  public String follow(Model model, @PathVariable long id, HttpServletRequest request) {
 	    
 	    Event event = eventRepo.findOne(id);
 	    
@@ -243,9 +322,18 @@ public class eventController {
 	    
 	    model.addAttribute("event", event);
 	    
-	    
-	    return "redirect:/event/{id}";
-
+	    if ((userComponent.isLoggedUser())) {
+			long idUser = userComponent.getLoggedUser().getId();
+			User userLogged = userRepo.findOne(idUser);
+			model.addAttribute("user", userLogged);
+			if (userComponent.getLoggedUser().getId() == userLogged.getId()) {
+				model.addAttribute("logged", true);
+			}
+			model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
+			return "redirect:/event/{id}";
+		} else {
+			 return "redirect:/event/{id}";
+		}
 	  }
 	
 	

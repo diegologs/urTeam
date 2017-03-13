@@ -71,23 +71,6 @@ public class urteamController {
 		return "login";
 	}
 
-	@RequestMapping("/userprofile")
-	public String userloginView(Model model, HttpServletRequest request) {
-
-		if ((userComponent.isLoggedUser())) {
-			long id = userComponent.getLoggedUser().getId();
-			User user = userRepo.findOne(id);
-			model.addAttribute("user", user);
-			if (userComponent.getLoggedUser().getId() == user.getId()) {
-				model.addAttribute("isLoged", true);
-			}
-			model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
-			return "user";
-		} else {
-			return "redirect:/";
-		}
-	}
-
 	public Boolean uploadImageFile(Model model, MultipartFile file, String name, String type, String generatedId) {
 
 		String folderPath = "imgs";

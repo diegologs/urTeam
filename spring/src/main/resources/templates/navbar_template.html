@@ -21,7 +21,9 @@
             </ul>
             {{#logged}}
             <ul class="nav navbar-nav navbar-right minav">
-				<li class="dropdown  {{#user_active}}active{{/user_active}}"><a href="#" class="dropdown-toggle"
+            	<li {{#user_active}}class="active"{{/user_active}}><a href="/{{user.nickname}}">{{user.nickname}}</a></li>
+            
+				<!-- <li class="dropdown  {{#user_active}}active{{/user_active}}"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown"> <span class="user-name">
 							{{user.nickname}} </span> <b class="caret"></b></a>
 					<ul class="dropdown-menu">
@@ -39,7 +41,7 @@
 									class="fa fa-power-off" aria-hidden="true"></i> Sign Out</a>
 							</div>
 						</li>
-					</ul></li>
+					</ul></li> -->
 			</ul>
 			{{/logged}}
 			{{^logged}}
