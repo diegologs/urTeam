@@ -70,6 +70,12 @@ public class urteamController {
 	public String login() {
 		return "login";
 	}
+	
+	@RequestMapping("/loginerror")
+	public String loginerror(Model model) {
+		model.addAttribute("loginerror", true);
+		return "login";
+	}
 
 	public Boolean uploadImageFile(Model model, MultipartFile file, String name, String type, String generatedId) {
 

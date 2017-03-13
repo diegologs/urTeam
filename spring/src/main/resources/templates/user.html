@@ -96,38 +96,40 @@
 
 			<!-- Start of left column -->
 			<div class="profile-sidebar">
-				<!-- SIDEBAR USERPIC -->
+				<!-- SIDEBAR userpagePIC -->
 				<div class="profile-userpic">
-					<img src="/image/user-avatar/{{user.generatedId}}/{{user.avatar}}"
+					<img src="/image/user-avatar/{{userpage.generatedId}}/{{userpage.avatar}}"
 						class="img-responsive" alt="avatar">
 				</div>
-				<!-- END SIDEBAR USERPIC -->
-				<!-- SIDEBAR USER TITLE -->
+				<!-- END SIDEBAR userpagePIC -->
+				<!-- SIDEBAR userpage TITLE -->
 				<div class="profile-usertitle">
-					<div class="profile-usertitle-name">{{user.username}}
-						{{user.surname}}</div>
-					<div class="profile-usertitle-name">@{{user.nickname}}</div>
+					<div class="profile-usertitle-name">{{userpage.username}}
+						{{userpage.surname}}</div>
+					<div class="profile-usertitle-name">@{{userpage.nickname}}</div>
 					<div class="profile-usertitle-name">{{numberOfFollowers}}
 						Seguidore/s</div>
-					<div class="profile-usertitle-name">{{user.city}},
-						{{user.country}}</div>
-					<div class="profile-usertitle-job">Puntuación: {{user.score}}</div>
+					<div class="profile-usertitle-name">{{userpage.city}},
+						{{userpage.country}}</div>
+					<div class="profile-usertitle-job">Puntuación: {{userpage.score}}</div>
 				</div>
-				<!-- END SIDEBAR USER TITLE -->
+				<!-- END SIDEBAR userpage TITLE -->
 				<!-- SIDEBAR BUTTONS -->
 				<div class="profile-userbuttons">
+				{{#buttonfollowing}}
 				<form action="/userprofile/{{id}}/follow" method="post">
-					{{#following}} 
+					{{#isfollowed}} 
 					<input type="submit"
 						class="btn btn-sm mybtn-succes" value="Dejar de seguir">
 						<input type="hidden" name="_csrf" value="{{token}}"/>
-					{{/following}} 
-					{{^following}} 
+					{{/isfollowed}} 
+					{{^isfollowed}} 
 					<input type="submit"
 						class="btn btn-sm mybtn-succes" value="Seguir">
 						<input type="hidden" name="_csrf" value="{{token}}"/>
-					{{/following}}
+					{{/isfollowed}}
 					</form>
+				{{/buttonfollowing}}
 				</div>
 				<!-- END SIDEBAR BUTTONS -->
 				<!-- SIDEBAR MENU -->
@@ -151,6 +153,7 @@
 						<li><a href="#friends" class="page-scroll"> <i
 								class="fa fa-address-book" aria-hidden="true"></i> Siguiendo
 						</a></li>
+						{{^buttonfollowing}}
 						<li>
 							<a data-toggle="modal" data-target="#profile-settings-modal">							
 								<i class ="fa fa-cogs" aria-hidden="true"> </i>Configuración										
@@ -162,6 +165,7 @@
    								<input type="hidden" name="_csrf" value="{{token}}"/>
   							</form>
 						</li>
+						{{/buttonfollowing}}
 					</ul>
 				</div>
 				<!-- END MENU -->
@@ -181,7 +185,7 @@
 					</div>
 					<!--/row-->
 					<hr class="hr-yellow">
-					<div class="row">{{user.bio}}</div>
+					<div class="row">{{userpage.bio}}</div>
 					<br> <br>
 				</div>
 				<div class="container-fluid info-box" id="progress">
@@ -342,7 +346,7 @@
 									<div class="col-md-9">
 
 										<div class="text-center">
-											<img src="/image/user-avatar/{{user.avatar}}"
+											<img src="/image/user-avatar/{{userpage.avatar}}"
 												class="avatar img-circle" alt="avatar">
 											<h6>Cambiar avatar</h6>
 											<input class="form-control" type="file" name="file"
@@ -351,12 +355,10 @@
 									</div>
 								</div>
 
-
-
 								<div class="form-group">
 									<label for="firstName" class="col-sm-3 control-label">Nombre</label>
 									<div class="col-sm-9">
-										<input type="text" id="firstName" value="{{user.username}}"
+										<input type="text" id="firstName" value="{{userpage.username}}"
 											class="form-control" autofocus required="required"
 											name="username">
 
@@ -365,7 +367,7 @@
 								<div class="form-group">
 									<label for="lastName" class="col-sm-3 control-label">Apellidos</label>
 									<div class="col-sm-9">
-										<input type="text" id="lastName" value={{user.surname}}
+										<input type="text" id="lastName" value={{userpage.surname}}
 											class="form-control" autofocus required="required"
 											name="surname">
 									</div>
@@ -373,7 +375,7 @@
 								<div class="form-group">
 									<label for="email" class="col-sm-3 control-label">Email</label>
 									<div class="col-sm-9">
-										<input type="email" id="email" value={{user.email}}
+										<input type="email" id="email" value={{userpage.email}}
 											class="form-control" required="required" name="email">
 									</div>
 								</div>
@@ -381,7 +383,7 @@
 							<div class="form-group">
 								<label for="nickname" class="col-sm-3 control-label">Nickname</label>
 								<div class="col-sm-9">
-									<input type="text" id="password" value={{user.nickname}}
+									<input type="text" id="password" value={{userpage.nickname}}
 										class="form-control">
 								</div>
 							</div>
@@ -389,7 +391,7 @@
 								<div class="form-group">
 									<label for="bio" class="col-sm-3 control-label">Biografia</label>
 									<div class="col-sm-9">
-										<textarea class="form-control" rows="5" name="bio">{{user.bio}}</textarea>
+										<textarea class="form-control" rows="5" name="bio">{{userpage.bio}}</textarea>
 									</div>
 								</div>
 								<!-- 
@@ -404,14 +406,14 @@
 								<div class="form-group">
 									<label for="city" class="col-sm-3 control-label">Ciudad</label>
 									<div class="col-sm-9">
-										<input type="text" id="city" value={{user.city}}
+										<input type="text" id="city" value={{userpage.city}}
 											class="form-control" name="city">
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="country" class="col-sm-3 control-label">Pais</label>
 									<div class="col-sm-9">
-										<input type="text" id="country" value={{user.country}}
+										<input type="text" id="country" value={{userpage.country}}
 											class="form-control" name="country">
 									</div>
 								</div>
@@ -430,7 +432,7 @@
 
 		</div>
 	</div>
-	<!-- End Modal Edit User -->
+	<!-- End Modal Edit userpage -->
 
 	<!-- Modal Add Stat -->
 	<div id="myModal_addStat" class="modal fade" role="dialog">
@@ -443,7 +445,7 @@
 				</div>
 				<div class="modal-body">
 					<div class="form-container">
-						<form class="form-group" action="/add-user-stats/{{user.id}}" method="post">
+						<form class="form-group" action="/add-user-stats/{{userpage.id}}" method="post">
 						<input type="text" name="sport" value=" "/>
 							<label style="color: black;" for="sport">Deporte</label>
 							<!-- <select>

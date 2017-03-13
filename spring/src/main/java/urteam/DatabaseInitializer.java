@@ -36,7 +36,7 @@ public class DatabaseInitializer {
 	@Autowired
 	private SportRepository sportRepo;
 
-	@PostConstruct
+	//@PostConstruct
 	public void init() throws ParseException {
 
 
@@ -68,7 +68,7 @@ public class DatabaseInitializer {
 		sportRepo.save(sport3);
 		
 		
-		// Sample events
+/*		// Sample events
 		for (int i = 0; i < 18; i++) {	
 			String name = "Evento de Prueba";
 			String[] sports = {"Running", "Mountain Bike", "Roller"}; 
@@ -89,7 +89,7 @@ public class DatabaseInitializer {
 			event.setYear_date(cal.get(Calendar.YEAR));
 
 			eventRepo.save(event);
-		}
+		}*/
 
 		// Sample communities
 		for (int i = 0; i < 10; i++) {
