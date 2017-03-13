@@ -9,6 +9,8 @@ __Entidades:__
 * ___Grupos:___ Los usuarios podran crear grupos o asociaciones las cuales creen e incentiven la participacion en eventos, estas podran ser privadas o publicadas.
 * ___Deportes:___ Lista de deportes practicados por los usuarios de la aplicacion.
 * ___Eventos:___ Los eventos los podran crear tanto los usuarios a nivel particular asi como los _admin_ de los grupos. Estos eventos podran ser privados o publicos y constaran de un titulo una descripcion asi como del horario en el que se realizaran.
+* ___Estadisticas:___ Las estadisticas forman parte del usuario, y estan compuestas por la informacion de las sesiones de cada deporte del usuario.
+* ___Noticias:___ Las noticias pueden ser creadas en las comunidades.
 
 __Equipo de desarrollo:__
 * Jose Miguel García Benayas
@@ -74,6 +76,14 @@ _controlPanel.html_ : Permite modificar los datos de la web con permisos de admi
 _Diagrama:_  
 
 ![alt tag](http://i.imgur.com/rC46Qbn.png)  
+
+_Diagrama de clases y relaciones:_  
+
+![alt tag](https://github.com/Frostqui/urTeam/blob/master/web/screenshots/DAW.png)  
+
+_Diagrama de la base de datos:_  
+
+![alt tag](https://github.com/Frostqui/urTeam/blob/master/web/screenshots/BBDD.jpg  
 
  __Plantillas__ 
  * Control Panel Template [control Panel template](https://www.creative-tim.com/product/light-bootstrap-dashboard)
