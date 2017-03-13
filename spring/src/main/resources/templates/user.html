@@ -141,16 +141,15 @@
 								class="fa fa-address-book" aria-hidden="true"></i> Siguiendo
 						</a></li>
 						<li>
-							<a data-toggle="modal" data-target="#profile-settings-modal">
-								<button class="btn btn-default btn-sm mybtn-succes">
+							<a data-toggle="modal" data-target="#profile-settings-modal">							
 								<i class ="fa fa-cogs" aria-hidden="true"> </i>Configuración										
-								</button>
 							</a> 
 						</li>
 						<li>
-							<a href="/logout" class="btn btn-default btn-sm mybtn-succes">
-								<i class="fa fa-power-off" aria-hidden="true"></i> Sign Out
-							</a>
+							<form action="/logout" method="post">
+    							<input type="submit" value="Sign Out"  class="page-scroll"/>
+   								<input type="hidden" name="_csrf" value="{{token}}"/>
+  							</form>
 						</li>
 					</ul>
 				</div>
