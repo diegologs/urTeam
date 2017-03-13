@@ -119,7 +119,7 @@
 				<!-- SIDEBAR BUTTONS -->
 				<div class="profile-userbuttons">
 					{{#buttonfollowing}}
-					<form action="/userprofile/{{id}}/follow" method="post">
+					<form action="/user/{{nickname}}/follow" method="post">
 						{{#isfollowed}} <input type="submit"
 							class="btn btn-sm mybtn-succes" value="Dejar de seguir">
 						<input type="hidden" name="_csrf" value="{{token}}" />
@@ -134,7 +134,7 @@
 				<div class="profile-usermenu">
 					<ul class="nav">
 						<li class="active"><a href="#profile" class="page-scroll">
-								<i class="fa fa-user-circle" aria-hidden="true"></i> Perfil
+								<i class="fa fa-user-circle" aria-hidden="true"></i> Biografia
 						</a></li>
 
 						<li><a href="#progress" class="page-scroll"> <i
@@ -150,17 +150,13 @@
 
 						<li><a href="#friends" class="page-scroll"> <i
 								class="fa fa-address-book" aria-hidden="true"></i> Siguiendo
-						</a></li> {{^buttonfollowing}}
+						</a></li>
+						{{^buttonfollowing}}
 						<li><a data-toggle="modal"
 							data-target="#profile-settings-modal"> <i class="fa fa-cogs"
-								aria-hidden="true"> </i>Configuración
-						</a></li>
-						<li>
-							<form action="/logout" method="post">
-								<input type="submit" value="Sign Out" class="btn mybtn-succes" /> <input
-									type="hidden" name="_csrf" value="{{token}}" />
-							</form>
-						</li> {{/buttonfollowing}}
+								aria-hidden="true"> </i>Configuración</a>
+						</li>
+						{{/buttonfollowing}}
 					</ul>
 				</div>
 				<!-- END MENU -->
@@ -173,7 +169,7 @@
 						<div class="col-sm-12">
 
 							<h3>
-								<i class="fa fa-user-circle" aria-hidden="true"></i> Perfil
+								<i class="fa fa-user-circle" aria-hidden="true"></i> Biografia
 							</h3>
 
 						</div>
@@ -362,7 +358,7 @@
 						<div class="row friendrow">
 							{{#following}}
 							<div class="col-sm-6">
-								<a href="/userprofile/{{id}}">
+								<a href="/user/{{nickname}}">
 									<div class="friend">
 										<div class="col-sm-3 friend-image">
 											<img class="img-circle img-responsive group-image"
@@ -395,13 +391,13 @@
 					<div class="row">
 						<div class="col-md-9">
 							<form class="form-horizontal" role="form"
-								action="/userprofile/{{id}}/edit" method="post"
+								action="/user/{{nickname}}/edit" method="post"
 								enctype="multipart/form-data">
 								<div class="form-group">
 									<div class="col-md-9">
 
 										<div class="text-center">
-											<img src="/image/user-avatar/{{userpage.avatar}}"
+											<img src="/image/user-avatar/{{userpage.id}}/{{userpage.avatar}}"
 												class="avatar img-circle" alt="avatar">
 											<h6>Cambiar avatar</h6>
 											<input class="form-control" type="file" name="file"

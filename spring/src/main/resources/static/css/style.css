@@ -141,7 +141,9 @@ img {
     height: 100%;
     width: 100%;
     overflow: hidden;
-    background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../images/talajara.jpg');
+    background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../images/Background.jpg');
+    background-size: 1350px 500px;
+     background-position: 0% 70%;
 }
 
 video {
@@ -352,4 +354,17 @@ video.fillWidth {
 
 .payments {
     font-size: 1.5em;
+}
+
+.dropdown-menu {
+    padding: 30px;
+    margin-right: 10px;
+    background: #1a2930;
+}
+
+.dropdown-menu .btn{
+    margin-top: 5px;
+    display: block;
+    color: black;
+
 }
