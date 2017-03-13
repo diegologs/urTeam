@@ -307,6 +307,7 @@ public class eventController {
 	    if(user.getEventList().contains(event)){
 	      
 	      user.removeEvent(event);
+	      model.addAttribute("following", false);
 	      
 	    }else{
 	    

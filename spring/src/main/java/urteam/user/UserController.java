@@ -2,6 +2,8 @@ package urteam.user;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -18,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import urteam.ConstantsUrTeam;
 import urteam.urteamController;
 import urteam.community.Community;
+import urteam.event.Event;
 import urteam.sport.SportController;
 import urteam.sport.SportRepository;
 
@@ -44,6 +47,8 @@ public class UserController {
 		String generatedId = userIdFormater.format(date);
 		user.setGeneratedId(generatedId);
 		user.setPasswordHash(password);
+		ArrayList<String> roles = new ArrayList<>(Arrays.asList("ROLE_USER"));
+		user.setRoles(roles);
 		userRepository.save(user);
 		return "redirect:/events";
 	}
@@ -75,8 +80,10 @@ public class UserController {
 		
 		List<User> friends = user.getFollowing();
 		List<Community> communities = user.getCommunityList();
+		List<Event> events = user.getEventList();
 		model.addAttribute("following", friends);
 		model.addAttribute("communities", communities);
+		model.addAttribute("events", events);
 		model.addAttribute("members", communities.size());
 		model.addAttribute("numberOfFollowers", user.getNumberOfFollower());
 		

@@ -98,7 +98,8 @@
 			<div class="profile-sidebar">
 				<!-- SIDEBAR userpagePIC -->
 				<div class="profile-userpic">
-					<img src="/image/user-avatar/{{userpage.generatedId}}/{{userpage.avatar}}"
+					<img
+						src="/image/user-avatar/{{userpage.generatedId}}/{{userpage.avatar}}"
 						class="img-responsive" alt="avatar">
 				</div>
 				<!-- END SIDEBAR userpagePIC -->
@@ -111,25 +112,22 @@
 						Seguidore/s</div>
 					<div class="profile-usertitle-name">{{userpage.city}},
 						{{userpage.country}}</div>
-					<div class="profile-usertitle-job">Puntuación: {{userpage.score}}</div>
+					<div class="profile-usertitle-job">Puntuación:
+						{{userpage.score}}</div>
 				</div>
 				<!-- END SIDEBAR userpage TITLE -->
 				<!-- SIDEBAR BUTTONS -->
 				<div class="profile-userbuttons">
-				{{#buttonfollowing}}
-				<form action="/userprofile/{{id}}/follow" method="post">
-					{{#isfollowed}} 
-					<input type="submit"
-						class="btn btn-sm mybtn-succes" value="Dejar de seguir">
-						<input type="hidden" name="_csrf" value="{{token}}"/>
-					{{/isfollowed}} 
-					{{^isfollowed}} 
-					<input type="submit"
-						class="btn btn-sm mybtn-succes" value="Seguir">
-						<input type="hidden" name="_csrf" value="{{token}}"/>
-					{{/isfollowed}}
+					{{#buttonfollowing}}
+					<form action="/userprofile/{{id}}/follow" method="post">
+						{{#isfollowed}} <input type="submit"
+							class="btn btn-sm mybtn-succes" value="Dejar de seguir">
+						<input type="hidden" name="_csrf" value="{{token}}" />
+						{{/isfollowed}} {{^isfollowed}} <input type="submit"
+							class="btn btn-sm mybtn-succes" value="Seguir"> <input
+							type="hidden" name="_csrf" value="{{token}}" /> {{/isfollowed}}
 					</form>
-				{{/buttonfollowing}}
+					{{/buttonfollowing}}
 				</div>
 				<!-- END SIDEBAR BUTTONS -->
 				<!-- SIDEBAR MENU -->
@@ -152,20 +150,17 @@
 
 						<li><a href="#friends" class="page-scroll"> <i
 								class="fa fa-address-book" aria-hidden="true"></i> Siguiendo
+						</a></li> {{^buttonfollowing}}
+						<li><a data-toggle="modal"
+							data-target="#profile-settings-modal"> <i class="fa fa-cogs"
+								aria-hidden="true"> </i>Configuración
 						</a></li>
-						{{^buttonfollowing}}
-						<li>
-							<a data-toggle="modal" data-target="#profile-settings-modal">							
-								<i class ="fa fa-cogs" aria-hidden="true"> </i>Configuración										
-							</a> 
-						</li>
 						<li>
 							<form action="/logout" method="post">
-    							<input type="submit" value="Sign Out"  class="page-scroll"/>
-   								<input type="hidden" name="_csrf" value="{{token}}"/>
-  							</form>
-						</li>
-						{{/buttonfollowing}}
+								<input type="submit" value="Sign Out" class="btn mybtn-succes" /> <input
+									type="hidden" name="_csrf" value="{{token}}" />
+							</form>
+						</li> {{/buttonfollowing}}
 					</ul>
 				</div>
 				<!-- END MENU -->
@@ -190,7 +185,7 @@
 				</div>
 				<div class="container-fluid info-box" id="progress">
 					<div class="row">
-					<!-- 
+						<!-- 
 						<div class="col-sm-12">
 							<h3>
 								<i class="fa fa-line-chart" aria-hidden="true"></i> Progreso
@@ -210,11 +205,11 @@
 								<th>Tiempo</th>
 							</tr>
 							{{#rowsStats}}
-								<tr>
-									<td>{{date}}</td>
-									<td>{{sport}}</td>
-									<td>{{totalSesionTime}}</td>
-								</tr>
+							<tr>
+								<td>{{date}}</td>
+								<td>{{sport}}</td>
+								<td>{{totalSesionTime}}</td>
+							</tr>
 							{{/rowsStats}}
 						</table>
 
@@ -258,14 +253,74 @@
 											<div class="group-members">{{members}} miembros</div>
 										</div>
 									</a>
-									<div class="col-sm-2 group-button">
-										<button class="btn btn-default group-btn">DEJAR</button>
+									<div class="col-sm-2 container">
+										<form action="/group/{{id}}/follow" method="post">
+
+
+											{{#following}} <input type="submit" class="btn btn-default group-btn mybtn-succes"
+												value="Dejar de seguir"> <input type="hidden"
+												name="_csrf" value="{{token}}" /> {{/following}}
+											{{^following}} <input type="submit"
+												class="btn btn-default group-btn mybtn-succes" value="Seguir"> <input
+												type="hidden" name="_csrf" value="{{token}}" />
+											{{/following}}
+
+										</form>
 									</div>
 								</div>
 							</div>
 						</div>
 						{{/communities}}
 					</div>
+					</div>
+					<div class="container-fluid info-box" id="events">
+						<div class="row">
+							<div class="col-sm-12">
+								<h3>
+									<i class="fa fa-users" aria-hidden="true"></i> Eventos
+								</h3>
+							</div>
+						</div>
+						<!--/row-->
+						<hr class="hr-yellow">
+						<div class="row">
+							{{#events}}
+							<div class="container-fluid">
+								<div class="row group">
+									<div class="group-info">
+										<div class="col-sm-2 group-image">
+											<img class="img-circle img-responsive group-image"
+												width="110px"
+												src="/image/event-avatar/{{eventId}}/{{main_photo}}">
+										</div>
+										<a href="/event/{{id}}">
+											<div class="col-sm-8">
+												<h1 class="group-name">{{name}}</h1>
+												<div class="badge">{{sport}}</div>
+												<hr>
+												<div class="group-members">{{members}} miembros</div>
+											</div>
+										</a>
+										<div class="col-sm-2 container">
+											<form action="/event/{{id}}/follow" method="post">
+
+
+												{{#following}} <input type="submit" class="btn btn-default group-btn mybtn-succes"
+													value="Dejar de seguir"> <input type="hidden"
+													name="_csrf" value="{{token}}" /> {{/following}}
+												{{^following}} <input type="submit" class="btn btn-default group-btn mybtn-succes"
+													value="Seguir"> <input type="hidden" name="_csrf"
+													value="{{token}}" /> {{/following}}
+
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+							{{/events}}
+						</div>
+					</div>
+
 					<br> <br>
 				</div>
 				<div class="container-fluid info-box" id="goals">
@@ -311,7 +366,7 @@
 									<div class="friend">
 										<div class="col-sm-3 friend-image">
 											<img class="img-circle img-responsive group-image"
-												width="110px" src="/image/user-avatar/{{avatar}}"
+												width="110px" src="/image/user-avatar/{{id}}/{{avatar}}"
 												alt="following avatar">
 										</div>
 										<div class="col-sm-9 friend-name">
@@ -358,9 +413,9 @@
 								<div class="form-group">
 									<label for="firstName" class="col-sm-3 control-label">Nombre</label>
 									<div class="col-sm-9">
-										<input type="text" id="firstName" value="{{userpage.username}}"
-											class="form-control" autofocus required="required"
-											name="username">
+										<input type="text" id="firstName"
+											value="{{userpage.username}}" class="form-control" autofocus
+											required="required" name="username">
 
 									</div>
 								</div>
@@ -420,7 +475,7 @@
 								<div class="col-sm-9 col-sm-offset-3">
 									<button type="submit"
 										class="btn btn-primary btn-block mybtn-succes">Guardar</button>
-										<input type="hidden" name="_csrf" value="{{token}}"/>
+									<input type="hidden" name="_csrf" value="{{token}}" />
 								</div>
 							</form>
 							<!-- /form -->
@@ -445,17 +500,17 @@
 				</div>
 				<div class="modal-body">
 					<div class="form-container">
-						<form class="form-group" action="/add-user-stats/{{userpage.id}}" method="post">
-						<input type="text" name="sport" value=" "/>
-							<label style="color: black;" for="sport">Deporte</label>
+						<form class="form-group" action="/add-user-stats/{{userpage.id}}"
+							method="post">
+							<input type="text" name="sport" value=" " /> <label
+								style="color: black;" for="sport">Deporte</label>
 							<!-- <select>
 								{{#sportList}}
 									<option value="Running">{{name}}</option> 
 								{{/sportList}}
 							</select>
 							 -->
-							<br>
-							<label style="color: black;" for="sport">Fecha
+							<br> <label style="color: black;" for="sport">Fecha
 								de realización</label> <input type="text" class="form-control"
 								name="date"> <br> <label style="color: black;"
 								for="sport">Tiempo de sesión</label> <input type="text"
@@ -463,7 +518,7 @@
 							<div class="addButton">
 								<br>
 								<button type="submit" class="btn mybtn-succes addButton">+</button>
-								<input type="hidden" name="_csrf" value="{{token}}"/>
+								<input type="hidden" name="_csrf" value="{{token}}" />
 							</div>
 						</form>
 					</div>
