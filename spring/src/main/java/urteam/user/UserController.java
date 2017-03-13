@@ -129,15 +129,41 @@ public class UserController {
 		return "redirect:/userprofile/{id}";
 	}
 
-	@RequestMapping("user/{id}/follow/{toFollowUser}")
-	public String followSomeUser(Model model, @PathVariable long id, @PathVariable long toFollowUser) {
+	@RequestMapping("/userprofile/{id}/follow")
+	  public String follow(Model model, @PathVariable long id, HttpServletRequest request) {
+	    
+	    User user = userRepository.findOne(id);   
+	    
+	    User me = userRepository.findOne(userComponent.getLoggedUser().getId());
+	    
+	    if(me.getFollowing().contains(user)){
+	      
+	      me.getFollowing().remove(user);
+	      
+	    }else{
+	    	me.getFollowers().add(user);
+	    	model.addAttribute("following", true);
+	    
+	    }
+	    
+	    userRepository.save(me);
+	    
+	    model.addAttribute("user", me);
+	    
+	    
+	    if ((userComponent.isLoggedUser())) {
+			long idUser = userComponent.getLoggedUser().getId();
+			User userLogged = userRepository.findOne(idUser);
+			model.addAttribute("user", userLogged);
+			if (userComponent.getLoggedUser().getId() == userLogged.getId()) {
+				model.addAttribute("logged", true);
+			}
+			model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
+			return "redirect:/userprofile/{id}";
+		} else {
+			return "redirect:/userprofile/{id}";
+		}
+	    
 
-		return "na";
-	}
-
-	@RequestMapping("user/{id}/unfollow/{toFollowUser}")
-	public String unfollowSomeUser(Model model, @PathVariable long id, @PathVariable long toFollowUser) {
-
-		return "na";
-	}
+	  }
 }
