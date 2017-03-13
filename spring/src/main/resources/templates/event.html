@@ -32,10 +32,13 @@
                     <form action="/event/{{id}}/follow" method="post">
 
 
-					{{#following}} <input type="submit"
+					{{#following}} 
+					<input type="submit"
 						class="btn btn-default group-btn" value="Dejar de seguir">
 						<input type="hidden" name="_csrf" value="{{token}}"/>
-					{{/following}} {{^following}} <input type="submit"
+					{{/following}} 
+					{{^following}} 
+					<input type="submit"
 						class="btn btn-default group-btn" value="Seguir">
 						<input type="hidden" name="_csrf" value="{{token}}"/>
 					{{/following}}

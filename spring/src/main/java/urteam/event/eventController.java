@@ -300,17 +300,14 @@ public class eventController {
 	@RequestMapping("/event/{id}/follow")
 	  public String follow(Model model, @PathVariable long id, HttpServletRequest request) {
 	    
-	    Event event = eventRepo.findOne(id);
+	    Event event = eventRepo.findOne(id);    
 	    
-	    List<User> users = userRepo.findAll();    
-	    
-	    User user = users.get(0);
-	    
-	    eventRepo.save(event);
+	    User user = userRepo.findOne(userComponent.getLoggedUser().getId());
 	    
 	    if(user.getEventList().contains(event)){
 	      
-	      user.removeEvent(event);      
+	      user.removeEvent(event);
+	      
 	    }else{
 	    
 	      user.addEvent(event);
@@ -322,6 +319,7 @@ public class eventController {
 	    
 	    model.addAttribute("event", event);
 	    
+	    
 	    if ((userComponent.isLoggedUser())) {
 			long idUser = userComponent.getLoggedUser().getId();
 			User userLogged = userRepo.findOne(idUser);
@@ -332,8 +330,10 @@ public class eventController {
 			model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
 			return "redirect:/event/{id}";
 		} else {
-			 return "redirect:/event/{id}";
+			return "redirect:/event/{id}";
 		}
+	    
+
 	  }
 	
 	

@@ -88,6 +88,7 @@ public class User {
 		this.email = email;
 		this.city = city;
 		this.country = country;
+		this.roles = new ArrayList<>(Arrays.asList("USER_ROLE"));
 	}
 
 	public long getId() {

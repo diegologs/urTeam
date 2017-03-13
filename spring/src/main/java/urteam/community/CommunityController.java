@@ -90,7 +90,7 @@ public class CommunityController{
 		
 		List<User> users = userRepo.findAll();    
 	    
-	    User user = users.get(0);
+	    User user = userRepo.findOne(userComponent.getLoggedUser().getId());
 	    
 	    if(user.getCommunityList().contains(community)){
 	      
@@ -288,7 +288,7 @@ public class CommunityController{
 	    
 	    List<User> users = userRepo.findAll();    
 	    
-	    User user = users.get(0);
+	    User user = userRepo.findOne(userComponent.getLoggedUser().getId());
 	    
 	    if(user.getCommunityList().contains(community)){
 	      
