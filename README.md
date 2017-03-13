@@ -83,7 +83,7 @@ _Diagrama de clases y relaciones:_
 
 _Diagrama de la base de datos:_  
 
-![alt tag](https://github.com/Frostqui/urTeam/blob/master/web/screenshots/BBDD.jpg  
+![alt tag](https://github.com/Frostqui/urTeam/blob/master/web/screenshots/BBDD.jpg)  
 
  __Plantillas__ 
  * Control Panel Template [control Panel template](https://www.creative-tim.com/product/light-bootstrap-dashboard)
