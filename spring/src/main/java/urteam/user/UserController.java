@@ -2,8 +2,11 @@ package urteam.user;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,12 +34,19 @@ public class UserController {
 	@Autowired
 	private urteamController urteamController;
 	
+	@Autowired
+	private UserComponent userComponent;
+	
 
 	@RequestMapping("/newUser")
-	public String eventAdded(Model model, User user) throws ParseException {
+	public String eventAdded(Model model, User user, @RequestParam String password) throws ParseException {
 		Date date = new Date();
 		SimpleDateFormat userIdFormater = new SimpleDateFormat("mmddyyyy-hhMMss");
 		String generatedId = userIdFormater.format(date);
+		user.setPasswordHash(password);
+		ArrayList<String> roles = new ArrayList<String>();
+		roles.add("ROLE_USER");
+		user.setRoles(roles);
 		user.setGeneratedId(generatedId);
 		userRepository.save(user);
 		return "redirect:/events";
@@ -61,7 +71,7 @@ public class UserController {
 //	}
 
 	@RequestMapping("/userprofile/{id}")
-	public String userProfile(Model model, @PathVariable Long id) {
+	public String userProfile(Model model, @PathVariable Long id, HttpServletRequest request) {
 		User user = userRepository.findOne(id);
 		model.addAttribute("user", user);
 		List<User> friends = user.getFollowing();
@@ -72,10 +82,24 @@ public class UserController {
 		model.addAttribute("numberOfFollowers", user.getNumberOfFollower());
 		
 		model.addAttribute("user_active", true);
-		model.addAttribute("logged", true);
+		
 		model.addAttribute("sportList",sportController.getSportList());
 		model.addAttribute("stats",user.getSportStats());
-		return "user";
+		
+		if ((userComponent.isLoggedUser())) {
+			long idUser = userComponent.getLoggedUser().getId();
+			User userLogged = userRepository.findOne(idUser);
+			model.addAttribute("usuario", userLogged);
+			if (userComponent.getLoggedUser().getId() == userLogged.getId()) {
+				model.addAttribute("logged", true);
+			}
+			model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
+			return "user";
+		} else {
+			return "user";
+		}
+		
+		
 	}
 
 	@RequestMapping("/userprofile/{id}/edit")
