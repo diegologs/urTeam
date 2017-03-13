@@ -1,5 +1,6 @@
 package urteam.stats;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -42,12 +43,15 @@ public class StatsController {
 			@RequestParam double sesionTime , Model model, HttpServletRequest request) {
 		User user = userRepository.findOne(id);
 		Stats newStats = new Stats();
-		newStats.setDate(new Date());
+		newStats.setDate(date);
 		newStats.setTotalSesionTime(sesionTime);
-		newStats.setSport(sportRepository.findByName(sport));
+		Sport s = new Sport();
+		s = sportRepository.findByName(sport);
+		newStats.setSport(s);
 		user.addStat(newStats);
+		user.setScore(String.valueOf(computeUserScore(user)));
 		userRepository.save(user);
-		computeUserScore(id);
+		
 		
 		if ((userComponent.isLoggedUser())) {
 			long idUser = userComponent.getLoggedUser().getId();
@@ -57,24 +61,24 @@ public class StatsController {
 				model.addAttribute("logged", true);
 			}
 			model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
-			return "/userprofile/{id}";
+			return "redirect:/userprofile/{id}";
 		} else {
-			return "/userprofile/{id}";
+			return "redirect:/userprofile/{id}";
 		}
 		
 	}
 
-	public void computeUserScore(long id) {
-		User user = userRepository.getOne(id);
-		double totalScore = 0;
+	public double computeUserScore(User user) {
+		
+		double totalScore = Double.parseDouble(user.getScore());
 
 		List<Stats> stats = user.getSportStats();
 
 		for (Stats s : stats) {
 			totalScore += s.getSport().getMultiplicator() * s.getTotalSesionTime() * 100;
 		}
-		user.setScore(String.valueOf(totalScore));
-		userRepository.save(user);
+		return totalScore;
+		
 	}
 
 }

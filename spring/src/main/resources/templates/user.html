@@ -175,6 +175,7 @@
 				</div>
 				<div class="container-fluid info-box" id="progress">
 					<div class="row">
+					<!-- 
 						<div class="col-sm-12">
 							<h3>
 								<i class="fa fa-line-chart" aria-hidden="true"></i> Progreso
@@ -182,6 +183,7 @@
 							<a data-toggle="modal" data-target="#myModal_addStat"><button
 									class="btn mybtn-succes">Añadir sesión</button></a>
 						</div>
+						 -->
 					</div>
 					<!--/row-->
 					<div class="statsTable">
@@ -431,11 +433,14 @@
 				<div class="modal-body">
 					<div class="form-container">
 						<form class="form-group" action="/add-user-stats/{{user.id}}" method="post">
-							<label style="color: black;" for="sport">Deporte</label> <select>
+						<input type="text" name="sport" value=" "/>
+							<label style="color: black;" for="sport">Deporte</label>
+							<!-- <select>
 								{{#sportList}}
-									<option value="{{name}}">{{name}}</option> 
+									<option value="Running">{{name}}</option> 
 								{{/sportList}}
 							</select>
+							 -->
 							<br>
 							<label style="color: black;" for="sport">Fecha
 								de realización</label> <input type="text" class="form-control"

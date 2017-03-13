@@ -21,7 +21,7 @@
             </ul>
             {{#logged}}
             <ul class="nav navbar-nav navbar-right minav">
-            	<li {{#user_active}}class="active"{{/user_active}}><a href="/{{user.nickname}}">{{user.nickname}}</a></li>
+            	<li {{#user_active}}class="active"{{/user_active}}><a href="/userprofile/{{user.id}}">{{user.nickname}}</a></li>
             
 				<!-- <li class="dropdown  {{#user_active}}active{{/user_active}}"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown"> <span class="user-name">

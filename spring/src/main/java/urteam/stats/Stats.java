@@ -22,12 +22,12 @@ public class Stats {
 	@OneToOne
 	private Sport sport;
 	private double totalSesionTime;
-	private Date date;
+	private String date;
 	
 	public Stats(){}
 	
 	
-	public Stats(String userId, Sport sport, double totalSesionTime, Date date) {
+	public Stats(String userId, Sport sport, double totalSesionTime, String date) {
 		super();
 		this.userId = userId;
 		this.sport = sport;
@@ -52,10 +52,10 @@ public class Stats {
 	public void setTotalSesionTime(double totalSesionTime) {
 		this.totalSesionTime = totalSesionTime;
 	}
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 	

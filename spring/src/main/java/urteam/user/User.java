@@ -57,9 +57,6 @@ public class User {
 	@ManyToMany
 	private List<Event> eventList = new ArrayList<>();
 
-
-	
-
 	@OneToMany
 	private List<Stats> sportStats = new ArrayList<>();
 	

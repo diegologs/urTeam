@@ -42,23 +42,23 @@ public class UserController {
 		return "redirect:/events";
 	}
 	
-	@RequestMapping("/{nickname}")
-	public String userProf(Model model, @PathVariable String nickname) {
-		User user = userRepository.findByNickname(nickname);
-		model.addAttribute("user", user);
-		List<User> friends = user.getFollowing();
-		List<Community> communities = user.getCommunityList();
-		model.addAttribute("following", friends);
-		model.addAttribute("communities", communities);
-		model.addAttribute("members", communities.size());
-		model.addAttribute("numberOfFollowers", user.getNumberOfFollower());
-		
-		model.addAttribute("user_active", true);
-		model.addAttribute("logged", true);
-		model.addAttribute("sportList",sportController.getSportList());
-		model.addAttribute("stats",user.getSportStats());
-		return "user";
-	}
+//	@RequestMapping("/{nickname}")
+//	public String userProf(Model model, @PathVariable String nickname) {
+//		User user = userRepository.findByNickname(nickname);
+//		model.addAttribute("user", user);
+//		List<User> friends = user.getFollowing();
+//		List<Community> communities = user.getCommunityList();
+//		model.addAttribute("following", friends);
+//		model.addAttribute("communities", communities);
+//		model.addAttribute("members", communities.size());
+//		model.addAttribute("numberOfFollowers", user.getNumberOfFollower());
+//		
+//		model.addAttribute("user_active", true);
+//		model.addAttribute("logged", true);
+//		model.addAttribute("sportList",sportController.getSportList());
+//		model.addAttribute("stats",user.getSportStats());
+//		return "user";
+//	}
 
 	@RequestMapping("/userprofile/{id}")
 	public String userProfile(Model model, @PathVariable Long id) {
