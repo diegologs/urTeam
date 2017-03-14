@@ -8,7 +8,10 @@
                 <div class="content">
                     <ul>
 	                    {{#users}}
-	                    	<li>{{username}}</li>
+	                    	<li>
+                    		<a href="#"><i class="fa fa-times" aria-hidden="true"></i></a>
+                    		<a href="/user/{{nickname}}">{{nickname}}</a>
+                    	</li>
 	                    {{/users}}
                     </ul>
                 </div>

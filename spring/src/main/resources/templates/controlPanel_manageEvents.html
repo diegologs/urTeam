@@ -8,7 +8,10 @@
                 <div class="content">
                     <ul>
                     {{#events}}
-                    	<li>{{name}}</li>
+                    	<li>
+                    		<a href="#"><i class="fa fa-times" aria-hidden="true"></i></a>
+                    		<a href="/event/{{id}}">{{name}}</a>
+                    	</li>
                     {{/events}}
                     </ul>
                 </div>
