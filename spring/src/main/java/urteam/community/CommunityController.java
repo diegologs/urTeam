@@ -53,8 +53,8 @@ public class CommunityController {
 
 		model.addAttribute("communitys", groups);
 		model.addAttribute("groups_active", true);
-
 		if ((userComponent.isLoggedUser())) {
+	
 			long idUser = userComponent.getLoggedUser().getId();
 			User userLogged = userRepo.findOne(idUser);
 			model.addAttribute("user", userLogged);
