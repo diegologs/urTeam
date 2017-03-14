@@ -110,7 +110,7 @@
 				<div class="row">
 					{{#members}}
 						<div class="col-sm-6">
-							<a href="/userprofile/{{id}}">
+							<a href="/user/{{nickname}}">
 								<div class="friend">
 									<div class="col-sm-3 friend-image">
 										<img class="img-circle img-responsive group-image"
@@ -251,8 +251,9 @@
 						<div class="modal-body">
 							<ul>
 								{{#community.communityUsers}}
-
-								<li>{{username}}</li> {{/community.communityUsers}}
+								<li><i class="fa fa-user-circle" aria-hidden="true"></i>
+								<a href="/user/{{nickname}}">{{nickname}}</a></li>
+								{{/community.communityUsers}}
 							</ul>
 						</div>
 					</div>

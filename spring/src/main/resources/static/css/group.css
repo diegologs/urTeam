@@ -1,3 +1,12 @@
+a{
+	color:black;
+	texto-decoration: none;
+	
+}
+a:hover{
+	color:grey;
+	texto-decoration: none;
+}
 .group-header{
     min-height: 200px;
     background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/talajara.jpg');

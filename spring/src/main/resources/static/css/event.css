@@ -10,6 +10,16 @@ body {
     background-color:#1a2930;
 }
 
+a{
+	color:black;
+	texto-decoration: none;
+	
+}
+a:hover{
+	color:grey;
+	texto-decoration: none;
+}
+
 .container {
     margin-top: 15px;
 }

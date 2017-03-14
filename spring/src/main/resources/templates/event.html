@@ -57,8 +57,8 @@
 		<!-- EVENT BAR -->
 		<div class="row nav">
 			<div class="col-md-12 col-xs-12">
-				<div class="col-md-4 col-xs-3 well">
-					<i class="fa fa-users fa-lg"></i> {{numberOfMembers}}
+				<div class="col-md-4 col-xs-3 well" data-toggle="modal" data-target="#myModalEventMembers"> 
+					<i class="fa fa-users" aria-hidden="true"></i> {{numberOfMembers}} Miembros
 				</div>
 				<!-- 
                 <div class="col-md-3 col-xs-3 well">
@@ -213,6 +213,28 @@
 		</div>
 	</div>
 	<!-- END MODAL SHARE SNIPP -->
+	
+	<!-- MODAL EVENT MEMBERS -->
+	<div id="myModalEventMembers" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Usuarios siguiendo este evento</h4>
+				</div>
+				<div class="modal-body">
+					<ul>
+						{{#event.participants_IDs}}
+						<li><i class="fa fa-user-circle" aria-hidden="true"></i>
+						<a href="/user/{{nickname}}">{{nickname}}</a></li>
+						{{/event.participants_IDs}}
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- MODAL EVENT MEMBERS -->
+	
 	{{> footer_template}}
 
 	<script
