@@ -36,7 +36,7 @@ public class DatabaseInitializer {
 	@Autowired
 	private SportRepository sportRepo;
 
-	//@PostConstruct
+	@PostConstruct
 	public void init() throws ParseException {
 
 

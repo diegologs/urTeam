@@ -47,7 +47,7 @@ public class urteamController {
 
 	@RequestMapping("/")
 	public String index(Model model, HttpServletRequest request) {
-
+		//Añadir elementos basicos
 		List<Event> eventos = eventRepo.findFirst3BySport("Mountain Bike");
 		model.addAttribute("first_events", eventos);
 
@@ -57,13 +57,15 @@ public class urteamController {
 		eventos = eventRepo.findFirst3BySport("Roller");
 		model.addAttribute("third_events", eventos);
 
+		//Comprobar si hay un usuario logueado y añadirlo
 		if ((userComponent.isLoggedUser())) {
-			long id = userComponent.getLoggedUser().getId();
-			User user = userRepo.findOne(id);
-			model.addAttribute("user", user);
-			if (userComponent.getLoggedUser().getId() == user.getId()) {
+			long userLogged_id = userComponent.getLoggedUser().getId();
+			User userLogged = userRepo.findOne(userLogged_id);
+			model.addAttribute("user", userLogged);
+			if (userComponent.getLoggedUser().getId() == userLogged.getId()) {
 				model.addAttribute("logged", true);
 			}
+			//Comprobar si es admin
 			model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
 			return "index";
 		} else {

@@ -34,16 +34,13 @@
 			</div>
 			<div class="col-sm-2 container">
 				<form action="/group/{{id}}/follow" method="post">
-
-
-					{{#following}} <input type="submit"
-						class="btn btn-default group-btn  mybtn-succes" value="Dejar de seguir">
+					{{#communityFollowed}} 
+						<input type="submit" class="btn btn-default group-btn  mybtn-succes" value="Dejar de seguir">
 						<input type="hidden" name="_csrf" value="{{token}}"/>
-					{{/following}} {{^following}} <input type="submit"
-						class="btn btn-default group-btn mybtn-succes" value="Seguir">
+					{{/communityFollowed}} {{^communityFollowed}} 
+						<input type="submit" class="btn btn-default group-btn mybtn-succes" value="Seguir">
 						<input type="hidden" name="_csrf" value="{{token}}"/>
-					{{/following}}
-
+					{{/communityFollowed}}
 				</form>
 			</div>
 		</div>
