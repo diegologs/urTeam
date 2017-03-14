@@ -104,20 +104,20 @@ public class UserController {
 		
 		if(editedUser.getId() == me.getId()){
 		
-		editedUser.setUserName(username);
-		editedUser.setSurname(surname);
-		editedUser.setEmail(email);
-		editedUser.setBio(bio);
-		editedUser.setCity(city);
-		editedUser.setCountry(country);
-
-		if (file != null) {
-			String filename = "avatar-" + editedUser.getGeneratedId();
-			if (urteamController.uploadImageFile(model, file, filename, ConstantsUrTeam.USER_AVATAR,
-					editedUser.getGeneratedId())) {
-				editedUser.setAvatar(filename);
+			editedUser.setUserName(username);
+			editedUser.setSurname(surname);
+			editedUser.setEmail(email);
+			editedUser.setBio(bio);
+			editedUser.setCity(city);
+			editedUser.setCountry(country);
+	
+			if (file != null) {
+				String filename = "avatar-" + editedUser.getGeneratedId();
+				if (urteamController.uploadImageFile(model, file, filename, ConstantsUrTeam.USER_AVATAR,
+						editedUser.getGeneratedId())) {
+					editedUser.setAvatar(filename);
+				}
 			}
-		}
 		
 		}
 		

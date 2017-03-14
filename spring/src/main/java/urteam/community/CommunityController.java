@@ -84,8 +84,6 @@ public class CommunityController {
 
 		Community community = communityRepo.findOne(id);
 
-		List<User> users = userRepo.findAll();
-
 		User user = userRepo.findOne(userComponent.getLoggedUser().getId());
 		if (user.getCommunityList().contains(community)) {
 			model.addAttribute("following", true);
@@ -93,26 +91,12 @@ public class CommunityController {
 
 			model.addAttribute("following", false);
 		}
+		User ownerCommunity = userRepo.findOne(community.getOwner_id().getId());
+		String ownerName = ownerCommunity.getNickname();
+		model.addAttribute("ownerName", ownerName);
+		model.addAttribute("owner", community.getOwner_id().getId() == userComponent.getLoggedUser().getId());
 		model.addAttribute("numberOfMembers", community.getCommunityUsers().size());
 		model.addAttribute("members", community.getCommunityUsers());
-		
-		List<User> users = userRepo.findAll();    
-	    
-	    User user = userRepo.findOne(userComponent.getLoggedUser().getId());
-	    
-	    if(user.getCommunityList().contains(community)){
-	      
-	    	model.addAttribute("following", true);
-	      
-	    }else{
-	    
-	    	model.addAttribute("following", false);
-	    
-	    }
-	  
-	    model.addAttribute("owner", community.getOwner_id().getId() == userComponent.getLoggedUser().getId());
-	    model.addAttribute("numberOfMembers",community.getCommunityUsers().size());
-	    model.addAttribute("members",community.getCommunityUsers());
 		model.addAttribute("community", community);
 		model.addAttribute("communityGallery", community.getCommunityImages());
 		if ((userComponent.isLoggedUser())) {
@@ -128,6 +112,8 @@ public class CommunityController {
 			return "group";
 		}
 	}
+	
+	
 
 	@RequestMapping("/sortGroupBySport")
 	public String sortGroupBySport(Model model, @RequestParam String sport) {
@@ -148,10 +134,7 @@ public class CommunityController {
 	public String groupEdited(Model model, @PathVariable long id, @RequestParam String info,
 			HttpServletRequest request) {
 		Community community = communityRepo.findOne(id);
-<<<<<<< HEAD
-=======
-		
->>>>>>> branch 'master' of https://github.com/Frostqui/urTeam.git
+
 		if(community.getOwner_id().getId() == userComponent.getLoggedUser().getId()){
 		
 			community.setInfo(info);
@@ -178,14 +161,7 @@ public class CommunityController {
 	public String groupEdited(Model model, @PathVariable long id, @RequestParam String title, @RequestParam String text,
 			HttpServletRequest request) {
 		Community community = communityRepo.findOne(id);
-<<<<<<< HEAD
 		communityRepo.save(community);
-		News news = new News(title, text);
-		community.getNews().add(news);
-		newsRepo.save(news);
-=======
->>>>>>> branch 'master' of https://github.com/Frostqui/urTeam.git
-		communityRepo.save(community);	
 		if(community.getOwner_id().getId() == userComponent.getLoggedUser().getId()){
 			News news = new News(title, text);
 			community.getNews().add(news);
