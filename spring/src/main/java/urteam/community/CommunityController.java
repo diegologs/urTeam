@@ -148,6 +148,10 @@ public class CommunityController {
 	public String groupEdited(Model model, @PathVariable long id, @RequestParam String info,
 			HttpServletRequest request) {
 		Community community = communityRepo.findOne(id);
+<<<<<<< HEAD
+=======
+		
+>>>>>>> branch 'master' of https://github.com/Frostqui/urTeam.git
 		if(community.getOwner_id().getId() == userComponent.getLoggedUser().getId()){
 		
 			community.setInfo(info);
@@ -174,10 +178,13 @@ public class CommunityController {
 	public String groupEdited(Model model, @PathVariable long id, @RequestParam String title, @RequestParam String text,
 			HttpServletRequest request) {
 		Community community = communityRepo.findOne(id);
+<<<<<<< HEAD
 		communityRepo.save(community);
 		News news = new News(title, text);
 		community.getNews().add(news);
 		newsRepo.save(news);
+=======
+>>>>>>> branch 'master' of https://github.com/Frostqui/urTeam.git
 		communityRepo.save(community);	
 		if(community.getOwner_id().getId() == userComponent.getLoggedUser().getId()){
 			News news = new News(title, text);
@@ -253,9 +260,9 @@ public class CommunityController {
 		String communitytId = communityIdFormater.format(date);
 		community.setCommunityId(communitytId);
 		community.setOwner_id(userComponent.getLoggedUser());
+	
+		String filename = "avatar-"+formater.format(date);
 		
-		String filename = "avatar-" + formater.format(date);
-
 		if (urteam.uploadImageFile(model, file, filename, ConstantsUrTeam.COMMUNITY_AVATAR,
 				community.getCommunityId())) {
 			community.setMain_photo(filename);

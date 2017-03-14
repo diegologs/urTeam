@@ -97,6 +97,7 @@ public class UserController {
 			@RequestParam String city, @RequestParam String country, @RequestParam("file") MultipartFile file)
 			throws ParseException {
 		
+		
 		User editedUser = userRepository.findByNickname(nickname);
 		
 		User me = userRepository.findOne(userComponent.getLoggedUser().getId());

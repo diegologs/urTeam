@@ -63,8 +63,12 @@
 				<i class="fa fa-info" aria-hidden="true"></i> Información
 			</h2>
 			<hr>
+			
+			{{#owner}}
 			<a data-toggle="modal" data-target="#myModal3"><button
 					class="btn mybtn-succes btn_group2">Editar información</button></a>
+			{{/owner}}
+			
 			<div class="info-text">{{community.info}}</div>
 			<br>
 			<div class="photos">
@@ -72,8 +76,11 @@
 					<i class="fa fa-picture-o" aria-hidden="true"></i> Fotos
 				</h2>
 				<hr>
+				{{#owner}}
 				<a data-toggle="modal" data-target="#myModal4"><button
 						class="btn mybtn-succes btn_group2">Añadir imágenes</button></a>
+				{{/owner}}
+				
 				{{#communityGallery}}
 				<div class="row">{{>groupGallery_template}}</div>
 				{{/communityGallery}}
@@ -82,7 +89,9 @@
 			<div class="news">
 				<h2><i class="fa fa-newspaper-o" aria-hidden="true"></i> Noticias</h2>
 				<hr>
+				{{#owner}}
 				<a data-toggle="modal" data-target="#myModal2"><button class="btn mybtn-succes btn_group2">Añadir noticia</button></a>
+				{{/owner}}
 				<hr>
 				{{#community.news}}
 					<div class="col-sm-12">

@@ -9,7 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import urteam.news.News;
 import urteam.user.User;
@@ -31,14 +33,10 @@ public class Community {
 	private String sport;
 	private String main_photo;
 	
-	public String getMain_photo() {
-		return main_photo;
-	}
-
-	public void setMain_photo(String main_photo) {
-		this.main_photo = main_photo;
-	}
-
+	@OneToOne
+	private User owner_id;
+	
+	
 	@Basic
 	private ArrayList<String> communityImages = new ArrayList();
 	
@@ -48,6 +46,19 @@ public class Community {
 	@ManyToMany(mappedBy = "communityList")
 	private List<User> communityUsers = new ArrayList<>();
 	
+	
+
+	public Community() {
+	}
+
+	public Community(String name, String info, String sport, String main_photo, User owner_id) {
+		this.name = name;
+		this.info = info;
+		this.sport = sport;
+		this.main_photo = main_photo;
+		this.owner_id = owner_id;
+	}	
+	
 	public String getSport() {
 		return sport;
 	}
@@ -56,19 +67,15 @@ public class Community {
 		this.sport = sport;
 	}
 
-//	private User admin_IDs;
 	
-
-	public Community() {
+	public String getMain_photo() {
+		return main_photo;
 	}
 
-	public Community(String name, String info, String sport, String main_photo) {
-		this.name = name;
-		this.info = info;
-		this.sport = sport;
+	public void setMain_photo(String main_photo) {
 		this.main_photo = main_photo;
 	}
-
+	
 	public long getId() {
 		return id;
 	}
@@ -163,6 +170,14 @@ public class Community {
 
 	public void setCommunityImages(ArrayList<String> communityImages) {
 		this.communityImages = communityImages;
+	}
+	
+	public User getOwner_id() {
+		return owner_id;
+	}
+
+	public void setOwner_id(User owner_id) {
+		this.owner_id = owner_id;
 	}
 }
 
