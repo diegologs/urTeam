@@ -23,7 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import urteam.ConstantsUrTeam;
 import urteam.urteamController;
-import urteam.community.Community;
+import urteam.community.*;
 import urteam.sport.*;
 import urteam.user.*;
 
@@ -83,41 +83,108 @@ public class eventController {
 
 	@RequestMapping("/event/{id}")
 	public String showEvent(Model model, @PathVariable long id, HttpServletRequest request) {
+		// Buscar el evento y su creador
 		Event event = eventRepo.findOne(id);
+		User ownerEvent = userRepo.findOne(event.getOwner_id().getId());
+		String ownerName = ownerEvent.getNickname();
+
+		// Añadir elementos basicos
 		model.addAttribute("event", event);
+		model.addAttribute("ownerName", ownerName);
 		model.addAttribute("imagen", event.getMain_photo());
 		model.addAttribute("event.participants", event.getParticipants_IDs().size());
 		model.addAttribute("eventGallery", event.getEventImages());
 		model.addAttribute("events_active", true);
 		model.addAttribute("numberOfMembers", event.getParticipants_IDs().size());
+
+		// Comprobar si hay usuario logueado y añadirlo
 		if (userComponent.isLoggedUser()) {
-			User user = userRepo.findOne(userComponent.getLoggedUser().getId());
-			model.addAttribute("user", user);
-			if (user.getEventList().contains(event)) {
-				model.addAttribute("following", true);
-			} else {
-				model.addAttribute("following", false);
-			}
-			if (userComponent.getLoggedUser().getId() == user.getId()) {
-				model.addAttribute("logged", true);
-			}
+			User userLogged = userRepo.findOne(userComponent.getLoggedUser().getId());
+			model.addAttribute("logged", true);
+			model.addAttribute("user", userLogged);
+			model.addAttribute("eventFollowed", userLogged.getEventList().contains(event));
+			// Comprobar si es admin
 			model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
+			// Comprobar si es dueño del evento
+			model.addAttribute("owner", userLogged.getId() == ownerEvent.getId());
 			return "event";
 		} else {
+			model.addAttribute("owner", false);
 			return "event";
+		}
+	}
+
+	@RequestMapping("/event/{id}/follow")
+	public String follow(Model model, @PathVariable long id, HttpServletRequest request) {
+		// Buscar el evento y su creador
+		Event event = eventRepo.findOne(id);
+		model.addAttribute("events_active", true);
+
+		// Comprobar si hay un usuario logueado
+		if ((userComponent.isLoggedUser())) {
+			long userLogged_id = userComponent.getLoggedUser().getId();
+			User userLogged = userRepo.findOne(userLogged_id);
+			model.addAttribute("logged", true);
+			model.addAttribute("user", userLogged);
+			// Comprobar si es admin
+			model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
+
+			// Comprobar si el evento esta entre las seguidas del usuario
+			if (userLogged.getEventList().contains(event)) {
+				userLogged.removeEvent(event);
+			} else {
+				userLogged.addEvent(event);
+			}
+			model.addAttribute("eventFollowed", userLogged.getCommunityList().contains(event));
+
+			eventRepo.save(event);
+			userRepo.save(userLogged);
+			model.addAttribute("event", event);
+			return "redirect:/event/{id}";
+		} else {
+			return "redirect:/event/{id}";
+		}
+	}
+
+	@RequestMapping("/event/{id}/EventEdited")
+	public String groupEdited(Model model, @PathVariable long id, @RequestParam String info,
+			HttpServletRequest request) {
+		// Buscar el evento y su creador
+		Event event = eventRepo.findOne(id);
+		User ownerEvent = userRepo.findOne(event.getOwner_id().getId());
+		String ownerName = ownerEvent.getNickname();
+		model.addAttribute("events_active", true);
+
+		// Comprobar si hay usuario logueado y añadirlo
+		if (userComponent.isLoggedUser()) {
+			User userLogged = userRepo.findOne(userComponent.getLoggedUser().getId());
+			model.addAttribute("logged", true);
+			model.addAttribute("user", userLogged);
+			model.addAttribute("eventFollowed", userLogged.getEventList().contains(event));
+			// Comprobar si es admin
+			model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
+			// Comprobar que el usuario y el dueño del evento son el mismoy si
+			// lo son modificar
+			if (userLogged.getId() == ownerEvent.getId()) {
+				event.setInfo(info);
+			}
+			eventRepo.save(event);
+			model.addAttribute("event", event);
+			return "redirect:/event/{id}";
+		} else {
+			return "redirect:/event/{id}";
 		}
 	}
 
 	@RequestMapping("/addEvent")
 	public String newEvent(Model model, HttpServletRequest request) {
 		model.addAttribute("events_active", true);
-		if ((userComponent.isLoggedUser())) {
-			long idUser = userComponent.getLoggedUser().getId();
-			User userLogged = userRepo.findOne(idUser);
+		// Comprobar si hay usuario logueado y añadirlo
+		if (userComponent.isLoggedUser()) {
+			User userLogged = userRepo.findOne(userComponent.getLoggedUser().getId());
+			model.addAttribute("logged", true);
 			model.addAttribute("user", userLogged);
-			if (userComponent.getLoggedUser().getId() == userLogged.getId()) {
-				model.addAttribute("logged", true);
-			}
+			// Comprobar si es admin
 			model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
 			return "addEvent";
 		} else {
@@ -128,37 +195,43 @@ public class eventController {
 	@RequestMapping("/eventAdded")
 	public String eventAdded(Model model, Event event, @RequestParam String start_date, @RequestParam String end_date,
 			@RequestParam("file") MultipartFile file, HttpServletRequest request) throws ParseException {
-		Date final_start_date = new SimpleDateFormat("dd/MM/yyyy").parse(start_date);
-		event.setStart_date(final_start_date);
-		Date final_end_date = new SimpleDateFormat("dd/MM/yyyy").parse(end_date);
-		event.setEnd_date(final_end_date);
-		Calendar cal = toCalendar(event.getStart_date());
-		event.setDay_date(cal.get(Calendar.DAY_OF_MONTH));
-		event.setMonth_date(cal.get(Calendar.MONTH));
-		event.setYear_date(cal.get(Calendar.YEAR));
-		// Filename formater
-		SimpleDateFormat formater = new SimpleDateFormat("mmddyyyy-hhMMss");
-		Date date = new Date();
-		// EventId generator
-		SimpleDateFormat eventIdFormater = new SimpleDateFormat("mmddyyyy-hhMMss");
-		String eventId = eventIdFormater.format(date);
-		event.setEventId(eventId);
-		String filename = "avatar-" + formater.format(date);
-		if (urteam.uploadImageFile(model, file, filename, ConstantsUrTeam.EVENT_AVATAR, event.getEventId())) {
-			event.setMain_photo(filename);
-		}
-		eventRepo.save(event);
-		Page<Event> eventos = eventRepo.findAll(new PageRequest(0, 9));
-		model.addAttribute("events", eventos);
+		
 		model.addAttribute("events_active", true);
-		if ((userComponent.isLoggedUser())) {
-			long id = userComponent.getLoggedUser().getId();
-			User user = userRepo.findOne(id);
-			model.addAttribute("user", user);
-			if (userComponent.getLoggedUser().getId() == user.getId()) {
-				model.addAttribute("logged", true);
-			}
+		// Comprobar si hay usuario logueado y añadirlo
+		if (userComponent.isLoggedUser()) {
+			User userLogged = userRepo.findOne(userComponent.getLoggedUser().getId());
+			model.addAttribute("logged", true);
+			model.addAttribute("user", userLogged);
+			// Comprobar si es admin
 			model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
+			
+			// Crear evento
+			Date final_start_date = new SimpleDateFormat("dd/MM/yyyy").parse(start_date);
+			event.setStart_date(final_start_date);
+			Date final_end_date = new SimpleDateFormat("dd/MM/yyyy").parse(end_date);
+			event.setEnd_date(final_end_date);
+			Calendar cal = toCalendar(event.getStart_date());
+			event.setDay_date(cal.get(Calendar.DAY_OF_MONTH));
+			event.setMonth_date(cal.get(Calendar.MONTH));
+			event.setYear_date(cal.get(Calendar.YEAR));
+			// Filename formater
+			SimpleDateFormat formater = new SimpleDateFormat("mmddyyyy-hhMMss");
+			Date date = new Date();
+			// EventId generator
+			SimpleDateFormat eventIdFormater = new SimpleDateFormat("mmddyyyy-hhMMss");
+			String eventId = eventIdFormater.format(date);
+			event.setEventId(eventId);
+			String filename = "avatar-" + formater.format(date);
+			if (urteam.uploadImageFile(model, file, filename, ConstantsUrTeam.EVENT_AVATAR, event.getEventId())) {
+				event.setMain_photo(filename);
+			}
+			event.setOwner_id(userLogged);
+			
+			// Guardar evento y recargar pagina
+			eventRepo.save(event);
+			Page<Event> eventos = eventRepo.findAll(new PageRequest(0, 9));
+			model.addAttribute("events", eventos);
+
 			return "redirect:/events";
 		} else {
 			return "redirect:/events";
@@ -169,29 +242,6 @@ public class eventController {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
 		return cal;
-	}
-
-	@RequestMapping("/event/{id}/EventEdited")
-	public String groupEdited(Model model, @PathVariable long id, @RequestParam String info,
-			HttpServletRequest request) {
-		Event event = eventRepo.findOne(id);
-		event.setInfo(info);
-		eventRepo.save(event);
-		model.addAttribute("event", event);
-		model.addAttribute("events_active", true);
-		if ((userComponent.isLoggedUser())) {
-			long idUser = userComponent.getLoggedUser().getId();
-			User userLogged = userRepo.findOne(idUser);
-			model.addAttribute("user", userLogged);
-			if (userComponent.getLoggedUser().getId() == userLogged.getId()) {
-				model.addAttribute("logged", true);
-			}
-			model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
-			return "redirect:/event/{id}";
-		} else {
-			return "redirect:/event/{id}";
-		}
-
 	}
 
 	@RequestMapping("/event/{id}/addImage")
@@ -233,34 +283,6 @@ public class eventController {
 		List<Event> eventos = eventRepo.findBySport(sport);
 		model.addAttribute("events", eventos);
 		return "redirect:/events";
-	}
-
-	@RequestMapping("/event/{id}/follow")
-	public String follow(Model model, @PathVariable long id, HttpServletRequest request) {
-		Event event = eventRepo.findOne(id);
-		User user = userRepo.findOne(userComponent.getLoggedUser().getId());
-		if (user.getEventList().contains(event)) {
-			user.removeEvent(event);
-			model.addAttribute("following", false);
-
-		} else {
-			user.addEvent(event);
-			model.addAttribute("following", true);
-		}
-		userRepo.save(user);
-		model.addAttribute("event", event);
-		if ((userComponent.isLoggedUser())) {
-			long idUser = userComponent.getLoggedUser().getId();
-			User userLogged = userRepo.findOne(idUser);
-			model.addAttribute("user", userLogged);
-			if (userComponent.getLoggedUser().getId() == userLogged.getId()) {
-				model.addAttribute("logged", true);
-			}
-			model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
-			return "redirect:/event/{id}";
-		} else {
-			return "redirect:/event/{id}";
-		}
 	}
 
 	// @PostMapping("/")

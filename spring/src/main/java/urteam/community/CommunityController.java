@@ -54,8 +54,6 @@ public class CommunityController {
 			User userLogged = userRepo.findOne(userLogged_id);
 			model.addAttribute("logged", true);
 			model.addAttribute("user", userLogged);
-			// model.addAttribute("communityFollowed",
-			// userLogged.getCommunityList().contains(community));
 			// Comprobar si es admin
 			model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
 			return "groups";
