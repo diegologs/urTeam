@@ -234,37 +234,7 @@
 					<div class="row">
 						{{#communities}}
 						<div class="container-fluid">
-							<div class="row group">
-								<div class="group-info">
-									<div class="col-sm-2 group-image">
-										<img class="img-circle img-responsive group-image"
-											width="110px"
-											src="/image/community-avatar/{{communityId}}/{{main_photo}}">
-									</div>
-									<a href="/group/{{id}}">
-										<div class="col-sm-8">
-											<h1 class="group-name">{{name}}</h1>
-											<div class="badge">{{sport}}</div>
-											<hr>
-											<div class="group-members">{{members}} miembros</div>
-										</div>
-									</a>
-									<div class="col-sm-2 container">
-										<form action="/group/{{id}}/follow" method="post">
-
-
-											{{#following}} <input type="submit" class="btn btn-default group-btn mybtn-succes"
-												value="Dejar de seguir"> <input type="hidden"
-												name="_csrf" value="{{token}}" /> {{/following}}
-											{{^following}} <input type="submit"
-												class="btn btn-default group-btn mybtn-succes" value="Seguir"> <input
-												type="hidden" name="_csrf" value="{{token}}" />
-											{{/following}}
-
-										</form>
-									</div>
-								</div>
-							</div>
+							{{> group_template}}
 						</div>
 						{{/communities}}
 					</div>
@@ -282,36 +252,7 @@
 						<div class="row">
 							{{#events}}
 							<div class="container-fluid">
-								<div class="row group">
-									<div class="group-info">
-										<div class="col-sm-2 group-image">
-											<img class="img-circle img-responsive group-image"
-												width="110px"
-												src="/image/event-avatar/{{eventId}}/{{main_photo}}">
-										</div>
-										<a href="/event/{{id}}">
-											<div class="col-sm-8">
-												<h1 class="group-name">{{name}}</h1>
-												<div class="badge">{{sport}}</div>
-												<hr>
-												<div class="group-members">{{members}} miembros</div>
-											</div>
-										</a>
-										<div class="col-sm-2 container">
-											<form action="/event/{{id}}/follow" method="post">
-
-
-												{{#following}} <input type="submit" class="btn btn-default group-btn mybtn-succes"
-													value="Dejar de seguir"> <input type="hidden"
-													name="_csrf" value="{{token}}" /> {{/following}}
-												{{^following}} <input type="submit" class="btn btn-default group-btn mybtn-succes"
-													value="Seguir"> <input type="hidden" name="_csrf"
-													value="{{token}}" /> {{/following}}
-
-											</form>
-										</div>
-									</div>
-								</div>
+								{{> eventUser_template}}
 							</div>
 							{{/events}}
 						</div>
@@ -356,7 +297,7 @@
 						<!--/row-->
 						<hr class="hr-yellow">
 						<div class="row friendrow">
-							{{#following}}
+							{{#userFollowing}}
 							<div class="col-sm-6">
 								<a href="/user/{{nickname}}">
 									<div class="friend">
@@ -371,7 +312,7 @@
 									</div>
 								</a>
 							</div>
-							{{/following}}
+							{{/userFollowing}}
 						</div>
 					</div>
 				</div>

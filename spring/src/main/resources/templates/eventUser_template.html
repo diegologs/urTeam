@@ -1,0 +1,30 @@
+<div class="row group">
+	<div class="group-info">
+		<div class="col-sm-2 group-image">
+			<img class="img-circle img-responsive group-image" width="110px"
+				src="/image/event-avatar/{{eventId}}/{{main_photo}}">
+		</div>
+		<a href="/event/{{id}}">
+			<div class="col-sm-8">
+				<h1 class="group-name">{{name}}</h1>
+				<div class="badge">{{sport}}</div>
+				<hr>
+				<div class="group-members">{{participants_IDs.size}} miembros</div>
+			</div>
+		</a>
+		<div class="col-sm-2 container">
+			<form action="/event/{{id}}/follow" method="post">
+
+
+				{{#following}} <input type="submit"
+					class="btn btn-default group-btn mybtn-succes"
+					value="Dejar de seguir"> <input type="hidden" name="_csrf"
+					value="{{token}}" /> {{/following}} {{^following}} <input
+					type="submit" class="btn btn-default group-btn mybtn-succes"
+					value="Seguir"> <input type="hidden" name="_csrf"
+					value="{{token}}" /> {{/following}}
+
+			</form>
+		</div>
+	</div>
+</div>

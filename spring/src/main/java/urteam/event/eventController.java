@@ -29,44 +29,37 @@ import urteam.user.*;
 
 @Controller
 public class eventController {
-	
+
 	@Autowired
 	private EventRepository eventRepo;
-	
+
 	@Autowired
 	private UserRepository userRepo;
-	
-	
+
 	@Autowired
 	private urteamController urteam;
-	
+
 	@Autowired
 	private SportController sportController;
-	
+
 	@Autowired
 	private UserComponent userComponent;
-	
+
 	@RequestMapping("/events")
-	public String eventos(Model model, Pageable page,  HttpServletRequest request) {
-		
+	public String eventos(Model model, Pageable page, HttpServletRequest request) {
 		String sortedBy;
-		
-		if(page.getSort() != null){
+		if (page.getSort() != null) {
 			sortedBy = page.getSort().iterator().next().getProperty();
-		}else{
+		} else {
 			sortedBy = "name";
-			page = new PageRequest(page.getPageNumber(), page.getPageSize(), 
+			page = new PageRequest(page.getPageNumber(), page.getPageSize(),
 					new Sort(new Order(Sort.DEFAULT_DIRECTION, "name")));
 		}
-		
-		Page<Event> eventos = eventRepo.findAll(new PageRequest(0,6));
+		Page<Event> eventos = eventRepo.findAll(new PageRequest(0, 6));
 		model.addAttribute("events", eventos);
-		model.addAttribute("sortedBy",sortedBy);
+		model.addAttribute("sortedBy", sortedBy);
 		model.addAttribute("sportList", sportController.getSportList());
-		
-		
 		model.addAttribute("events_active", true);
-		
 		if ((userComponent.isLoggedUser())) {
 			long id = userComponent.getLoggedUser().getId();
 			User user = userRepo.findOne(id);
@@ -79,55 +72,32 @@ public class eventController {
 		} else {
 			return "events";
 		}
-		
 	}
-	
-	@RequestMapping(value="/moreContent")
-	public String moreAllShelf(Model model, @RequestParam int page){
-		Page<Event> eventos = eventRepo.findAll(new PageRequest(page,6));
+
+	@RequestMapping(value = "/moreContent")
+	public String moreAllShelf(Model model, @RequestParam int page) {
+		Page<Event> eventos = eventRepo.findAll(new PageRequest(page, 6));
 		model.addAttribute("event", eventos);
 		return "listEvents";
 	}
-	
-	
+
 	@RequestMapping("/event/{id}")
 	public String showEvent(Model model, @PathVariable long id, HttpServletRequest request) {
 		Event event = eventRepo.findOne(id);
 		model.addAttribute("event", event);
-		
-		model.addAttribute("imagen",event.getMain_photo());
+		model.addAttribute("imagen", event.getMain_photo());
 		model.addAttribute("event.participants", event.getParticipants_IDs().size());
-		
 		model.addAttribute("eventGallery", event.getEventImages());
-		
 		model.addAttribute("events_active", true);
-		
-		List<User> users = userRepo.findAll();    
-		    
-		User user = users.get(0);
-		
-		model.addAttribute("numberOfMembers",event.getParticipants_IDs().size());
-		
-		    
-		
-		
-		if(user.getEventList().contains(event)){
-		      
-			 model.addAttribute("following", true);
-			    
-		      
-		    }else{
-		    
-		 
-		      model.addAttribute("following", false);
-		    
-		    }
-		
-		
-		if ((userComponent.isLoggedUser())) {
-			id = userComponent.getLoggedUser().getId();
-			user = userRepo.findOne(id);
+		model.addAttribute("numberOfMembers", event.getParticipants_IDs().size());
+		if (userComponent.isLoggedUser()) {
+			User user = userRepo.findOne(userComponent.getLoggedUser().getId());
 			model.addAttribute("user", user);
+			if (user.getEventList().contains(event)) {
+				model.addAttribute("following", true);
+			} else {
+				model.addAttribute("following", false);
+			}
 			if (userComponent.getLoggedUser().getId() == user.getId()) {
 				model.addAttribute("logged", true);
 			}
@@ -136,13 +106,11 @@ public class eventController {
 		} else {
 			return "event";
 		}
-		
 	}
-	
+
 	@RequestMapping("/addEvent")
 	public String newEvent(Model model, HttpServletRequest request) {
 		model.addAttribute("events_active", true);
-		
 		if ((userComponent.isLoggedUser())) {
 			long idUser = userComponent.getLoggedUser().getId();
 			User userLogged = userRepo.findOne(idUser);
@@ -154,44 +122,35 @@ public class eventController {
 			return "addEvent";
 		} else {
 			return "addEvent";
-		}		
+		}
 	}
-	
+
 	@RequestMapping("/eventAdded")
-	public String eventAdded(Model model, Event event, @RequestParam String start_date,
-			@RequestParam String end_date,  @RequestParam("file") MultipartFile file, HttpServletRequest request) throws ParseException {
-		
+	public String eventAdded(Model model, Event event, @RequestParam String start_date, @RequestParam String end_date,
+			@RequestParam("file") MultipartFile file, HttpServletRequest request) throws ParseException {
 		Date final_start_date = new SimpleDateFormat("dd/MM/yyyy").parse(start_date);
 		event.setStart_date(final_start_date);
-		
-		Date final_end_date = new SimpleDateFormat("dd/MM/yyyy").parse(end_date);		
-		event.setEnd_date(final_end_date);		
-		
-		Calendar cal = toCalendar(event.getStart_date());		
+		Date final_end_date = new SimpleDateFormat("dd/MM/yyyy").parse(end_date);
+		event.setEnd_date(final_end_date);
+		Calendar cal = toCalendar(event.getStart_date());
 		event.setDay_date(cal.get(Calendar.DAY_OF_MONTH));
 		event.setMonth_date(cal.get(Calendar.MONTH));
 		event.setYear_date(cal.get(Calendar.YEAR));
-		
-		//Filename formater
+		// Filename formater
 		SimpleDateFormat formater = new SimpleDateFormat("mmddyyyy-hhMMss");
 		Date date = new Date();
-		
-		//EventId generator
+		// EventId generator
 		SimpleDateFormat eventIdFormater = new SimpleDateFormat("mmddyyyy-hhMMss");
 		String eventId = eventIdFormater.format(date);
 		event.setEventId(eventId);
-		String filename = "avatar-"+formater.format(date);
-		
-		if(urteam.uploadImageFile(model, file,filename,ConstantsUrTeam.EVENT_AVATAR, event.getEventId())){
+		String filename = "avatar-" + formater.format(date);
+		if (urteam.uploadImageFile(model, file, filename, ConstantsUrTeam.EVENT_AVATAR, event.getEventId())) {
 			event.setMain_photo(filename);
 		}
-		
 		eventRepo.save(event);
-		Page<Event> eventos = eventRepo.findAll(new PageRequest(0,9));
+		Page<Event> eventos = eventRepo.findAll(new PageRequest(0, 9));
 		model.addAttribute("events", eventos);
-		
 		model.addAttribute("events_active", true);
-		
 		if ((userComponent.isLoggedUser())) {
 			long id = userComponent.getLoggedUser().getId();
 			User user = userRepo.findOne(id);
@@ -204,25 +163,22 @@ public class eventController {
 		} else {
 			return "redirect:/events";
 		}
-		
+	}
 
+	private static Calendar toCalendar(Date date) {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		return cal;
 	}
-	
-	private static Calendar toCalendar(Date date){ 
-		  Calendar cal = Calendar.getInstance();
-		  cal.setTime(date);
-		  return cal;
-	}
-	
+
 	@RequestMapping("/event/{id}/EventEdited")
-	public String groupEdited(Model model, @PathVariable long id,  @RequestParam String info, HttpServletRequest request) {
+	public String groupEdited(Model model, @PathVariable long id, @RequestParam String info,
+			HttpServletRequest request) {
 		Event event = eventRepo.findOne(id);
 		event.setInfo(info);
 		eventRepo.save(event);
 		model.addAttribute("event", event);
-		
 		model.addAttribute("events_active", true);
-		
 		if ((userComponent.isLoggedUser())) {
 			long idUser = userComponent.getLoggedUser().getId();
 			User userLogged = userRepo.findOne(idUser);
@@ -235,24 +191,21 @@ public class eventController {
 		} else {
 			return "redirect:/event/{id}";
 		}
-		
+
 	}
-	
+
 	@RequestMapping("/event/{id}/addImage")
-	public String addImage(Model model, @PathVariable long id, @RequestParam("file") MultipartFile file, HttpServletRequest request) throws ParseException {
+	public String addImage(Model model, @PathVariable long id, @RequestParam("file") MultipartFile file,
+			HttpServletRequest request) throws ParseException {
 		Event event = eventRepo.findOne(id);
-		
-		//Filename formater
+		// Filename formater
 		SimpleDateFormat formater = new SimpleDateFormat("mmddyyyy-hhMMss");
 		Date date = new Date();
-		String filename = "imageingallery-"+formater.format(date);
-		
-		if(urteam.uploadImageFile(model, file,filename,ConstantsUrTeam.EVENT_IMGS, event.getEventId())){
+		String filename = "imageingallery-" + formater.format(date);
+		if (urteam.uploadImageFile(model, file, filename, ConstantsUrTeam.EVENT_IMGS, event.getEventId())) {
 			event.addNewImageToGallery(filename);
 		}
-		
 		eventRepo.save(event);
-		
 		if ((userComponent.isLoggedUser())) {
 			long idUser = userComponent.getLoggedUser().getId();
 			User userLogged = userRepo.findOne(idUser);
@@ -266,62 +219,37 @@ public class eventController {
 			return "redirect:/event/{id}";
 		}
 	}
-	
+
 	@RequestMapping("/sortEventByName/{name}")
 	public String sortEventByName(Model model, @RequestParam String name) {
-		
-		
-		
 		List<Event> eventos = eventRepo.findAll();
-
 		eventos = eventRepo.findByName(name);
-		
-		
 		model.addAttribute("events", eventos);
-		
-
 		return "redirect:/events";
 	}
-	
-	
+
 	@RequestMapping("/sortEventBySport")
 	public String sortEventBySport(Model model, @RequestParam String sport) {
-		
 		List<Event> eventos = eventRepo.findBySport(sport);
-
 		model.addAttribute("events", eventos);
-		
-		
-
 		return "redirect:/events";
 	}
-	
-	
+
 	@RequestMapping("/event/{id}/follow")
-	  public String follow(Model model, @PathVariable long id, HttpServletRequest request) {
-	    
-	    Event event = eventRepo.findOne(id);    
-	    
-	    User user = userRepo.findOne(userComponent.getLoggedUser().getId());
-	    
-	    if(user.getEventList().contains(event)){
-	      
-	      user.removeEvent(event);
-	      model.addAttribute("following", false);
-	      
-	    }else{
-	    
-	      user.addEvent(event);
-	      model.addAttribute("following", true);
-	    
-	    }
-	    
-	    userRepo.save(user);
-	    
-	    model.addAttribute("event", event);
-	    
-	    
-	    if ((userComponent.isLoggedUser())) {
+	public String follow(Model model, @PathVariable long id, HttpServletRequest request) {
+		Event event = eventRepo.findOne(id);
+		User user = userRepo.findOne(userComponent.getLoggedUser().getId());
+		if (user.getEventList().contains(event)) {
+			user.removeEvent(event);
+			model.addAttribute("following", false);
+
+		} else {
+			user.addEvent(event);
+			model.addAttribute("following", true);
+		}
+		userRepo.save(user);
+		model.addAttribute("event", event);
+		if ((userComponent.isLoggedUser())) {
 			long idUser = userComponent.getLoggedUser().getId();
 			User userLogged = userRepo.findOne(idUser);
 			model.addAttribute("user", userLogged);
@@ -333,17 +261,14 @@ public class eventController {
 		} else {
 			return "redirect:/event/{id}";
 		}
-	    
+	}
 
-	  }
-	
-	
-	
-//	@PostMapping("/")
-//    public String checkPersonInfo(@Valid Event personForm, BindingResult bindingResult) {
-//        if (bindingResult.hasErrors()) {
-//            return "form";
-//        }
-//        return "redirect:/results";
-//    }
+	// @PostMapping("/")
+	// public String checkPersonInfo(@Valid Event personForm, BindingResult
+	// bindingResult) {
+	// if (bindingResult.hasErrors()) {
+	// return "form";
+	// }
+	// return "redirect:/results";
+	// }
 }

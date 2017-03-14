@@ -61,10 +61,11 @@ public class UserController {
 		List<User> friends = user.getFollowing();
 		List<Community> communities = user.getCommunityList();
 		List<Event> events = user.getEventList();
-		model.addAttribute("following", friends);
+		model.addAttribute("userFollowing", friends);
 		model.addAttribute("communities", communities);
 		model.addAttribute("events", events);
-		model.addAttribute("members", communities.size());
+		model.addAttribute("membersCommunity", communities.size());
+		
 		model.addAttribute("numberOfFollowers", user.getNumberOfFollower());
 		model.addAttribute("sportList", sportController.getSportList());
 		model.addAttribute("stats", user.getSportStats());		
@@ -97,6 +98,11 @@ public class UserController {
 			throws ParseException {
 		
 		User editedUser = userRepository.findByNickname(nickname);
+		
+		User me = userRepository.findOne(userComponent.getLoggedUser().getId());
+		
+		if(editedUser.getId() == me.getId()){
+		
 		editedUser.setUserName(username);
 		editedUser.setSurname(surname);
 		editedUser.setEmail(email);
@@ -112,6 +118,8 @@ public class UserController {
 			}
 		}
 		
+		}
+		
 		userRepository.save(editedUser);
 		return "redirect:/user/{nickname}";
 	}
@@ -124,6 +132,7 @@ public class UserController {
 
 		if (me.getFollowing().contains(user)) {
 			me.getFollowing().remove(user);
+			model.addAttribute("buttonfollowing", false);
 		} else {
 			me.getFollowing().add(user);
 			model.addAttribute("buttonfollowing", true);

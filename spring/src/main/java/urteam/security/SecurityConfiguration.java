@@ -30,6 +30,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/addEvent").hasAnyRole("USER");
         http.authorizeRequests().antMatchers("/addGroup").hasAnyRole("USER");
         http.authorizeRequests().antMatchers("/user/*").hasAnyRole("USER");
+        http.authorizeRequests().antMatchers("/event/*/follow").hasAnyRole("USER");
+        http.authorizeRequests().antMatchers("/GroupAdded").hasAnyRole("USER");
+        http.authorizeRequests().antMatchers("/eventAdded").hasAnyRole("USER");
+        http.authorizeRequests().antMatchers("/moreContent").hasAnyRole("USER");
+        http.authorizeRequests().antMatchers("/moreGroups").hasAnyRole("USER");
         http.authorizeRequests().antMatchers("/adminPanel/*").hasAnyRole("ADMIN");
 
         // Login form
