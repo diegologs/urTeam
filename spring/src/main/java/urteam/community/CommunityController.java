@@ -101,6 +101,8 @@ public class CommunityController{
 	    	model.addAttribute("following", false);
 	    
 	    }
+	  
+	    model.addAttribute("owner", community.getOwner_id().getId() == userComponent.getLoggedUser().getId());
 	    model.addAttribute("numberOfMembers",community.getCommunityUsers().size());
 	    model.addAttribute("members",community.getCommunityUsers());
 		model.addAttribute("community", community);
@@ -152,7 +154,12 @@ public class CommunityController{
 	public String groupEdited(Model model, @PathVariable long id,  @RequestParam String info, HttpServletRequest request) {
 		
 		Community community = communityRepo.findOne(id);
-		community.setInfo(info);
+		
+		if(community.getOwner_id().getId() == userComponent.getLoggedUser().getId()){
+		
+			community.setInfo(info);
+		
+		}
 		
 		communityRepo.save(community);
 		model.addAttribute("community", community);
@@ -178,10 +185,13 @@ public class CommunityController{
 	public String groupEdited(Model model, @PathVariable long id, @RequestParam String title, @RequestParam String text, HttpServletRequest request) {
 		
 		Community community = communityRepo.findOne(id);
-		communityRepo.save(community);		
-		News news = new News(title, text);
-		community.getNews().add(news);
-		newsRepo.save(news);
+		communityRepo.save(community);	
+		if(community.getOwner_id().getId() == userComponent.getLoggedUser().getId()){
+			News news = new News(title, text);
+			community.getNews().add(news);
+			newsRepo.save(news);
+		
+		}
 		model.addAttribute("community", community);
 
 		if ((userComponent.isLoggedUser())) {
@@ -205,18 +215,20 @@ public class CommunityController{
 		
 		
 		Community community  = communityRepo.findOne(id);
+		if(community.getOwner_id().getId() == userComponent.getLoggedUser().getId()){
 		
-		//Filename formater
-		SimpleDateFormat formater = new SimpleDateFormat("mmddyyyy-hhMMss");
-		Date date = new Date();
+			//Filename formater
+			SimpleDateFormat formater = new SimpleDateFormat("mmddyyyy-hhMMss");
+			Date date = new Date();
+			
+			
+			String filename = "imageingallery-"+formater.format(date);
+			
+			if(urteam.uploadImageFile(model, file,filename,ConstantsUrTeam.COMMUNITY_IMGS, community.getCommunityId())){
+				community.addImage(filename);
+			}
 		
-		
-		String filename = "imageingallery-"+formater.format(date);
-		
-		if(urteam.uploadImageFile(model, file,filename,ConstantsUrTeam.COMMUNITY_IMGS, community.getCommunityId())){
-			community.addImage(filename);
 		}
-		
 		communityRepo.save(community);
 		
 		if ((userComponent.isLoggedUser())) {
@@ -255,8 +267,11 @@ public class CommunityController{
 		SimpleDateFormat communityIdFormater = new SimpleDateFormat("mmddyyyy-hhMMss");
 		String communitytId = communityIdFormater.format(date);
 		community.setCommunityId(communitytId);
+		community.setOwner_id(userComponent.getLoggedUser());
+		
 		String filename = "avatar-"+formater.format(date);
-	
+		
+		
 		
 		if(urteam.uploadImageFile(model, file,filename,ConstantsUrTeam.COMMUNITY_AVATAR, community.getCommunityId())){
 			community.setMain_photo(filename);

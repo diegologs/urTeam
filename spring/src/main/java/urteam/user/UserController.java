@@ -96,7 +96,13 @@ public class UserController {
 			@RequestParam String city, @RequestParam String country, @RequestParam("file") MultipartFile file)
 			throws ParseException {
 		
+		
 		User editedUser = userRepository.findByNickname(nickname);
+		
+		User me = userRepository.findOne(userComponent.getLoggedUser().getId());
+		
+		if(editedUser.getId() == me.getId()){
+		
 		editedUser.setUserName(username);
 		editedUser.setSurname(surname);
 		editedUser.setEmail(email);
@@ -110,6 +116,8 @@ public class UserController {
 					editedUser.getGeneratedId())) {
 				editedUser.setAvatar(filename);
 			}
+		}
+		
 		}
 		
 		userRepository.save(editedUser);

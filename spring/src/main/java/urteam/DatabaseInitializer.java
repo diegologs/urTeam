@@ -36,7 +36,7 @@ public class DatabaseInitializer {
 	@Autowired
 	private SportRepository sportRepo;
 
-	//@PostConstruct
+	@PostConstruct
 	public void init() throws ParseException {
 
 
@@ -91,20 +91,6 @@ public class DatabaseInitializer {
 			eventRepo.save(event);
 		}*/
 
-		// Sample communities
-		for (int i = 0; i < 10; i++) {
-			String name = "Comunidad  "+String.valueOf(i);
-			String info = "Información de la comunidad.";
-			String main_photo = "http://lorempixel.com/400/200/sports/" + i%10;
-			News news = new News("Titulo de ejemplo de la noticia", "Texto de ejemplo de la noticia.");
-			newsRepo.save(news);
-			Community com = new Community("MTB  "+String.valueOf(i), info, "Mtb",main_photo);
-			Community com2 = new Community("Running  "+String.valueOf(i), info, "Running",main_photo);
-
-			communityRepo.save(com);
-			communityRepo.save(com2);
-		}
-		
 		
 		// Sample users
 		String avatar = "avatar";
@@ -119,6 +105,23 @@ public class DatabaseInitializer {
 	    userRepo.save(user3);
 	    userRepo.save(user4);
 	    userRepo.save(user_admin);
+	    
+
+		// Sample communities
+	
+	    for (int i = 0; i < 10; i++) {
+			String name = "Comunidad  "+String.valueOf(i);
+			String info = "Información de la comunidad.";
+			String main_photo = "http://lorempixel.com/400/200/sports/" + i%10;
+			News news = new News("Titulo de ejemplo de la noticia", "Texto de ejemplo de la noticia.");
+			newsRepo.save(news);
+			Community com = new Community("MTB  "+String.valueOf(i), info, "Mtb",main_photo, user1);
+			Community com2 = new Community("Running  "+String.valueOf(i), info, "Running",main_photo, user2);
+
+			communityRepo.save(com);
+			communityRepo.save(com2);
+		}
+		
 	   
 	//Add followers
 	    
