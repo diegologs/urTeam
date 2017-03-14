@@ -121,18 +121,7 @@ body {}
     padding: 30px;
 }
 
-.dropdown-menu {
-    padding: 30px;
-    margin-right: 10px;
-    background: #1a2930;
-}
 
-.dropdown-menu .btn{
-    margin-top: 5px;
-    display: block;
-    color: black;
-
-}
 
 /*Communities info*/
 .group{
