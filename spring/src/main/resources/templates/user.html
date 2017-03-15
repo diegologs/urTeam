@@ -136,6 +136,9 @@
 						<li class="active"><a href="#profile" class="page-scroll">
 								<i class="fa fa-user-circle" aria-hidden="true"></i> Biografia
 						</a></li>
+						<li><a href="#goals" class="page-scroll"> <i
+								class="fa fa-flag-checkered" aria-hidden="true"></i> Logros
+						</a></li>
 
 						<li><a href="#progress" class="page-scroll"> <i
 								class="fa fa-line-chart" aria-hidden="true"></i> Progreso
@@ -144,9 +147,7 @@
 						<li><a href="#communities" class="page-scroll"> <i
 								class="fa fa-users" aria-hidden="true"></i> Comunidades
 						</a></li>
-						<li><a href="#goals" class="page-scroll"> <i
-								class="fa fa-flag-checkered" aria-hidden="true"></i> Logros
-						</a></li>
+						
 
 						<li><a href="#friends" class="page-scroll"> <i
 								class="fa fa-address-book" aria-hidden="true"></i> Siguiendo
@@ -175,6 +176,26 @@
 					<!--/row-->
 					<hr class="hr-yellow">
 					<div class="row">{{userpage.bio}}</div>
+					<br> <br>
+				</div>
+				<div class="container-fluid info-box" id="goals">
+					<div class="row">
+						<div class="col-sm-12">
+							<h3>
+								<i class="fa fa-flag-checkered" aria-hidden="true"></i> Logros
+							</h3>
+						</div>
+					</div>
+					<!--/row-->
+					<hr class="hr-yellow">
+					<div class="row">
+						<div class="skillBar">
+							<h4>Nivel {{level}}</h4>
+							<div class="skillBarContainer">
+								<div class="skillBarValue" style="width: {{progress}}%;"></div>
+							</div>
+						</div>
+					</div>
 					<br> <br>
 				</div>
 				<div class="container-fluid info-box" id="progress">
@@ -259,33 +280,7 @@
 
 				<br> <br>
 			</div>
-			<div class="container-fluid info-box" id="goals">
-				<div class="row">
-					<div class="col-sm-12">
-						<h3>
-							<i class="fa fa-flag-checkered" aria-hidden="true"></i> Logros
-						</h3>
-					</div>
-				</div>
-				<!--/row-->
-				<hr class="hr-yellow">
-				<div class="row">
-					<div class="skillBar">
-						<h4>MTB Nivel 2</h4>
-						<div class="skillBarContainer">
-							<div class="skillBarValue value-50"></div>
-						</div>
-					</div>
 
-					<div class="skillBar">
-						<h4>Runner Nivel 3</h4>
-						<div class="skillBarContainer">
-							<div class="skillBarValue value-80"></div>
-						</div>
-					</div>
-				</div>
-				<br> <br>
-			</div>
 			<div class="container-fluid info-box" id="friends">
 				<div class="row">
 					<div class="col-sm-12">
