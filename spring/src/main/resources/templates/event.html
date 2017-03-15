@@ -1,185 +1,248 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>urTeam - Tu web del deporte</title>
-  	<link rel="shortcut icon" href="/images/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/event.css">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+<meta charset="UTF-8">
+<title>urTeam - Tu web del deporte</title>
+<link rel="shortcut icon" href="/images/favicon.ico" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/event.css">
+<link rel="stylesheet"
+	href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
+	media="screen">
 </head>
 <body>
-    {{> navbar_template}}
+	{{> navbar_template}}
 
-    <div class="container">
-        <!-- EVENT FAST INFO -->
-        <div class="row panel">
-            <div class="col-md-4 bg_blur ">
-                <!-- <a href="#" class="follow_btn">Seguir</a> -->
-                <img src="/image/event-avatar/{{event.eventId}}/{{event.main_photo}}">
-            </div>
-            <div class="col-md-8  col-xs-12">
-                <div class="header">
-                   <h1>{{event.name}}</h1>
-                    <hr class="hr-yellow">
-                    <h4><i class="fa fa-calendar-check-o "></i><span> {{event.start_date}} </span><i class="fa fa-calendar-check-o "></i><span> {{event.end_date}} </span></h4>
-                    <h4><i class="fa fa-map-marker "></i><span> {{event.place}}</span></h4>
-                    <h4>{{event.sport}}</h4>
-                    
-                    <form action="/event/{{id}}/follow" method="post">
+	<div class="container">
+		<!-- EVENT FAST INFO -->
+		<div class="row panel">
+			<div class="col-md-4 bg_blur ">
+				<!-- <a href="#" class="follow_btn">Seguir</a> -->
+				<img
+					src="/image/event-avatar/{{event.eventId}}/{{event.main_photo}}">
+			</div>
+			<div class="col-md-8  col-xs-12">
+				<div class="header">
+					<h1>{{event.name}}</h1>
+					<hr class="hr-yellow">
+					<h4>
+						<i class="fa fa-calendar-check-o "></i><span>
+							{{event.start_date}} </span><i class="fa fa-calendar-check-o "></i><span>
+							{{event.end_date}} </span>
+					</h4>
+					<h4>
+						<i class="fa fa-map-marker "></i><span> {{event.place}}</span>
+					</h4>
+					<h4>{{event.sport}}</h4>
+
+					<form action="/event/{{id}}/follow" method="post">
+						{{#eventFollowed}} 
+							<input type="submit" class="btn btn-default group-btn mybtn-succes" value="Dejar de seguir"> 
+							<input type="hidden" name="_csrf" value="{{token}}" /> 
+						{{/eventFollowed}} {{^eventFollowed}} 
+							<input type="submit" class="btn btn-default group-btn mybtn-succes" value="Seguir">
+							<input type="hidden" name="_csrf" value="{{token}}" />
+						{{/eventFollowed}}
+					</form>
 
 
-					{{#following}} 
-					<input type="submit"
-						class="btn btn-default group-btn mybtn-succes" value="Dejar de seguir">
-						<input type="hidden" name="_csrf" value="{{token}}"/>
-					{{/following}} 
-					{{^following}} 
-					<input type="submit"
-						class="btn btn-default group-btn mybtn-succes" value="Seguir">
-						<input type="hidden" name="_csrf" value="{{token}}"/>
-					{{/following}}
-
-				</form>
-				
-                    
-                </div>
-            </div>
-        </div>
-        <!-- END EVENT FAST INFO -->
-        <!-- EVENT BAR -->
-        <div class="row nav">
-            <div class="col-md-12 col-xs-12">
-                <div class="col-md-4 col-xs-3 well">
-                    <i class="fa fa-users fa-lg"></i> {{event.participants}}
-                </div>
+				</div>
+			</div>
+		</div>
+		<!-- END EVENT FAST INFO -->
+		<!-- EVENT BAR -->
+		<div class="row nav">
+			<div class="col-md-12 col-xs-12">
+				<div class="col-md-4 col-xs-3 well" data-toggle="modal" data-target="#myModalEventMembers"> 
+					<i class="fa fa-users" aria-hidden="true"></i> {{numberOfMembers}} Miembros
+				</div>
 				<!-- 
                 <div class="col-md-3 col-xs-3 well">
                     <i class="fa fa-thumbs-o-up fa-lg"></i> 26
                 </div>
  				-->
-                <div class="col-md-4 col-xs-3 well">
-                	{{event.price}} <i class="fa fa-eur fa-lg"></i>
-                </div>
+				<div class="col-md-4 col-xs-3 well">
+					{{event.price}} <i class="fa fa-eur fa-lg"></i>
+				</div>
 
-                <div class="col-md-4 col-xs-3 well" data-toggle="modal" data-target="#modalShareEvent">
-                    <i class="fa fa-share-alt"></i>
-                </div>
-            </div>
-        </div>
-        <!-- END EVENT BAR -->
-        <!-- EVENT DESCRIPTION -->
-        <div class="info">
-            <h3><i class="fa fa-info" aria-hidden="true"></i> Información </h3>
-            <hr>
-            <div class="info-text">
-            	{{event.info}}
-            </div>
-            <a data-toggle="modal" data-target="#myModal_editEventInfo"><button class="btn mybtn-succes">Editar información</button></a>
-        </div>
-        <!-- END EVENT DESCRIPTION -->
-        <h3><i class="fa fa-picture-o" aria-hidden="true"> </i>  Fotos</h3>
-        <a data-toggle="modal" data-target="#myModal_addPhotos"><button class="btn mybtn-succes">Añadir Fotos</button></a>
-        <hr>
-        <!-- EVENT GALLERY -->
-        <div class='list-group gallery'>
-	       	{{#eventGallery}}
-	       		 {{>eventGallery_template}}
-	       	{{/eventGallery}}
-        </div>
-        <!-- END EVENT GALLERY -->
-    </div>
-    
- 	<!-- Modal Edit Event Info -->
-    <div id="myModal_editEventInfo" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Información</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="form-container">
-                        <form class="form-group" action="/event/{{id}}/EventEdited" method="post">
-                            <label style="color:black;" for="textarea">Información</label>
-                              <textarea type="text" id="textarea" class="form-control" rows="15" name="info"></textarea>
-                              <br>
-                              <hr>
-                            <div class="addButton">
-                                 <button type="submit" class="btn mybtn-succes addButton">Editar información</button>
-                                 <input type="hidden" name="_csrf" value="{{token}}"/>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Modal Edit Event Info -->    
-   
-    <!-- Modal Add Photos -->
-    <div id="myModal_addPhotos" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Añadir Fotos</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="form-container">
-                        <form class="form-group" action="/event/{{id}}/addImage" method="post"  enctype="multipart/form-data">
-                            <div class="form-group">
-                    			<label for="eventGallery">Imagen</label>
-                    			<input type="file" class="form-control-file" name="file" aria-describedby="fileHelp">
-                			</div>
-                            <div class="addButton">
-                                 <button type="submit" class="btn mybtn-succes addButton">Añadir Foto</button>
-                                 <input type="hidden" name="_csrf" value="{{token}}"/>
-                            </div>
-                        </form>
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Modal Add Photos -->   
+				<div class="col-md-4 col-xs-3 well" data-toggle="modal"
+					data-target="#modalShareEvent">
+					<i class="fa fa-share-alt"></i>
+				</div>
+			</div>
+		</div>
+		<!-- END EVENT BAR -->
+		<!-- EVENT DESCRIPTION -->
+		<div class="info">
+			<h3>
+				<i class="fa fa-info" aria-hidden="true"></i> Información
+			</h3>
+			<hr>
+			<div class="info-text">{{event.info}}</div>
+			{{#owner}}
+			<a data-toggle="modal" data-target="#myModal_editEventInfo"><button
+					class="btn mybtn-succes">Editar información</button></a>
+			{{/owner}}
+		</div>
+		<!-- END EVENT DESCRIPTION -->
+		<h3>
+			<i class="fa fa-picture-o" aria-hidden="true"> </i> Fotos
+		</h3>
+		{{#owner}}
+		<a data-toggle="modal" data-target="#myModal_addPhotos"><button
+				class="btn mybtn-succes">Añadir Fotos</button></a>
+		{{/owner}}
+		<hr>
+		<!-- EVENT GALLERY -->
+		<div class='list-group gallery'>
+			{{#eventGallery}}
+				{{>eventGallery_template}}
+			{{/eventGallery}}
+		</div>
+		<!-- END EVENT GALLERY -->
+	</div>
 
-    <!-- MODAL SHARE SNIPP -->
-    <div class="modal fade" id="modalShareEvent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Cerrar</span></button>
-                    <h4 class="modal-title" id="myModalLabel"><i class="fa fa-share-alt"></i> Compartir</h4>
-                </div>
-                <div class="modal-body">
-                    <p>
-                        <a title="Facebook" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-facebook fa-stack-1x"></i></span></a>
-                        <a title="Twitter" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-twitter fa-stack-1x"></i></span></a>
-                        <a title="Google+" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-google-plus fa-stack-1x"></i></span></a>
-                        <a title="Reddit" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-reddit fa-stack-1x"></i></span></a>
-                        <a title="WordPress" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-wordpress fa-stack-1x"></i></span></a>
-                        <a title="Stumbleupon" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-stumbleupon fa-stack-1x"></i></span></a>
-                        <a title="E-mail" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-envelope fa-stack-1x"></i></span></a>
-                        <a title="Print" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-print fa-stack-1x"></i></span></a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- END MODAL SHARE SNIPP -->
+	<!-- Modal Edit Event Info -->
+	<div id="myModal_editEventInfo" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Información</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-container">
+						<form class="form-group" action="/event/{{id}}/EventEdited"
+							method="post">
+							<label style="color: black;" for="textarea">Información</label>
+							<textarea type="text" id="textarea" class="form-control"
+								rows="15" name="info"></textarea>
+							<br>
+							<hr>							
+							<div class="addButton">
+								<button type="submit" class="btn mybtn-succes addButton">Editar	información</button>
+								<input type="hidden" name="_csrf" value="{{token}}" />
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Modal Edit Event Info -->
+
+	<!-- Modal Add Photos -->
+	<div id="myModal_addPhotos" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Añadir Fotos</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-container">
+						<form class="form-group" action="/event/{{id}}/addImage"
+							method="post" enctype="multipart/form-data">
+							<div class="form-group">
+								<label for="eventGallery">Imagen</label> <input type="file"
+									class="form-control-file" name="file"
+									aria-describedby="fileHelp">
+							</div>
+							<div class="addButton">
+								<button type="submit" class="btn mybtn-succes addButton">Añadir
+									Foto</button>
+								<input type="hidden" name="_csrf" value="{{token}}" />
+							</div>
+						</form>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Modal Add Photos -->
+
+	<!-- MODAL SHARE SNIPP -->
+	<div class="modal fade" id="modalShareEvent" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">×</span><span class="sr-only">Cerrar</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">
+						<i class="fa fa-share-alt"></i> Compartir
+					</h4>
+				</div>
+				<div class="modal-body">
+					<p>
+						<a title="Facebook" href=""><span class="fa-stack fa-lg"><i
+								class="fa fa-square-o fa-stack-2x"></i><i
+								class="fa fa-facebook fa-stack-1x"></i></span></a> <a title="Twitter"
+							href=""><span class="fa-stack fa-lg"><i
+								class="fa fa-square-o fa-stack-2x"></i><i
+								class="fa fa-twitter fa-stack-1x"></i></span></a> <a title="Google+"
+							href=""><span class="fa-stack fa-lg"><i
+								class="fa fa-square-o fa-stack-2x"></i><i
+								class="fa fa-google-plus fa-stack-1x"></i></span></a> <a title="Reddit"
+							href=""><span class="fa-stack fa-lg"><i
+								class="fa fa-square-o fa-stack-2x"></i><i
+								class="fa fa-reddit fa-stack-1x"></i></span></a> <a title="WordPress"
+							href=""><span class="fa-stack fa-lg"><i
+								class="fa fa-square-o fa-stack-2x"></i><i
+								class="fa fa-wordpress fa-stack-1x"></i></span></a> <a title="Stumbleupon"
+							href=""><span class="fa-stack fa-lg"><i
+								class="fa fa-square-o fa-stack-2x"></i><i
+								class="fa fa-stumbleupon fa-stack-1x"></i></span></a> <a title="E-mail"
+							href=""><span class="fa-stack fa-lg"><i
+								class="fa fa-square-o fa-stack-2x"></i><i
+								class="fa fa-envelope fa-stack-1x"></i></span></a> <a title="Print" href=""><span
+							class="fa-stack fa-lg"><i
+								class="fa fa-square-o fa-stack-2x"></i><i
+								class="fa fa-print fa-stack-1x"></i></span></a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- END MODAL SHARE SNIPP -->
+	
+	<!-- MODAL EVENT MEMBERS -->
+	<div id="myModalEventMembers" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Usuarios siguiendo este evento</h4>
+				</div>
+				<div class="modal-body">
+					<ul>
+						{{#event.participants_IDs}}
+						<li><i class="fa fa-user-circle" aria-hidden="true"></i>
+						<a href="/user/{{nickname}}">{{nickname}}</a></li>
+						{{/event.participants_IDs}}
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- MODAL EVENT MEMBERS -->
+	
 	{{> footer_template}}
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
-    <script src="/js/fancybox.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script
+		src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+	<script src="/js/fancybox.js"></script>
 
 </body>
 

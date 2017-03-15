@@ -42,6 +42,13 @@ public class Sport {
 	public void setMultiplicator(double d) {
 		this.multiplicator = d;
 	}
+
+	@Override
+	public String toString() {
+		return name;
+	}
+	
+	
 	
 	
 

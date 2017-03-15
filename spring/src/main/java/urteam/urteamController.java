@@ -4,11 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.security.Principal;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,18 +14,16 @@ import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletCont
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
 import org.springframework.boot.web.servlet.ErrorPage;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import urteam.event.*;
+import urteam.sport.SportRepository;
 import urteam.user.*;
 
 @Controller
@@ -44,10 +37,13 @@ public class urteamController {
 
 	@Autowired
 	private UserRepository userRepo;
+	
+	@Autowired
+	private SportRepository sportRepo;
 
 	@RequestMapping("/")
 	public String index(Model model, HttpServletRequest request) {
-
+		//Añadir elementos basicos
 		List<Event> eventos = eventRepo.findFirst3BySport("Mountain Bike");
 		model.addAttribute("first_events", eventos);
 
@@ -57,13 +53,15 @@ public class urteamController {
 		eventos = eventRepo.findFirst3BySport("Roller");
 		model.addAttribute("third_events", eventos);
 
+		//Comprobar si hay un usuario logueado y añadirlo
 		if ((userComponent.isLoggedUser())) {
-			long id = userComponent.getLoggedUser().getId();
-			User user = userRepo.findOne(id);
-			model.addAttribute("user", user);
-			if (userComponent.getLoggedUser().getId() == user.getId()) {
+			long userLogged_id = userComponent.getLoggedUser().getId();
+			User userLogged = userRepo.findOne(userLogged_id);
+			model.addAttribute("user", userLogged);
+			if (userComponent.getLoggedUser().getId() == userLogged.getId()) {
 				model.addAttribute("logged", true);
 			}
+			//Comprobar si es admin
 			model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
 			return "index";
 		} else {

@@ -192,7 +192,7 @@ public class User {
 	}
 
 	public void addFollowing(User following) {
-		this.following.add(following);
+		this.getFollowing().add(following);
 	}
 
 	public List<User> getFollowers() {

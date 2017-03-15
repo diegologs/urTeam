@@ -19,6 +19,7 @@ import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import urteam.sport.Sport;
 import urteam.user.User;
 
 @Entity
@@ -33,7 +34,7 @@ public class Event {
 	@Size(min = 2, max = 21)
 	private String name;
 	
-	
+	//@OneToOne
 	private String sport;
 	
 	private double price;
@@ -68,11 +69,10 @@ public class Event {
 	public Event() {
 	}
 
-	public Event(String name, String sport, double price, String info, String place, 
+	public Event(String name,double price, String info, String place, 
 			Date start_date, Date end_date, String main_photo) {
 		
 		this.name = name;
-		this.sport = sport;
 		this.price = price;
 		this.info = info;
 		this.place = place;		
@@ -81,11 +81,11 @@ public class Event {
 		this.main_photo = main_photo;
 	}
 	
-	public Event(String name, String sport, String info, double price, String place){
-		
+	public Event(String name, String info, double price, String place){		
 		this.name = name;
-		this.sport = sport;
 		this.info = info;
+		this.price = price;
+		this.place = place;
 	}
 
 	public long getId() {
