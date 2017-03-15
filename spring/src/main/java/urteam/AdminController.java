@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import urteam.community.Community;
 import urteam.community.CommunityRepository;
@@ -25,6 +27,12 @@ public class AdminController {
 
 	@Autowired
 	private CommunityRepository communityRepository;
+	
+	@RequestMapping("/adminPanel")
+	public String adminRoot(Model model) {
+		model.addAttribute("edit_Section", true);
+		return "controlPanel-base";
+	}
 
 	@RequestMapping("/adminPanel/edit")
 	public String edit(Model model, String action) {
@@ -45,6 +53,13 @@ public class AdminController {
 		model.addAttribute("events", events);
 		return "controlPanel-base";
 	}
+	
+	@RequestMapping("/adminPanel/manageEvents/delete/{id}")
+	public String manageEventsDelete(@PathVariable long id) {
+		Event event = eventRepository.findOne(id);
+		eventRepository.delete(event);
+		return "redirect:/adminPanel/manageEvents";
+	}
 
 	@RequestMapping("/adminPanel/manageUsers")
 	public String manageUsers(Model model, String action) {
@@ -53,6 +68,13 @@ public class AdminController {
 		model.addAttribute("users", users);
 		return "controlPanel-base";
 	}
+	
+	@RequestMapping("/adminPanel/manageUsers/delete/{id}")
+	public String manageUsersDelete(@PathVariable long id) {
+		User user = userRepository.findOne(id);
+		userRepository.delete(user);
+		return "redirect:/adminPanel/manageUsers";
+	}
 
 	@RequestMapping("/adminPanel/manageGroups")
 	public String manageGroups(Model model, String action) {
@@ -60,6 +82,13 @@ public class AdminController {
 		List<Community> communities = communityRepository.findAll();
 		model.addAttribute("communities", communities);
 		return "controlPanel-base";
+	}
+	
+	@RequestMapping("/adminPanel/manageGroups/delete/{id}")
+	public String manageGroupsDelete(@PathVariable long id) {
+		Community community = communityRepository.findOne(id);
+		communityRepository.delete(community);
+		return "redirect:/adminPanel/manageGroups";
 	}
 
 }
