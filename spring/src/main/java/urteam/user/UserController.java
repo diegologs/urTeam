@@ -69,7 +69,13 @@ public class UserController {
 		model.addAttribute("numberOfFollowers", user.getNumberOfFollower());
 		model.addAttribute("sportList", sportController.getSportList());
 		model.addAttribute("stats", user.getSportStats());		
-
+		for (Event event : events) {
+			model.addAttribute("eventFollowed", me.getEventList().contains(event));
+		}
+		for (Community community : communities) {
+			model.addAttribute("communityFollowed", me.getCommunityList().contains(community));
+		}
+		
 		model.addAttribute("buttonfollowing", me.getId() != user.getId());
 		if (me.getFollowing().contains(user)) {
 			model.addAttribute("isfollowed", true);

@@ -1,11 +1,11 @@
 a{
-	color:black;
+	color: grey;
 	texto-decoration: none;
 	
 }
 a:hover{
-	color:grey;
-	texto-decoration: none;
+	color: grey;
+	texto-decoration: underline;
 }
 .group-header{
     min-height: 200px;

@@ -56,6 +56,11 @@ public class CommunityController {
 			model.addAttribute("user", userLogged);
 			// Comprobar si es admin
 			model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
+			
+			//Comprobar si el usuario sigue a alguna comunidad
+			for (Community community : groups) {
+				model.addAttribute("communityFollowed", userLogged.getCommunityList().contains(community));
+			}
 			return "groups";
 		} else {
 			return "groups";
