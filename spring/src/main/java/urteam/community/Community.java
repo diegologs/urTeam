@@ -51,12 +51,11 @@ public class Community {
 	public Community() {
 	}
 
-	public Community(String name, String info, String sport, String main_photo, User owner_id) {
+	public Community(String name, String info, String sport, String main_photo) {
 		this.name = name;
 		this.info = info;
 		this.sport = sport;
 		this.main_photo = main_photo;
-		this.owner_id = owner_id;
 	}	
 	
 	public String getSport() {

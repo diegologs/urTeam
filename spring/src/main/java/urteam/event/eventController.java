@@ -23,7 +23,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import urteam.ConstantsUrTeam;
 import urteam.urteamController;
-import urteam.community.*;
 import urteam.sport.*;
 import urteam.user.*;
 
@@ -35,6 +34,9 @@ public class eventController {
 
 	@Autowired
 	private UserRepository userRepo;
+	
+	@Autowired
+	private SportRepository sportRepo;	
 
 	@Autowired
 	private urteamController urteam;
@@ -193,7 +195,7 @@ public class eventController {
 	}
 
 	@RequestMapping("/eventAdded")
-	public String eventAdded(Model model, Event event, @RequestParam String start_date, @RequestParam String end_date,
+	public String eventAdded(Model model, Event event, @RequestParam String sport, @RequestParam String start_date, @RequestParam String end_date,
 			@RequestParam("file") MultipartFile file, HttpServletRequest request) throws ParseException {
 		
 		model.addAttribute("events_active", true);
@@ -206,6 +208,7 @@ public class eventController {
 			model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
 			
 			// Crear evento
+
 			Date final_start_date = new SimpleDateFormat("dd/MM/yyyy").parse(start_date);
 			event.setStart_date(final_start_date);
 			Date final_end_date = new SimpleDateFormat("dd/MM/yyyy").parse(end_date);
@@ -279,7 +282,7 @@ public class eventController {
 	}
 
 	@RequestMapping("/sortEventBySport")
-	public String sortEventBySport(Model model, @RequestParam String sport) {
+	public String sortEventBySport(Model model, @RequestParam Sport sport) {
 		List<Event> eventos = eventRepo.findBySport(sport);
 		model.addAttribute("events", eventos);
 		return "redirect:/events";
