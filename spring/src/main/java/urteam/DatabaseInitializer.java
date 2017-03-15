@@ -69,6 +69,7 @@ public class DatabaseInitializer {
 			String avatar = "default-avatar";
 			
 			User user = new User(username, surname, nickname, password, email, bio, score, city, country, avatar, "ROLE_USER");
+			user.setScore("5750");
 			userRepo.save(user); 
 		}
 		

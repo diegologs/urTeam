@@ -22,6 +22,7 @@ import urteam.urteamController;
 import urteam.community.*;
 import urteam.event.*;
 import urteam.sport.*;
+import urteam.stats.StatsController;
 
 @Controller
 public class UserController {
@@ -34,9 +35,13 @@ public class UserController {
 
 	@Autowired
 	private urteamController urteamController;
+	
+	@Autowired
+	private StatsController statsController;
 
 	@Autowired
 	private UserComponent userComponent;
+
 
 	@RequestMapping("/newUser")
 	public String eventAdded(Model model, User user, @RequestParam String password) throws ParseException {
@@ -68,19 +73,22 @@ public class UserController {
 		
 		model.addAttribute("numberOfFollowers", user.getNumberOfFollower());
 		model.addAttribute("sportList", sportController.getSportList());
-		model.addAttribute("stats", user.getSportStats());		
-		for (Event event : events) {
-			model.addAttribute("eventFollowed", me.getEventList().contains(event));
-		}
-		for (Community community : communities) {
-			model.addAttribute("communityFollowed", me.getCommunityList().contains(community));
-		}
+		model.addAttribute("stats", user.getSportStats());	
+		model.addAttribute("level", statsController.computeUserLevel(user));
+		model.addAttribute("progress",statsController.computeUserBarLevel(user));
 		
 		model.addAttribute("buttonfollowing", me.getId() != user.getId());
 		if (me.getFollowing().contains(user)) {
 			model.addAttribute("isfollowed", true);
 		} else {
 			model.addAttribute("isfollowed", false);
+		}
+		
+		for (Event event : events) {
+			model.addAttribute("eventFollowed", me.getEventList().contains(event));
+		}
+		for (Community community : communities) {
+			model.addAttribute("communityFollowed", me.getCommunityList().contains(community));
 		}
 
 		if ((userComponent.isLoggedUser())) {

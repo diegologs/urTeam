@@ -236,6 +236,7 @@ position: fixed
   background: rgba(247, 206, 62,.75);
 }
 
+
 /* Allowed values for the css skill bars */
 .value-00  { width: 0;    }
 .value-10  { width: 10%;  }
