@@ -22,6 +22,7 @@ import urteam.urteamController;
 import urteam.community.*;
 import urteam.event.*;
 import urteam.sport.*;
+import urteam.stats.StatsController;
 
 @Controller
 public class UserController {
@@ -34,9 +35,13 @@ public class UserController {
 
 	@Autowired
 	private urteamController urteamController;
+	
+	@Autowired
+	private StatsController statsController;
 
 	@Autowired
 	private UserComponent userComponent;
+
 
 	@RequestMapping("/newUser")
 	public String eventAdded(Model model, User user, @RequestParam String password) throws ParseException {
@@ -61,14 +66,16 @@ public class UserController {
 		List<User> friends = user.getFollowing();
 		List<Community> communities = user.getCommunityList();
 		List<Event> events = user.getEventList();
-		model.addAttribute("following", friends);
+		model.addAttribute("userFollowing", friends);
 		model.addAttribute("communities", communities);
 		model.addAttribute("events", events);
-		model.addAttribute("members", communities.size());
+		model.addAttribute("membersCommunity", communities.size());
+		
 		model.addAttribute("numberOfFollowers", user.getNumberOfFollower());
 		model.addAttribute("sportList", sportController.getSportList());
 		model.addAttribute("stats", user.getSportStats());		
-
+		model.addAttribute("level", statsController.computeUserLevel(user));
+		model.addAttribute("progress",statsController.computeUserBarLevel(user));
 		model.addAttribute("buttonfollowing", me.getId() != user.getId());
 		if (me.getFollowing().contains(user)) {
 			model.addAttribute("isfollowed", true);
@@ -96,20 +103,28 @@ public class UserController {
 			@RequestParam String city, @RequestParam String country, @RequestParam("file") MultipartFile file)
 			throws ParseException {
 		
+		
 		User editedUser = userRepository.findByNickname(nickname);
-		editedUser.setUserName(username);
-		editedUser.setSurname(surname);
-		editedUser.setEmail(email);
-		editedUser.setBio(bio);
-		editedUser.setCity(city);
-		editedUser.setCountry(country);
-
-		if (file != null) {
-			String filename = "avatar-" + editedUser.getGeneratedId();
-			if (urteamController.uploadImageFile(model, file, filename, ConstantsUrTeam.USER_AVATAR,
-					editedUser.getGeneratedId())) {
-				editedUser.setAvatar(filename);
+		
+		User me = userRepository.findOne(userComponent.getLoggedUser().getId());
+		
+		if(editedUser.getId() == me.getId()){
+		
+			editedUser.setUserName(username);
+			editedUser.setSurname(surname);
+			editedUser.setEmail(email);
+			editedUser.setBio(bio);
+			editedUser.setCity(city);
+			editedUser.setCountry(country);
+	
+			if (file != null) {
+				String filename = "avatar-" + editedUser.getGeneratedId();
+				if (urteamController.uploadImageFile(model, file, filename, ConstantsUrTeam.USER_AVATAR,
+						editedUser.getGeneratedId())) {
+					editedUser.setAvatar(filename);
+				}
 			}
+		
 		}
 		
 		userRepository.save(editedUser);
@@ -124,6 +139,7 @@ public class UserController {
 
 		if (me.getFollowing().contains(user)) {
 			me.getFollowing().remove(user);
+			model.addAttribute("buttonfollowing", false);
 		} else {
 			me.getFollowing().add(user);
 			model.addAttribute("buttonfollowing", true);

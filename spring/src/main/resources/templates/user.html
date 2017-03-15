@@ -150,13 +150,11 @@
 
 						<li><a href="#friends" class="page-scroll"> <i
 								class="fa fa-address-book" aria-hidden="true"></i> Siguiendo
-						</a></li>
-						{{^buttonfollowing}}
+						</a></li> {{^buttonfollowing}}
 						<li><a data-toggle="modal"
 							data-target="#profile-settings-modal"> <i class="fa fa-cogs"
-								aria-hidden="true"> </i>Configuración</a>
-						</li>
-						{{/buttonfollowing}}
+								aria-hidden="true"> </i>Configuración
+						</a></li> {{/buttonfollowing}}
 					</ul>
 				</div>
 				<!-- END MENU -->
@@ -181,17 +179,22 @@
 				</div>
 				<div class="container-fluid info-box" id="progress">
 					<div class="row">
-						<!-- 
 						<div class="col-sm-12">
+
 							<h3>
 								<i class="fa fa-line-chart" aria-hidden="true"></i> Progreso
 							</h3>
+							<!-- 
+						<div class="col-sm-12">
+							
 							<a data-toggle="modal" data-target="#myModal_addStat"><button
 									class="btn mybtn-succes">Añadir sesión</button></a>
 						</div>
 						 -->
+						</div>
 					</div>
 					<!--/row-->
+
 					<div class="statsTable">
 
 						<table style="width: 100%">
@@ -319,64 +322,40 @@
 
 					<br> <br>
 				</div>
-				<div class="container-fluid info-box" id="goals">
-					<div class="row">
-						<div class="col-sm-12">
-							<h3>
-								<i class="fa fa-flag-checkered" aria-hidden="true"></i> Logros
-							</h3>
-						</div>
+				
+				<br> <br>
+			</div>
+			<div class="container-fluid info-box" id="friends">
+				<div class="row">
+					<div class="col-sm-12">
+						<h3>
+							<i class="fa fa-address-book" aria-hidden="true"></i> Siguiendo
+						</h3>
 					</div>
 					<!--/row-->
 					<hr class="hr-yellow">
-					<div class="row">
-						<div class="skillBar">
-							<h4>MTB Nivel 2</h4>
-							<div class="skillBarContainer">
-								<div class="skillBarValue value-50"></div>
-							</div>
-						</div>
-
-						<div class="skillBar">
-							<h4>Runner Nivel 3</h4>
-							<div class="skillBarContainer">
-								<div class="skillBarValue value-80"></div>
-							</div>
-						</div>
-					</div>
-					<br> <br>
-				</div>
-				<div class="container-fluid info-box" id="friends">
-					<div class="row">
-						<div class="col-sm-12">
-							<h3>
-								<i class="fa fa-address-book" aria-hidden="true"></i> Siguiendo
-							</h3>
-						</div>
-						<!--/row-->
-						<hr class="hr-yellow">
-						<div class="row friendrow">
-							{{#following}}
-							<div class="col-sm-6">
-								<a href="/user/{{nickname}}">
-									<div class="friend">
-										<div class="col-sm-3 friend-image">
-											<img class="img-circle img-responsive group-image"
-												width="110px" src="/image/user-avatar/{{id}}/{{avatar}}"
-												alt="following avatar">
-										</div>
-										<div class="col-sm-9 friend-name">
-											<h3>{{username}} {{surname}}</h3>
-										</div>
+					<div class="row friendrow">
+						{{#userFollowing}}
+						<div class="col-sm-6">
+							<a href="/user/{{nickname}}">
+								<div class="friend">
+									<div class="col-sm-3 friend-image">
+										<img class="img-circle img-responsive group-image"
+											width="110px" src="/image/user-avatar/{{id}}/{{avatar}}"
+											alt="following avatar">
 									</div>
-								</a>
-							</div>
-							{{/following}}
+									<div class="col-sm-9 friend-name">
+										<h3>{{username}} {{surname}}</h3>
+									</div>
+								</div>
+							</a>
 						</div>
+						{{/userFollowing}}
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
 	</div>
 
 	<div id="profile-settings-modal" class="modal fade" role="dialog">
@@ -395,14 +374,19 @@
 								enctype="multipart/form-data">
 								<div class="form-group">
 									<div class="col-md-9">
-
 										<div class="text-center">
-											<img src="/image/user-avatar/{{userpage.id}}/{{userpage.avatar}}"
+											<img
+												src="/image/user-avatar/{{userpage.id}}/{{userpage.avatar}}"
 												class="avatar img-circle" alt="avatar">
-											<h6>Cambiar avatar</h6>
-											<input class="form-control" type="file" name="file"
-												aria-describedby="fileHelp">
 										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="avatar" class="col-sm-3 control-label">Avatar</label>
+									<div class="col-sm-9">
+										<input class="form-control" type="file" name="file"
+											aria-describedby="fileHelp">
+
 									</div>
 								</div>
 

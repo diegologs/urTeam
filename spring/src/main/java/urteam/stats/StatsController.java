@@ -80,5 +80,23 @@ public class StatsController {
 		return totalScore;
 		
 	}
+	
+	public int computeUserLevel(User user){
+		
+		double userScore = Double.parseDouble(user.getScore());
+		
+		return (int) (userScore/1000); 
+			
+	}
+	
+	
+	public int computeUserBarLevel(User user){
+		
+		double userScore =  Double.parseDouble(user.getScore());
+		
+		int userbarlevel =((int)userScore%1000)/10;
+		
+		return userbarlevel;
+	}
 
 }
