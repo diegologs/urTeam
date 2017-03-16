@@ -366,5 +366,9 @@ video.fillWidth {
     margin-top: 5px;
     display: block;
     color: black;
+}
 
+.navbar-nav .nomargin{
+	padding-top: 10px;
+	padding-bottom: 10px;
 }

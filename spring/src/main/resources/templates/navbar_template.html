@@ -19,11 +19,16 @@
                 <li {{#events_active}}class="active"{{/events_active}}><a href="/events">Eventos</a></li>
                 <li {{#groups_active}}class="active"{{/groups_active}}><a href="/groups">Comunidades</a></li>
             </ul>
+            {{#admin}}
+            <ul class="nav navbar-nav navbar-right minav">
+            	<li ><a class = "nomargin" href="/adminPanel"><button
+					class="btn mybtn-succes">Admin</button></a>
+				</li>            	
+            </ul>			
+			{{/admin}}
             {{#logged}}
             <ul class="nav navbar-nav navbar-right minav">
-            	<!-- <li {{#user_active}}class="active"{{/user_active}}><a href="/userprofile/{{user.id}}">{{user.nickname}}</a></li> -->
-            
-				<li class="dropdown  {{#user_active}}active{{/user_active}}"><a href="#" class="dropdown-toggle"
+            	<li class="dropdown  {{#user_active}}active{{/user_active}}"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown"> <span class="user-name">
 							{{user.nickname}} </span> <b class="caret"></b></a>
 					<ul class="dropdown-menu">
