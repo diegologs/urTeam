@@ -73,9 +73,11 @@ public class UserController {
 		
 		model.addAttribute("numberOfFollowers", user.getNumberOfFollower());
 		model.addAttribute("sportList", sportController.getSportList());
-		model.addAttribute("stats", user.getSportStats());	
+		model.addAttribute("userSportList", user.getUserSportsList());	
 		model.addAttribute("level", statsController.computeUserLevel(user));
 		model.addAttribute("progress",statsController.computeUserBarLevel(user));
+		
+		model.addAttribute("userSportList", user.getUserSportsList());
 		
 		model.addAttribute("buttonfollowing", me.getId() != user.getId());
 		if (me.getFollowing().contains(user)) {

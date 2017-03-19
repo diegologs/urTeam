@@ -12,80 +12,68 @@
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/user.css">
 <link rel="stylesheet" href="/css/scrolling-nav.css">
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
-	window.onload = function() {
-		var chart = new CanvasJS.Chart(
-				"chartContainer",
-				{
-					title : {
-						text : "Deportes practicados"
-					},
-					animationEnabled : true,
-					data : [ {
-						type : "doughnut",
-						startAngle : 60,
-						toolTipContent : "{legendText}: {y} - <strong>#percent% </strong>",
-						showInLegend : true,
-						explodeOnClick : true, //**Change it to true
-						dataPoints : [ {
-							y : 5,
-							indexLabel : "Mountain Bike #percent%",
-							legendText : "Mountain Bike"
-						}, {
-							y : 1,
-							indexLabel : "Running #percent%",
-							legendText : "Running"
-						}, {
-							y : 2,
-							indexLabel : "Roller #percent%",
-							legendText : "Roller"
-						} ]
-					} ]
-				});
+	google.charts.load("current", {
+		packages : [ "corechart" ]
+	});
+	google.charts.setOnLoadCallback(drawChart);
+	function drawChart() {
+		var data = google.visualization.arrayToDataTable([
+				[ 'Deporte', 'Horas al mes' ],
+				{{#userSportList}}
+					[ '{{sportName}}', {{sportTotalTime}} ],
+				{{/userSportList}}
+				]);
 
-		var chart2 = new CanvasJS.Chart("chartContainer2", {
-			title : {
-				text : "Febrero"
-			},
-			data : [ {
-				type : "spline",
-				dataPoints : [ {
-					x : 10,
-					y : 230
-				}, {
-					x : 20,
-					y : 0
-				}, {
-					x : 30,
-					y : 380
-				}, {
-					x : 40,
-					y : 567
-				}, {
-					x : 50,
-					y : 280
-				}, {
-					x : 60,
-					y : 507
-				}, {
-					x : 70,
-					y : 680
-				}, {
-					x : 80,
-					y : 287
-				}, {
-					x : 90,
-					y : 460
-				}, {
-					x : 100,
-					y : 509
-				} ]
-			} ]
-		});
-		chart2.render();
-
+		var options = {
+			title : 'Porcentaje mensual',
+			pieHole : 0.4,
+			backgroundColor: 'transparent',
+			legend:{position: 'right', textStyle: {color: 'white', fontSize: 16}},
+			titleTextStyle: { color: 'white', fontSize: 24}
+		};
+		
+		var chart = new google.visualization.PieChart(document
+				.getElementById('donutchart'));
+		chart.draw(data, options);
 	}
 </script>
+<!-- 
+<script type="text/javascript">
+	google.charts.load('current', {
+		'packages' : [ 'corechart' ]
+	});
+	google.charts.setOnLoadCallback(drawChart);
+
+	function drawChart() {
+		var data = google.visualization.arrayToDataTable([
+				[ 'day of month', 'Running', 'Mountain Bike', 'Roller' ],
+				[ '1', 1, 2, 0 ], [ '2', 1, 0, 0 ], [ '3', 0, 1, 1 ],
+				[ '4', 1, 0, 0 ], [ '5', 1, 4, 0 ], [ '6', 0, 0, 1 ],
+				[ '7', 0, 0, 0 ], [ '11', 0, 0, 0 ], [ '13', 1, 0, 0 ],
+				[ '14', 0, 0, 0 ], [ '18', 1, 0, 1 ], [ '19', 1, 0, 0 ],
+				[ '20', 1, 0, 0 ], [ '27', 1, 0, 0 ], [ '29', 1, 0, 0 ],
+				[ '30', 1, 0, 0 ], [ '31', 0, 0, 1 ], ]);
+
+		var options = {
+			title : 'Company Performance',
+			curveType : 'function',
+			legend : {
+				position : 'bottom'
+			}
+		};
+
+		var chart = new google.visualization.LineChart(document
+				.getElementById('curve_chart'));
+
+		chart.draw(data, options);
+	}
+</script>
+ -->
+
+
 </head>
 
 <body>
@@ -208,40 +196,37 @@
 							<div class="col-sm-12">
 
 								<a data-toggle="modal" data-target="#myModal_addStat"><button
-										class="btn mybtn-succes">Añadir sesión</button></a>
+										class="btn mybtn-succes">Añadir sesión</button></a> <br>
 							</div>
 						</div>
 					</div>
 					<!--/row-->
-
+					{{#userSportList}}
 					<div class="statsTable">
-
+						<h4>{{sportName}}</h4>
+						<hr class="hr-yellow">
 						<table style="width: 100%">
 							<tr>
 								<th>Fecha</th>
-								<th>Sport</th>
 								<th>Tiempo</th>
 							</tr>
-							{{#rowsStats}}
+							{{#sportStats}}
 							<tr>
 								<td>{{date}}</td>
-								<td>{{sport}}</td>
 								<td>{{totalSesionTime}}</td>
 							</tr>
-							{{/rowsStats}}
+							{{/sportStats}}
 						</table>
-
 					</div>
-
+					<br>
+					{{/userSportList}}
 					<hr class="hr-yellow">
-					<div class="row">
-						<!-- start of chart -->
-						<div id="chartContainer" style="height: 400px; width: 100%;"></div>
-						<br> <br>
-						<div id="chartContainer2" style="height: 400px; width: 100%;"></div>
-						<!-- end of chart -->
-					</div>
-					<br> <br>
+					<div id="donutchart" class="container-fluid "
+						style="width: auto; height: 500px;"></div>
+					<!-- 
+					<div id="curve_chart" class="container-fluid"
+						style="width: auto; height: 500px"></div>
+					 -->
 				</div>
 				<div class="container-fluid info-box" id="communities">
 					<div class="row">
@@ -434,17 +419,12 @@
 				</div>
 				<div class="modal-body">
 					<div class="form-container">
-						<form class="form-group" action="/add-user-stats/{{userpage.id}}"
+						<form class="form-group" action="/addstats/{{nickname}}"
 							method="post">
-							<input type="text" name="sport" value=" " /> <label
-								style="color: black;" for="sport">Deporte</label>
-							<!-- <select>
-								{{#sportList}}
-									<option value="Running">{{name}}</option> 
-								{{/sportList}}
-							</select>
-							 -->
-							<br> <label style="color: black;" for="sport">Fecha
+							<label style="color: black;" for="sport">Deporte</label> <select
+								name="sport"> {{#sportList}}
+								<option value="{{name}}">{{name}}</option> {{/sportList}}
+							</select> <br> <label style="color: black;" for="sport">Fecha
 								de realización</label> <input type="text" class="form-control"
 								name="date"> <br> <label style="color: black;"
 								for="sport">Tiempo de sesión</label> <input type="text"
@@ -472,7 +452,8 @@
 	<script src="/js/scrolling-nav.js"></script>
 
 	<!-- charts -->
-	<script src="/js/canvasjs.min.js"></script>
+
+
 
 
 	<!-- Navigation bar -->

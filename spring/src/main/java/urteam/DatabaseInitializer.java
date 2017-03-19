@@ -10,11 +10,17 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import urteam.community.*;
-import urteam.event.*;
-import urteam.news.*;
-import urteam.sport.*;
-import urteam.user.*;
+import urteam.community.Community;
+import urteam.community.CommunityRepository;
+import urteam.event.Event;
+import urteam.event.EventRepository;
+import urteam.news.NewsRepository;
+import urteam.sport.Sport;
+import urteam.sport.SportRepository;
+import urteam.stats.Stats_dos;
+import urteam.user.User;
+import urteam.user.UserRepository;
+import urteam.user.UserSport;
 
 @Component
 public class DatabaseInitializer {
@@ -69,7 +75,34 @@ public class DatabaseInitializer {
 			String avatar = "default-avatar";
 			
 			User user = new User(username, surname, nickname, password, email, bio, score, city, country, avatar, "ROLE_USER");
-			user.setScore("5750");
+			user.setScore("0");
+			
+			Stats_dos statsDos = new Stats_dos();
+		    statsDos.setDate("12/12/12");
+		    statsDos.setTotalSesionTime(1.5);
+		
+		    
+		    Stats_dos statsDos2 = new Stats_dos();
+		    statsDos2.setDate("12/12/12");
+		    statsDos2.setTotalSesionTime(1.5);
+		    
+		    Stats_dos statsDos3 = new Stats_dos();
+		    statsDos3.setDate("12/12/16");
+		    statsDos3.setTotalSesionTime(1.75);
+		    
+		    UserSport userSport = new UserSport();
+		    userSport.setSportName("Running");
+		    userSport.addSportStats(statsDos);
+		    userSport.addSportStats(statsDos3);
+		    
+		    UserSport userSport2 = new UserSport();
+		    userSport2.setSportName("Roller");
+		    userSport2.addSportStats(statsDos2);
+		    
+		    
+		    user.addUserSportsList(userSport);
+		    user.addUserSportsList(userSport2);
+			
 			userRepo.save(user); 
 		}
 		
@@ -141,7 +174,13 @@ public class DatabaseInitializer {
 	    userRepo.getOne(3L).addCommunity(communityRepo.getOne(1L));
 	    userRepo.getOne(3L).addCommunity(communityRepo.getOne(2L));
 	    userRepo.getOne(3L).addCommunity(communityRepo.getOne(3L));
-	    userRepo.getOne(3L).addCommunity(communityRepo.getOne(4L));  */	    
+	    userRepo.getOne(3L).addCommunity(communityRepo.getOne(4L));  */
+	    
+	    
+	    
+	    
+	    
+	 
 	}
 
 	private static Calendar toCalendar(Date date) {

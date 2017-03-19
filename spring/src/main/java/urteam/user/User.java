@@ -3,6 +3,8 @@ package urteam.user;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -12,11 +14,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import urteam.community.*;
 import urteam.community.Community;
 import urteam.event.Event;
 import urteam.stats.Stats;
@@ -41,8 +43,8 @@ public class User {
 	private String country;
 	private String score = "0";
 	private String avatar = "avatar";
-	
-	@ElementCollection(fetch = FetchType.EAGER) 
+
+	@ElementCollection(fetch = FetchType.EAGER)
 	private List<String> roles;
 
 	@ManyToMany
@@ -53,17 +55,21 @@ public class User {
 
 	@ManyToMany
 	private List<Community> communityList = new ArrayList<>();
-	
+
 	@ManyToMany
 	private List<Event> eventList = new ArrayList<>();
 
-	@OneToMany
+	@OneToMany(cascade = { CascadeType.ALL })
 	private List<Stats> sportStats = new ArrayList<>();
-	
-	public User() {}
+
+	@OneToMany(cascade = { CascadeType.ALL})
+	private List<UserSport> userSportsList = new ArrayList<>();
+
+	public User() {
+	}
 
 	public User(String username, String surname, String nickname, String password, String email, String bio,
-			String score, String city, String country,String avatar, String... roles) {
+			String score, String city, String country, String avatar, String... roles) {
 		this.username = username;
 		this.surname = surname;
 		this.nickname = nickname;
@@ -75,12 +81,11 @@ public class User {
 		this.score = score;
 		this.avatar = avatar;
 		this.roles = new ArrayList<>(Arrays.asList(roles));
-		
-		
+
 	}
-	
-	public User(String username, String surname, String nickname, String password, String email,
-			String city, String country) {
+
+	public User(String username, String surname, String nickname, String password, String email, String city,
+			String country) {
 		this.username = username;
 		this.surname = surname;
 		this.nickname = nickname;
@@ -233,34 +238,61 @@ public class User {
 
 	public void removeCommunity(Community community) {
 		this.communityList.remove(community);
-		
+
 	}
-	
-	
+
 	public List<Stats> getSportStats() {
 		return sportStats;
 	}
 
-	public void addStat(Stats stats){
+	public void addStat(Stats stats) {
 		this.getSportStats().add(stats);
 	}
 
 	public void removeEvent(Event event) {
 		this.eventList.remove(event);
-		
+
 	}
 
 	public void addEvent(Event event) {
 		this.eventList.add(event);
-		
+
 	}
-	
+
 	public List<Event> getEventList() {
 		return eventList;
 	}
 
 	public void setEventList(List<Event> eventList) {
 		this.eventList = eventList;
+	}
+
+	public List<UserSport> getUserSportsList() {
+		return userSportsList;
+	}
+	
+	public void addUserSportsList(UserSport userSport) {
+		this.userSportsList.add(userSport);
+	}
+	
+	public boolean containsUserSport(String sport){
+		for(UserSport ue: userSportsList){
+			if(ue.getSportName().equalsIgnoreCase(sport)){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public int userSportPosition(String sport){
+		int index=0;
+		for(UserSport ue: userSportsList){
+			if(ue.getSportName().equalsIgnoreCase(sport)){
+				return index;
+			}
+			index++;
+		}
+		return index;
 	}
 
 }

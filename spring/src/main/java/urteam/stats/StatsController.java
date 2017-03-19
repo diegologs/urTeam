@@ -1,7 +1,5 @@
 package urteam.stats;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +17,7 @@ import urteam.sport.SportRepository;
 import urteam.user.User;
 import urteam.user.UserComponent;
 import urteam.user.UserRepository;
+import urteam.user.UserSport;
 
 @Controller
 public class StatsController {
@@ -38,19 +37,34 @@ public class StatsController {
 	@Autowired
 	private UserComponent userComponent;
 
-	@RequestMapping("/add-user-stats/{id}")
-	public String addUserStats(@PathVariable long id, @RequestParam String sport, @RequestParam String date,
+	@RequestMapping("/addstats/{nickname}")
+	public String addUserStats(@PathVariable String nickname, @RequestParam String sport, @RequestParam String date,
 			@RequestParam double sesionTime , Model model, HttpServletRequest request) {
-		User user = userRepository.findOne(id);
-		Stats newStats = new Stats();
-		newStats.setDate(date);
-		newStats.setTotalSesionTime(sesionTime);
-		Sport s = new Sport();
-		s = sportRepository.findByName(sport);
-		newStats.setSport(s);
-		user.addStat(newStats);
+		User user = userRepository.findByNickname(nickname);
+//		Stats newStats = new Stats();
+//		newStats.setDate(date);
+//		newStats.setTotalSesionTime(sesionTime);
+//		newStats.setUserId(user.getId());
+//		newStats.setSport(sport);
+//		user.addStat(newStats);
+//		user.setScore(String.valueOf(computeUserScore(user)));
+//		userRepository.save(user);
+		
+		
+		Stats_dos statsDos = new Stats_dos();
+	    statsDos.setDate(date);
+	    statsDos.setTotalSesionTime(sesionTime);
+	    
+	    if(user.containsUserSport(sport)){
+	    	user.getUserSportsList().get(user.userSportPosition(sport)).addSportStats(statsDos);
+	    }else{
+	    	UserSport userSport = new UserSport();
+	    	userSport.setSportName(sport);
+	    	userSport.addSportStats(statsDos);
+	    	user.addUserSportsList(userSport);
+	    }
 		user.setScore(String.valueOf(computeUserScore(user)));
-		userRepository.save(user);
+	    userRepository.save(user);
 		
 		
 		if ((userComponent.isLoggedUser())) {
@@ -61,24 +75,26 @@ public class StatsController {
 				model.addAttribute("logged", true);
 			}
 			model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
-			return "redirect:/userprofile/{id}";
+			return "redirect:/user/{nickname}";
 		} else {
-			return "redirect:/userprofile/{id}";
+			return "redirect:/user/{nickname}";
 		}
 		
 	}
 
 	public double computeUserScore(User user) {
 		
-		double totalScore = Double.parseDouble(user.getScore());
+		double totalScore = 0;
 
-		List<Stats> stats = user.getSportStats();
+		List<UserSport> userSport = user.getUserSportsList();
 
-		for (Stats s : stats) {
-			totalScore += s.getSport().getMultiplicator() * s.getTotalSesionTime() * 100;
+		for (UserSport u : userSport) {
+			Sport sport = sportRepository.findByName(u.getSportName());
+			for(Stats_dos s: u.getSportStats()){
+				totalScore += sport.getMultiplicator() * s.getTotalSesionTime() * 100;
+			}
 		}
 		return totalScore;
-		
 	}
 	
 	public int computeUserLevel(User user){
