@@ -9,9 +9,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface CommunityRepository extends JpaRepository<Community, Long>{
 	
 	List<Community> findByName(String name);
-	
 	List<Community> findBySport(String sport);
-	
-
-
+	List<Community> findByNameIgnoreCase(String name);
 }

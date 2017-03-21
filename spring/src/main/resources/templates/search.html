@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<title>urTeam - Tu web del deporte</title>
+<link rel="shortcut icon" href="/images/favicon.ico" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/groups.css">
+</head>
+<body>
+	{{> navbar_template}}
+	
+		<h2>Usuarios</h2>
+		{{#foundUsers}}
+		<h4>{{username}} {{surname}} {{nickname}}</h4> 
+		{{/foundUsers}}
+		
+		<h2>Comunidades</h2>
+		{{#foundCommunities}}
+		<h4>{{name}}</h4> 
+		{{/foundCommunities}}
+		
+		
+		<h2>Events</h2>
+		{{#foundEvents}}
+		<h4>{{name}}</h4> 
+		{{/foundEvents}}
+		
+	<br>
+	<br> {{> footer_template}}
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/moreGroups.js"></script>
+</body>
+</html>

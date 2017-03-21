@@ -35,13 +35,12 @@ public class UserController {
 
 	@Autowired
 	private urteamController urteamController;
-	
+
 	@Autowired
 	private StatsController statsController;
 
 	@Autowired
 	private UserComponent userComponent;
-
 
 	@RequestMapping("/newUser")
 	public String eventAdded(Model model, User user, @RequestParam String password) throws ParseException {
@@ -58,7 +57,7 @@ public class UserController {
 
 	@RequestMapping("/user/{nickname}")
 	public String userProf(Model model, @PathVariable String nickname, HttpServletRequest request) {
-		
+
 		User me = userRepository.findOne(userComponent.getLoggedUser().getId());
 		User user = userRepository.findByNickname(nickname);
 		model.addAttribute("userpage", user);
@@ -70,22 +69,22 @@ public class UserController {
 		model.addAttribute("communities", communities);
 		model.addAttribute("events", events);
 		model.addAttribute("membersCommunity", communities.size());
-		
+
 		model.addAttribute("numberOfFollowers", user.getNumberOfFollower());
 		model.addAttribute("sportList", sportController.getSportList());
-		model.addAttribute("userSportList", user.getUserSportsList());	
-		model.addAttribute("level", statsController.computeUserLevel(user));
-		model.addAttribute("progress",statsController.computeUserBarLevel(user));
-		
 		model.addAttribute("userSportList", user.getUserSportsList());
-		
+		model.addAttribute("level", statsController.computeUserLevel(user));
+		model.addAttribute("progress", statsController.computeUserBarLevel(user));
+
+		model.addAttribute("userSportList", user.getUserSportsList());
+
 		model.addAttribute("buttonfollowing", me.getId() != user.getId());
 		if (me.getFollowing().contains(user)) {
 			model.addAttribute("isfollowed", true);
 		} else {
 			model.addAttribute("isfollowed", false);
 		}
-		
+
 		for (Event event : events) {
 			model.addAttribute("eventFollowed", me.getEventList().contains(event));
 		}
@@ -112,21 +111,20 @@ public class UserController {
 			@RequestParam String surname, @RequestParam String email, @RequestParam String bio,
 			@RequestParam String city, @RequestParam String country, @RequestParam("file") MultipartFile file)
 			throws ParseException {
-		
-		
+
 		User editedUser = userRepository.findByNickname(nickname);
-		
+
 		User me = userRepository.findOne(userComponent.getLoggedUser().getId());
-		
-		if(editedUser.getId() == me.getId()){
-		
+
+		if (editedUser.getId() == me.getId()) {
+
 			editedUser.setUserName(username);
 			editedUser.setSurname(surname);
 			editedUser.setEmail(email);
 			editedUser.setBio(bio);
 			editedUser.setCity(city);
 			editedUser.setCountry(country);
-	
+
 			if (file != null) {
 				String filename = "avatar-" + editedUser.getGeneratedId();
 				if (urteamController.uploadImageFile(model, file, filename, ConstantsUrTeam.USER_AVATAR,
@@ -134,9 +132,9 @@ public class UserController {
 					editedUser.setAvatar(filename);
 				}
 			}
-		
+
 		}
-		
+
 		userRepository.save(editedUser);
 		return "redirect:/user/{nickname}";
 	}
@@ -171,4 +169,7 @@ public class UserController {
 			return "redirect:/user/{nickname}";
 		}
 	}
+
+	
+
 }

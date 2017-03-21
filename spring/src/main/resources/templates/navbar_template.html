@@ -1,57 +1,73 @@
 <meta charset="UTF-8">
 <nav class="navbar-fixed-top navbar-urTeam" role="navigation">
-        <!-- El logotipo y el icono que despliega el menú se agrupan
+	<!-- El logotipo y el icono que despliega el menú se agrupan
        para mostrarlos mejor en los dispositivos móviles -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                  <span class="sr-only">Desplegar navegación</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-left" href="/"><img alt="urTeam" src="/images/logo.png" width="150px"></a>
-        </div>
+	<div class="navbar-header">
+		<button type="button" class="navbar-toggle" data-toggle="collapse"
+			data-target=".navbar-ex1-collapse">
+			<span class="sr-only">Desplegar navegación</span> <span
+				class="icon-bar"></span> <span class="icon-bar"></span> <span
+				class="icon-bar"></span>
+		</button>
+		<a class="navbar-left" href="/"><img alt="urTeam"
+			src="/images/logo.png" width="150px"></a>
+	</div>
 
-        <!-- Agrupar los enlaces de navegación, los formularios y cualquier
+	<!-- Agrupar los enlaces de navegación, los formularios y cualquier
        otro elemento que se pueda ocultar al minimizar la barra -->
-        <div class="collapse navbar-collapse navbar-ex1-collapse navbar-inner">
-            <ul class="nav navbar-nav minav">
-                <li {{#events_active}}class="active"{{/events_active}}><a href="/events">Eventos</a></li>
-                <li {{#groups_active}}class="active"{{/groups_active}}><a href="/groups">Comunidades</a></li>
-            </ul>
-            {{#admin}}
-            <ul class="nav navbar-nav navbar-right minav">
-            	<li ><a class = "nomargin" href="/adminPanel"><button
-					class="btn mybtn-succes">Admin</button></a>
-				</li>            	
-            </ul>			
-			{{/admin}}
-            {{#logged}}
-            <ul class="nav navbar-nav navbar-right minav">
-            	<li class="dropdown  {{#user_active}}active{{/user_active}}"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown"> <span class="user-name">
-							{{user.nickname}} </span> <b class="caret"></b></a>
-					<ul class="dropdown-menu">
-						<li><div class="navbar-content">
-								<a href="/user/{{user.nickname}}">Mi perfil
-								<div class="divider"></a>
-							</div>
-						</li>
-						<li>
-							<form action="/logout" method="post">
-								<input type="submit" value="Sign Out" class="btn mybtn-succes" /> <input
-									type="hidden" name="_csrf" value="{{token}}" />
-							</form>
-						</li>
-							</div>
-						</li>
-					</ul></li>
-			</ul>
-			{{/logged}}
-			{{^logged}}
-            <ul class="nav navbar-nav navbar-right minav">
-                <li {{#user_active}}class="active"{{/user_active}}><a href="/login">Iniciar Sesión / Registro</a></li>
-            </ul>
-            {{/logged}}
-        </div>
-    </nav>
+	<div class="collapse navbar-collapse navbar-ex1-collapse navbar-inner">
+		<ul class="nav navbar-nav minav">
+			<li {{#events_active}}class="active"{{/events_active}}><a
+				href="/events">Eventos</a></li>
+			<li {{#groups_active}}class="active"{{/groups_active}}><a
+				href="/groups">Comunidades</a></li>
+			<li>
+				<form class="navbar-form" role="search" method="post" action="/search">
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="Search"
+							name="toSearch">
+						<div class="input-group-btn">
+							<button class="btn btn-default" type="submit">
+								<i class="fa fa-search" aria-hidden="true"></i>
+							</button>
+							<input type="hidden" name="_csrf" value="{{token}}" />
+						</div>
+					</div>
+				</form>
+			</li>
+		</ul>
+		{{#admin}}
+		<ul class="nav navbar-nav navbar-right minav">
+			<li><a class="nomargin" href="/adminPanel"><button
+						class="btn mybtn-succes">Admin</button></a></li>
+		</ul>
+		{{/admin}} {{#logged}}
+		<ul class="nav navbar-nav navbar-right minav">
+			<li class="dropdown  {{#user_active}}active{{/user_active}}"><a
+				href="#" class="dropdown-toggle" data-toggle="dropdown"> <span
+					class="user-name"> {{user.nickname}} </span> <b class="caret"></b></a>
+				<ul class="dropdown-menu">
+					<li><div class="navbar-content">
+							<a href="/user/{{user.nickname}}">Mi perfil
+								<div class="divider">
+							</a>
+						</div></li>
+					<li>
+						<form action="/logout" method="post">
+							<input type="submit" value="Sign Out" class="btn mybtn-succes" />
+							<input type="hidden" name="_csrf" value="{{token}}" />
+						</form>
+					</li>
+	</div>
+	</li>
+	</ul>
+	</li>
+	</ul>
+	{{/logged}} {{^logged}}
+	<ul class="nav navbar-nav navbar-right minav">
+		<li {{#user_active}}class="active"{{/user_active}}><a
+			href="/login">Iniciar Sesión / Registro</a></li>
+	</ul>
+	{{/logged}}
+	</div>
+</nav>
