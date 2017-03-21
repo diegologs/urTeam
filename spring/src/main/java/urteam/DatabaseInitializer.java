@@ -77,31 +77,31 @@ public class DatabaseInitializer {
 			User user = new User(username, surname, nickname, password, email, bio, score, city, country, avatar, "ROLE_USER");
 			user.setScore("0");
 			
-			Stats_dos statsDos = new Stats_dos();
-		    statsDos.setDate("12/12/12");
-		    statsDos.setTotalSesionTime(1.5);
-		
-		    
-		    Stats_dos statsDos2 = new Stats_dos();
-		    statsDos2.setDate("12/12/12");
-		    statsDos2.setTotalSesionTime(1.5);
-		    
-		    Stats_dos statsDos3 = new Stats_dos();
-		    statsDos3.setDate("12/12/16");
-		    statsDos3.setTotalSesionTime(1.75);
-		    
-		    UserSport userSport = new UserSport();
-		    userSport.setSportName("Running");
-		    userSport.addSportStats(statsDos);
-		    userSport.addSportStats(statsDos3);
-		    
-		    UserSport userSport2 = new UserSport();
-		    userSport2.setSportName("Roller");
-		    userSport2.addSportStats(statsDos2);
-		    
-		    
-		    user.addUserSportsList(userSport);
-		    user.addUserSportsList(userSport2);
+//			Stats_dos statsDos = new Stats_dos();
+//		    statsDos.setDate("12/12/12");
+//		    statsDos.setTotalSesionTime(1.5);
+//		
+//		    
+//		    Stats_dos statsDos2 = new Stats_dos();
+//		    statsDos2.setDate("12/12/12");
+//		    statsDos2.setTotalSesionTime(1.5);
+//		    
+//		    Stats_dos statsDos3 = new Stats_dos();
+//		    statsDos3.setDate("12/12/16");
+//		    statsDos3.setTotalSesionTime(1.75);
+//		    
+//		    UserSport userSport = new UserSport();
+//		    userSport.setSportName("Running");
+//		    userSport.addSportStats(statsDos);
+//		    userSport.addSportStats(statsDos3);
+//		    
+//		    UserSport userSport2 = new UserSport();
+//		    userSport2.setSportName("Roller");
+//		    userSport2.addSportStats(statsDos2);
+//		    
+//		    
+//		    user.addUserSportsList(userSport);
+//		    user.addUserSportsList(userSport2);
 			
 			userRepo.save(user); 
 		}
