@@ -12,6 +12,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import urteam.news.News;
 import urteam.user.User;
 
@@ -39,9 +41,11 @@ public class Community {
 	@Basic
 	private ArrayList<String> communityImages = new ArrayList();
 	
+	@JsonIgnore
 	@OneToMany
 	private List<News> news;
 	
+	@JsonIgnore
 	@ManyToMany(mappedBy = "communityList")
 	private List<User> communityUsers = new ArrayList<>();
 	
