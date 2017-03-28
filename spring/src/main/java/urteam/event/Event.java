@@ -11,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -19,11 +18,14 @@ import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import urteam.sport.Sport;
+import com.fasterxml.jackson.annotation.JsonView;
+
 import urteam.user.User;
 
 @Entity
 public class Event {
+	
+	public interface BasicEvent{}
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -32,6 +34,7 @@ public class Event {
 	private String eventId = "aleatorio";
 	
 	@Size(min = 2, max = 21)
+	@JsonView(BasicEvent.class)
 	private String name;
 	
 	//@OneToOne
@@ -62,6 +65,7 @@ public class Event {
 	@OneToOne
 	private User owner_id;
 	
+	//@JsonView(BasicEvent.class)
 	@ManyToMany(mappedBy = "eventList")
 	private List<User> participants_IDs = new ArrayList<>();
 	
