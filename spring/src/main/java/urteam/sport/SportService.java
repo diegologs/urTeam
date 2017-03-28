@@ -14,4 +14,8 @@ public class SportService {
 	public List<Sport> getSports() {
 		return sportRepository.findAll();
 	}
+	
+	public Sport getSport(String sportName){
+		return sportRepository.findByName(sportName);
+	}
 }
