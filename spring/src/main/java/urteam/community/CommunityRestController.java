@@ -2,6 +2,7 @@ package urteam.community;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -29,19 +30,17 @@ import urteam.user.UserComponent;
 import urteam.user.UserRepository;
 
 
-
 @RestController
 
 
-
-@RequestMapping("/api/group")
+@RequestMapping("/api/groups")
 public class CommunityRestController {
 
 	@Autowired
 	private urteamController urteam;
 
 	@Autowired
-	private CommunityRepository communityRepo;
+	private CommunityService service;
 
 	@Autowired
 	private NewsRepository newsRepo;
@@ -54,12 +53,10 @@ public class CommunityRestController {
 
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public List<Community> groups() {
-		// Añadir elementos basicos
-		List<Community> groups = communityRepo.findAll();
+	public Collection<Community> groups() {
 		
-			return groups;
-		}
+		return service.findAll();
+	}
 	
 	
 	
@@ -67,8 +64,8 @@ public class CommunityRestController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Community> getGroup(@PathVariable long id) {
-		// Buscar la comunidad y su creador
-		Community community = communityRepo.findOne(id);
+		
+		Community community = service.findOne(id);
 		
 		if(community != null){
 			return new ResponseEntity<>(community, HttpStatus.OK);
@@ -83,10 +80,10 @@ public class CommunityRestController {
 
 	
 
-	@RequestMapping(value = "/group/{id}/GroupEdited", method = RequestMethod.PUT)
+	@RequestMapping(value = "/group/{id}/edit", method = RequestMethod.PUT)
 	public ResponseEntity<Community> addInfo(@PathVariable long id, @RequestParam String info) {
 		// Buscar la comunidad y su creador
-		Community community = communityRepo.findOne(id);
+		Community community = service.findOne(id);
 		User ownerCommunity = userRepo.findOne(community.getOwner_id().getId());
 
 		// Comprobar si hay un usuario logueado
@@ -100,7 +97,7 @@ public class CommunityRestController {
 			if (userLogged.getId() == ownerCommunity.getId()) {
 				community.setInfo(info);
 			}
-			communityRepo.save(community);
+			service.save(community);
 		
 		}
 		
@@ -111,24 +108,18 @@ public class CommunityRestController {
 		}
 		
 	}
-/*
+
 	
 	@RequestMapping("/group/{id}/addNews")
-	public String groupEdited(Model model, @PathVariable long id, @RequestParam String title, @RequestParam String text,
-			HttpServletRequest request) {
+	public ResponseEntity<Community> groupEdited(@PathVariable long id, @RequestParam String title, @RequestParam String text) {
 		// Buscar la comunidad y su creador
-		Community community = communityRepo.findOne(id);
+		Community community = service.findOne(id);
 		User ownerCommunity = userRepo.findOne(community.getOwner_id().getId());
 
 		// Comprobar si hay un usuario logueado
 		if ((userComponent.isLoggedUser())) {
 			long userLogged_id = userComponent.getLoggedUser().getId();
 			User userLogged = userRepo.findOne(userLogged_id);
-			model.addAttribute("logged", true);
-			model.addAttribute("user", userLogged);
-			model.addAttribute("communityFollowed", userLogged.getCommunityList().contains(community));
-			// Comprobar si es admin
-			model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
 
 			// Comprobar que el usuario y el dueño de la comunidad son el mismo
 			// y si lo son modificar
@@ -137,14 +128,20 @@ public class CommunityRestController {
 				community.getNews().add(news);
 				newsRepo.save(news);
 			}
-			communityRepo.save(community);
-			model.addAttribute("community", community);
-			return "redirect:/group/{id}";
-		} else {
-			return "redirect:/group/{id}";
+			service.save(community);
+		
 		}
+		
+			
+		if(community != null){
+			return new ResponseEntity<>(community, HttpStatus.OK);
+		}else{
+			return new ResponseEntity<>(community, HttpStatus.NOT_FOUND);
+		}
+			
 	}
 
+/*
 	@RequestMapping("/group/{id}/addImage")
 	public String addImage(Model model, @PathVariable long id, @RequestParam("file") MultipartFile file,
 			HttpServletRequest request) throws ParseException {
@@ -259,4 +256,4 @@ public class CommunityRestController {
 	}
 	
 	*/
-}
+	}
