@@ -16,74 +16,25 @@ import urteam.user.UserComponent;
 
 @Configuration
 public class CSRFHandlerConfiguration extends WebMvcConfigurerAdapter {
-//	
+
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new CSRFHandlerInterceptor());
 	}
 }
 
-//class CSRFHandlerInterceptor extends HandlerInterceptorAdapter {
-//	
-//	@Override
-//    public void postHandle(final HttpServletRequest request,
-//            final HttpServletResponse response, final Object handler,
-//            final ModelAndView modelAndView) throws Exception {
-//
-//		CsrfToken token = (CsrfToken) request.getAttribute("_csrf"); 
-//    	modelAndView.addObject("token", token.getToken());    	
-//    }
-
-
-class UserLoggedHandlerInterceptor extends HandlerInterceptorAdapter {
-
-	@Autowired
-	UserComponent userComp;
-
-	@Override
-	public void postHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler,
-			final ModelAndView modelAndView) throws Exception {
-
-		if (modelAndView != null && userComp!=null) {
-			if (userComp.isLoggedUser()) {
-				modelAndView.addObject("user", userComp.getLoggedUser());
-				modelAndView.addObject("UsuarioActivo", userComp.getLoggedUser());
-				modelAndView.addObject("isUsermenuActive", userComp.isLoggedUser());
-//				if (!userComp.getLoggedUser().isPhotoSelected()) {
-//					modelAndView.addObject("isMen", userComp.getLoggedUser().isMen());
-//				}
-
-			}
-
-		}
-
-	}
-
-}
-
 class CSRFHandlerInterceptor extends HandlerInterceptorAdapter {
-
+	
 	@Override
-	public void postHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler,
-			final ModelAndView modelAndView) throws Exception {
+    public void postHandle(final HttpServletRequest request,
+            final HttpServletResponse response, final Object handler,
+            final ModelAndView modelAndView) throws Exception {
 
-		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
-		if (modelAndView != null && isDefinitiveUrl(request)) {
+		if (modelAndView != null) {
+			CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 			modelAndView.addObject("token", token.getToken());
-		}
-
-	}
-
-	public Boolean isDefinitiveUrl(HttpServletRequest request) {
-		// URL request from browser
-		String requestedUri = request.getRequestURI();
-		// IsCorrect if the last char of requestedUri isn't a "/"
-		boolean isCorrect = !(requestedUri.lastIndexOf("/") == requestedUri.length() - 1);
-
-		return isCorrect;
-
-	}
-
+		}   	
+    }
 
 }
 
