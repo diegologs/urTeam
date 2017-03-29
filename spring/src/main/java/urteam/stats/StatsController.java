@@ -13,17 +13,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import urteam.community.CommunityRepository;
 import urteam.sport.Sport;
-import urteam.sport.SportRepository;
+import urteam.sport.SportService;
 import urteam.user.User;
 import urteam.user.UserComponent;
 import urteam.user.UserRepository;
-import urteam.user.UserSport;
 
 @Controller
 public class StatsController {
 	
+	
+	
 	@Autowired
-	SportRepository sportRepository;
+	SportService sportService;
 
 	@Autowired
 	StatsRepository statsRepository;
@@ -40,25 +41,15 @@ public class StatsController {
 	@RequestMapping("/addstats/{nickname}")
 	public String addUserStats(@PathVariable String nickname, @RequestParam String sport, @RequestParam String date,
 			@RequestParam double sesionTime , Model model, HttpServletRequest request) {
-		User user = userRepository.findByNickname(nickname);
-//		Stats newStats = new Stats();
-//		newStats.setDate(date);
-//		newStats.setTotalSesionTime(sesionTime);
-//		newStats.setUserId(user.getId());
-//		newStats.setSport(sport);
-//		user.addStat(newStats);
-//		user.setScore(String.valueOf(computeUserScore(user)));
-//		userRepository.save(user);
-		
-		
-		Stats_dos statsDos = new Stats_dos();
+		User user = userRepository.findByNickname(nickname);			
+		Stat statsDos = new Stat();
 	    statsDos.setDate(date);
 	    statsDos.setTotalSesionTime(sesionTime);
 	    
 	    if(user.containsUserSport(sport)){
 	    	user.getUserSportsList().get(user.userSportPosition(sport)).addSportStats(statsDos);
 	    }else{
-	    	UserSport userSport = new UserSport();
+	    	UserSportStats userSport = new UserSportStats();
 	    	userSport.setSportName(sport);
 	    	userSport.addSportStats(statsDos);
 	    	user.addUserSportsList(userSport);
@@ -86,11 +77,11 @@ public class StatsController {
 		
 		double totalScore = 0;
 
-		List<UserSport> userSport = user.getUserSportsList();
+		List<UserSportStats> userSport = user.getUserSportsList();
 
-		for (UserSport u : userSport) {
-			Sport sport = sportRepository.findByName(u.getSportName());
-			for(Stats_dos s: u.getSportStats()){
+		for (UserSportStats u : userSport) {
+			Sport sport = sportService.getSport(u.getSportName());
+			for(Stat s: u.getSportStats()){
 				totalScore += sport.getMultiplicator() * s.getTotalSesionTime() * 100;
 			}
 		}

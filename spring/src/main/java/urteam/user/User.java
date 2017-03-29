@@ -20,7 +20,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import urteam.community.Community;
 import urteam.event.Event;
-import urteam.stats.Stats;
+import urteam.stats.UserSportStats;
 
 @Entity
 @Table(name = "user_profile")
@@ -58,11 +58,9 @@ public class User {
 	@ManyToMany
 	private List<Event> eventList = new ArrayList<>();
 
-	@OneToMany(cascade = { CascadeType.ALL })
-	private List<Stats> sportStats = new ArrayList<>();
 
 	@OneToMany(cascade = { CascadeType.ALL})
-	private List<UserSport> userSportsList = new ArrayList<>();
+	private List<UserSportStats> userSportsList = new ArrayList<>();
 
 	public User() {
 	}
@@ -240,13 +238,6 @@ public class User {
 
 	}
 
-	public List<Stats> getSportStats() {
-		return sportStats;
-	}
-
-	public void addStat(Stats stats) {
-		this.getSportStats().add(stats);
-	}
 
 	public void removeEvent(Event event) {
 		this.eventList.remove(event);
@@ -266,16 +257,16 @@ public class User {
 		this.eventList = eventList;
 	}
 
-	public List<UserSport> getUserSportsList() {
+	public List<UserSportStats> getUserSportsList() {
 		return userSportsList;
 	}
 	
-	public void addUserSportsList(UserSport userSport) {
+	public void addUserSportsList(UserSportStats userSport) {
 		this.userSportsList.add(userSport);
 	}
 	
 	public boolean containsUserSport(String sport){
-		for(UserSport ue: userSportsList){
+		for(UserSportStats ue: userSportsList){
 			if(ue.getSportName().equalsIgnoreCase(sport)){
 				return true;
 			}
@@ -285,7 +276,7 @@ public class User {
 	
 	public int userSportPosition(String sport){
 		int index=0;
-		for(UserSport ue: userSportsList){
+		for(UserSportStats ue: userSportsList){
 			if(ue.getSportName().equalsIgnoreCase(sport)){
 				return index;
 			}

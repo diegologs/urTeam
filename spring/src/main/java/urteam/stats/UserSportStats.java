@@ -1,4 +1,4 @@
-package urteam.user;
+package urteam.stats;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,10 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import urteam.stats.Stats_dos;
-
 @Entity
-public class UserSport {
+public class UserSportStats {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,9 +21,9 @@ public class UserSport {
 	private String sportName;
 
 	@OneToMany(cascade = { CascadeType.ALL })
-	private List<Stats_dos> sportStats = new ArrayList<>();
+	private List<Stat> sportStats = new ArrayList<>();
 
-	public UserSport() {
+	public UserSportStats() {
 	}
 
 	public long getId() {
@@ -44,22 +42,22 @@ public class UserSport {
 		this.sportName = sportName;
 	}
 
-	public List<Stats_dos> getSportStats() {
+	public List<Stat> getSportStats() {
 		return sportStats;
 	}
 
-	public void setSportStats(List<Stats_dos> sportStats) {
+	public void setSportStats(List<Stat> sportStats) {
 		this.sportStats = sportStats;
 	}
 
-	public void addSportStats(Stats_dos stats) {
+	public void addSportStats(Stat stats) {
 		this.sportStats.add(stats);
 		this.updateSportTotalTime();
 	}
 
 	public void updateSportTotalTime() {
 		sportTotalTime = 0;
-		for (Stats_dos times : sportStats) {
+		for (Stat times : sportStats) {
 			sportTotalTime = sportTotalTime + times.getTotalSesionTime();
 		}
 	}

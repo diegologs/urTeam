@@ -20,10 +20,11 @@ public class CSRFHandlerConfiguration extends WebMvcConfigurerAdapter {
 }
 
 class CSRFHandlerInterceptor extends HandlerInterceptorAdapter {
-
+	
 	@Override
-	public void postHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler,
-			final ModelAndView modelAndView) throws Exception {
+    public void postHandle(final HttpServletRequest request,
+            final HttpServletResponse response, final Object handler,
+            final ModelAndView modelAndView) throws Exception {
 
 		if (modelAndView != null) {
 			CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
