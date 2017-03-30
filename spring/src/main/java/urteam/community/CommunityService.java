@@ -48,25 +48,35 @@ public class CommunityService {
 		
 	}
 
-	public void saveOwner(Community community) {
-		if(isOwner(community)){
-			repository.save(community);
-		}
-	}
+
 
 	public void delete(long id) {
 		repository.delete(id);
 	}
 
-	public void editInfo(Community community, String info){
-		community.setInfo(info);
-		saveOwner(community);
+	public boolean editInfo(Community community, String info){
+		if(isOwner(community)){
+			community.setInfo(info);
+			return true;
+		}else{
+			return false;
+			
+		}
+		
 	}
 	
-	public void addNews(Community community, News news){
-		community.getNews().add(news);
-		saveOwner(community);
+	public boolean edit(Community community){
+		if(isOwner(community)){
+			repository.save(community);
+			return true;
+		}else{
+			return false;
+			
+		}
+		
 	}
+	
+	
 	
 	
 	public boolean isOwner(Community community){

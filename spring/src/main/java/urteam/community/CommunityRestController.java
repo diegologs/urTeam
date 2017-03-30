@@ -70,42 +70,42 @@ public class CommunityRestController {
 
 	
 	@JsonView(CompleteCommunity.class)
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Community> addInfo(@PathVariable long id, @RequestParam String info) {
+	@RequestMapping(value = "/{id}/setInfo", method = RequestMethod.PUT)
+	public ResponseEntity<Community> addInfo(@PathVariable long id, @RequestBody String info) {
 		
 		
 		Community community = service.findOne(id);
 		
 		
-		service.editInfo(community, info);
-		
-				
-		
-		if(community != null){
+		if(service.editInfo(community, info) && community != null){
 			return new ResponseEntity<>(community, HttpStatus.OK);
+		
+					
 		}else{
 			return new ResponseEntity<>(community, HttpStatus.NOT_FOUND);
 		}
 		
 	}
-
+	
 	@JsonView(CompleteCommunity.class)
-	@RequestMapping(value = "/{id}/news", method = RequestMethod.PUT)
-	public ResponseEntity<Community> addNews(@PathVariable long id, @RequestBody News news) {
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Community> edit(@PathVariable long id, @RequestBody Community communityEdited) {
+		
 		
 		Community community = service.findOne(id);
 		
-		service.addNews(community, news);
 		
-				
-		if(community != null){
+		if(service.edit(communityEdited) && community != null){
 			return new ResponseEntity<>(community, HttpStatus.OK);
+		
+					
 		}else{
 			return new ResponseEntity<>(community, HttpStatus.NOT_FOUND);
 		}
-			
+		
 	}
 
+	
 	@JsonView(CompleteCommunity.class)
 	@RequestMapping("/{id}/addImage")
 	public ResponseEntity<Community> addImage(@PathVariable long id, @RequestParam("file") MultipartFile file) throws ParseException {
