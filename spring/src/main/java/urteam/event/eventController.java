@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import urteam.event.EventService;
 import urteam.ConstantsUrTeam;
 import urteam.urteamController;
 import urteam.sport.*;
@@ -29,6 +30,9 @@ import urteam.user.*;
 @Controller
 public class eventController {
 
+	@Autowired
+	private EventService eventService;
+	
 	@Autowired
 	private EventRepository eventRepo;
 
@@ -46,6 +50,7 @@ public class eventController {
 
 	@Autowired
 	private UserComponent userComponent;
+
 
 	@RequestMapping("/events")
 	public String eventos(Model model, Pageable page, HttpServletRequest request) {
@@ -207,32 +212,35 @@ public class eventController {
 			// Comprobar si es admin
 			model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
 			
-			// Crear evento
-
-			Date final_start_date = new SimpleDateFormat("dd/MM/yyyy").parse(start_date);
-			event.setStart_date(final_start_date);
-			Date final_end_date = new SimpleDateFormat("dd/MM/yyyy").parse(end_date);
-			event.setEnd_date(final_end_date);
-			Calendar cal = toCalendar(event.getStart_date());
-			event.setDay_date(cal.get(Calendar.DAY_OF_MONTH));
-			event.setMonth_date(cal.get(Calendar.MONTH));
-			event.setYear_date(cal.get(Calendar.YEAR));
-			// Filename formater
-			SimpleDateFormat formater = new SimpleDateFormat("mmddyyyy-hhMMss");
-			Date date = new Date();
-			// EventId generator
-			SimpleDateFormat eventIdFormater = new SimpleDateFormat("mmddyyyy-hhMMss");
-			String eventId = eventIdFormater.format(date);
-			event.setEventId(eventId);
-			String filename = "avatar-" + formater.format(date);
-			if (urteam.uploadImageFile(model, file, filename, ConstantsUrTeam.EVENT_AVATAR, event.getEventId())) {
-				event.setMain_photo(filename);
-			}
-			event.setOwner_id(userLogged);
+			eventService.save(userLogged, event, file, start_date, end_date);
 			
-			// Guardar evento y recargar pagina
-			eventRepo.save(event);
-			Page<Event> eventos = eventRepo.findAll(new PageRequest(0, 9));
+//			// Crear evento
+//
+//			Date final_start_date = new SimpleDateFormat("dd/MM/yyyy").parse(start_date);
+//			event.setStart_date(final_start_date);
+//			Date final_end_date = new SimpleDateFormat("dd/MM/yyyy").parse(end_date);
+//			event.setEnd_date(final_end_date);
+//			Calendar cal = toCalendar(event.getStart_date());
+//			event.setDay_date(cal.get(Calendar.DAY_OF_MONTH));
+//			event.setMonth_date(cal.get(Calendar.MONTH));
+//			event.setYear_date(cal.get(Calendar.YEAR));
+//			// Filename formater
+//			SimpleDateFormat formater = new SimpleDateFormat("mmddyyyy-hhMMss");
+//			Date date = new Date();
+//			// EventId generator
+//			SimpleDateFormat eventIdFormater = new SimpleDateFormat("mmddyyyy-hhMMss");
+//			String eventId = eventIdFormater.format(date);
+//			event.setEventId(eventId);
+//			String filename = "avatar-" + formater.format(date);
+//			if (urteam.uploadImageFile(model, file, filename, ConstantsUrTeam.EVENT_AVATAR, event.getEventId())) {
+//				event.setMain_photo(filename);
+//			}
+//			event.setOwner_id(userLogged);
+//			
+//			// Guardar evento y recargar pagina
+//			eventRepo.save(event);
+//			Page<Event> eventos = eventRepo.findAll(new PageRequest(0, 9));
+			List<Event> eventos = eventService.findAll();
 			model.addAttribute("events", eventos);
 
 			return "redirect:/events";
@@ -241,11 +249,11 @@ public class eventController {
 		}
 	}
 
-	private static Calendar toCalendar(Date date) {
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(date);
-		return cal;
-	}
+//	private static Calendar toCalendar(Date date) {
+//		Calendar cal = Calendar.getInstance();
+//		cal.setTime(date);
+//		return cal;
+//	}
 
 	@RequestMapping("/event/{id}/addImage")
 	public String addImage(Model model, @PathVariable long id, @RequestParam("file") MultipartFile file,

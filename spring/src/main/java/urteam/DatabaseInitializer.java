@@ -17,10 +17,10 @@ import urteam.event.EventRepository;
 import urteam.news.NewsRepository;
 import urteam.sport.Sport;
 import urteam.sport.SportRepository;
-import urteam.stats.Stats_dos;
+import urteam.stats.Stat;
+import urteam.stats.UserSportStats;
 import urteam.user.User;
 import urteam.user.UserRepository;
-import urteam.user.UserSport;
 
 @Component
 public class DatabaseInitializer {

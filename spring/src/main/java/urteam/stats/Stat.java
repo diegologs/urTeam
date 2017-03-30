@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Stats_dos {
+public class Stat {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,7 +16,7 @@ public class Stats_dos {
 	private String date;
 	
 	
-	public Stats_dos() {
+	public Stat() {
 		
 	}
 

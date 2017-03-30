@@ -41,6 +41,9 @@ public class UserController {
 
 	@Autowired
 	private UserComponent userComponent;
+	
+	@Autowired
+	private UserService userService;
 
 	@RequestMapping("/newUser")
 	public String eventAdded(Model model, User user, @RequestParam String password) throws ParseException {
