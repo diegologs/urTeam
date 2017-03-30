@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import urteam.ConstantsUrTeam;
+import urteam.urTeamService;
 import urteam.urteamController;
 import urteam.news.News;
 import urteam.user.User;
@@ -30,7 +31,7 @@ public class CommunityService {
 	private UserComponent userComponent;
 	
 	@Autowired
-	private urteamController urteam;
+	private urTeamService urteam;
 	
 
 	public Community findOne(long id) {
@@ -91,20 +92,31 @@ public class CommunityService {
 	}
 	
 	public void addImage(Community community, MultipartFile file){
-		
-				/*
-				if (urteam.uploadImageFile(model, file, filename, ConstantsUrTeam.COMMUNITY_IMGS,
-						community.getCommunityId())) {
-					community.addImage(filename);
-				}
+		try {
 				
-				*/
-				saveOwner(community);
+			SimpleDateFormat formater = new SimpleDateFormat("mmddyyyy-hhMMss");
+			Date date = new Date();
 			
+			String filename = "imageingallery-" + formater.format(date);
+			
+			
+			if (urteam.uploadImageFile(file, filename, ConstantsUrTeam.COMMUNITY_IMGS, community.getCommunityId())) {
+					community.addImage(filename);
+			}
+				
+				
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 	}
 
 	public void add(Community community, MultipartFile file) {
+		
+		try {
+			
 		
 		SimpleDateFormat formater = new SimpleDateFormat("mmddyyyy-hhMMss");
 		Date date = new Date();
@@ -118,13 +130,17 @@ public class CommunityService {
 		String filename = "avatar-" + formater.format(date);
 	
 		/*
-		if (urteam.uploadImageFile(model, file, filename, ConstantsUrTeam.COMMUNITY_AVATAR,
-			community.getCommunityId())) {
+		if (urteam.uploadImageFile(file, filename, ConstantsUrTeam.COMMUNITY_IMGS, community.getCommunityId())) {
 			community.setMain_photo(filename);
 		}
-				
-		*/
+			*/	
+		
 		save(community);
+		
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 

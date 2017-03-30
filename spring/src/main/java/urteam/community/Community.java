@@ -13,12 +13,17 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 
+import urteam.event.Event.BasicEvent;
 import urteam.news.News;
 import urteam.user.User;
 
 @Entity
 public class Community {
+	
+	
+	public interface BasicCommunity{}
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,11 +31,14 @@ public class Community {
 	
 	private String communityId = "aleatorio";
 
-
+	@JsonView(BasicCommunity.class)
 	private String name;
+	@JsonView(BasicCommunity.class)
 	private String info;
 	private String country;
+	@JsonView(BasicCommunity.class)
 	private String city;
+	@JsonView(BasicCommunity.class)
 	private String sport;
 	private String main_photo;
 	
