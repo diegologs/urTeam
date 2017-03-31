@@ -18,6 +18,8 @@ import javax.persistence.Table;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import urteam.community.Community;
 import urteam.event.Event;
 import urteam.stats.UserSportStats;
@@ -47,19 +49,24 @@ public class User {
 	private List<String> roles;
 
 	@ManyToMany
+	@JsonIgnore
 	private List<User> following = new ArrayList<>();
 
 	@ManyToMany(mappedBy = "following")
+	@JsonIgnore
 	private List<User> followers = new ArrayList<>();
 
 	@ManyToMany
+	@JsonIgnore
 	private List<Community> communityList = new ArrayList<>();
 
 	@ManyToMany
+	@JsonIgnore
 	private List<Event> eventList = new ArrayList<>();
 
 
 	@OneToMany(cascade = { CascadeType.ALL})
+	@JsonIgnore
 	private List<UserSportStats> userSportsList = new ArrayList<>();
 
 	public User() {
@@ -204,7 +211,7 @@ public class User {
 	public void addFollower(User follower) {
 		this.followers.add(follower);
 	}
-
+	@JsonIgnore
 	public int getNumberOfFollower() {
 		return this.followers.size();
 	}

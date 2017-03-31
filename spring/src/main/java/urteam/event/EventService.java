@@ -66,6 +66,10 @@ public class EventService {
 		eventRepo.save(event);
 	}
 	
+	public Event mod(Event updatedEvent){
+		return eventRepo.saveAndFlush(updatedEvent);
+	}
+	
 	private static Calendar toCalendar(Date date) {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);

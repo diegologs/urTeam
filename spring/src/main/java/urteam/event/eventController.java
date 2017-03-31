@@ -91,7 +91,7 @@ public class eventController {
 	@RequestMapping("/event/{id}")
 	public String showEvent(Model model, @PathVariable long id, HttpServletRequest request) {
 		// Buscar el evento y su creador
-		Event event = eventRepo.findOne(id);
+		Event event = eventService.findOne(id);
 		User ownerEvent = userRepo.findOne(event.getOwner_id().getId());
 		String ownerName = ownerEvent.getNickname();
 
@@ -124,7 +124,7 @@ public class eventController {
 	@RequestMapping("/event/{id}/follow")
 	public String follow(Model model, @PathVariable long id, HttpServletRequest request) {
 		// Buscar el evento y su creador
-		Event event = eventRepo.findOne(id);
+		Event event = eventService.findOne(id);
 		model.addAttribute("events_active", true);
 
 		// Comprobar si hay un usuario logueado
@@ -157,7 +157,7 @@ public class eventController {
 	public String groupEdited(Model model, @PathVariable long id, @RequestParam String info,
 			HttpServletRequest request) {
 		// Buscar el evento y su creador
-		Event event = eventRepo.findOne(id);
+		Event event = eventService.findOne(id);
 		User ownerEvent = userRepo.findOne(event.getOwner_id().getId());
 		String ownerName = ownerEvent.getNickname();
 		model.addAttribute("events_active", true);
@@ -258,7 +258,7 @@ public class eventController {
 	@RequestMapping("/event/{id}/addImage")
 	public String addImage(Model model, @PathVariable long id, @RequestParam("file") MultipartFile file,
 			HttpServletRequest request) throws ParseException {
-		Event event = eventRepo.findOne(id);
+		Event event = eventService.findOne(id);
 		// Filename formater
 		SimpleDateFormat formater = new SimpleDateFormat("mmddyyyy-hhMMss");
 		Date date = new Date();
@@ -283,7 +283,7 @@ public class eventController {
 
 	@RequestMapping("/sortEventByName/{name}")
 	public String sortEventByName(Model model, @RequestParam String name) {
-		List<Event> eventos = eventRepo.findAll();
+		List<Event> eventos = eventService.findAll();
 		eventos = eventRepo.findByName(name);
 		model.addAttribute("events", eventos);
 		return "redirect:/events";
@@ -291,7 +291,7 @@ public class eventController {
 
 	@RequestMapping("/sortEventBySport")
 	public String sortEventBySport(Model model, @RequestParam Sport sport) {
-		List<Event> eventos = eventRepo.findBySport(sport);
+		List<Event> eventos = eventService.findAll();
 		model.addAttribute("events", eventos);
 		return "redirect:/events";
 	}

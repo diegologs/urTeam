@@ -27,8 +27,11 @@ public class Event {
 	
 	public interface BasicEvent{}
 	
+	public interface MembersEvent{}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@JsonView(BasicEvent.class)
 	private long id;
 	
 	private String eventId = "aleatorio";
@@ -38,13 +41,18 @@ public class Event {
 	private String name;
 	
 	//@OneToOne
+	@JsonView(BasicEvent.class)
 	private String sport;
 	
+	@JsonView(BasicEvent.class)
 	private double price;
 	
 	@Column(columnDefinition = "TEXT")
 	private String info;
+	
 	private String main_photo;
+	
+	@JsonView(BasicEvent.class)
 	private String place;
 	
 	@Basic
@@ -52,10 +60,12 @@ public class Event {
 
 	@DateTimeFormat(pattern = "dd/MM")
 	@Temporal(TemporalType.DATE)
+	@JsonView(BasicEvent.class)
 	private Date start_date;
 	
 	@DateTimeFormat(pattern = "dd/MM")
 	@Temporal(TemporalType.DATE)
+	@JsonView(BasicEvent.class)
 	private Date end_date;
 	
 	private int day_date;
@@ -67,6 +77,7 @@ public class Event {
 	
 	//@JsonView(BasicEvent.class)
 	@ManyToMany(mappedBy = "eventList")
+	@JsonView(MembersEvent.class)
 	private List<User> participants_IDs = new ArrayList<>();
 	
 
