@@ -62,7 +62,8 @@ public class eventController {
 			page = new PageRequest(page.getPageNumber(), page.getPageSize(),
 					new Sort(new Order(Sort.DEFAULT_DIRECTION, "name")));
 		}
-		Page<Event> eventos = eventRepo.findAll(new PageRequest(0, 6));
+		//Page<Event> eventos = eventRepo.findAll(new PageRequest(0, 6));
+		Page<Event> eventos = eventService.findAll(new PageRequest(0, 6));
 		model.addAttribute("events", eventos);
 		model.addAttribute("sortedBy", sortedBy);
 		model.addAttribute("sportList", sportController.getSportList());
@@ -135,16 +136,11 @@ public class eventController {
 			model.addAttribute("user", userLogged);
 			// Comprobar si es admin
 			model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
-
-			// Comprobar si el evento esta entre las seguidas del usuario
-			if (userLogged.getEventList().contains(event)) {
-				userLogged.removeEvent(event);
-			} else {
-				userLogged.addEvent(event);
-			}
+			
+			eventService.follow(userLogged, event);
+			eventService.save(event);
+			
 			model.addAttribute("eventFollowed", userLogged.getCommunityList().contains(event));
-
-			eventRepo.save(event);
 			userRepo.save(userLogged);
 			model.addAttribute("event", event);
 			return "redirect:/event/{id}";
@@ -175,7 +171,7 @@ public class eventController {
 			if (userLogged.getId() == ownerEvent.getId()) {
 				event.setInfo(info);
 			}
-			eventRepo.save(event);
+			eventService.save(event);
 			model.addAttribute("event", event);
 			return "redirect:/event/{id}";
 		} else {
@@ -213,9 +209,8 @@ public class eventController {
 			model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
 			
 			eventService.save(userLogged, event, file, start_date, end_date);
-			
+			Page<Event> eventos = eventService.findAll(new PageRequest(0, 9));
 //			// Crear evento
-//
 //			Date final_start_date = new SimpleDateFormat("dd/MM/yyyy").parse(start_date);
 //			event.setStart_date(final_start_date);
 //			Date final_end_date = new SimpleDateFormat("dd/MM/yyyy").parse(end_date);
@@ -235,14 +230,12 @@ public class eventController {
 //			if (urteam.uploadImageFile(model, file, filename, ConstantsUrTeam.EVENT_AVATAR, event.getEventId())) {
 //				event.setMain_photo(filename);
 //			}
-//			event.setOwner_id(userLogged);
-//			
+//			event.setOwner_id(userLogged);	
 //			// Guardar evento y recargar pagina
 //			eventRepo.save(event);
 //			Page<Event> eventos = eventRepo.findAll(new PageRequest(0, 9));
-			List<Event> eventos = eventService.findAll();
+			
 			model.addAttribute("events", eventos);
-
 			return "redirect:/events";
 		} else {
 			return "redirect:/events";

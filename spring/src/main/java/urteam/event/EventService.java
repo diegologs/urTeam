@@ -34,6 +34,14 @@ public class EventService {
 		return eventRepo.findAll();
 	}
 	
+	public Page<Event> findAll(PageRequest pageRequest){
+		return eventRepo.findAll(pageRequest);
+	}
+	
+	public void save(Event event){
+		eventRepo.save(event);
+	}
+	
 	public void save(User user, Event event, MultipartFile file, String start_date, String end_date){
 		// Crear evento
 		try {
@@ -66,8 +74,13 @@ public class EventService {
 		eventRepo.save(event);
 	}
 	
-	public Event mod(Event updatedEvent){
-		return eventRepo.saveAndFlush(updatedEvent);
+	public void follow(User user, Event event){
+		// Comprobar si el evento esta entre las seguidas del usuario
+		if (user.getEventList().contains(event)) {
+			user.removeEvent(event);
+		} else {
+			user.addEvent(event);
+		}
 	}
 	
 	private static Calendar toCalendar(Date date) {

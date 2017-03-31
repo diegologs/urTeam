@@ -59,6 +59,20 @@ public class EventRestController {
 	}
 	
 	@JsonView(CompleteEvent.class)
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Event> followEvent(@PathVariable long id){
+		Event event = eventService.findOne(id);
+		User userLogged = userRepo.findOne(userComponent.getLoggedUser().getId());
+		if(event != null && userLogged != null){
+			eventService.follow(userLogged, event);
+			eventService.save(event);
+			return new ResponseEntity<Event>(event, HttpStatus.OK);
+		}else{
+			return new ResponseEntity<Event>(HttpStatus.NOT_FOUND);
+		}			
+	}
+	
+	@JsonView(CompleteEvent.class)
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<Event> createEvent(@RequestBody Event event, String start_date, String end_date, MultipartFile file){
@@ -81,8 +95,8 @@ public class EventRestController {
 		if (userLogged.getId() == ownerEvent.getId()) {
 			if(event != null && updatedEvent != null){
 				updatedEvent.setId(id);
-				Event newEvent = eventService.mod(updatedEvent);
-				return new ResponseEntity<>(newEvent, HttpStatus.ACCEPTED);
+				eventService.save(updatedEvent);
+				return new ResponseEntity<>(updatedEvent, HttpStatus.ACCEPTED);
 				//return new ResponseEntity<Event>(updatedEvent, HttpStatus.OK);
 			}else{
 				return new ResponseEntity<Event>(HttpStatus.NOT_FOUND);
@@ -97,6 +111,6 @@ public class EventRestController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Event> deleteEvent(@PathVariable long id){
 		eventService.delete(id);
-		return new ResponseEntity<>(null, HttpStatus.OK);
+		return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
 	}
 }
