@@ -6,16 +6,26 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import urteam.community.Community;
+import urteam.community.Community.BasicCommunity;
 
 @Entity
 
 public class News {
 	
+	
+	public interface BasicNews{}
+	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@JsonView(BasicNews.class)
 	private long id;
+	@JsonView(BasicNews.class)
 	private String title;
+	@JsonView(BasicNews.class)
 	private String text;
 	
 		

@@ -196,16 +196,12 @@ public class CommunityService {
 		return repository.findBySport(sport);
 	}
 
-	public boolean addNews(Community community, String title, String text) {
+	public void addNews(Community community, News news) {
 		if(isOwner(community)){
-			News news = new News(title, text);
+			
 			community.getNews().add(news);			
 			newsRepo.save(news);
 			save(community);
-			return true;
-		}else{
-			return false;
-			
 		}
 		
 	}

@@ -173,7 +173,8 @@ public class CommunityController {
 
 			// Comprobar que el usuario y el dueño de la comunidad son el mismo
 			// y si lo son modificar
-			communityService.addNews(community, title, text);
+			News news = new News(title, text);
+			communityService.addNews(community,news);
 			model.addAttribute("community", community);
 			return "redirect:/group/{id}";
 		} else {

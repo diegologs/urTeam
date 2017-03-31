@@ -41,6 +41,7 @@ import urteam.user.UserRepository;
 public class CommunityRestController {
 
 	interface CompleteCommunity extends Community.BasicCommunity{} 
+	interface CompleteNews extends News.BasicNews{} 
 	
 	@Autowired
 	private CommunityService service;
@@ -139,24 +140,24 @@ public class CommunityRestController {
 
 	}
 	
-	@JsonView(CompleteCommunity.class)
+	@JsonView(CompleteNews.class)	
 	@RequestMapping(value = "/{id}/news", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<Community> addNews(@PathVariable long id, @RequestBody String title, String text) throws ParseException {
+	public ResponseEntity<News> addNews(@PathVariable long id, @RequestBody News news) {
 
 
 		Community community = service.findOne(id);
-		service.addNews(community, title, text);
+		service.addNews(community, news);
 		
 		if(community != null){
-			return new ResponseEntity<>(community, HttpStatus.OK);
+			return new ResponseEntity<>(news, HttpStatus.OK);
 		}else{
-			return new ResponseEntity<>(community, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(news, HttpStatus.NOT_FOUND);
 		}
 
 	}
 	
-	
+	@JsonView(CompleteNews.class)	
 	@RequestMapping(value = "/{id}/news", method = RequestMethod.GET)
 	public List<News> getNews(@PathVariable long id) {
 
@@ -171,7 +172,7 @@ public class CommunityRestController {
 
 	
 	@JsonView(CompleteCommunity.class)
-	@RequestMapping("/group/{id}/follow")
+	@RequestMapping(value = "/{id}/follow", method = RequestMethod.PUT)
 	public ResponseEntity<Community> follow(@PathVariable long id) {
 		
 		Community community = service.findOne(id);
