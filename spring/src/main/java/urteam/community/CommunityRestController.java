@@ -138,6 +138,36 @@ public class CommunityRestController {
 		}
 
 	}
+	
+	@JsonView(CompleteCommunity.class)
+	@RequestMapping(value = "/{id}/news", method = RequestMethod.POST)
+	@ResponseStatus(HttpStatus.CREATED)
+	public ResponseEntity<Community> addNews(@PathVariable long id, @RequestBody String title, String text) throws ParseException {
+
+
+		Community community = service.findOne(id);
+		service.addNews(community, title, text);
+		
+		if(community != null){
+			return new ResponseEntity<>(community, HttpStatus.OK);
+		}else{
+			return new ResponseEntity<>(community, HttpStatus.NOT_FOUND);
+		}
+
+	}
+	
+	
+	@RequestMapping(value = "/{id}/news", method = RequestMethod.GET)
+	public List<News> getNews(@PathVariable long id) {
+
+		Community community = service.findOne(id);
+		
+		return service.findNews(community);
+		
+		
+
+	}
+
 
 	
 	@JsonView(CompleteCommunity.class)

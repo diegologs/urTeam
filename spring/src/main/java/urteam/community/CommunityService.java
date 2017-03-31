@@ -6,6 +6,9 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -13,6 +16,7 @@ import urteam.ConstantsUrTeam;
 import urteam.urTeamService;
 import urteam.urteamController;
 import urteam.news.News;
+import urteam.news.NewsRepository;
 import urteam.user.User;
 import urteam.user.UserComponent;
 import urteam.user.UserRepository;
@@ -26,6 +30,9 @@ public class CommunityService {
 	
 	@Autowired
 	private UserRepository userRepo;
+	
+	@Autowired
+	private NewsRepository newsRepo;
 	
 	@Autowired
 	private UserComponent userComponent;
@@ -44,7 +51,7 @@ public class CommunityService {
 	
 	public void save(Community community) {
 		
-	repository.save(community);
+		repository.save(community);
 		
 	}
 
@@ -57,6 +64,8 @@ public class CommunityService {
 	public boolean editInfo(Community community, String info){
 		if(isOwner(community)){
 			community.setInfo(info);
+			
+			save(community);
 			return true;
 		}else{
 			return false;
@@ -67,7 +76,7 @@ public class CommunityService {
 	
 	public boolean edit(Community community){
 		if(isOwner(community)){
-			repository.save(community);
+			save(community);
 			return true;
 		}else{
 			return false;
@@ -82,7 +91,7 @@ public class CommunityService {
 	public boolean isOwner(Community community){
 		
 		User ownerCommunity = userRepo.findOne(community.getOwner_id().getId());
-		
+		System.out.println(userComponent.isLoggedUser());
 		if ((userComponent.isLoggedUser())) {
 			long userLogged_id = userComponent.getLoggedUser().getId();
 			User userLogged = userRepo.findOne(userLogged_id);
@@ -172,6 +181,38 @@ public class CommunityService {
 		}
 
 		
+		
+	}
+
+	public Page<Community> findAll(PageRequest pageRequest) {
+		return repository.findAll(pageRequest);
+	}
+
+	public List<Community> findByName(String name) {
+		return repository.findByName(name);
+	}
+
+	public List<Community> findBySport(String sport) {
+		return repository.findBySport(sport);
+	}
+
+	public boolean addNews(Community community, String title, String text) {
+		if(isOwner(community)){
+			News news = new News(title, text);
+			community.getNews().add(news);			
+			newsRepo.save(news);
+			save(community);
+			return true;
+		}else{
+			return false;
+			
+		}
+		
+	}
+
+	public List<News> findNews(Community community) {
+		
+		return community.getNews();
 		
 	}
 
