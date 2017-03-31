@@ -26,6 +26,7 @@ public class Community {
 	public interface BasicCommunity{}
 	
 	@Id
+	@JsonView(BasicCommunity.class)
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
@@ -35,8 +36,7 @@ public class Community {
 	private String name;
 	@JsonView(BasicCommunity.class)
 	private String info;
-	private String country;
-	@JsonView(BasicCommunity.class)
+	private String country;	
 	private String city;
 	@JsonView(BasicCommunity.class)
 	private String sport;
