@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -25,6 +27,7 @@ import urteam.sport.SportController;
 import urteam.sport.SportService;
 import urteam.stats.StatsController;
 import urteam.stats.StatsService;
+import urteam.stats.UserSportStats;
 
 @Controller
 public class UserController {
@@ -59,6 +62,7 @@ public class UserController {
 		User me = userService.findOne(userComponent.getLoggedUser().getId());
 		User user = userService.getUser(nickname);
 		model.addAttribute("userpage", user);
+		Set<Map.Entry<String,UserSportStats>> stats = user.getSportStats().entrySet();
 
 		List<User> friends = user.getFollowing();
 		List<Community> communities = user.getCommunityList();
@@ -70,7 +74,7 @@ public class UserController {
 
 		model.addAttribute("numberOfFollowers", user.getNumberOfFollower());
 		model.addAttribute("sportList", sportService.getSports());
-		model.addAttribute("userSportList",user.getSportStats());
+		model.addAttribute("userSportList",stats);
 		model.addAttribute("level", statsService.computeUserLevel(user));
 		model.addAttribute("progress", statsService.computeUserBarLevel(user));
 		model.addAttribute("buttonfollowing", me.getId() != user.getId());
