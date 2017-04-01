@@ -18,10 +18,9 @@ public class UserSportStats {
 	private long id;
 
 	private double sportTotalTime;
-	private String sportName;
 
 	@OneToMany(cascade = { CascadeType.ALL })
-	private List<Stat> sportStats = new ArrayList<>();
+	private List<Stat> stats = new ArrayList<>();
 
 	public UserSportStats() {
 	}
@@ -34,30 +33,22 @@ public class UserSportStats {
 		this.id = id;
 	}
 
-	public String getSportName() {
-		return sportName;
+	public List<Stat> getStats() {
+		return stats;
 	}
 
-	public void setSportName(String sportName) {
-		this.sportName = sportName;
+	public void setStats(List<Stat> sportStats) {
+		this.stats = sportStats;
 	}
 
-	public List<Stat> getSportStats() {
-		return sportStats;
-	}
-
-	public void setSportStats(List<Stat> sportStats) {
-		this.sportStats = sportStats;
-	}
-
-	public void addSportStats(Stat stats) {
-		this.sportStats.add(stats);
+	public void addStats(Stat stats) {
+		this.stats.add(stats);
 		this.updateSportTotalTime();
 	}
 
 	public void updateSportTotalTime() {
 		sportTotalTime = 0;
-		for (Stat times : sportStats) {
+		for (Stat times : stats) {
 			sportTotalTime = sportTotalTime + times.getTotalSesionTime();
 		}
 	}

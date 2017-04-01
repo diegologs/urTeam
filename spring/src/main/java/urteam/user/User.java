@@ -2,7 +2,9 @@ package urteam.user;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,6 +21,7 @@ import javax.persistence.Table;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import urteam.community.Community;
 import urteam.event.Event;
@@ -27,13 +30,23 @@ import urteam.stats.UserSportStats;
 @Entity
 @Table(name = "user_profile")
 public class User {
-
+	
+	public interface BasicUser{}
+	
+	public interface FriendsUser{}
+	
+	public interface FollowersUser{}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@JsonView(BasicUser.class)
 	private long id;
 	private String generatedId = "aleatorio";
 	private String username;
 	private String surname;
+	
+	@Column(unique=true)
+	@JsonView(BasicUser.class)
 	private String nickname;
 	private String passwordHash;
 	private String email;
@@ -49,11 +62,11 @@ public class User {
 	private List<String> roles;
 
 	@ManyToMany
-	@JsonIgnore
+	@JsonView(FriendsUser.class)
 	private List<User> following = new ArrayList<>();
 
 	@ManyToMany(mappedBy = "following")
-	@JsonIgnore
+	@JsonView(FollowersUser.class)
 	private List<User> followers = new ArrayList<>();
 
 	@ManyToMany
@@ -64,10 +77,13 @@ public class User {
 	@JsonIgnore
 	private List<Event> eventList = new ArrayList<>();
 
+	// @OneToMany(cascade = { CascadeType.ALL})
+	// @JsonIgnore
+	// private List<UserSportStats> userSportsList = new ArrayList<>();
 
-	@OneToMany(cascade = { CascadeType.ALL})
+	@OneToMany(cascade = {CascadeType.ALL})
 	@JsonIgnore
-	private List<UserSportStats> userSportsList = new ArrayList<>();
+	private Map<String, UserSportStats> sportStats = new HashMap<String, UserSportStats>();
 
 	public User() {
 	}
@@ -211,6 +227,7 @@ public class User {
 	public void addFollower(User follower) {
 		this.followers.add(follower);
 	}
+
 	@JsonIgnore
 	public int getNumberOfFollower() {
 		return this.followers.size();
@@ -245,7 +262,6 @@ public class User {
 
 	}
 
-
 	public void removeEvent(Event event) {
 		this.eventList.remove(event);
 
@@ -264,32 +280,8 @@ public class User {
 		this.eventList = eventList;
 	}
 
-	public List<UserSportStats> getUserSportsList() {
-		return userSportsList;
-	}
-	
-	public void addUserSportsList(UserSportStats userSport) {
-		this.userSportsList.add(userSport);
-	}
-	
-	public boolean containsUserSport(String sport){
-		for(UserSportStats ue: userSportsList){
-			if(ue.getSportName().equalsIgnoreCase(sport)){
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	public int userSportPosition(String sport){
-		int index=0;
-		for(UserSportStats ue: userSportsList){
-			if(ue.getSportName().equalsIgnoreCase(sport)){
-				return index;
-			}
-			index++;
-		}
-		return index;
+	public Map<String, UserSportStats> getSportStats() {
+		return sportStats;
 	}
 
 }

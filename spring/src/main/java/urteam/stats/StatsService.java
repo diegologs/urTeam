@@ -1,15 +1,15 @@
 package urteam.stats;
 
-import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import urteam.community.CommunityRepository;
 import urteam.sport.Sport;
 import urteam.sport.SportService;
 import urteam.user.User;
 import urteam.user.UserRepository;
+import urteam.user.UserService;
 
 @Service
 public class StatsService {
@@ -18,54 +18,39 @@ public class StatsService {
 	SportService sportService;
 
 	@Autowired
-	StatsRepository statsRepository;
+	UserService userService;
 
 	@Autowired
 	UserRepository userRepository;
 
-	@Autowired
-	CommunityRepository communityRepository;
-
-	public String addUserStats(String nickname,String sport,String date,
-			double sesionTime) {
+	public Map<String, UserSportStats> getUserStats(String nickname) {
 		User user = userRepository.findByNickname(nickname);
+		return user.getSportStats();
+	}
 
-		Stat statsDos = new Stat();
-		statsDos.setDate(date);
-		statsDos.setTotalSesionTime(sesionTime);
+	public Stat newUserStat(String nickname, String sport, Stat stat) {
 
-		if (user.containsUserSport(sport)) {
-			user.getUserSportsList().get(user.userSportPosition(sport)).addSportStats(statsDos);
+		User user = userService.getUser(nickname);
+		if (user.getSportStats().containsKey(sport)) {
+			user.getSportStats().get(sport).getStats().add(stat);
 		} else {
-			UserSportStats userSport = new UserSportStats();
-			userSport.setSportName(sport);
-			userSport.addSportStats(statsDos);
-			user.addUserSportsList(userSport);
+			UserSportStats userSportStats = new UserSportStats();
+			userSportStats.getStats().add(stat);
+			user.getSportStats().put(sport, userSportStats);
 		}
-		user.setScore(String.valueOf(computeUserScore(user)));
+		user.getSportStats().get(sport).updateSportTotalTime();
 		userRepository.save(user);
-		return "cambiar";
+		return stat;
 	}
-	
-	public List<UserSportStats> getUserStats(String nickname){
-		User user = userRepository.findByNickname(nickname);
-		return user.getUserSportsList();
-	}
-	
-	
-	
 
 	public double computeUserScore(User user) {
 
 		double totalScore = 0;
 
-		List<UserSportStats> userSport = user.getUserSportsList();
-
-		for (UserSportStats u : userSport) {
-			Sport sport = sportService.getSport(u.getSportName());
-			for (Stat s : u.getSportStats()) {
-				totalScore += sport.getMultiplicator() * s.getTotalSesionTime() * 100;
-			}
+		Map<String, UserSportStats> userSportStats = user.getSportStats();
+		for (Map.Entry<String, UserSportStats> entry : userSportStats.entrySet()) {
+			Sport sport = sportService.getSport(entry.getKey());
+			totalScore += sport.getMultiplicator() * entry.getValue().getSportTotalTime() * 100;
 		}
 		return totalScore;
 	}
@@ -73,17 +58,13 @@ public class StatsService {
 	public int computeUserLevel(User user) {
 
 		double userScore = Double.parseDouble(user.getScore());
-
 		return (int) (userScore / 1000);
-
 	}
 
 	public int computeUserBarLevel(User user) {
 
 		double userScore = Double.parseDouble(user.getScore());
-
 		int userbarlevel = ((int) userScore % 1000) / 10;
-
 		return userbarlevel;
 	}
 

@@ -8,18 +8,19 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import urteam.ConstantsUrTeam;
+import urteam.urTeamService;
 
 @Service
 public class UserService {
 
 	@Autowired
 	private UserRepository userRepository;
+
+	@Autowired
+	private urTeamService imageService;
 
 	public List<User> getUsers() {
 		return userRepository.findAll();
@@ -29,45 +30,88 @@ public class UserService {
 		return userRepository.findByNickname(nickname);
 	}
 
-	public User createNewUser(User user, String password) {
-		Date date = new Date();
-		SimpleDateFormat userIdFormater = new SimpleDateFormat("mmddyyyy-hhMMss");
-		String generatedId = userIdFormater.format(date);
-		user.setGeneratedId(generatedId);
-		user.setPasswordHash(password);
-		ArrayList<String> roles = new ArrayList<>(Arrays.asList("ROLE_USER"));
-		user.setRoles(roles);
-		userRepository.save(user);
-		return user;
+	public User findOne(long id) {
+		return userRepository.findOne(id);
 	}
 
-	public User updateUser(String nickname, String username, String surname, String email, String bio, String city,
-			String country, MultipartFile file) {
-
-		User userToEdit = userRepository.findByNickname(nickname);
-
-		if (userToEdit != null) {
-			userToEdit.setUserName(username);
-			userToEdit.setSurname(surname);
-			userToEdit.setEmail(email);
-			userToEdit.setBio(bio);
-			userToEdit.setCity(city);
-			userToEdit.setCountry(country);
-			// if (file != null) {
-			// String filename = "avatar-" + editedUser.getGeneratedId();
-			// if (urteamController.uploadImageFile(model, file, filename,
-			// ConstantsUrTeam.USER_AVATAR,
-			// editedUser.getGeneratedId())) {
-			// editedUser.setAvatar(filename);
-			// }
-			// }
-
-			// }
-
-			userRepository.save(userToEdit);
-			return userToEdit;
+	public User createNewUser(User user) {
+		if (userRepository.findByNickname(user.getNickname()) == null) {
+			Date date = new Date();
+			SimpleDateFormat userIdFormater = new SimpleDateFormat("mmddyyyy-hhMMss");
+			String generatedId = userIdFormater.format(date);
+			user.setGeneratedId(generatedId);
+			ArrayList<String> roles = new ArrayList<>(Arrays.asList("ROLE_USER"));
+			user.setRoles(roles);
+			userRepository.save(user);
+			return user;
 		} else {
 			return null;
 		}
+	}
+
+	public User updateUserInfo(String nickname, User user) {
+		User userToEdit = userRepository.findByNickname(nickname);
+		if (userToEdit != null) {
+			user.setId(userToEdit.getId());
+			userRepository.save(user);
+			return user;
+		} else {
+			return null;
+		}
+	}
+
+	public User updateUserAvatar(String nickname, MultipartFile file) {
+
+		User userToEdit = userRepository.findByNickname(nickname);
+		if (userToEdit != null) {
+			try {
+				if (imageService.uploadImageFile(file, "avatar-" + userToEdit.getGeneratedId(),
+						ConstantsUrTeam.USER_AVATAR, userToEdit.getGeneratedId())) {
+					userToEdit.setAvatar("avatar-" + userToEdit.getGeneratedId());
+					userRepository.save(userToEdit);
+					return userToEdit;
+				} else {
+					return null;
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			}
+		} else {
+			return null;
+		}
+	}
+
+	public List<User> getFriends(String nickname) {
+		List<User> followerList = userRepository.findByNickname(nickname).getFollowing();
+		if (followerList != null) {
+			return followerList;
+		} else {
+			return null;
+		}
+	}
+
+	public List<User> getFollowers(String nickname) {
+		List<User> followerList = userRepository.findByNickname(nickname).getFollowers();
+		if (followerList != null) {
+			return followerList;
+		} else {
+			return null;
+		}
+	}
+
+	public List<User> followUnfollow(User logged, String nicknameToFollow) {
+
+		User user = userRepository.findByNickname(nicknameToFollow);
+
+		if (logged.getFollowing().contains(user)) {
+			logged.getFollowing().remove(user);
+		} else {
+			logged.getFollowing().add(user);
+		}
+
+		userRepository.save(logged);
+		return user.getFollowers();
 	}
 }

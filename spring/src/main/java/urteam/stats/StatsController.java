@@ -38,63 +38,63 @@ public class StatsController {
 	@Autowired
 	private UserComponent userComponent;
 
-	@RequestMapping("/addstats/{nickname}")
-	public String addUserStats(@PathVariable String nickname, @RequestParam String sport, @RequestParam String date,
-			@RequestParam double sesionTime , Model model, HttpServletRequest request) {
-		User user = userRepository.findByNickname(nickname);			
-		Stat statsDos = new Stat();
-	    statsDos.setDate(date);
-	    statsDos.setTotalSesionTime(sesionTime);
-	    
-	    if(user.containsUserSport(sport)){
-	    	user.getUserSportsList().get(user.userSportPosition(sport)).addSportStats(statsDos);
-	    }else{
-	    	UserSportStats userSport = new UserSportStats();
-	    	userSport.setSportName(sport);
-	    	userSport.addSportStats(statsDos);
-	    	user.addUserSportsList(userSport);
-	    }
-		user.setScore(String.valueOf(computeUserScore(user)));
-	    userRepository.save(user);
-		
-		
-		if ((userComponent.isLoggedUser())) {
-			long idUser = userComponent.getLoggedUser().getId();
-			User userLogged = userRepository.findOne(idUser);
-			model.addAttribute("user", userLogged);
-			if (userComponent.getLoggedUser().getId() == userLogged.getId()) {
-				model.addAttribute("logged", true);
-			}
-			model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
-			return "redirect:/user/{nickname}";
-		} else {
-			return "redirect:/user/{nickname}";
-		}
-		
-	}
-
-	public double computeUserScore(User user) {
-		
-		double totalScore = 0;
-
-		List<UserSportStats> userSport = user.getUserSportsList();
-
-		for (UserSportStats u : userSport) {
-			Sport sport = sportService.getSport(u.getSportName());
-			for(Stat s: u.getSportStats()){
-				totalScore += sport.getMultiplicator() * s.getTotalSesionTime() * 100;
-			}
-		}
-		return totalScore;
-	}
-	
-	public int computeUserLevel(User user){
-		
-		double userScore = Double.parseDouble(user.getScore());
-		
-		return (int) (userScore/1000); 
-			
-	}
+//	@RequestMapping("/addstats/{nickname}")
+//	public String addUserStats(@PathVariable String nickname, @RequestParam String sport, @RequestParam String date,
+//			@RequestParam double sesionTime , Model model, HttpServletRequest request) {
+//		User user = userRepository.findByNickname(nickname);			
+//		Stat statsDos = new Stat();
+//	    statsDos.setDate(date);
+//	    statsDos.setTotalSesionTime(sesionTime);
+//	    
+//	    if(user.containsUserSport(sport)){
+//	    	user.getUserSportsList().get(user.userSportPosition(sport)).addSportStats(statsDos);
+//	    }else{
+//	    	UserSportStats userSport = new UserSportStats();
+//	    	userSport.setSportName(sport);
+//	    	userSport.addSportStats(statsDos);
+//	    	user.addUserSportsList(userSport);
+//	    }
+//		user.setScore(String.valueOf(computeUserScore(user)));
+//	    userRepository.save(user);
+//		
+//		
+//		if ((userComponent.isLoggedUser())) {
+//			long idUser = userComponent.getLoggedUser().getId();
+//			User userLogged = userRepository.findOne(idUser);
+//			model.addAttribute("user", userLogged);
+//			if (userComponent.getLoggedUser().getId() == userLogged.getId()) {
+//				model.addAttribute("logged", true);
+//			}
+//			model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
+//			return "redirect:/user/{nickname}";
+//		} else {
+//			return "redirect:/user/{nickname}";
+//		}
+//		
+//	}
+//
+//	public double computeUserScore(User user) {
+//		
+//		double totalScore = 0;
+//
+//		List<UserSportStats> userSport = user.getUserSportsList();
+//
+//		for (UserSportStats u : userSport) {
+//			Sport sport = sportService.getSport(u.getSportName());
+//			for(Stat s: u.getSportStats()){
+//				totalScore += sport.getMultiplicator() * s.getTotalSesionTime() * 100;
+//			}
+//		}
+//		return totalScore;
+//	}
+//	
+//	public int computeUserLevel(User user){
+//		
+//		double userScore = Double.parseDouble(user.getScore());
+//		
+//		return (int) (userScore/1000); 
+//			
+//	}
 	
 	
 	public int computeUserBarLevel(User user){

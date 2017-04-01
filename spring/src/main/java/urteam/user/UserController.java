@@ -58,56 +58,56 @@ public class UserController {
 		return "redirect:/events";
 	}
 
-	@RequestMapping("/user/{nickname}")
-	public String userProf(Model model, @PathVariable String nickname, HttpServletRequest request) {
+//	@RequestMapping("/user/{nickname}")
+//	public String userProf(Model model, @PathVariable String nickname, HttpServletRequest request) {
 
-		User me = userRepository.findOne(userComponent.getLoggedUser().getId());
-		User user = userRepository.findByNickname(nickname);
-		model.addAttribute("userpage", user);
-
-		List<User> friends = user.getFollowing();
-		List<Community> communities = user.getCommunityList();
-		List<Event> events = user.getEventList();
-		model.addAttribute("userFollowing", friends);
-		model.addAttribute("communities", communities);
-		model.addAttribute("events", events);
-		model.addAttribute("membersCommunity", communities.size());
-
-		model.addAttribute("numberOfFollowers", user.getNumberOfFollower());
-		model.addAttribute("sportList", sportController.getSportList());
-		model.addAttribute("userSportList", user.getUserSportsList());
-		model.addAttribute("level", statsController.computeUserLevel(user));
-		model.addAttribute("progress", statsController.computeUserBarLevel(user));
-
-		model.addAttribute("userSportList", user.getUserSportsList());
-
-		model.addAttribute("buttonfollowing", me.getId() != user.getId());
-		if (me.getFollowing().contains(user)) {
-			model.addAttribute("isfollowed", true);
-		} else {
-			model.addAttribute("isfollowed", false);
-		}
-
-		for (Event event : events) {
-			model.addAttribute("eventFollowed", me.getEventList().contains(event));
-		}
-		for (Community community : communities) {
-			model.addAttribute("communityFollowed", me.getCommunityList().contains(community));
-		}
-
-		if ((userComponent.isLoggedUser())) {
-			User userLogged = userRepository.findOne(me.getId());
-			model.addAttribute("user", me);
-			if (userComponent.getLoggedUser().getId() == userLogged.getId()) {
-				model.addAttribute("user_active", true);
-				model.addAttribute("logged", true);
-			}
-			model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
-			return "user";
-		} else {
-			return "user";
-		}
-	}
+//		User me = userRepository.findOne(userComponent.getLoggedUser().getId());
+//		User user = userRepository.findByNickname(nickname);
+//		model.addAttribute("userpage", user);
+//
+//		List<User> friends = user.getFollowing();
+//		List<Community> communities = user.getCommunityList();
+//		List<Event> events = user.getEventList();
+//		model.addAttribute("userFollowing", friends);
+//		model.addAttribute("communities", communities);
+//		model.addAttribute("events", events);
+//		model.addAttribute("membersCommunity", communities.size());
+//
+//		model.addAttribute("numberOfFollowers", user.getNumberOfFollower());
+//		model.addAttribute("sportList", sportController.getSportList());
+//		model.addAttribute("userSportList", user.getUserSportsList());
+//		model.addAttribute("level", statsController.computeUserLevel(user));
+//		model.addAttribute("progress", statsController.computeUserBarLevel(user));
+//
+//		model.addAttribute("userSportList", user.getUserSportsList());
+//
+//		model.addAttribute("buttonfollowing", me.getId() != user.getId());
+//		if (me.getFollowing().contains(user)) {
+//			model.addAttribute("isfollowed", true);
+//		} else {
+//			model.addAttribute("isfollowed", false);
+//		}
+//
+//		for (Event event : events) {
+//			model.addAttribute("eventFollowed", me.getEventList().contains(event));
+//		}
+//		for (Community community : communities) {
+//			model.addAttribute("communityFollowed", me.getCommunityList().contains(community));
+//		}
+//
+//		if ((userComponent.isLoggedUser())) {
+//			User userLogged = userRepository.findOne(me.getId());
+//			model.addAttribute("user", me);
+//			if (userComponent.getLoggedUser().getId() == userLogged.getId()) {
+//				model.addAttribute("user_active", true);
+//				model.addAttribute("logged", true);
+//			}
+//			model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
+//			return "user";
+//		} else {
+//			return "user";
+//		}
+//	}
 
 	@RequestMapping("/user/{nickname}/edit")
 	public String userProfileEdit(Model model, @PathVariable String nickname, @RequestParam String username,

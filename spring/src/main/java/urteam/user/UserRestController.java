@@ -13,13 +13,23 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @RestController
 @RequestMapping("/api/users")
 public class UserRestController {
+	
+	interface CompleteUser extends User.BasicUser{}
+	interface FriendsUser extends User.FriendsUser, User.BasicUser{}
+	interface FollowersUser extends User.FollowersUser, User.BasicUser{}
 
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private UserComponent userComponent;
+
+	@JsonView(CompleteUser.class)
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<List<User>> getUsers() {
@@ -31,6 +41,7 @@ public class UserRestController {
 		}
 	}
 
+	@JsonView(CompleteUser.class)
 	@RequestMapping(value = "/{nickname}", method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<User> getUser(@PathVariable String nickname) {
@@ -42,23 +53,71 @@ public class UserRestController {
 		}
 	}
 
+	@JsonView(CompleteUser.class)
 	@RequestMapping(value = "/{nickname}", method = RequestMethod.PUT)
-	public ResponseEntity<User> updateUser(@PathVariable String nickname, String username, String surname, String email,
-			String bio, String city, String country, MultipartFile file) {
-		User user = userService.updateUser(nickname, username, surname, email, bio, city, country, file);
-		if (user != null) {
-			return new ResponseEntity<>(user, HttpStatus.OK);
+	public ResponseEntity<User> updateUserInfo(@PathVariable String nickname, @RequestBody User user) {
+		User updatedUser = userService.updateUserInfo(nickname, user);
+		if (updatedUser != null) {
+			return new ResponseEntity<>(updatedUser, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-
 	}
 
+	@JsonView(CompleteUser.class)
+	@RequestMapping(value = "/{nickname}/avatar", method = RequestMethod.PUT)
+	public ResponseEntity<User> updateUserAvatar(@PathVariable String nickname, @RequestBody MultipartFile file) {
+		User updatedUserAvatar = userService.updateUserAvatar(nickname, file);
+		if (updatedUserAvatar != null) {
+			return new ResponseEntity<>(updatedUserAvatar, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+
+	@JsonView(CompleteUser.class)
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
-	public User createUser(@RequestBody User user, String password) {
-		userService.createNewUser(user, password);
-		return user;
+	public ResponseEntity<User> createUser(@RequestBody User user) {
+		User newUser = userService.createNewUser(user);
+		if (newUser != null) {
+			return new ResponseEntity<>(newUser, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@JsonView(FriendsUser.class)
+	@RequestMapping(value = "/{nickname}/friends", method = RequestMethod.PUT)
+	public ResponseEntity<List<User>> followUnfollowUser(@PathVariable String nickname) {
+		List<User> friends = userService.followUnfollow(userComponent.getLoggedUser(), nickname);
+		if (friends != null) {
+			return new ResponseEntity<>(friends, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+
+	@JsonView(FriendsUser.class)
+	@RequestMapping(value = "/{nickname}/friends", method = RequestMethod.GET)
+	public ResponseEntity<List<User>> getFriends(@PathVariable String nickname) {
+		List<User> friends = userService.getFriends(nickname);
+		if (friends != null) {
+			return new ResponseEntity<>(friends, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+
+	@JsonView(FollowersUser.class)
+	@RequestMapping(value = "/{nickname}/followers", method = RequestMethod.GET)
+	public ResponseEntity<List<User>> getFollowers(@PathVariable String nickname) {
+		List<User> followers = userService.getFollowers(nickname);
+		if (followers != null) {
+			return new ResponseEntity<>(followers, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 
 }
