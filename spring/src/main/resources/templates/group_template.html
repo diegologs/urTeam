@@ -3,7 +3,12 @@
 	<div class="row group">
 		<div class="group-info">
 			<div class="col-sm-2 group-image">
+				{{#main_photo}}
 				<img class="img-circle img-responsive group-image" width="110px" alt="{{name}}" src="/image/community-avatar/{{communityId}}/{{main_photo}}">
+				{{/main_photo}}
+				{{^main_photo}}
+				<img class="img-circle img-responsive group-image" width="110px" alt="{{name}}" src="/image/community-avatar/{{communityId}}/default-mainphoto">
+				{{/main_photo}}
 			</div>
 			<div class="col-sm-8">
 				<h1 class="group-name">{{name}}</h1>
