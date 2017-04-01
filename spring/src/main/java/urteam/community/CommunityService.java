@@ -215,4 +215,31 @@ public class CommunityService {
 		
 	}
 
+	public void setImage(Community community, MultipartFile file) {
+		
+		try {
+			
+			if(isOwner(community)){
+				
+				SimpleDateFormat formater = new SimpleDateFormat("mmddyyyy-hhMMss");
+				Date date = new Date();
+				
+				String filename = "imageingallery-" + formater.format(date);
+				
+							
+				if (urteam.uploadImageFile(file, filename, ConstantsUrTeam.COMMUNITY_IMGS, community.getCommunityId())) {
+					community.setMain_photo(filename);
+				}
+				
+			}
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+	}
+		
+	
+
 }
