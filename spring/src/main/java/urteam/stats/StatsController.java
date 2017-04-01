@@ -97,13 +97,13 @@ public class StatsController {
 //	}
 	
 	
-	public int computeUserBarLevel(User user){
-		
-		double userScore =  Double.parseDouble(user.getScore());
-		
-		int userbarlevel =((int)userScore%1000)/10;
-		
-		return userbarlevel;
-	}
+//	public int computeUserBarLevel(User user){
+//		
+//		double userScore =  Double.parseDouble(user.getScore());
+//		
+//		int userbarlevel =((int)userScore%1000)/10;
+//		
+//		return userbarlevel;
+//	}
 
 }
