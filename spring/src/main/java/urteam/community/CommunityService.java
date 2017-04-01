@@ -38,7 +38,7 @@ public class CommunityService {
 	private UserComponent userComponent;
 	
 	@Autowired
-	private urTeamService urteam;
+	private urTeamService urteamService;
 	
 
 	public Community findOne(long id) {
@@ -121,7 +121,7 @@ public class CommunityService {
 			String filename = "imageingallery-" + formater.format(date);
 			
 			
-			if (urteam.uploadImageFile(file, filename, ConstantsUrTeam.COMMUNITY_IMGS, community.getCommunityId())) {
+			if (urteamService.uploadImageFile(file, filename, ConstantsUrTeam.COMMUNITY_IMGS, community.getCommunityId())) {
 					community.addImage(filename);
 			}
 				
@@ -150,12 +150,12 @@ public class CommunityService {
 		
 			String filename = "avatar-" + formater.format(date);
 		
-			/*
-			if (urteam.uploadImageFile(file, filename, ConstantsUrTeam.COMMUNITY_IMGS, community.getCommunityId())) {
+			
+			if (urteamService.uploadImageFile(file, filename, ConstantsUrTeam.COMMUNITY_AVATAR, community.getCommunityId())) {
 				community.setMain_photo(filename);
 			}
 			
-			*/
+			
 				
 			
 			save(community);
@@ -229,7 +229,7 @@ public class CommunityService {
 				String filename = "imageingallery-" + formater.format(date);
 				
 							
-				if (urteam.uploadImageFile(file, filename, ConstantsUrTeam.COMMUNITY_IMGS, community.getCommunityId())) {
+				if (urteamService.uploadImageFile(file, filename, ConstantsUrTeam.COMMUNITY_IMGS, community.getCommunityId())) {
 					community.setMain_photo(filename);
 				}
 				
