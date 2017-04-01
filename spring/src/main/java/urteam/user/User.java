@@ -18,6 +18,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -63,10 +65,12 @@ public class User {
 
 	@ManyToMany
 	@JsonView(FriendsUser.class)
+	@JsonIgnore
 	private List<User> following = new ArrayList<>();
 
 	@ManyToMany(mappedBy = "following")
 	@JsonView(FollowersUser.class)
+	@JsonIgnore
 	private List<User> followers = new ArrayList<>();
 
 	@ManyToMany
@@ -211,19 +215,21 @@ public class User {
 	public void setRoles(List<String> roles) {
 		this.roles = roles;
 	}
-
+	@JsonIgnore
 	public List<User> getFollowing() {
 		return following;
 	}
-
+	@JsonIgnore
 	public void addFollowing(User following) {
 		this.getFollowing().add(following);
 	}
-
+	
+	@JsonIgnore
 	public List<User> getFollowers() {
 		return followers;
 	}
-
+	
+	@JsonIgnore
 	public void addFollower(User follower) {
 		this.followers.add(follower);
 	}

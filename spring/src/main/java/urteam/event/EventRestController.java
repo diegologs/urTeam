@@ -1,9 +1,7 @@
 package urteam.event;
 
-import java.io.IOException;
 import java.util.List;
 
-import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import urteam.event.EventService;
 import urteam.user.User;
 import urteam.user.UserComponent;
 import urteam.user.UserRepository;
@@ -26,7 +23,10 @@ import urteam.user.UserRepository;
 @RequestMapping("/api/events")
 public class EventRestController {
 	
-	interface CompleteEvent extends Event.BasicEvent, Event.MembersEvent{}
+	interface CompleteEvent extends Event.BasicEvent{}
+	
+	interface FollowersEvent extends Event.MembersEvent, User.BasicUser{}
+	//interface FollowersEvent extends Event.MembersEvent{}
 	
 	@Autowired
 	private EventService eventService;
@@ -36,9 +36,6 @@ public class EventRestController {
 	
 	@Autowired
 	private UserRepository userRepo;
-	
-	@Autowired
-	private EventRepository eventRepo;
 	
 
 	@JsonView(CompleteEvent.class)
@@ -58,8 +55,19 @@ public class EventRestController {
 		}
 	}
 	
-	@JsonView(CompleteEvent.class)
-	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
+	@JsonView(FollowersEvent.class)
+	@RequestMapping(value = "/{id}/members", method = RequestMethod.GET)
+	public ResponseEntity<Event> eventMembers(@PathVariable long id){
+		Event event = eventService.findOne(id);
+		if(event != null){
+			return new ResponseEntity<Event>(event, HttpStatus.OK);
+		}else{
+			return new ResponseEntity<Event>(HttpStatus.NOT_FOUND);
+		}			
+	}
+	
+	@JsonView(FollowersEvent.class)
+	@RequestMapping(value = "/{id}/members", method = RequestMethod.PUT)
 	public ResponseEntity<Event> followEvent(@PathVariable long id){
 		Event event = eventService.findOne(id);
 		User userLogged = userRepo.findOne(userComponent.getLoggedUser().getId());

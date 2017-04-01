@@ -56,7 +56,7 @@ public class Event {
 	private String place;
 	
 	@Basic
-	private ArrayList<String> eventImages = new ArrayList();
+	private ArrayList<String> eventImages = new ArrayList<String>();
 
 	@DateTimeFormat(pattern = "dd/MM")
 	@Temporal(TemporalType.DATE)
