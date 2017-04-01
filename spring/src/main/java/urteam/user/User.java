@@ -68,7 +68,7 @@ public class User {
 	@JsonView(FriendsUser.class)
 	private List<User> following = new ArrayList<>();
 
-	@ElementCollection(fetch = FetchType.EAGER)
+	
 	@ManyToMany(mappedBy = "following")
 	@JsonView(FollowersUser.class)
 	private List<User> followers = new ArrayList<>();
