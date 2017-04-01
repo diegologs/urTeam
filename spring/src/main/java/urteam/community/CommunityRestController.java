@@ -108,13 +108,31 @@ public class CommunityRestController {
 
 	
 	@JsonView(CompleteCommunity.class)
-	@RequestMapping("/{id}/image")
-	public ResponseEntity<Community> addImage(@PathVariable long id, @RequestParam("file") MultipartFile file) throws ParseException {
+	@RequestMapping(value = "/{id}/image", method = RequestMethod.PUT)
+	public ResponseEntity<Community> addImage(@PathVariable long id, @RequestBody MultipartFile file) throws ParseException {
 		
 		
 		Community community = service.findOne(id);
 		
 		service.addImage(community, file);
+		
+		
+		if(community != null){
+			return new ResponseEntity<>(community, HttpStatus.OK);
+		}else{
+			return new ResponseEntity<>(community, HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	
+	@JsonView(CompleteCommunity.class)
+	@RequestMapping(value = "/{id}/avatar", method = RequestMethod.PUT)
+	public ResponseEntity<Community> setImage(@PathVariable long id, @RequestBody MultipartFile file) throws ParseException {
+		
+		
+		Community community = service.findOne(id);
+		
+		service.setImage(community, file);
 		
 		
 		if(community != null){
@@ -172,7 +190,7 @@ public class CommunityRestController {
 
 	
 	@JsonView(CompleteCommunity.class)
-	@RequestMapping(value = "/{id}/follow", method = RequestMethod.PUT)
+	@RequestMapping(value = "/{id}/followers", method = RequestMethod.PUT)
 	public ResponseEntity<Community> follow(@PathVariable long id) {
 		
 		Community community = service.findOne(id);
