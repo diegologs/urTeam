@@ -96,7 +96,7 @@ public class CommunityRestController {
 		Community community = service.findOne(id);
 		
 		
-		if(service.edit(communityEdited) && community != null){
+		if(service.edit(id,communityEdited) && community != null){
 			return new ResponseEntity<>(community, HttpStatus.OK);
 		
 					

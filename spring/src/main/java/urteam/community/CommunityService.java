@@ -74,11 +74,13 @@ public class CommunityService {
 		
 	}
 	
-	public boolean edit(Community community){
-		if(isOwner(community)){
+	public boolean edit(long id, Community community){
+		Community community2 = repository.getOne(id);
+		if (community2 != null) {
+			community.setId(community2.getId());
 			save(community);
 			return true;
-		}else{
+		} else {
 			return false;
 			
 		}
