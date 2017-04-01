@@ -63,11 +63,13 @@ public class User {
 	@ElementCollection(fetch = FetchType.EAGER)
 	private List<String> roles;
 
+	
 	@ManyToMany
 	@JsonView(FriendsUser.class)
 	@JsonIgnore
 	private List<User> following = new ArrayList<>();
 
+	
 	@ManyToMany(mappedBy = "following")
 	@JsonView(FollowersUser.class)
 	@JsonIgnore
