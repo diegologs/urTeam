@@ -250,16 +250,10 @@ public class CommunityController {
 			// Comprobar si es admin
 			model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
 
-			// Comprobar si la comunidad esta entre las seguidas del usuario
-			if (userLogged.getCommunityList().contains(community)) {
-				userLogged.removeCommunity(community);
-			} else {
-				userLogged.addCommunity(community);
-			}
+			communityService.follow(community);
 			model.addAttribute("communityFollowed", userLogged.getCommunityList().contains(community));
 
-			communityService.save(community);
-			userRepo.save(userLogged);
+			
 			model.addAttribute("community", community);
 			return "redirect:/group/{id}";
 		} else {
