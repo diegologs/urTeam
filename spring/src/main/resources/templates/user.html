@@ -23,7 +23,7 @@
 		var data = google.visualization.arrayToDataTable([
 				[ 'Deporte', 'Horas al mes' ],
 				{{#userSportList}}
-					[ '{{sportName}}', {{sportTotalTime}} ],
+					[ '{{key}}', {{value.sportTotalTime}} ],
 				{{/userSportList}}
 				]);
 
@@ -203,19 +203,19 @@
 					<!--/row-->
 					{{#userSportList}}
 					<div class="statsTable">
-						<h4>{{sportName}}</h4>
+						<h4>{{key}}</h4>
 						<hr class="hr-yellow">
 						<table style="width: 100%">
 							<tr>
 								<th>Fecha</th>
 								<th>Tiempo</th>
 							</tr>
-							{{#sportStats}}
+							{{#value.stats}}
 							<tr>
 								<td>{{date}}</td>
 								<td>{{totalSesionTime}}</td>
 							</tr>
-							{{/sportStats}}
+							{{/value.stats}}
 						</table>
 					</div>
 					<br>
