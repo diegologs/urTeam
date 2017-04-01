@@ -39,6 +39,8 @@ public class StatsService {
 			user.getSportStats().put(sport, userSportStats);
 		}
 		user.getSportStats().get(sport).updateSportTotalTime();
+		double score = computeUserScore(user);
+		user.setScore(Double.toString(score));
 		userRepository.save(user);
 		return stat;
 	}
