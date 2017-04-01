@@ -22,23 +22,20 @@ import urteam.urteamController;
 import urteam.community.Community;
 import urteam.event.Event;
 import urteam.sport.SportController;
+import urteam.sport.SportService;
 import urteam.stats.StatsController;
 import urteam.stats.StatsService;
 
 @Controller
 public class UserController {
 
-	@Autowired
-	private UserRepository userRepository;
 
 	@Autowired
-	private SportController sportController;
+	private SportService sportService;
 
 	@Autowired
 	private urteamController urteamController;
 
-	@Autowired
-	private StatsController statsController;
 
 	@Autowired
 	private UserComponent userComponent;
@@ -50,20 +47,14 @@ public class UserController {
 	private StatsService statsService;
 
 	@RequestMapping("/newUser")
-	public String eventAdded(Model model, User user, @RequestParam String password) throws ParseException {
-		Date date = new Date();
-		SimpleDateFormat userIdFormater = new SimpleDateFormat("mmddyyyy-hhMMss");
-		String generatedId = userIdFormater.format(date);
-		user.setGeneratedId(generatedId);
+	public String newUser(Model model, User user, @RequestParam String password) throws ParseException {
 		user.setPasswordHash(password);
-		ArrayList<String> roles = new ArrayList<>(Arrays.asList("ROLE_USER"));
-		user.setRoles(roles);
-		userRepository.save(user);
-		return "redirect:/events";
+		userService.createNewUser(user);
+		return "redirect:/";
 	}
 
 	@RequestMapping("/user/{nickname}")
-	public String userProf(Model model, @PathVariable String nickname, HttpServletRequest request) {
+	public String userProfile(Model model, @PathVariable String nickname, HttpServletRequest request) {
 
 		User me = userService.findOne(userComponent.getLoggedUser().getId());
 		User user = userService.getUser(nickname);
@@ -78,8 +69,8 @@ public class UserController {
 		model.addAttribute("membersCommunity", communities.size());
 
 		model.addAttribute("numberOfFollowers", user.getNumberOfFollower());
-		model.addAttribute("sportList", sportController.getSportList());
-		model.addAttribute("userSportList", user.getSportStats());
+		model.addAttribute("sportList", sportService.getSports());
+		model.addAttribute("userSportList",user.getSportStats());
 		model.addAttribute("level", statsService.computeUserLevel(user));
 		model.addAttribute("progress", statsService.computeUserBarLevel(user));
 		model.addAttribute("buttonfollowing", me.getId() != user.getId());
@@ -97,7 +88,7 @@ public class UserController {
 		}
 
 		if ((userComponent.isLoggedUser())) {
-			User userLogged = userRepository.findOne(me.getId());
+			User userLogged = userService.findOne(me.getId());
 			model.addAttribute("user", me);
 			if (userComponent.getLoggedUser().getId() == userLogged.getId()) {
 				model.addAttribute("user_active", true);
@@ -116,9 +107,8 @@ public class UserController {
 			@RequestParam String city, @RequestParam String country, @RequestParam("file") MultipartFile file)
 			throws ParseException {
 
-		User editedUser = userRepository.findByNickname(nickname);
-
-		User me = userRepository.findOne(userComponent.getLoggedUser().getId());
+		User editedUser = userService.getUser(nickname);
+		User me = userService.findOne(userComponent.getLoggedUser().getId());
 
 		if (editedUser.getId() == me.getId()) {
 
@@ -128,41 +118,32 @@ public class UserController {
 			editedUser.setBio(bio);
 			editedUser.setCity(city);
 			editedUser.setCountry(country);
-
+			userService.updateUserInfo(nickname, editedUser);
+			
 			if (file != null) {
-				String filename = "avatar-" + editedUser.getGeneratedId();
-				if (urteamController.uploadImageFile(model, file, filename, ConstantsUrTeam.USER_AVATAR,
-						editedUser.getGeneratedId())) {
-					editedUser.setAvatar(filename);
-				}
+//				String filename = "avatar-" + editedUser.getGeneratedId();
+//				if (urteamController.uploadImageFile(model, file, filename, ConstantsUrTeam.USER_AVATAR,
+//						editedUser.getGeneratedId())) {
+//					editedUser.setAvatar(filename);
+//				}
+				userService.updateUserAvatar(nickname,file);
 			}
-
+			 
 		}
-
-		userRepository.save(editedUser);
 		return "redirect:/user/{nickname}";
 	}
 
 	@RequestMapping("/user/{nickname}/follow")
 	public String follow(Model model, @PathVariable String nickname, HttpServletRequest request) {
-
-		User user = userRepository.findByNickname(nickname);
-		User me = userRepository.findOne(userComponent.getLoggedUser().getId());
-
-		if (me.getFollowing().contains(user)) {
-			me.getFollowing().remove(user);
-			model.addAttribute("buttonfollowing", false);
-		} else {
-			me.getFollowing().add(user);
-			model.addAttribute("buttonfollowing", true);
-		}
-
-		userRepository.save(me);
+		User user = userService.getUser(nickname);
+		User me = userService.findOne(userComponent.getLoggedUser().getId());
+		userService.followUnfollow(me, nickname);
+		model.addAttribute("buttonfollowing", me.getFollowing().contains(user));
 		model.addAttribute("user", me);
 
 		if ((userComponent.isLoggedUser())) {
 			long idUser = userComponent.getLoggedUser().getId();
-			User userLogged = userRepository.findOne(idUser);
+			User userLogged = userService.findOne(idUser);
 			model.addAttribute("user", userLogged);
 			if (userComponent.getLoggedUser().getId() == userLogged.getId()) {
 				model.addAttribute("logged", true);
