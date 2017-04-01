@@ -136,25 +136,28 @@ public class CommunityService {
 		
 		try {
 			
+		if ((userComponent.isLoggedUser())) {
+			SimpleDateFormat formater = new SimpleDateFormat("mmddyyyy-hhMMss");
+			Date date = new Date();
+	
+			// EventId generator
+			SimpleDateFormat communityIdFormater = new SimpleDateFormat("mmddyyyy-hhMMss");
+			String communitytId = communityIdFormater.format(date);
+			community.setCommunityId(communitytId);
+			community.setOwner_id(userComponent.getLoggedUser());
 		
-		SimpleDateFormat formater = new SimpleDateFormat("mmddyyyy-hhMMss");
-		Date date = new Date();
-
-		// EventId generator
-		SimpleDateFormat communityIdFormater = new SimpleDateFormat("mmddyyyy-hhMMss");
-		String communitytId = communityIdFormater.format(date);
-		community.setCommunityId(communitytId);
-		community.setOwner_id(userComponent.getLoggedUser());
-	
-		String filename = "avatar-" + formater.format(date);
-	
-		/*
-		if (urteam.uploadImageFile(file, filename, ConstantsUrTeam.COMMUNITY_IMGS, community.getCommunityId())) {
-			community.setMain_photo(filename);
+			String filename = "avatar-" + formater.format(date);
+		
+			/*
+			if (urteam.uploadImageFile(file, filename, ConstantsUrTeam.COMMUNITY_IMGS, community.getCommunityId())) {
+				community.setMain_photo(filename);
+			}
+			
+			*/
+				
+			
+			save(community);
 		}
-			*/	
-		
-		save(community);
 		
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

@@ -71,7 +71,7 @@ public class CommunityRestController {
 
 	
 	@JsonView(CompleteCommunity.class)
-	@RequestMapping(value = "/{id}/setInfo", method = RequestMethod.PUT)
+	@RequestMapping(value = "/{id}/info", method = RequestMethod.PUT)
 	public ResponseEntity<Community> addInfo(@PathVariable long id, @RequestBody String info) {
 		
 		
@@ -108,7 +108,7 @@ public class CommunityRestController {
 
 	
 	@JsonView(CompleteCommunity.class)
-	@RequestMapping("/{id}/addImage")
+	@RequestMapping("/{id}/image")
 	public ResponseEntity<Community> addImage(@PathVariable long id, @RequestParam("file") MultipartFile file) throws ParseException {
 		
 		
@@ -127,7 +127,7 @@ public class CommunityRestController {
 	@JsonView(CompleteCommunity.class)
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<Community> add(@RequestBody Community community, MultipartFile file) throws ParseException {
+	public ResponseEntity<Community> add(@RequestBody Community community, MultipartFile file){
 
 		
 		service.add(community, file);
