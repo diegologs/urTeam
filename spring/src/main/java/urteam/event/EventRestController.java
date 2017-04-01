@@ -59,7 +59,7 @@ public class EventRestController {
 	}
 	
 	@JsonView(CompleteEvent.class)
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
 	public ResponseEntity<Event> followEvent(@PathVariable long id){
 		Event event = eventService.findOne(id);
 		User userLogged = userRepo.findOne(userComponent.getLoggedUser().getId());
