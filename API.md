@@ -6,7 +6,8 @@
 
 Método | URL | Descripcion | Respuesta | Error
 --- | --- | --- | --- | --- |
-GET | /api/events/ | Devuelve los eventos. | `200 OK` |
+GET | /api/events/ | Devuelve los eventos. | `200 OK` | `404 NOT FOUND`
+GET | /api/events/?page=3&size=2 | Devuelve los eventos paginados. | `200 OK` | `404 NOT FOUND`
 GET | /api/events/{id} | Devuelve el evento específico. |  `200 OK` | `404 NOT FOUND`
 GET | /api/events/{id}/members | Devuelve los miembros de ese evento. | `200 OK`| `404 NOT FOUND`
 
@@ -56,7 +57,8 @@ Body:
 
 Método | URL | Descripcion | Respuesta | Error
 --- | --- | --- | --- | --- | 
-GET | /api/groups/ | Devuelve los grupos. | `200 OK` |
+GET | /api/groups/ | Devuelve los grupos. | `200 OK` | `404 NOT FOUND`
+GET | /api/groups/?page=3&size=2&sort=sport | Devuelve los grupos paginados y ordenados. | `200 OK` | `404 NOT FOUND`
 GET | /api/groups/{id} | Devuelve el grupo específico. |  `200 OK` | `404 NOT FOUND`
 POST | /api/groups/ | Crea el grupo con los datos del body. | `200 OK`| `400 BAD REQUEST`
 PUT | /api/groups/{id} | Modifica el evento específico. | `200 OK` | `404 NOT FOUND 401 UNAUTHORIZED`
@@ -148,8 +150,8 @@ Body:
  
  Método | URL | Descripcion | Respuesta | Error
 --- | --- | --- | --- | --- |
-GET | /api/stats/{nickname} | Devuelve las estadsticas de un usuario. | `200 OK` | `404 NOT FOUND`
-POST | /api/stats/{nickname}/{sportName} | Añade una nueva estadstica a un usuario. | `200 OK` | `404 NOT FOUND`
+GET | /api/stats/{nickname} | Devuelve las estadisticas de un usuario. | `200 OK` | `404 NOT FOUND`
+POST | /api/stats/{nickname}/{sportName} | Añade una nueva estadistica a un usuario. | `200 OK` | `404 NOT FOUND`
 
 #### Ejemplos de peticiones
     
@@ -196,3 +198,14 @@ Body:
        "multiplicator": 0.75
     }
   ```
+
+## Buscador
+
+ * Privado (El usuario debe estar logueado para poder realizar el método)
+ 
+ Método | URL | Descripcion | Respuesta | Error
+--- | --- | --- | --- | --- |
+GET | /api/searchbox/users/{criteria} | Devuelve los resultados por usuarios. | `200 OK` | `404 NOT FOUND`
+GET | /api/searchbox/events/{criteria} | Devuelve los resultados por eventos. | `200 OK` | `404 NOT FOUND`
+GET | /api/searchbox/groups/{criteria} | Devuelve los resultados por grupos. | `200 OK` | `404 NOT FOUND`
+GET | /api/searchbox/all/{criteria} | Devuelve los resultados para todos. | `200 OK` | `404 NOT FOUND`
