@@ -10,17 +10,22 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import urteam.user.User;
 import urteam.user.UserComponent;
 
 @RestController
 public class LoginController {
 
+	interface CompleteUser extends User.BasicUser{}
+	
 	private static final Logger log = LoggerFactory.getLogger(LoginController.class);
 
 	@Autowired
 	private UserComponent userComponent;
 
+	@JsonView(CompleteUser.class)
 	@RequestMapping("/api/logIn")
 	public ResponseEntity<User> logIn() {
 
