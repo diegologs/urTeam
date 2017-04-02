@@ -16,7 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import urteam.community.Community;
-import urteam.community.Community.CommunityNews;
 import urteam.event.Event;
 
 @RestController
