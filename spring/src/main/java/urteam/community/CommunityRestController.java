@@ -38,11 +38,10 @@ import urteam.user.UserRepository;
 @RequestMapping("/api/groups")
 public class CommunityRestController {
 
-	interface CompleteCommunity extends Community.BasicCommunity {
-	}
 
-	interface CompleteNews extends News.BasicNews {
-	}
+	interface CompleteCommunity extends Community.BasicCommunity, Community.CommunityNews, News.BasicNews{} 
+	interface CompleteNews extends News.BasicNews{} 
+	
 
 	@Autowired
 	private CommunityService service;

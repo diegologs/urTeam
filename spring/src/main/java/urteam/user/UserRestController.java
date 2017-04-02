@@ -19,9 +19,9 @@ import com.fasterxml.jackson.annotation.JsonView;
 @RequestMapping("/api/users")
 public class UserRestController {
 	
-	interface CompleteUser extends User.BasicUser{}
-	interface FriendsUser extends User.FriendsUser, User.BasicUser{}
-	interface FollowersUser extends User.FollowersUser, User.BasicUser{}
+	public interface CompleteUser extends User.BasicUser{}
+	public interface FriendsUser extends User.FriendsUser, User.BasicUser{}
+	public interface FollowersUser extends User.FollowersUser, User.BasicUser{}
 
 	@Autowired
 	private UserService userService;

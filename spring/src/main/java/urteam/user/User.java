@@ -42,7 +42,9 @@ public class User {
 	@JsonView(BasicUser.class)
 	private long id;
 	private String generatedId = "aleatorio";
+	@JsonView(BasicUser.class)
 	private String username;
+	@JsonView(BasicUser.class)
 	private String surname;
 	
 	@Column(unique=true)
@@ -53,8 +55,10 @@ public class User {
 
 	@Column(columnDefinition = "TEXT")
 	private String bio = "";
+	@JsonView(BasicUser.class)
 	private String city;
 	private String country;
+	@JsonView(BasicUser.class)
 	private String score = "0";
 	private String avatar = "avatar";
 
@@ -63,13 +67,13 @@ public class User {
 
 	
 	@ManyToMany
-	@JsonView(FriendsUser.class)
+	//@JsonView(FriendsUser.class)
 	@JsonIgnore
 	private List<User> following = new ArrayList<>();
 
 	
 	@ManyToMany(mappedBy = "following")
-	@JsonView(FollowersUser.class)
+	//@JsonView(FollowersUser.class)
 	@JsonIgnore
 	private List<User> followers = new ArrayList<>();
 
@@ -86,7 +90,7 @@ public class User {
 	// private List<UserSportStats> userSportsList = new ArrayList<>();
 
 	@OneToMany(cascade = {CascadeType.ALL})
-	@JsonIgnore
+	@JsonView(BasicUser.class)
 	private Map<String, UserSportStats> sportStats = new HashMap<String, UserSportStats>();
 
 	public User() {

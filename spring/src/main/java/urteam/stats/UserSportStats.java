@@ -10,15 +10,22 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import urteam.user.User.BasicUser;
+
 @Entity
 public class UserSportStats {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@JsonView(BasicUser.class)
 	private long id;
 
+	@JsonView(BasicUser.class)
 	private double sportTotalTime;
 
+	@JsonView(BasicUser.class)
 	@OneToMany(cascade = { CascadeType.ALL })
 	private List<Stat> stats = new ArrayList<>();
 
