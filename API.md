@@ -64,7 +64,6 @@ POST | /api/groups/ | Crea el grupo con los datos del body. | `200 OK`| `400 BAD
 PUT | /api/groups/{id} | Modifica el evento específico. | `200 OK` | `404 NOT FOUND 401 UNAUTHORIZED`
 POST | /api/groups/{id}/news | Añade una noticia a un grupo  | `200 OK` | `404 NOT FOUND 401 UNAUTHORIZED`
 GET | /api/groups/{id}/news | Devuelve las noticias de un grupo. |  `200 OK` | `404 NOT FOUND`
-PUT | /api/groups/{id}/avatar | Modifica el avatar de un grupo | `200 OK` | `404 NOT FOUND 401 UNAUTHORIZED`
 PUT | /api/groups/{id}/followers | El usuario logueado sigue o deja de seguir a la comunidad específica | `200 OK` | `404 NOT FOUND`
 DELETE | /api/groups/{id} | El grupo específico es borrado | `204 NO CONTENT` | `401 UNAUTHORIZED`
 
@@ -117,6 +116,8 @@ POST | /api/users/ | Crea un usuario nuevo. | `200 OK` | `400 BAD REQUEST`
 GET | /api/users/{nickname} | Devuelve un usuario específico. | `200 OK` | `404 NOT FOUND`
 PUT | /api/users/{nickname} | Modifica un usuario específico. | `200 OK` | `404 NOT FOUND`
 GET | /api/users/{nickname}/friends | Devuelve los amigos de un usuario. | `200 OK` | `404 NOT FOUND`
+PUT | /api/users/{nickname}/friends | Añade al usuario logueado a la lista del usuario. | `200 OK` | `400 BAD REQUEST`
+PUT | /api/users/{nickname}/avatar | Añade un avatar al usuario. | `200 OK` | `400 BAD REQUEST`
 GET | /api/users/{nickname}/followers | Devuelve los seguidores de un usuario. | `200 OK` | `404 NOT FOUND`
 
 #### Ejemplos de peticiones
@@ -130,7 +131,7 @@ Body:
            "password": "ExamplePassword",  
         }
   ```
- **POST /api/users/{nickname}**
+ **PUT /api/users/{nickname}**
 
 Body:
 ```json
@@ -144,6 +145,13 @@ Body:
         }
   ```
   
+ **PUT | /api/users/{nickname}/avatar**
+ 
+ Body:
+ ```
+ file
+ 
+ ```
 ## Estadísticas
 
  * Privado (El usuario debe estar logueado para poder realizar el método)
