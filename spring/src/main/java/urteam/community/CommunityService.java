@@ -1,6 +1,5 @@
 package urteam.community;
 
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -8,13 +7,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import urteam.ConstantsUrTeam;
 import urteam.urTeamService;
-import urteam.urteamController;
 import urteam.news.News;
 import urteam.news.NewsRepository;
 import urteam.user.User;
@@ -43,8 +41,8 @@ public class CommunityService {
 		return repository.findOne(id);
 	}
 
-	public List<Community> findAll() {
-		return repository.findAll();
+	public Page<Community> findAll(Pageable pageable) {
+		return repository.findAll(pageable);
 	}
 
 	public void save(Community community) {

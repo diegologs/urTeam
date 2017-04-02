@@ -1,10 +1,11 @@
 package urteam.community;
 
 import java.text.ParseException;
-import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,9 +36,13 @@ public class CommunityRestController {
 
 	@JsonView(CompleteCommunity.class)
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public Collection<Community> groups() {
-
-		return service.findAll();
+	public ResponseEntity<Page<Community>> getGroups(Pageable pageable) {
+		Page<Community> communities = service.findAll(pageable);
+		if (communities != null) {
+			return new ResponseEntity<>(communities,HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 
 	@JsonView(CompleteCommunity.class)

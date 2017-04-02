@@ -15,7 +15,7 @@ public interface EventRepository extends JpaRepository<Event, Long>{
 	List<Event> findBySport(Sport sport);
 	List<Event> findByName(String name);
 	List<Event> findByNameIgnoreCase(String name);
-	Page<Event> findAll(Pageable pageable);
+	
 	
 }
 
