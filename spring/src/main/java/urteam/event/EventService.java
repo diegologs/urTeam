@@ -3,11 +3,11 @@ package urteam.event;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,30 +17,30 @@ import urteam.user.User;
 
 @Service
 public class EventService {
-	
+
 	@Autowired
 	private urTeamService urteamService;
-	
+
 	@Autowired
 	private EventRepository eventRepo;
-	
-	public Event findOne(long id){
+
+	public Event findOne(long id) {
 		return eventRepo.findOne(id);
 	}
-	
-	public List<Event> findAll(){
-		return eventRepo.findAll();
+
+	public Page<Event> findAll(Pageable pageable) {
+		return eventRepo.findAll(pageable);
 	}
-	
-	public Page<Event> findAll(PageRequest pageRequest){
+
+	public Page<Event> findAll(PageRequest pageRequest) {
 		return eventRepo.findAll(pageRequest);
 	}
-	
-	public void save(Event event){
+
+	public void save(Event event) {
 		eventRepo.save(event);
 	}
-	
-	public void save(User user, Event event, MultipartFile file, String start_date, String end_date){
+
+	public void save(User user, Event event, MultipartFile file, String start_date, String end_date) {
 		// Crear evento
 		try {
 			event.setOwner_id(user);
@@ -60,7 +60,7 @@ public class EventService {
 			String eventId = eventIdFormater.format(date);
 			event.setEventId(eventId);
 			String filename = "avatar-" + formater.format(date);
-			
+
 			if (urteamService.uploadImageFile(file, filename, ConstantsUrTeam.EVENT_AVATAR, event.getEventId())) {
 				event.setMain_photo(filename);
 			}
@@ -70,8 +70,8 @@ public class EventService {
 		// Guardar evento y recargar pagina
 		eventRepo.save(event);
 	}
-	
-	public void follow(User user, Event event){
+
+	public void follow(User user, Event event) {
 		// Comprobar si el evento esta entre las seguidas del usuario
 		if (user.getEventList().contains(event)) {
 			user.removeEvent(event);
@@ -79,14 +79,14 @@ public class EventService {
 			user.addEvent(event);
 		}
 	}
-	
+
 	private static Calendar toCalendar(Date date) {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
 		return cal;
 	}
-	
-	public void delete(long id){
+
+	public void delete(long id) {
 		eventRepo.delete(id);
 	}
 

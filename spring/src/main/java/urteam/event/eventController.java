@@ -274,20 +274,20 @@ public class eventController {
 		}
 	}
 
-	@RequestMapping("/sortEventByName/{name}")
-	public String sortEventByName(Model model, @RequestParam String name) {
-		List<Event> eventos = eventService.findAll();
-		eventos = eventRepo.findByName(name);
-		model.addAttribute("events", eventos);
-		return "redirect:/events";
-	}
+//	@RequestMapping("/sortEventByName/{name}")
+//	public String sortEventByName(Model model, @RequestParam String name) {
+//		List<Event> eventos = eventService.findAll();
+//		eventos = eventRepo.findByName(name);
+//		model.addAttribute("events", eventos);
+//		return "redirect:/events";
+//	}
 
-	@RequestMapping("/sortEventBySport")
-	public String sortEventBySport(Model model, @RequestParam Sport sport) {
-		List<Event> eventos = eventService.findAll();
-		model.addAttribute("events", eventos);
-		return "redirect:/events";
-	}
+//	@RequestMapping("/sortEventBySport")
+//	public String sortEventBySport(Model model, @RequestParam Sport sport) {
+//		List<Event> eventos = eventService.findAll();
+//		model.addAttribute("events", eventos);
+//		return "redirect:/events";
+//	}
 
 	// @PostMapping("/")
 	// public String checkPersonInfo(@Valid Event personForm, BindingResult
