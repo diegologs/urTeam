@@ -18,7 +18,7 @@ import urteam.user.UserComponent;
 @RestController
 public class LoginController {
 
-	interface CompleteUser extends User.BasicUser{}
+	interface CompleteUser extends User.MinimalUser{}
 	
 	private static final Logger log = LoggerFactory.getLogger(LoginController.class);
 

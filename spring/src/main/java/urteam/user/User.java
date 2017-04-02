@@ -1,5 +1,6 @@
 package urteam.user;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -22,6 +23,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import urteam.community.Community;
 import urteam.event.Event;
@@ -29,34 +32,38 @@ import urteam.stats.UserSportStats;
 
 @Entity
 @Table(name = "user_profile")
-public class User {
+public class User{
 	
-	public interface BasicUser{}
+	public interface MinimalUser {};
 	
-	public interface FriendsUser{}
+	public interface BasicUser{};
 	
-	public interface FollowersUser{}
+	public interface CompleteUser{};
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@JsonView(BasicUser.class)
+	@JsonView(MinimalUser.class)
 	private long id;
 	private String generatedId = "aleatorio";
-	@JsonView(BasicUser.class)
+	@JsonView(MinimalUser.class)
 	private String username;
-	@JsonView(BasicUser.class)
+	@JsonView(MinimalUser.class)
 	private String surname;
 	
 	@Column(unique=true)
-	@JsonView(BasicUser.class)
+	@JsonView(MinimalUser.class)
 	private String nickname;
+	@JsonView(BasicUser.class)
 	private String passwordHash;
+	@JsonView(BasicUser.class)
 	private String email;
 
 	@Column(columnDefinition = "TEXT")
+	@JsonView(BasicUser.class)
 	private String bio = "";
 	@JsonView(BasicUser.class)
 	private String city;
+	@JsonView(BasicUser.class)
 	private String country;
 	@JsonView(BasicUser.class)
 	private String score = "0";
@@ -66,31 +73,31 @@ public class User {
 	private List<String> roles;
 
 	
+	
+	@JsonView(CompleteUser.class)
+	@JsonSerialize(using = CustomUserSerializer.class)
+	@JsonDeserialize(using = CustomUserDeserializer.class)
 	@ManyToMany
-	//@JsonView(FriendsUser.class)
-	@JsonIgnore
 	private List<User> following = new ArrayList<>();
 
 	
+	
+	@JsonView(CompleteUser.class)
+	@JsonSerialize(using = CustomUserSerializer.class)
+	@JsonDeserialize(using = CustomUserDeserializer.class)
 	@ManyToMany(mappedBy = "following")
-	//@JsonView(FollowersUser.class)
-	@JsonIgnore
 	private List<User> followers = new ArrayList<>();
 
 	@ManyToMany
-	@JsonIgnore
+	@JsonView(CompleteUser.class)
 	private List<Community> communityList = new ArrayList<>();
 
 	@ManyToMany
-	@JsonIgnore
+	@JsonView(CompleteUser.class)
 	private List<Event> eventList = new ArrayList<>();
 
-	// @OneToMany(cascade = { CascadeType.ALL})
-	// @JsonIgnore
-	// private List<UserSportStats> userSportsList = new ArrayList<>();
-
 	@OneToMany(cascade = {CascadeType.ALL})
-	@JsonView(BasicUser.class)
+	@JsonView(CompleteUser.class)
 	private Map<String, UserSportStats> sportStats = new HashMap<String, UserSportStats>();
 
 	public User() {
