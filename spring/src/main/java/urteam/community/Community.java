@@ -25,6 +25,10 @@ public class Community {
 	
 	public interface BasicCommunity{}
 	
+	public interface CommunityUsers{}
+	
+	public interface CommunityNews{}
+	
 	@Id
 	@JsonView(BasicCommunity.class)
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -49,11 +53,11 @@ public class Community {
 	@Basic
 	private ArrayList<String> communityImages = new ArrayList();
 	
-	@JsonIgnore
+	@JsonView(CommunityNews.class)
 	@OneToMany
 	private List<News> news;
 	
-	@JsonIgnore
+	@JsonView(CommunityUsers.class)
 	@ManyToMany(mappedBy = "communityList")
 	private List<User> communityUsers = new ArrayList<>();
 	
