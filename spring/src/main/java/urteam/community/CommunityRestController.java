@@ -28,182 +28,168 @@ import com.fasterxml.jackson.annotation.JsonView;
 import urteam.ConstantsUrTeam;
 import urteam.urteamController;
 import urteam.event.Event;
-
 import urteam.news.News;
 import urteam.news.NewsRepository;
 import urteam.user.User;
 import urteam.user.UserComponent;
 import urteam.user.UserRepository;
 
-
 @RestController
 @RequestMapping("/api/groups")
 public class CommunityRestController {
 
-	interface CompleteCommunity extends Community.BasicCommunity{} 
-	interface CompleteNews extends News.BasicNews{} 
-	
+	interface CompleteCommunity extends Community.BasicCommunity {
+	}
+
+	interface CompleteNews extends News.BasicNews {
+	}
+
 	@Autowired
 	private CommunityService service;
 
-	@JsonView(CompleteCommunity.class)	
+	@JsonView(CompleteCommunity.class)
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public Collection<Community> groups() {
-		
+
 		return service.findAll();
 	}
-	
+
 	@JsonView(CompleteCommunity.class)
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Community> getGroup(@PathVariable long id) {
-		
+
 		Community community = service.findOne(id);
-		
-		if(community != null){
-			return new ResponseEntity<>(community, HttpStatus.OK);
-		}else{
-			return new ResponseEntity<>(community, HttpStatus.NOT_FOUND);
+
+		if (community != null) {
+			return new ResponseEntity<Community>(community, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Community>(community, HttpStatus.NOT_FOUND);
 		}
-				
-		
+
 	}
 
-
-	
 	@JsonView(CompleteCommunity.class)
 	@RequestMapping(value = "/{id}/info", method = RequestMethod.PUT)
 	public ResponseEntity<Community> addInfo(@PathVariable long id, @RequestBody String info) {
-		
-		
+
 		Community community = service.findOne(id);
-		
-		
-		if(service.editInfo(community, info) && community != null){
-			return new ResponseEntity<>(community, HttpStatus.OK);
-		
-					
-		}else{
-			return new ResponseEntity<>(community, HttpStatus.NOT_FOUND);
+
+		if (service.editInfo(community, info) && community != null) {
+			return new ResponseEntity<Community>(community, HttpStatus.OK);
+
+		} else {
+			return new ResponseEntity<Community>(HttpStatus.UNAUTHORIZED);
 		}
-		
+
 	}
-	
+
 	@JsonView(CompleteCommunity.class)
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Community> edit(@PathVariable long id, @RequestBody Community communityEdited) {
-		
-		
+
 		Community community = service.findOne(id);
-		
-		
-		if(service.edit(id,communityEdited) && community != null){
-			return new ResponseEntity<>(community, HttpStatus.OK);
-		
-					
-		}else{
-			return new ResponseEntity<>(community, HttpStatus.NOT_FOUND);
+
+		if (service.edit(id, communityEdited) && community != null) {
+			return new ResponseEntity<Community>(community, HttpStatus.OK);
+
+		} else {
+			return new ResponseEntity<Community>(HttpStatus.UNAUTHORIZED);
 		}
-		
+
 	}
 
-	
 	@JsonView(CompleteCommunity.class)
 	@RequestMapping(value = "/{id}/image", method = RequestMethod.PUT)
-	public ResponseEntity<Community> addImage(@PathVariable long id, @RequestBody MultipartFile file) throws ParseException {
-		
-		
+	public ResponseEntity<Community> addImage(@PathVariable long id, @RequestBody MultipartFile file)
+			throws ParseException {
+
 		Community community = service.findOne(id);
-		
+
 		service.addImage(community, file);
-		
-		
-		if(community != null){
-			return new ResponseEntity<>(community, HttpStatus.OK);
-		}else{
-			return new ResponseEntity<>(community, HttpStatus.NOT_FOUND);
+
+		if (community != null) {
+			return new ResponseEntity<Community>(community, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Community>(HttpStatus.UNAUTHORIZED);
 		}
 	}
-	
-	
+
 	@JsonView(CompleteCommunity.class)
 	@RequestMapping(value = "/{id}/avatar", method = RequestMethod.PUT)
-	public ResponseEntity<Community> setImage(@PathVariable long id, @RequestBody MultipartFile file) throws ParseException {
-		
-		
+	public ResponseEntity<Community> setImage(@PathVariable long id, @RequestBody MultipartFile file)
+			throws ParseException {
+
 		Community community = service.findOne(id);
-		
+
 		service.setImage(community, file);
-		
-		
-		if(community != null){
-			return new ResponseEntity<>(community, HttpStatus.OK);
-		}else{
-			return new ResponseEntity<>(community, HttpStatus.NOT_FOUND);
+
+		if (community != null) {
+			return new ResponseEntity<Community>(community, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Community>(HttpStatus.UNAUTHORIZED);
 		}
 	}
 
 	@JsonView(CompleteCommunity.class)
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<Community> add(@RequestBody Community community, MultipartFile file){
+	public ResponseEntity<Community> add(@RequestBody Community community, MultipartFile file) {
 
-		
-		service.add(community, file);
-		
-		if(community != null){
-			return new ResponseEntity<>(community, HttpStatus.OK);
-		}else{
-			return new ResponseEntity<>(community, HttpStatus.NOT_FOUND);
+	
+		if (service.add(community, file) == true) {
+			return new ResponseEntity<Community>(community, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Community>(HttpStatus.BAD_REQUEST);
 		}
 
 	}
-	
-	@JsonView(CompleteNews.class)	
+
+	@JsonView(CompleteNews.class)
 	@RequestMapping(value = "/{id}/news", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<News> addNews(@PathVariable long id, @RequestBody News news) {
 
-
 		Community community = service.findOne(id);
-		service.addNews(community, news);
 		
-		if(community != null){
+
+		if (service.addNews(community, news) == true && community != null) {
 			return new ResponseEntity<>(news, HttpStatus.OK);
-		}else{
-			return new ResponseEntity<>(news, HttpStatus.NOT_FOUND);
+		} else {
+			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 		}
 
 	}
-	
-	@JsonView(CompleteNews.class)	
+
+	@JsonView(CompleteNews.class)
 	@RequestMapping(value = "/{id}/news", method = RequestMethod.GET)
 	public List<News> getNews(@PathVariable long id) {
 
 		Community community = service.findOne(id);
-		
+
 		return service.findNews(community);
-		
-		
 
 	}
 
-
-	
 	@JsonView(CompleteCommunity.class)
 	@RequestMapping(value = "/{id}/followers", method = RequestMethod.PUT)
 	public ResponseEntity<Community> follow(@PathVariable long id) {
-		
+
 		Community community = service.findOne(id);
-		
+
 		service.follow(community);
-		
-		
-		if(community != null){
-			return new ResponseEntity<>(community, HttpStatus.OK);
-		}else{
-			return new ResponseEntity<>(community, HttpStatus.NOT_FOUND);
+
+		if (community != null) {
+			return new ResponseEntity<Community>(community, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Community>(community, HttpStatus.NOT_FOUND);
 		}
 	}
-	
-	
+
+	@JsonView(CompleteCommunity.class)
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Event> deleteEvent(@PathVariable long id) {
+		service.delete(id);
+		return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+	}
+
 }
