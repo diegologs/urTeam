@@ -1,8 +1,8 @@
 # urTeam
 
-* urTeam es una nueva aplicacion web para organizar tus encuentros deportivos, estara orientada sobre todo para deportes en ruta de exterior (ciclismo, running, patines...).  
-* La parte publica de la web constará de los eventos, los grupos y de la página personal de cada usuario.  
-* La parte privada se compone de el panel de control de cada usuario donde podrá modificar su perfil, añadir eventos y administrar sus grupos.
+* urTeam es una nueva aplicación web para organizar tus encuentros deportivos, estará orientada sobre todo para deportes en ruta de exterior (ciclismo, running, patines...).  
+* La parte pública de la web constará de los eventos, los grupos y de la página personal de cada usuario.  
+* La parte privada se compone del panel de control de cada usuario donde podrá modificar su perfil, añadir eventos y administrar sus grupos.
 
 __Entidades:__
 * ___Usuarios:___ Personas que se registran en la aplicacion con el animo de asistir y crear eventos de su deporte favorito.
@@ -28,62 +28,74 @@ __Equipo de desarrollo:__
   
 __Fase 2:__  
  
-_index.html_ : Muestra una informacion rapida de los eventos publicos disponibles ordenados por deporte.  
+_index.html_ : Muestra una información rápida de los eventos públicos disponibles ordenados por deporte.  
 
-![alt tag](http://i.imgur.com/7vBDoQn.jpg)
+![index.html Photo](http://i.imgur.com/7vBDoQn.jpg)
 
-_events.html_ : Contiene un listado de todos los eventos disponibles y publicos.  
+_events.html_ : Contiene un listado de todos los eventos disponibles y públicos.  
 
-![alt tag](http://i.imgur.com/QPsizLF.jpg)
+![events.html Photo](http://i.imgur.com/QPsizLF.jpg)
 
-_event.html_ : Muestra informacion detallada del evento.   
+_event.html_ : Muestra información detallada del evento.   
 
-![alt tag](http://i.imgur.com/PcWoEmz.jpg)
+![event.html Photo](http://i.imgur.com/PcWoEmz.jpg)
 
-_groups.html_ : Contiene un listado de todos los grupos disponibles y publicos.  
+_groups.html_ : Contiene un listado de todos los grupos disponibles y públicos.  
 
-![alt tag](http://i.imgur.com/XxINME2.jpg)  
+![groups.html Photo](http://i.imgur.com/XxINME2.jpg)  
 
-_group.html_ : Muestra informacion detallada del grupo.   
+_group.html_ : Muestra información detallada del grupo.   
 
-![alt tag](http://i.imgur.com/cnedO5A.jpg)
+![group.html Photo](http://i.imgur.com/cnedO5A.jpg)
 
-_login.html_ : Permite el inicio de sesion y registro de usuarios.  
+_login.html_ : Permite el inicio de sesión y registro de usuarios.  
 
-![alt tag](http://i.imgur.com/u9BQITg.jpg)
-![alt tag](http://i.imgur.com/iBR1i12.jpg)
+![login.html Photo](http://i.imgur.com/u9BQITg.jpg)
+![login.html Photo](http://i.imgur.com/iBR1i12.jpg)
 
-_user.html_ : Muestra la informacion del usuario.  
+_user.html_ : Muestra la información del usuario.  
 
-![alt tag](http://i.imgur.com/MX5rfb7.jpg)
+![user.html Photo](http://i.imgur.com/MX5rfb7.jpg)
 
 _settings.html_ : Permite modificar tu perfil.  
 
-![alt tag](http://i.imgur.com/oA7sAX8.jpg)
+![settings.html Photo](http://i.imgur.com/oA7sAX8.jpg)
 
-_addGroup.html_ : Permite añadir un grupo nuevo a la pagina.  
+_addGroup.html_ : Permite añadir un grupo nuevo a la página.  
 
-![alt tag](http://imgur.com/OggX35J.jpg)
+![addGroup.html Photo](http://imgur.com/OggX35J.jpg)
 
-_addEvent.html_ : Permite añadir un evento nuevo a la pagina.  
+_addEvent.html_ : Permite añadir un evento nuevo a la página.  
 
-![alt tag](http://i.imgur.com/caaP6rp.png)
+![addEvent.html Photo](http://i.imgur.com/caaP6rp.png)
 
-_controlPanel.html_ : Permite modificar los datos de la web con permisos de admin.  
+_controlPanel.html_ : Permite modificar los datos de la web con permisos de administración.  
 
-![alt tag](http://i.imgur.com/RsyGHxX.png)  
+![controlPanel.html Photo](http://i.imgur.com/RsyGHxX.png)  
 
-_Diagrama:_  
+_Diagrama de navegación:_  
 
-![alt tag](http://i.imgur.com/rC46Qbn.png)  
+![Diagrama de navegación](http://i.imgur.com/rC46Qbn.png)  
+
+__Fase 3:__ 
 
 _Diagrama de clases y relaciones:_  
 
-![alt tag](https://github.com/Frostqui/urTeam/blob/master/web/screenshots/DAW.png)  
+![Diagrama de clases y relaciones](https://github.com/Frostqui/urTeam/blob/master/web/screenshots/DAW.png)  
 
 _Diagrama de la base de datos:_  
 
-![alt tag](https://github.com/Frostqui/urTeam/blob/master/web/screenshots/BBDD.jpg)  
+![Diagrama de la base de datos](https://github.com/Frostqui/urTeam/blob/master/web/screenshots/BBDD.jpg) 
+
+__Fase 4:__ 
+
+_Diagrama de clases y relaciones:_
+![Diagrama de clases y relaciones](https://github.com/Frostqui/urTeam/blob/master/web/screenshots/fase4-diagramadeclases-servicioscontrollerrestcontroller-daw.png)
+
+Este diagrama es complementario a los anteriores, añadiéndose las clases servicios, y restcontroller necesarios para la APIRest.
+
+_Documentación de la API:_
+[DOCUMENTACION API - API.md](https://github.com/Frostqui/urTeam/blob/master/API.md)
 
  __Plantillas__ 
  * Control Panel Template [control Panel template](https://www.creative-tim.com/product/light-bootstrap-dashboard)
