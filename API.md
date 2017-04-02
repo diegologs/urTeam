@@ -112,8 +112,8 @@ Body:
 --- | --- | --- | --- | --- |
 GET | /api/users/ | Devuelve los usuarios. | `200 OK` | `404 NOT FOUND`
 POST | /api/users/ | Crea un usuario nuevo. | `200 OK` | `400 BAD REQUEST`
-GET | /api/events/{nickname} | Devuelve un usuario específico. | `200 OK` | `404 NOT FOUND`
-PUT | /api/events/{nickname} | Modifica un usuario específico. | `200 OK` | `404 NOT FOUND`
+GET | /api/users/{nickname} | Devuelve un usuario específico. | `200 OK` | `404 NOT FOUND`
+PUT | /api/users/{nickname} | Modifica un usuario específico. | `200 OK` | `404 NOT FOUND`
 GET | /api/users/{nickname}/friends | Devuelve los amigos de un usuario. | `200 OK` | `404 NOT FOUND`
 GET | /api/users/{nickname}/followers | Devuelve los seguidores de un usuario. | `200 OK` | `404 NOT FOUND`
 
