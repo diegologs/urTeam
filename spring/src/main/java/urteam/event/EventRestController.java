@@ -18,6 +18,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import urteam.user.User;
 import urteam.user.UserComponent;
 import urteam.user.UserRepository;
+import urteam.user.UserService;
 
 @RestController
 @RequestMapping("/api/events")
@@ -32,6 +33,9 @@ public class EventRestController {
 
 	@Autowired
 	private EventService eventService;
+	
+	@Autowired
+	private UserService userService;
 
 	@Autowired
 	private UserComponent userComponent;
@@ -76,7 +80,7 @@ public class EventRestController {
 	@RequestMapping(value = "/{id}/members", method = RequestMethod.PUT)
 	public ResponseEntity<Event> followEvent(@PathVariable long id) {
 		Event event = eventService.findOne(id);
-		User userLogged = userRepo.findOne(userComponent.getLoggedUser().getId());
+		User userLogged = userService.findOne(userComponent.getLoggedUser().getId());
 		if (event != null && userLogged != null) {
 			eventService.follow(userLogged, event);
 			eventService.save(event);
@@ -91,7 +95,7 @@ public class EventRestController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<Event> createEvent(@RequestBody Event event, String start_date, String end_date,
 			MultipartFile file) {
-		User userLogged = userRepo.findOne(userComponent.getLoggedUser().getId());
+		User userLogged = userService.findOne(userComponent.getLoggedUser().getId());
 		if (userLogged != null) {
 			eventService.save(userLogged, event, file, start_date, end_date);
 			return new ResponseEntity<Event>(event, HttpStatus.OK);
@@ -105,8 +109,8 @@ public class EventRestController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Event> updateEvent(@PathVariable long id, @RequestBody Event updatedEvent) {
 		Event event = eventService.findOne(id);
-		User ownerEvent = userRepo.findOne(event.getOwner_id().getId());
-		User userLogged = userRepo.findOne(userComponent.getLoggedUser().getId());
+		User ownerEvent = userService.findOne(event.getOwner_id().getId());
+		User userLogged = userService.findOne(userComponent.getLoggedUser().getId());
 		if (userLogged.getId() == ownerEvent.getId()) {
 			if (event != null && updatedEvent != null) {
 				updatedEvent.setId(id);
