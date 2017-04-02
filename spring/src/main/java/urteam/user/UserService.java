@@ -1,9 +1,5 @@
 package urteam.user;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -103,6 +99,14 @@ public class UserService {
 
 	public List<User> getFriends(String nickname) {
 		List<User> followerList = userRepository.findByNickname(nickname).getFollowing();
+		if (followerList != null) {
+			return followerList;
+		} else {
+			return null;
+		}
+	}
+	public List<User> getUsersByCriteria(String nickname) {
+		List<User> followerList = userRepository.findByNicknameContaining(nickname);
 		if (followerList != null) {
 			return followerList;
 		} else {

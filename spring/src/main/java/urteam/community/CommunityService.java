@@ -232,4 +232,14 @@ public class CommunityService {
 
 	}
 
+	public List<Community> getCommunitiesByCriteria(String criteria) {
+		List<Community> foundCommunities = repository.findByNameContaining(criteria);
+		if (foundCommunities != null) {
+			return foundCommunities;
+		} else {
+			return null;
+		}
+	}
+
+
 }

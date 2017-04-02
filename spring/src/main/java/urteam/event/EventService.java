@@ -3,6 +3,7 @@ package urteam.event;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import urteam.ConstantsUrTeam;
 import urteam.urTeamService;
+import urteam.community.Community;
 import urteam.user.User;
 
 @Service
@@ -88,6 +90,15 @@ public class EventService {
 
 	public void delete(long id) {
 		eventRepo.delete(id);
+	}
+
+	public List<Event> getEventsByCriteria(String criteria) {
+		List<Event> foundEvents = eventRepo.findByNameContaining(criteria);
+		if (foundEvents != null) {
+			return foundEvents;
+		} else {
+			return null;
+		}
 	}
 
 }
