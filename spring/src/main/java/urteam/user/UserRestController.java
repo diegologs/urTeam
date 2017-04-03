@@ -1,9 +1,12 @@
 package urteam.user;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,11 +24,19 @@ import urteam.event.Event;
 @RestController
 @RequestMapping("/api/users")
 public class UserRestController {
-	
-	public interface MinimalUser extends User.MinimalUser{}
-	public interface BasicUser extends User.MinimalUser,User.BasicUser {}
-	public interface CompleteUser extends User.MinimalUser, User.CompleteUser, User.BasicUser, Event.BasicEvent, Community.BasicCommunity {}
-	public interface FriendUser extends User.MinimalUser, User.CompleteUser {}
+
+	public interface MinimalUser extends User.MinimalUser {
+	}
+
+	public interface BasicUser extends User.MinimalUser, User.BasicUser {
+	}
+
+	public interface CompleteUser
+			extends User.MinimalUser, User.CompleteUser, User.BasicUser, Event.BasicEvent, Community.BasicCommunity {
+	}
+
+	public interface FriendUser extends User.MinimalUser, User.CompleteUser {
+	}
 
 	@Autowired
 	private UserService userService;
@@ -62,14 +73,14 @@ public class UserRestController {
 	public ResponseEntity<User> updateUserInfo(@PathVariable String nickname, @RequestBody User user) {
 		User updatedUser = userService.getUser(nickname);
 		User userLogged = userService.findOne(userComponent.getLoggedUser().getId());
-		if(updatedUser == userLogged){
+		if (updatedUser == userLogged) {
 			if (updatedUser != null) {
 				updatedUser = userService.updateUserInfo(nickname, user);
 				return new ResponseEntity<>(updatedUser, HttpStatus.OK);
 			} else {
 				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 			}
-		}else{
+		} else {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
 		}
@@ -79,9 +90,9 @@ public class UserRestController {
 	@RequestMapping(value = "/{nickname}/avatar", method = RequestMethod.PUT)
 	public ResponseEntity<User> updateUserAvatar(@PathVariable String nickname, @RequestBody MultipartFile file) {
 		User updatedUserAvatar = userService.getUser(nickname);
-		if (userService.findOne(userComponent.getLoggedUser().getId()) != null ){
+		if (userService.findOne(userComponent.getLoggedUser().getId()) != null) {
 			User userLogged = userService.findOne(userComponent.getLoggedUser().getId());
-			if(updatedUserAvatar == userLogged){
+			if (updatedUserAvatar == userLogged) {
 				if (updatedUserAvatar != null) {
 					updatedUserAvatar = userService.updateUserAvatar(nickname, file);
 					return new ResponseEntity<>(updatedUserAvatar, HttpStatus.OK);
@@ -91,6 +102,25 @@ public class UserRestController {
 			}
 		}
 		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	}
+
+	@JsonView(BasicUser.class)
+	@RequestMapping(value = "/{nickname}/avatar", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
+	public ResponseEntity<byte[]> updateUserAvatar(@PathVariable String nickname) {
+		byte[] userAvatar;
+		try {
+			userAvatar = userService.getUserAvatar(nickname);
+			if (userAvatar != null) {
+				final HttpHeaders headers = new HttpHeaders();
+				headers.setContentType(MediaType.IMAGE_JPEG);
+				return new ResponseEntity<>(userAvatar, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 	}
 
 	@JsonView(BasicUser.class)
@@ -108,13 +138,13 @@ public class UserRestController {
 	@JsonView(MinimalUser.class)
 	@RequestMapping(value = "/{nickname}/friends", method = RequestMethod.PUT)
 	public ResponseEntity<List<User>> followUnfollowUser(@PathVariable String nickname) {
-		if (userService.findOne(userComponent.getLoggedUser().getId()) != null ){
+		if (userService.findOne(userComponent.getLoggedUser().getId()) != null) {
 			User userToFollow = userService.getUser(nickname);
 			User userLogged = userService.findOne(userComponent.getLoggedUser().getId());
-			if(userLogged != userToFollow){
+			if (userLogged != userToFollow) {
 				List<User> friends = userService.getFriends(nickname);
 				if (friends != null) {
-					friends = userService.followUnfollow( userLogged, nickname);
+					friends = userService.followUnfollow(userLogged, nickname);
 					return new ResponseEntity<>(friends, HttpStatus.OK);
 				} else {
 					return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -127,7 +157,7 @@ public class UserRestController {
 	@JsonView(FriendUser.class)
 	@RequestMapping(value = "/{nickname}/friends", method = RequestMethod.GET)
 	public ResponseEntity<List<User>> getFriends(@PathVariable String nickname) {
-		
+
 		List<User> friends = userService.getFriends(nickname);
 		if (friends != null) {
 			return new ResponseEntity<>(friends, HttpStatus.OK);

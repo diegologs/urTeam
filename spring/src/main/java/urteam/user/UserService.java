@@ -1,5 +1,8 @@
 package urteam.user;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -83,19 +86,19 @@ public class UserService {
 		}
 	}
 	
-//	public InputStream getUserAvatar(String nickname) throws FileNotFoundException, IOException{
-//		User user = userRepository.findByNickname(nickname);
-//		if(user != null){
-//			InputStream inputStream = urTeamService.getFile(ConstantsUrTeam.USER_AVATAR, user.getGeneratedId(),
-//					user.getAvatar()); 
-//			if(inputStream != null){
-//				return inputStream;
-//			}
-//		} else {
-//			return null;
-//		}
-//		return null;
-//	}
+	public byte[] getUserAvatar(String nickname) throws FileNotFoundException, IOException{
+		User user = userRepository.findByNickname(nickname);
+		if(user != null){
+			 byte[] file = imageService.getFile(ConstantsUrTeam.USER_AVATAR, user.getGeneratedId(),
+					user.getAvatar()); 
+			if(file != null){
+				return file;
+			}
+		} else {
+			return null;
+		}
+		return null;
+	}
 
 	public List<User> getFriends(String nickname) {
 		List<User> followerList = userRepository.findByNickname(nickname).getFollowing();

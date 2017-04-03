@@ -4,10 +4,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
@@ -148,41 +150,36 @@ public class urTeamService {
 		return foundElements;
 	}
 
-	// public InputStream getFile(String type, String generatedId,
-	// String fileName) throws FileNotFoundException, IOException {
-	//
-	// String filePath = null;
-	//
-	// switch (type) {
-	// case ConstantsUrTeam.USER_AVATAR:
-	// filePath = ConstantsUrTeam.USERS_AVATAR_FOLDER + "/" + fileName +
-	// ".jpeg";
-	// break;
-	// case ConstantsUrTeam.EVENT_AVATAR:
-	// filePath = ConstantsUrTeam.EVENTS_FOLDER + "/" + generatedId + "/" +
-	// fileName + ".jpeg";
-	// break;
-	// case ConstantsUrTeam.EVENT_IMGS:
-	// filePath = ConstantsUrTeam.EVENTS_FOLDER + "/" + generatedId +
-	// "/gallery/" + fileName + ".jpeg";
-	// break;
-	// case ConstantsUrTeam.COMMUNITY_AVATAR:
-	// filePath = ConstantsUrTeam.COMMUNITIES_FOLDER + "/" + generatedId + "/" +
-	// fileName + ".jpeg";
-	// break;
-	// case ConstantsUrTeam.COMMUNITY_IMGS:
-	// filePath = ConstantsUrTeam.COMMUNITIES_FOLDER + "/" + generatedId +
-	// "/gallery/" + fileName + ".jpeg";
-	// break;
-	// default:
-	// break;
-	// }
-	// File file = new File(filePath);
-	//
-	// if (file.exists()) {
-	// InputStream inputStream = new FileInputStream(file);
-	// return inputStream;
-	// }
-	// return null;
-	// }
+	public byte[] getFile(String type, String generatedId, String fileName)
+			throws FileNotFoundException, IOException {
+
+		String filePath = null;
+
+		switch (type) {
+		case ConstantsUrTeam.USER_AVATAR:
+			filePath = ConstantsUrTeam.USERS_AVATAR_FOLDER + "/" + fileName + ".jpeg";
+			break;
+		case ConstantsUrTeam.EVENT_AVATAR:
+			filePath = ConstantsUrTeam.EVENTS_FOLDER + "/" + generatedId + "/" + fileName + ".jpeg";
+			break;
+		case ConstantsUrTeam.EVENT_IMGS:
+			filePath = ConstantsUrTeam.EVENTS_FOLDER + "/" + generatedId + "/gallery/" + fileName + ".jpeg";
+			break;
+		case ConstantsUrTeam.COMMUNITY_AVATAR:
+			filePath = ConstantsUrTeam.COMMUNITIES_FOLDER + "/" + generatedId + "/" + fileName + ".jpeg";
+			break;
+		case ConstantsUrTeam.COMMUNITY_IMGS:
+			filePath = ConstantsUrTeam.COMMUNITIES_FOLDER + "/" + generatedId + "/gallery/" + fileName + ".jpeg";
+			break;
+		default:
+			break;
+		}
+		File file = new File(filePath);
+
+		if (file.exists()) {
+			InputStream inputStream = new FileInputStream(file);
+			return IOUtils.toByteArray(inputStream);
+		}
+		return null;
+	}
 }
