@@ -249,7 +249,13 @@ public class CommunityController {
 			model.addAttribute("user", userLogged);			
 			// Comprobar si es admin
 			model.addAttribute("admin", request.isUserInRole("ROLE_ADMIN"));
-
+			
+			if (!userLogged.getCommunityList().contains(community)) {
+				userLogged.addCommunity(community);
+			}else{
+				userLogged.removeCommunity(community);
+			}
+			
 			communityService.follow(community);
 			model.addAttribute("communityFollowed", userLogged.getCommunityList().contains(community));
 

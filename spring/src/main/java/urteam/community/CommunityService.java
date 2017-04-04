@@ -164,9 +164,7 @@ public class CommunityService {
 			long userLogged_id = userComponent.getLoggedUser().getId();
 			User userLogged = userRepo.findOne(userLogged_id);
 
-			if (userLogged.getCommunityList().contains(community)) {
-				userLogged.removeCommunity(community);
-			} else {
+			if (!userLogged.getCommunityList().contains(community)) {
 				userLogged.addCommunity(community);
 			}
 
@@ -175,6 +173,25 @@ public class CommunityService {
 		}
 
 	}
+	
+	public void unfollow(Community community) {
+
+		if ((userComponent.isLoggedUser())) {
+
+			long userLogged_id = userComponent.getLoggedUser().getId();
+			User userLogged = userRepo.findOne(userLogged_id);
+
+			if (userLogged.getCommunityList().contains(community)) {
+				userLogged.removeCommunity(community);
+			}
+			
+
+			save(community);
+			userRepo.save(userLogged);
+		}
+
+	}
+
 
 	public Page<Community> findAll(PageRequest pageRequest) {
 		return repository.findAll(pageRequest);

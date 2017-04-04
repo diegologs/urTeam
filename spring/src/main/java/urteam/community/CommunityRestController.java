@@ -175,6 +175,22 @@ public class CommunityRestController {
 			return new ResponseEntity<Community>(community, HttpStatus.NOT_FOUND);
 		}
 	}
+	
+
+	@JsonView(CompleteCommunity.class)
+	@RequestMapping(value = "/{id}/followers", method = RequestMethod.DELETE)
+	public ResponseEntity<Community> unfollow(@PathVariable long id) {
+
+		Community community = service.findOne(id);
+
+		service.unfollow(community);
+
+		if (community != null) {
+			return new ResponseEntity<Community>(community, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Community>(community, HttpStatus.NOT_FOUND);
+		}
+	}
 
 	@JsonView(CompleteCommunity.class)
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
