@@ -106,7 +106,7 @@ public class UserRestController {
 
 	@JsonView(BasicUser.class)
 	@RequestMapping(value = "/{nickname}/avatar", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
-	public ResponseEntity<byte[]> updateUserAvatar(@PathVariable String nickname) {
+	public ResponseEntity<byte[]> getUserAvatar(@PathVariable String nickname) {
 		byte[] userAvatar;
 		try {
 			userAvatar = userService.getUserAvatar(nickname);
