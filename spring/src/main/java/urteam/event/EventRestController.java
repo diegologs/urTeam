@@ -27,7 +27,7 @@ public class EventRestController {
 	interface CompleteEvent extends Event.BasicEvent {
 	}
 
-	interface FollowersEvent extends Event.MembersEvent, User.BasicUser {
+	interface FollowersEvent extends Event.MembersEvent, User.MinimalUser {
 	}
 	// interface FollowersEvent extends Event.MembersEvent{}
 
