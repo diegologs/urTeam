@@ -1,4 +1,12 @@
+.spinner{
+    display: block;
+    margin: 0px auto;
+    padding: 150px;
+}
+
+
 /* CSS del navbar*/
+
 
 .navbar-urTeam {
     background-color: #0a1612;
@@ -16,7 +24,7 @@
 }
 
 .minav a {
-    color: #c5c1c0;
+    color: #c5c1c0 !important;
     font-weight: bold;
     margin: auto;
     border-bottom-style: solid;
@@ -32,9 +40,9 @@
 .minav li.active a,
 .minav li.active a,
 .minav  li.active a:hover {
-    color: #f7ce3e;
+    color: #f7ce3e !important;
     border-bottom-style: solid;
-    border-bottom-color: #f7ce3e;
+    border-bottom-color: #f7ce3e !important;
     background-color: transparent;
     text-decoration: none;
 }
@@ -42,11 +50,16 @@
 .nav .open>a,
 .nav .open>a:focus,
 .nav .open>a:hover {
-    color: #f7ce3e;
+    color: #f7ce3e !important;
     border-bottom-style: solid;
-    border-bottom-color: #f7ce3e;
+    border-bottom-color: #f7ce3e !important;
     background-color: transparent;
     text-decoration: none;
+}
+
+nav-link{
+    color: #f7ce3e !important;
+    
 }
 
 
@@ -58,7 +71,7 @@ body {
     background-repeat: repeat;
     background-attachment: fixed;
     background-position: center;
-    padding-top: 53px;
+
     color: white;
 }
 
@@ -122,6 +135,11 @@ img {
     color: #0a1612;
     background-color: #c5a431;
     border-color: #c5a431;
+}
+
+.btn-outline-success{
+    color: #f7ce3e !important;
+    border-color: #f7ce3e !important;
 }
 
 
