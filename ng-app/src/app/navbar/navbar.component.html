@@ -1,22 +1,58 @@
-<nav class="navbar navbar-toggleable-md navbar-light bg-faded navbar-urTeam">
-  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <a class="navbar-brand" [routerLink]="['/home']">  <img alt="urTeam" src="../../assets/images/logo.png" width="150px"></a>
-
-  <div class="nav collapse navbar-collapse minav" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/events']">Eventos</a>
+<nav class="navbar-fixed-top navbar-urTeam" role="navigation">
+  <!-- El logotipo y el icono que despliega el menú se agrupan
+       para mostrarlos mejor en los dispositivos móviles -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+			<span class="sr-only">Desplegar navegación</span> <span
+				class="icon-bar"></span> <span class="icon-bar"></span> <span
+				class="icon-bar"></span>
+		</button>
+    <a class="navbar-left" href="/">
+      <img alt="urTeam" src="../../assets/images/logo.png" width="150px">
+    </a>
+  </div>
+  <!-- Agrupar los enlaces de navegación, los formularios y cualquier
+       otro elemento que se pueda ocultar al minimizar la barra -->
+  <div class="collapse navbar-collapse navbar-ex1-collapse navbar-inner">
+    <ul class="nav navbar-nav minav">
+      <li>
+        <a [routerLink]="['/events']">Eventos</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/communities']">Comunidades</a>
+      <li>
+        <a [routerLink]="['/communities']">Comunidades</a>
+      </li>
+      <li>
+        <form class="navbar-form" role="search" method="post" action="/search">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search" name="toSearch">
+            <div class="input-group-btn">
+              <button class="btn btn-default" type="submit">
+								<i class="fa fa-search" aria-hidden="true"></i>
+							</button>
+            </div>
+          </div>
+        </form>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-	  
-    </form>
+    <ul class="nav navbar-nav navbar-right minav">
+      <li class="dropdown">
+        <a href="#" data-toggle="dropdown">
+          <span class="user-name"> {{user.nickname}} </span> <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li>
+            <div class="navbar-content">
+              <a href="">Mi perfil</a>
+            </div>
+          </li>
+          <li>
+          </li>
+        </ul>
+      </li>
+    </ul>
   </div>
+  <ul class="nav navbar-nav navbar-right minav">
+    <li>
+      <a href="/login">Iniciar Sesión / Registro</a>
+    </li>
+  </ul>
 </nav>
