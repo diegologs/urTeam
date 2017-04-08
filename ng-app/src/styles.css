@@ -23,6 +23,42 @@
     margin: auto;
 }
 
+.nav-link{
+    color: #c5c1c0 !important;
+    font-weight: bold;
+    font-size: 1.3em;
+    margin: auto;
+    border-bottom-style: solid;
+    border-bottom-color: transparent;
+}
+
+.nav-link :active{
+    color: #f7ce3e !important;
+    border-bottom-style: solid;
+    border-bottom-color: #f7ce3e !important;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+.navbar-default .navbar-toggler-icon {
+  border-color: transparent; /* Removes border color */
+  float: left; /* Move navbar toggle to left */
+}
+.navbar-default .navbar-toggler-icon {
+  background-color: #f7ce3e /* Changes regular toggle color */
+}
+.navbar-default .navbar-toggler-icon {
+  background-color: #fff; /* Changes toggle color on hover */
+}
+
+.nav-link :hover{
+ color: #f7ce3e !important;
+    border-bottom-style: solid;
+    border-bottom-color: #f7ce3e !important;
+    background-color: transparent;
+    text-decoration: none;
+}
+
 .minav a {
     color: #c5c1c0 !important;
     font-weight: bold;
