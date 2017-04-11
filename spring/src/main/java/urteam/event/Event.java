@@ -48,6 +48,7 @@ public class Event {
 	private double price;
 	
 	@Column(columnDefinition = "TEXT")
+	@JsonView(BasicEvent.class)
 	private String info;
 	
 	private String main_photo;
@@ -68,8 +69,11 @@ public class Event {
 	@JsonView(BasicEvent.class)
 	private Date end_date;
 	
+	@JsonView(BasicEvent.class)
 	private int day_date;
+	@JsonView(BasicEvent.class)
 	private String month_date;
+	@JsonView(BasicEvent.class)
 	private int year_date;
 	
 	@OneToOne

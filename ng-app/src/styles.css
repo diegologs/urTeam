@@ -107,7 +107,7 @@ body {
     background-repeat: repeat;
     background-attachment: fixed;
     background-position: center;
-
+    padding-top: 56px;
     color: white;
 }
 

@@ -9,14 +9,18 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
+
 import { EventsComponent } from './events/events.component';
 import { EventService} from './events/events.service';
+import { EventDetailComponent} from './events/event-detail.component';
+
 import { CommunitiesComponent } from './communities/communities.component';
  
 
 @NgModule({
   declarations: [
-    AppComponent, NavbarComponent, FooterComponent, HomeComponent, EventsComponent, CommunitiesComponent
+    AppComponent, NavbarComponent, FooterComponent, HomeComponent, EventsComponent, EventDetailComponent,
+    CommunitiesComponent
   ],
   imports: [
     BrowserModule,
