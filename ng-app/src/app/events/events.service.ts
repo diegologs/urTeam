@@ -55,6 +55,12 @@ export class EventService {
             .catch(error => this.handleError(error));
 	}
 
+	getEventAvatar(id: number | string){
+		return this.http.get(BASE_URL + id + '/avatar')
+            .map(response => response.json())
+            .catch(error => this.handleError(error));
+	}
+
 
 	private handleError(error: any) {
 		console.error(error);
