@@ -1,5 +1,7 @@
 package urteam.event;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -100,5 +102,20 @@ public class EventService {
 			return null;
 		}
 	}
+	
+	public byte[] getEventAvatar(long id) throws FileNotFoundException, IOException{
+		Event event = eventRepo.findOne(id);
+		if(event != null){
+			 byte[] file = urteamService.getFile(ConstantsUrTeam.EVENT_AVATAR, event.getEventId(),
+					event.getMain_photo()); 
+			if(file != null){
+				return file;
+			}
+		} else {
+			return null;
+		}
+		return null;
+	}
+	
 
 }

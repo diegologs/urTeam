@@ -2,9 +2,7 @@ package urteam.event;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,11 +19,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import urteam.event.EventService;
 import urteam.ConstantsUrTeam;
 import urteam.urteamController;
-import urteam.sport.*;
-import urteam.user.*;
+import urteam.sport.SportController;
+import urteam.sport.SportRepository;
+import urteam.user.User;
+import urteam.user.UserComponent;
+import urteam.user.UserRepository;
 
 @Controller
 public class eventController {
@@ -38,9 +38,6 @@ public class eventController {
 
 	@Autowired
 	private UserRepository userRepo;
-	
-	@Autowired
-	private SportRepository sportRepo;	
 
 	@Autowired
 	private urteamController urteam;

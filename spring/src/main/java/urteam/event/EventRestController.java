@@ -1,9 +1,13 @@
 package urteam.event;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -133,4 +137,26 @@ public class EventRestController {
 		eventService.delete(id);
 		return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
 	}
+	
+	
+	@RequestMapping(value = "/{id}/avatar", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
+	public ResponseEntity<byte[]> get(@PathVariable long id) {
+		byte[] eventAvatar;
+		try {
+			eventAvatar = eventService.getEventAvatar(id);
+			if (eventAvatar != null) {
+				final HttpHeaders headers = new HttpHeaders();
+				headers.setContentType(MediaType.IMAGE_JPEG);
+				return new ResponseEntity<>(eventAvatar, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	
+	
 }
