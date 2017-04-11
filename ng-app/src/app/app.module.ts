@@ -10,7 +10,9 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { EventsComponent } from './events/events.component';
+import { EventService} from './events/events.service';
 import { CommunitiesComponent } from './communities/communities.component';
+ 
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import { CommunitiesComponent } from './communities/communities.component';
     NgbModule.forRoot(),
     routing
   ],
-  providers: [],
+  providers: [EventService
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

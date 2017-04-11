@@ -1,4 +1,4 @@
-
+<!--
 <nav class="navbar navbar-toggleable-md navbar-light navbar-urTeam" style="background-color: #1a2930;">
   <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -25,4 +25,30 @@
       </li>
     </form>
   </div>
-</nav>
+</nav> -->
+
+<nav class="navbar-fixed-top navbar-urTeam" role="navigation">
+        <!-- El logotipo y el icono que despliega el menú se agrupan
+       para mostrarlos mejor en los dispositivos móviles -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                  <span class="sr-only">Desplegar navegación</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-left" [routerLink]="['/']"><img alt="urTeam" src="../assets/images/logo.png" width="150px"></a>
+        </div>
+
+        <!-- Agrupar los enlaces de navegación, los formularios y cualquier
+       otro elemento que se pueda ocultar al minimizar la barra -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse navbar-inner">
+            <ul class="nav navbar-nav minav">
+                <li><a [routerLink]="['/events']">Eventos</a></li>
+                <li><a [routerLink]="['/communities']">Comunidades</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right minav">
+                <li><a [routerLink]="['/']">Iniciar Sesión / Registro</a></li>
+            </ul>
+        </div>
+    </nav>
