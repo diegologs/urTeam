@@ -6,7 +6,7 @@ import 'rxjs/Rx';
 import {Sport} from './sport.model';
 
 
-const BASE_URL = 'https://127.0.0.1:8443/api/sports/';
+const BASE_URL = 'https://localhost:8443/api/sports/';
 
 @Injectable()
 export class StatsService{

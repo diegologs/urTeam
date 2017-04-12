@@ -114,11 +114,18 @@ time>.month {
     color: #c5c0c1!important;
     background-color: #0a1612;
     border-color: #0a1612;
+    
 }
 
 .panel-primary>.panel-footer p {
     color: #c5c0c1;
     text-align: justify;
+    
+}
+
+.panel-primary>.panel-footer>.infoBox{
+	height: 25px;
+	overflow: hidden;
 }
 
 .panel-primary a {
@@ -129,7 +136,6 @@ time>.month {
     width: 400px;
     height: 150px;
 }
-
 .filterNav {
     margin-top: 10px;
     border-radius: 0;
@@ -165,51 +171,11 @@ time>.month {
 .form-group select {
     height: 30px;
 }
-
-
-/*
-PAGINACION
-*/
-
-.pagination {
-    list-style: none;
-    margin: 0px;
-    padding: 0px;
-    position: relative;
+.styleMoreEvents{
+	text-align:center;
 }
 
-.pagination li {
-    float: left;
-    margin: 3px;
+#btnMoreEvents{
+	margin: 0 auto;
+	margin-bottom: 25px;
 }
-
-.pagination li a {
-    display: block;
-    padding: 3px 5px;
-    color: #1a2930;
-    background-color: #f7ce3e;
-    border-color: #f7ce3e;
-    text-decoration: none;
-} 
-
-.pagination li a:hover {
-    display: block;
-    padding: 3px 5px;
-    color: #1a2930;
-    background-color: #c5a431;
-    border-color: #c5a431;
-    text-decoration: none;
-}
-
-.pagination li a.active {
-    border: 1px solid #c5a431;
-    color: #0a1612;
-    background-color: #c5a431;
-}
-
-.pagination li a.inactive {
-    background-color: #1a2930;
-    color: #c5c0c1;
-    border: 1px solid #1a2930;
-}
- 

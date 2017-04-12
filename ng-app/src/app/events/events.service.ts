@@ -6,15 +6,15 @@ import 'rxjs/Rx';
 import { Event } from './events.model';
 
 
-const BASE_URL = 'https://127.0.0.1:8443/api/events/';
+const BASE_URL = 'https://localhost:8443/api/events/';
 
 @Injectable()
 export class EventService {
 
 	constructor(private http: Http) { }
 
-	getEvents() {
-		return this.http.get(BASE_URL)
+	getEvents(page: number) {
+		return this.http.get(BASE_URL + "?page=" + page +"&size=6")
 			.map(response => response.json())
 			.catch(error => this.handleError(error));
 	}
