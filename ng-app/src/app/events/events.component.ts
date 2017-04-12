@@ -10,6 +10,7 @@ import {EventService} from './events.service';
 export class EventsComponent implements OnInit{
 
   events: Event[];
+  imgUrl =  "https://localhost:8443/image/event-avatar/aleatorio/default-mainphoto";
   constructor(private router:Router, private service: EventService){}
 
   ngOnInit(){
