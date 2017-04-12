@@ -15,6 +15,8 @@ import { EventService} from './events/events.service';
 import { EventDetailComponent} from './events/event-detail.component';
 
 import { CommunitiesComponent } from './communities/communities.component';
+import { CommunityService} from './communities/communities.service';
+
  
 
 @NgModule({
@@ -29,8 +31,7 @@ import { CommunitiesComponent } from './communities/communities.component';
     NgbModule.forRoot(),
     routing
   ],
-  providers: [EventService
-],
+  providers: [EventService, CommunityService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

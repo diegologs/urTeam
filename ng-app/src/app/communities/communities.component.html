@@ -1,1 +1,22 @@
-<h1>Hi! , I'm communities</h1>
+  <div class="container">
+  
+     <a href="group.html" *ngFor="let group of communities">
+            <div class="row group">
+                <div class="group-info">
+                    <div class="col-sm-2 group-image">
+                        <img class="img-circle img-responsive group-image" width="110px" src="images/avatar.jpg">
+                    </div>
+                    <div class="col-sm-8">
+                        <h1 class="group-name">{{group.name}}</h1>
+                        <div class="badge">Mountain Bike</div>
+                        <div class="badge">Mountain Bike</div>
+                        <hr>
+                        <div class="group-members">300 miembros</div>
+                    </div>
+                    <div class="col-sm-2 group-button">
+                        <button class="btn btn-default group-btn">UNIRME</button>
+                    </div>
+                </div>
+            </div>
+        </a>
+  </div>
