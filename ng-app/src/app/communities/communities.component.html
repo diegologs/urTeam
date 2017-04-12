@@ -1,6 +1,6 @@
   <div class="container">
-  
-     <a href="group.html" *ngFor="let group of communities">
+  <div *ngFor="let group of communities" >
+     <a href="group.html" [routerLink]="['/communities', group.id]">
             <div class="row group">
                 <div class="group-info">
                     <div class="col-sm-2 group-image">
@@ -8,8 +8,8 @@
                     </div>
                     <div class="col-sm-8">
                         <h1 class="group-name">{{group.name}}</h1>
-                        <div class="badge">Mountain Bike</div>
-                        <div class="badge">Mountain Bike</div>
+                        <div class="badge">{{group.sport}}</div>
+                       
                         <hr>
                         <div class="group-members">300 miembros</div>
                     </div>
@@ -19,4 +19,5 @@
                 </div>
             </div>
         </a>
+  </div>
   </div>
