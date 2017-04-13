@@ -17,12 +17,17 @@ import { EventDetailComponent} from './events/event-detail.component';
 import { CommunitiesComponent } from './communities/communities.component';
 import { CommunityService} from './communities/communities.service';
 
- 
+import { UserComponent } from './user/user.component';
+import { UserService } from './user/user.service';
+
+import { LoginComponent } from './login/login.component';
+import { LoginService } from './login/login.service';
+
 
 @NgModule({
   declarations: [
     AppComponent, NavbarComponent, FooterComponent, HomeComponent, EventsComponent, EventDetailComponent,
-    CommunitiesComponent
+    CommunitiesComponent, UserComponent, LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +36,7 @@ import { CommunityService} from './communities/communities.service';
     NgbModule.forRoot(),
     routing
   ],
-  providers: [EventService, CommunityService],
+  providers: [EventService, CommunityService , LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
