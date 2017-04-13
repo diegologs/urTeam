@@ -15,6 +15,7 @@ import { EventService} from './events/events.service';
 import { EventDetailComponent} from './events/event-detail.component';
 
 import { CommunitiesComponent } from './communities/communities.component';
+import { CommunityDetailComponent } from './communities/communities-detail.component';
 import { CommunityService} from './communities/communities.service';
 
 import { UserComponent } from './user/user.component';
@@ -27,7 +28,7 @@ import { LoginService } from './login/login.service';
 @NgModule({
   declarations: [
     AppComponent, NavbarComponent, FooterComponent, HomeComponent, EventsComponent, EventDetailComponent,
-    CommunitiesComponent, UserComponent, LoginComponent
+    CommunitiesComponent,CommunityDetailComponent, UserComponent, LoginComponent
   ],
   imports: [
     BrowserModule,
