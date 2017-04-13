@@ -70,3 +70,10 @@
 .form-group select {
     height: 30px;
 }
+
+#btnMoreEvents{
+    display: block;
+	margin: 0 auto;
+	margin-bottom: 25px;
+    margin-top: 25px;
+}

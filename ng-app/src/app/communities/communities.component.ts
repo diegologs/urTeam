@@ -12,13 +12,45 @@ import { Community } from "app/communities/community.model";
 export class CommunitiesComponent implements OnInit {
    
   communities: Community[];
+  groupsPage: number;
+  groupsPageActual: number;
+  moreGroupsButtonText: string;
+
+   imgUrl = "https://localhost:8443/image/event-avatar/aleatorio/default-mainphoto";
+
   constructor(private router:Router, private service: CommunityService){}
 
-  ngOnInit(){
-    this.service.getGroups().subscribe(
-        communities => this.communities = communities.content,
-        error => console.log(error)
+   ngOnInit() {
+    this.groupsPage = 0;
+    this.moreGroupsButtonText = "Ver Más";
+    this.service.getGroups(this.groupsPage).subscribe(
+      communities => {
+        this.groupsPage++;
+        this.communities = communities.content;
+        this.groupsPageActual = communities.totalPages;
+      },
+      error => {
+        console.log(error);
+      }
     )
+  }
+
+
+   moreGroups() {
+    if (this.groupsPage < this.groupsPageActual) {
+      this.service.getGroups(this.groupsPage).subscribe(
+        communities => {
+          this.groupsPage++;
+          this.communities = this.communities.concat(communities.content);
+        },
+        error => {
+          console.log(error);
+        }
+      )
+    }
+    else {
+      this.moreGroupsButtonText = 'No hay mas resultados';
+    }
   }
 
  

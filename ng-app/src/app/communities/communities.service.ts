@@ -13,8 +13,9 @@ export class CommunityService {
 
 	constructor(private http: Http) { }
 
-	getGroups() {
-		return this.http.get(BASE_URL)
+	
+	getGroups(page: number) {
+		return this.http.get(BASE_URL + "?page=" + page +"&size=3")
 			.map(response => response.json())
 			.catch(error => this.handleError(error));
 	}

@@ -4,7 +4,7 @@
             <div class="row group">
                 <div class="group-info">
                     <div class="col-sm-2 group-image">
-                        <img class="img-circle img-responsive group-image" width="110px" src="images/avatar.jpg">
+                        <img [src]="imgUrl" class="img-circle img-responsive group-image" width="110px" src="images/avatar.jpg">
                     </div>
                     <div class="col-sm-8">
                         <h1 class="group-name">{{group.name}}</h1>
@@ -20,4 +20,7 @@
             </div>
         </a>
   </div>
-  </div>
+  <div class="styleMoreEvents">
+        <button id="btnMoreEvents" type="button" class="btn mybtn-succes btnMoreEvents" (click)="moreGroups()">{{moreGroupsButtonText}}</button>
+      </div>
+</div>
