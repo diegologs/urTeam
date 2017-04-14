@@ -6,7 +6,7 @@ import 'rxjs/Rx';
 import { Community } from './community.model';
 
 
-const BASE_URL = 'https://127.0.0.1:8443/api/groups/';
+const BASE_URL = 'https://localhost:8443/api/groups/';
 
 @Injectable()
 export class CommunityService {
