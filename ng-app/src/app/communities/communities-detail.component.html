@@ -124,16 +124,16 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-container">
-                                <form class="form-group">
+                                <div class="form-group">
                                     <label style="color:black;" for="textarea">Información</label>
-                                      <textarea type="text" id="textarea" class="form-control" rows="15"></textarea>
+                                      <textarea type="text" id="textarea" class="form-control" rows="15" [(ngModel)]="info"></textarea>
                                       <br>
                                       <hr>
                                     <div class="addButton">
-                                         <a data-toggle="modal" data-target="#myModal2"><button class="btn mybtn-succes addButton">Editar información</button></a>
+                                     <button class="btn mybtn-succes addButton" (click)="editInfo()">Editar información</button>
                                     </div>
 
-                                </form>
+                                </div>
                             </div>
                         </div>
                     </div>

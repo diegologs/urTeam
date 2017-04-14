@@ -40,7 +40,7 @@ export class CommunityService {
 			.catch(error => this.handleError(error));
 	}
 
-	updatedGroup(id: number | string, community: Community){
+	updateGroup(id: number | string, community: Community){
 		return this.http.put(BASE_URL + id,community)
             .map(response => response.json())
             .catch(error => this.handleError(error));
