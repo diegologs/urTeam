@@ -1,3 +1,5 @@
+import { Community } from '../communities/community.model';
+
 export interface User {
     id?: number;
 	generatedId: string;
@@ -8,10 +10,10 @@ export interface User {
     bio: string;
     city: string;
     country: string;
-    socre: number;
+    score: number;
     roles: string[];
     following: User[];
     followers: User[];
-    //communityList: Community[];
+    communityList: Community[];
     eventList: Event[];
 }

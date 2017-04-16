@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { routing } from './app.routing';
+import {Ng2PageScrollModule} from 'ng2-page-scroll';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -35,9 +36,10 @@ import { LoginService } from './login/login.service';
     FormsModule,
     HttpModule,
     NgbModule.forRoot(),
-    routing
+    routing,
+    Ng2PageScrollModule.forRoot()
   ],
-  providers: [EventService, CommunityService , LoginService],
+  providers: [EventService, CommunityService , LoginService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

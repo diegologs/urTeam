@@ -8,67 +8,64 @@ import { UserService } from '../user/user.service';
 
 import 'rxjs/Rx';
 
+const BASE_URL = 'https://localhost:8443/api/';
+
 @Injectable()
 export class LoginService {
 
-    private isLogged:boolean = false;  
-    private credentials:string; 
-    private userLogged :User; 
+  user: User;
+  authCreds: string;
+  isLogged = false;
+  isAdmin = false;
 
-    constructor(private router: Router, private http: Http, private userService:UserService) { }
+  constructor(private http: Http, private userService: UserService) {
+  }
 
-  
+  logIn(username: string, password: string) {
+    this.authCreds = btoa(username + ':' + password);
+    let headers: Headers = new Headers();
+    headers.append('Authorization', 'Basic ' + this.authCreds);
 
-    private handleLogIn(response){
-        this.isLogged = true;
-        this.userService.getUser(response.json().id).subscribe(
-            user => this.userLogged = user
-        );
-    }
-    
-    logIn(nickname: string, pass: string) {
-        let headers = new Headers();
-        this.credentials = btoa(nickname + ':' + pass);
-        headers.append('Authorization', 'Basic ' + this.credentials);
-        return this.http.get("https://localhost:8443/api/login", {headers : headers})
-            .map(response => {
-                this.handleLogIn(response);
-                localStorage.setItem("user", response.json());
-                console.log(this.credentials);
-                return response.json();
-            })
-            .catch(error => this.handleError(error))
-    }
+    return this.http.get(BASE_URL, {headers: headers})
+      .map(
+        response => {
+          let id = response.json().id;
+          this.userService.setAuthHeaders(this.authCreds);
+          this.userService.getUser(id).subscribe(
+            user => {
+              this.user = user;
+/*              if (this.user.roles.include('ROLE_ADMIN', 0) )
+                this.isAdmin = true;*/
+            },
+            error => console.log(error)
+          );
+          localStorage.setItem("user", username);
+          this.isLogged = true;
+          return this.user;
+      })
+      .catch(error => Observable.throw('Server error'));
+  }
 
-    logOut(){
-        let headers = new Headers();
-        headers.append('Authorization', 'Basic ' + this.credentials);
-        console.log(this.credentials);
-        return this.http.get("https://localhost:8443/api/logout", {headers:headers})
-        .map(response =>{
-            this.isLogged = false;
-            localStorage.removeItem("user");
-            return true;
-        })
-        .catch (error => this.handleError(error))
-    }
- 
- 
-     getCredentials(){
-        return this.credentials;
-    }
+  logOut() {
+    let headers: Headers = new Headers();
+    headers.append('Authorization', 'Basic ' + this.authCreds);
+    return this.http.get(BASE_URL + 'logOut', {headers: headers})
+      .map(response => {
+        localStorage.clear();
+        this.isLogged = false;
+        this.user = null;
+        return true;
+      })
+      .catch(error => Observable.throw('Server error'));
+  }
 
-    setCredentials(credentials:string){
-        this.credentials = credentials;
-    }
+  checkCredentials() {
+    return (localStorage.getItem("user") !== null);
+  }
 
-    isUserLogged(){//
-        return this.isLogged;
-    }
-
-
-    private handleError(error: any) {
-        console.log(error);
-        return Observable.throw("Server error (" + error.status + "): " + error.text())
-    }
+  /*register(firstName: string, lastName1: string, lastName2: string, username: string, password: string, dni: string, email: string, phone: string){
+      let newUser: User;
+      newUser = {name: username, passwordHash: password, dni: dni, firstName: firstName, lastName1: lastName1, lastName2: lastName2, email: email, telephone: phone, hasPhoto: false, viewTelephone: false};
+      return this.http.post(BASE_URL + 'register', newUser);
+  }*/
 }

@@ -11,7 +11,14 @@ const BASE_URL = 'https://localhost:8443/api/users/';
 @Injectable()
 export class UserService{
 
+	user: User;
+	authCreds: string;
+
     constructor(private http: Http){}
+
+	setAuthHeaders(authCreds: string) {
+    this.authCreds = authCreds;
+	}
 
     getUsers() {
 		return this.http.get(BASE_URL)

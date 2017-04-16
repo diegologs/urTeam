@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { LoginService } from './login.service';
-import { Http } from "@angular/http";
+import { User } from '../user/user.model';
 
 @Component({
   templateUrl: './login.component.html',
@@ -10,20 +10,23 @@ import { Http } from "@angular/http";
 })
 export class LoginComponent{
 
-  nickname: string;
-  pass: string;
+  private userLogged:User;
 
 
- constructor(private http: Http, private service:LoginService) {}
+  constructor(private sessionService: LoginService, private router: Router) {
+  }
 
-  
-
- 
-
-  logIn(){
-    this.service.logIn(this.nickname ,this.pass).subscribe(
-      user => console.log(user)
+  logIn(username: string, password: string) {
+    this.sessionService.logIn(username, password).subscribe(
+      user => {
+        this.userLogged = user;
+        this.router.navigate(['']);
+      },
+      error => console.log("Fail trying to login.")
     );
-   
+  }
+
+  logOut() {
+    this.sessionService.logOut();
   }
 }
