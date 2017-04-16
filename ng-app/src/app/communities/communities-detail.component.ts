@@ -4,6 +4,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CommunityService } from './communities.service';
 import { Community } from './community.model';
 
+import { News } from "app/news/news.model";
+
+
 @Component({
   templateUrl: './communities-detail.component.html',
   styleUrls: ['./communities-detail.component.css']
@@ -15,7 +18,12 @@ export class CommunityDetailComponent{
 
   info: string;
 
+  newsTitle: string;
+  newsText: string;
+
   myService: CommunityService;
+
+  
   
   communityID: number;
   imgUrl = "https://localhost:8443/image/event-avatar/aleatorio/default-mainphoto";
@@ -30,8 +38,7 @@ export class CommunityDetailComponent{
   }
 
   editInfo(){
-    this.info = "eeeeeeey";
-     
+        
     
      this.community.info = this.info;
      this.service.updateGroup(this.communityID, this.community).subscribe(
@@ -43,6 +50,23 @@ export class CommunityDetailComponent{
       
       
   }
+
+  addNews(){
+    
+    let updateNews: News;
+
+    updateNews = {title: this.newsTitle, text:this.newsText}
+    
+     this.service.addNews(this.communityID, updateNews).subscribe(
+          community => console.log(community),
+          error => console.error(error)
+
+     );
+
+      
+      
+  }
+
 
 
 }

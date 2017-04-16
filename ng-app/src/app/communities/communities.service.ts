@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 
 import { Community } from './community.model';
+import { News } from "app/news/news.model";
 
 
 const BASE_URL = 'https://localhost:8443/api/groups/';
@@ -50,6 +51,13 @@ export class CommunityService {
 		return this.http.put(BASE_URL + id, null)
             .map(response => response.json())
             .catch(error => this.handleError(error));
+	}
+
+	addNews(id: number | string, news: News){
+		return this.http.post(BASE_URL + id, + '/news')
+			.map(response => response.json())
+			.catch(error => this.handleError(error));
+
 	}
 
 	

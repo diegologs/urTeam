@@ -94,13 +94,13 @@
                             <div class="form-container">
                                 <form class="form-group">
                                      <label style="color:black;" for="groupName">Titulo de la actualización</label>
-                                      <input type="text" class="form-control" id="groupName" placeholder="Titulo de la actualización">
+                                      <input [(ngModel)]="newsTitle" type="text" class="form-control" id="groupName" placeholder="Titulo de la actualización">
                                        <label style="color:black;" for="textarea">Cuerpo de la actualización</label>
-                                      <textarea type="text" id="textarea" class="form-control" rows="15"></textarea>
+                                      <textarea [(ngModel)]="newsText" type="text" id="textarea" class="form-control" rows="15"></textarea>
                                       <br>
                                       <hr>
                                         <div class="addButton">
-                                         <a data-toggle="modal" data-target="#myModal2"><button class="btn mybtn-succes addButton">Añadir noticia</button></a>
+                                       <button class="btn mybtn-succes addButton" (click)="addNews()">Añadir noticia</button>
                                         </div>
                                 </form>
                             </div>
