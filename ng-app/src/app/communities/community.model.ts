@@ -1,4 +1,5 @@
-import {User} from '../user/user.model';
+import { User } from '../user/user.model';
+import { News } from "app/news/news.model";
 
 export interface Community {
     id?: number;
@@ -11,4 +12,5 @@ export interface Community {
     main_photo: string;
     owner_id: string;
     communityUsers: User[];
+    news: News[];
 }

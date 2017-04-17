@@ -50,9 +50,10 @@
               
                 <hr>
                 <a data-toggle="modal" data-target="#myModal2"><button class="btn mybtn-succes btn_group2">Añadir noticia</button></a>
-                <div class="new">
-                    <h4>Título de la actualización</h4>
-                    <div>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget</div>
+                
+                <div class="new" *ngFor="let new of community.news">
+                    <h4>{{new.title}}</h4>
+                    <div>{{new.text}}</div>
                     <br>
                 </div>
 

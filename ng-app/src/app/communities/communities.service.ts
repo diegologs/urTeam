@@ -54,7 +54,7 @@ export class CommunityService {
 	}
 
 	addNews(id: number | string, news: News){
-		return this.http.post(BASE_URL + id, + '/news')
+		return this.http.post(BASE_URL + id + '/news', news)
 			.map(response => response.json())
 			.catch(error => this.handleError(error));
 
