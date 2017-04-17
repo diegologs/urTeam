@@ -22,6 +22,7 @@ export class LoginService {
   }
 
   logIn(username: string, password: string) {
+    console.log("logIn");
     this.authCreds = btoa(username + ':' + password);
     let headers: Headers = new Headers();
     headers.append('Authorization', 'Basic ' + this.authCreds);
@@ -34,41 +35,41 @@ export class LoginService {
           this.userService.getUser(nickname).subscribe(
             user => {
               this.userLogged = user;
+              // if(this.userLogged.roles.indexOf("ADMIN") > -1){
+              //   this.isAdmin = true;
+              // }
             },
             error => console.log(error)
           );
-          //localStorage.setItem("user", username);
           this.isLogged = true;
           return this.userLogged;
       })
       .catch(error => Observable.throw('Server error'));
   }
 
-  logOut() {
-    let headers: Headers = new Headers();
-    headers.append('Authorization', 'Basic ' + this.authCreds);
-    return this.http.get(BASE_URL + 'logOut', {headers: headers})
-      .map(response => {
-        //localStorage.clear();
-        this.isLogged = false;
-        this.userLogged = null;
-        return true;
-      })
-      .catch(error => Observable.throw('Server error'));
-  }
+  // logOut() {
+  //   console.log("logOut");
+  //   // let headers: Headers = new Headers();
+  //   // headers.append('Authorization', 'Basic ' + this.authCreds);
+  //   return this.http.get(BASE_URL + 'logOut')
+  //     .map(response => {
+  //       this.isLogged = false;
+  //       this.userLogged = null;
+  //       return true;
+  //     })
+  //     .catch(error => Observable.throw('Server error'));
+  // }
 
-  logged(){
-    return this.isLogged;
-
-  }
-
-  /*checkCredentials() {
-    return (localStorage.getItem("user") !== null);
-  }*/
-
-  /*register(firstName: string, lastName1: string, lastName2: string, username: string, password: string, dni: string, email: string, phone: string){
-      let newUser: User;
-      newUser = {name: username, passwordHash: password, dni: dni, firstName: firstName, lastName1: lastName1, lastName2: lastName2, email: email, telephone: phone, hasPhoto: false, viewTelephone: false};
-      return this.http.post(BASE_URL + 'register', newUser);
-  }*/
+  logOut(){
+      console.log("logOut");
+        return this.http.get(BASE_URL + 'logOut')
+        .map(
+            response => {
+                this.userLogged = null;
+                console.log("logOut");
+                this.isLogged = false;
+                console.log("logOut");
+            }
+        );
+    }
 }
