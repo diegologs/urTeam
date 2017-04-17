@@ -29,7 +29,6 @@
     "ng2-page-scroll": "^4.0.0-beta.6",
     "rxjs": "^5.0.1",
     "ts-helpers": "^1.1.1",
-    "typescript": "^2.2.2",
     "zone.js": "^0.7.2"
   },
   "devDependencies": {
@@ -48,6 +47,6 @@
     "protractor": "~4.0.13",
     "ts-node": "1.2.1",
     "tslint": "^4.3.0",
-    "typescript": "~2.0.3"
+    "typescript": "~2.2.0"
   }
 }

@@ -9,9 +9,5 @@ import { User } from '../user/user.model';
 })
 export class NavbarComponent {
 
-    userLogged: User;
-
-    constructor(private sessionService: LoginService, private router: Router) {
-        this.userLogged = sessionService.userLogged;
-  }
+    constructor(private sessionService: LoginService, private router: Router) {}
 }
