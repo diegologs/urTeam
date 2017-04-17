@@ -25,7 +25,7 @@ export class CommunitiesCreate {
 
     imgUrl = "https://localhost:8443/image/event-avatar/aleatorio/default-mainphoto";
 
-    constructor(private router: Router, private service: CommunityService, private sessionService: LoginService) { }
+    constructor(private router: Router, private service: CommunityService) { }
 
     createCommunity() {
 

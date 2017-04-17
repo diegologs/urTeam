@@ -61,6 +61,8 @@ export class CommunityService {
 	}
 
 	
+
+	
 	private handleError(error: any) {
 		console.error(error);
 		return Observable.throw("Server error (" + error.status + "): " + error.text())

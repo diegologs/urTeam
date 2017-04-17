@@ -20,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 import urteam.event.Event;
 import urteam.news.News;
+import urteam.user.User;
 
 
 @RestController
@@ -29,6 +30,9 @@ public class CommunityRestController {
 
 	interface CompleteCommunity extends Community.BasicCommunity, Community.CommunityNews, News.BasicNews{} 
 	interface CompleteNews extends News.BasicNews{} 
+	interface FollowersGroup extends Community.CommunityUsers, User.MinimalUser {
+	}
+	// 
 	
 
 	@Autowired
@@ -161,6 +165,23 @@ public class CommunityRestController {
 
 	}
 
+	
+	@JsonView(FollowersGroup.class)
+	@RequestMapping(value = "/{id}/followers", method = RequestMethod.GET)
+	public ResponseEntity<Community> getfollowers(@PathVariable long id) {
+
+		Community community = service.findOne(id);
+
+	
+
+		if (community != null) {
+			return new ResponseEntity<Community>(community, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Community>(community, HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	
 	@JsonView(CompleteCommunity.class)
 	@RequestMapping(value = "/{id}/followers", method = RequestMethod.PUT)
 	public ResponseEntity<Community> follow(@PathVariable long id) {

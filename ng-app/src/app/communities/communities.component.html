@@ -1,6 +1,8 @@
   <div class="container">
   
-  <div class="btn-groups"><a [routerLink]="['/communities/create']"><button class="btn mybtn-succes">Crear comunidad</button></a></div>
+  <div *ngIf="sessionService.isLogged" class="btn-groups">
+      <a [routerLink]="['/communities/create']"><button class="btn mybtn-succes">Crear comunidad</button></a>
+      </div>
   
   <div *ngFor="let group of communities" >
    

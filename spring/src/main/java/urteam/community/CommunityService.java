@@ -258,5 +258,10 @@ public class CommunityService {
 		}
 	}
 
+	public List<User> getfollowers(Community community) {
+		return community.getUsers_IDs();
+		
+	}
+
 
 }
