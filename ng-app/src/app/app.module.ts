@@ -26,8 +26,9 @@ import { UserService } from './user/user.service';
 
 import { LoginComponent } from './login/login.component';
 import { LoginService } from './login/login.service';
+import { HttpClient } from "./HttpClient/httpClient";
 
-import { HttpClient } from './httpClient/httpClient';
+
 
 
 @NgModule({

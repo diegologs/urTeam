@@ -6,13 +6,15 @@ import 'rxjs/Rx';
 import { Community } from './community.model';
 import { News } from "app/news/news.model";
 
+import { HttpClient } from '../HttpClient/httpClient';
+
 
 const BASE_URL = 'https://localhost:8443/api/groups/';
 
 @Injectable()
 export class CommunityService {
 
-	constructor(private http: Http) { }
+	constructor(private http: HttpClient) { }
 
 	
 	getGroups(page: number) {
@@ -30,7 +32,7 @@ export class CommunityService {
 	
 
 	createGroup(community: Community) {
-		return this.http.post(BASE_URL, community, null)
+		return this.http.post(BASE_URL, community)
 			.map(response => response.json())
 			.catch(error => this.handleError(error));
 	}
@@ -54,7 +56,7 @@ export class CommunityService {
 	}
 
 	unfollowGroup(id: number | string){
-		return this.http.delete(BASE_URL + id, null)
+		return this.http.delete(BASE_URL + id)
             .map(response => response.json())
             .catch(error => this.handleError(error));
 	}

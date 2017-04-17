@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 
 import { Event } from './events.model';
-import { HttpClient } from '../httpClient/httpClient';
+import { HttpClient } from '../HttpClient/httpClient';
 
 
 const BASE_URL = 'https://localhost:8443/api/events/';

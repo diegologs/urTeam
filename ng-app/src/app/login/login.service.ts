@@ -5,7 +5,7 @@ import { Http, Headers } from '@angular/http';
 
 import { User } from '../user/user.model';
 import { UserService } from '../user/user.service';
-import { HttpClient } from '../httpClient/httpClient';
+import { HttpClient } from '../HttpClient/httpClient';
 
 import 'rxjs/Rx';
 
