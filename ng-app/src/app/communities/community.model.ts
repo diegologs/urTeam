@@ -3,14 +3,15 @@ import { News } from "app/news/news.model";
 
 export interface Community {
     id?: number;
-	groupId: string;
+	groupId?: string;
 	name: string;
     sport: string;
     info: string;
-    country: string;
+    country?: string;
     city: string;
     main_photo: string;
-    owner_id: string;
-    communityUsers: User[];
-    news: News[];
+    owner_id?: User;
+    communityUsers?: User[];
+    news?: News[];
 }
+

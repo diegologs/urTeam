@@ -30,7 +30,7 @@ export class CommunityService {
 	
 
 	createGroup(community: Community) {
-		return this.http.post(BASE_URL, community)
+		return this.http.post(BASE_URL, community, null)
 			.map(response => response.json())
 			.catch(error => this.handleError(error));
 	}

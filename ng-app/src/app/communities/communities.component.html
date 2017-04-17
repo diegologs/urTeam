@@ -1,5 +1,9 @@
   <div class="container">
+  
+  <div class="btn-groups"><a [routerLink]="['/communities/create']"><button class="btn mybtn-succes">Crear comunidad</button></a></div>
+  
   <div *ngFor="let group of communities" >
+   
      <a href="group.html" [routerLink]="['/communities', group.id]">
             <div class="row group">
                 <div class="group-info">

@@ -16,6 +16,7 @@ import { EventService} from './events/events.service';
 import { EventDetailComponent} from './events/event-detail.component';
 
 import { CommunitiesComponent } from './communities/communities.component';
+import { CommunitiesCreate } from './communities/communities-create.component';
 import { CommunityDetailComponent } from './communities/communities-detail.component';
 import { CommunityService} from './communities/communities.service';
 
@@ -29,7 +30,7 @@ import { LoginService } from './login/login.service';
 @NgModule({
   declarations: [
     AppComponent, NavbarComponent, FooterComponent, HomeComponent, EventsComponent, EventDetailComponent,
-    CommunitiesComponent,CommunityDetailComponent, UserComponent, LoginComponent
+    CommunitiesComponent,CommunityDetailComponent,CommunitiesCreate, UserComponent, LoginComponent
   ],
   imports: [
     BrowserModule,
