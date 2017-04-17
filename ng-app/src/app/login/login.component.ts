@@ -11,8 +11,7 @@ import { User } from '../user/user.model';
 export class LoginComponent{
 
   private userLogged:User;
-
-
+  
   constructor(private sessionService: LoginService, private router: Router) {
   }
 

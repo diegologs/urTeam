@@ -13,7 +13,7 @@ const BASE_URL = 'https://localhost:8443/api/';
 @Injectable()
 export class LoginService {
 
-  user: User;
+  userLogged: User;
   authCreds: string;
   isLogged = false;
   isAdmin = false;
@@ -26,22 +26,20 @@ export class LoginService {
     let headers: Headers = new Headers();
     headers.append('Authorization', 'Basic ' + this.authCreds);
 
-    return this.http.get(BASE_URL, {headers: headers})
+    return this.http.get(BASE_URL + 'logIn', {headers: headers})
       .map(
         response => {
-          let id = response.json().id;
+          let nickname = response.json().nickname;
           this.userService.setAuthHeaders(this.authCreds);
-          this.userService.getUser(id).subscribe(
+          this.userService.getUser(nickname).subscribe(
             user => {
-              this.user = user;
-/*              if (this.user.roles.include('ROLE_ADMIN', 0) )
-                this.isAdmin = true;*/
+              this.userLogged = user;
             },
             error => console.log(error)
           );
-          localStorage.setItem("user", username);
+          //localStorage.setItem("user", username);
           this.isLogged = true;
-          return this.user;
+          return this.userLogged;
       })
       .catch(error => Observable.throw('Server error'));
   }
@@ -51,17 +49,22 @@ export class LoginService {
     headers.append('Authorization', 'Basic ' + this.authCreds);
     return this.http.get(BASE_URL + 'logOut', {headers: headers})
       .map(response => {
-        localStorage.clear();
+        //localStorage.clear();
         this.isLogged = false;
-        this.user = null;
+        this.userLogged = null;
         return true;
       })
       .catch(error => Observable.throw('Server error'));
   }
 
-  checkCredentials() {
-    return (localStorage.getItem("user") !== null);
+  logged(){
+    return this.isLogged;
+
   }
+
+  /*checkCredentials() {
+    return (localStorage.getItem("user") !== null);
+  }*/
 
   /*register(firstName: string, lastName1: string, lastName2: string, username: string, password: string, dni: string, email: string, phone: string){
       let newUser: User;
