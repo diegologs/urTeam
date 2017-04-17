@@ -12,12 +12,12 @@ body {
 
 a{
 	color: grey;
-	texto-decoration: none;
+	text-decoration: none;
 	
 }
 a:hover{
 	color: grey;
-	texto-decoration: underline;
+	text-decoration: underline;
 }
 
 .container {

@@ -37,6 +37,8 @@ export class CommunitiesCreate {
             error => console.error(error)
         );
 
+        this.router.navigateByUrl('/communities');
+
     }
 
 

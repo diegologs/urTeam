@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 
 import { Event } from './events.model';
+import { HttpClient } from '../httpClient/httpClient';
 
 
 const BASE_URL = 'https://localhost:8443/api/events/';
@@ -11,7 +12,7 @@ const BASE_URL = 'https://localhost:8443/api/events/';
 @Injectable()
 export class EventService {
 
-	constructor(private http: Http) { }
+	constructor(private http: HttpClient) { }
 
 	getEvents(page: number) {
 		return this.http.get(BASE_URL + "?page=" + page +"&size=6")
@@ -31,7 +32,7 @@ export class EventService {
 			.catch(error => this.handleError(error));
 	}
 
-	createEvent(event: Event, start_date: string, end_date: string) {
+	createEvent(event: Event) {
 		return this.http.post(BASE_URL, event)
 			.map(response => response.json())
 			.catch(error => this.handleError(error));

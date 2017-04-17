@@ -14,6 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { EventsComponent } from './events/events.component';
 import { EventService} from './events/events.service';
 import { EventDetailComponent} from './events/event-detail.component';
+import { EventCreateComponent } from './events/event-create.component';
 
 import { CommunitiesComponent } from './communities/communities.component';
 import { CommunitiesCreate } from './communities/communities-create.component';
@@ -26,11 +27,14 @@ import { UserService } from './user/user.service';
 import { LoginComponent } from './login/login.component';
 import { LoginService } from './login/login.service';
 
+import { HttpClient } from './httpClient/httpClient';
+
 
 @NgModule({
   declarations: [
     AppComponent, NavbarComponent, FooterComponent, HomeComponent, EventsComponent, EventDetailComponent,
-    CommunitiesComponent,CommunityDetailComponent,CommunitiesCreate, UserComponent, LoginComponent
+    CommunitiesComponent,CommunityDetailComponent,CommunitiesCreate, UserComponent, LoginComponent,EventCreateComponent
+
   ],
   imports: [
     BrowserModule,
@@ -40,7 +44,7 @@ import { LoginService } from './login/login.service';
     routing,
     Ng2PageScrollModule.forRoot()
   ],
-  providers: [EventService, CommunityService , LoginService, UserService],
+  providers: [EventService, CommunityService , LoginService, UserService,HttpClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

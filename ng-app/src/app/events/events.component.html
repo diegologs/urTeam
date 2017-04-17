@@ -2,6 +2,18 @@
   <div class="row">
     <div class="content">
       <div class="col-sm-12">
+        <br>
+        <br>
+        <!--<div *ngIf="sessionService.isLogged" class="btn-events">
+          <a [routerLink]="['/events/add']" class="btn mybtn-succes">Crear evento</a>
+        </div>-->
+        <div class="btn-groups">
+          <a [routerLink]="['/create']">
+          <button class="btn mybtn-succes">Crear Evento</button>
+          </a>
+        </div>
+        <br>
+        <br>
         <div class="col-sm-4" *ngFor="let event of events">
           <div class="panel panel-primary event-primary">
             <div class="panel-heading">
@@ -50,3 +62,7 @@
     </div>
   </div>
 </div>
+<br>
+<br>
+<br>
+<br>

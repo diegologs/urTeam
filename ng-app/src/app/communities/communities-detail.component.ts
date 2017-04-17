@@ -77,5 +77,15 @@ export class CommunityDetailComponent{
   }
 
 
+  unfollowGroup(){
+     this.service.followGroup(this.communityID).subscribe(
+          community => console.log(community),
+          error => console.error(error)
+
+     );
+
+  }
+
+
 
 }
