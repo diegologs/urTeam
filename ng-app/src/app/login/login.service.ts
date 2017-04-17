@@ -5,10 +5,12 @@ import { Http, Headers } from '@angular/http';
 
 import { User } from '../user/user.model';
 import { UserService } from '../user/user.service';
+import { HttpClient } from '../httpClient/httpClient';
 
 import 'rxjs/Rx';
 
-const BASE_URL = 'https://localhost:8443/api/';
+const BASE_URL_Login = 'https://localhost:8443/api/logIn';
+const BASE_URL_Logout = 'https://localhost:8443/api/logOut';
 
 @Injectable()
 export class LoginService {
@@ -18,31 +20,41 @@ export class LoginService {
   isLogged = false;
   isAdmin = false;
 
-  constructor(private http: Http, private userService: UserService) {
+  constructor(private http: HttpClient, private userService: UserService) {
+  }
+
+  private generateAuthString(username: String, password: String) {
+        return "Basic " + btoa(username + ":" + password);
   }
 
   logIn(username: string, password: string) {
     console.log("logIn");
-    this.authCreds = btoa(username + ':' + password);
-    let headers: Headers = new Headers();
-    headers.append('Authorization', 'Basic ' + this.authCreds);
+    // this.authCreds = btoa(username + ':' + password);
+    // let headers: Headers = new Headers();
+    // headers.append('Authorization', 'Basic ' + this.authCreds);
+    this.http.sessionData.authToken = this.generateAuthString(username,password);
+    this.http.sessionData.isLogged = true;
 
-    return this.http.get(BASE_URL + 'logIn', {headers: headers})
-      .map(
+    return this.http.get(BASE_URL_Login).map(
         response => {
-          let nickname = response.json().nickname;
-          this.userService.setAuthHeaders(this.authCreds);
-          this.userService.getUser(nickname).subscribe(
+          // let nickname = response.json().nickname;
+          // this.userService.setAuthHeaders(this.authCreds);
+          this.userService.getUser(username).subscribe(
             user => {
-              this.userLogged = user;
-              // if(this.userLogged.roles.indexOf("ADMIN") > -1){
-              //   this.isAdmin = true;
+              this.http.sessionData.userLogged = user;
+              this.http.sessionData.isLogged = true;
+              // if(this.http.sessionData.userLogged.roles.indexOf("ADMIN") > -1){
+              //   this.http.sessionData.isAdmin = true;
               // }
             },
-            error => console.log(error)
+            error =>{
+              console.log(error)
+              this.http.sessionData.isLogged = false;
+            } 
+            
           );
           this.isLogged = true;
-          return this.userLogged;
+          //return this.userLogged;
       })
       .catch(error => Observable.throw('Server error'));
   }
@@ -62,7 +74,7 @@ export class LoginService {
 
   logOut(){
       console.log("logOut");
-        return this.http.get(BASE_URL + 'logOut')
+        return this.http.get(BASE_URL_Logout)
         .map(
             response => {
                 this.userLogged = null;
@@ -72,4 +84,16 @@ export class LoginService {
             }
         );
     }
+
+    public getisLogged() {
+        return this.http.sessionData.isLogged;
+    }
+
+    public getisAdmin() {
+        return this.getisLogged() && this.http.sessionData.isAdmin;
+    }
+
+    public getUser() {
+        return this.http.sessionData.userLogged;
+  }
 }

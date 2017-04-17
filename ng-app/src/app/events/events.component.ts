@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { EventService } from './events.service';
+import { LoginService } from '../login/login.service';
 
 @Component({
   selector: 'events',
@@ -17,7 +18,7 @@ export class EventsComponent implements OnInit {
 
   imgUrl = "https://localhost:8443/image/event-avatar/aleatorio/default-mainphoto";
 
-  constructor(private router: Router, private service: EventService) { }
+  constructor(private router: Router, private service: EventService, private sessionService: LoginService) { }
 
   ngOnInit() {
     this.eventsPage = 0;

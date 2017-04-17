@@ -1,0 +1,55 @@
+<div class="container">
+        <div class="form-container">
+            <form class="form-group" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="eventName">Nombre del evento *</label>
+                    <input #name type="text" class="form-control" name="name" required="required" placeholder="Nombre" maxlength="21">
+                </div>
+                <div class="form-group">
+                    <label for="eventLoc">Ubicación del evento *</label>
+                    <input #place type="text" class="form-control" name="place" required="required" placeholder="Ubicación">
+                </div>
+                <div class="form-group">
+                    <label for="eventPrice">Precio del evento *</label>
+                    <input #price type="number" class="form-control" name="price" required="required" placeholder="EUR">
+                </div>
+                        
+                 <div class="form-group">
+                    <label for="eventRangeStart">Inicio y fin del evento *</label>
+                    <div class="input-daterange input-group" id="datepicker">
+                        <input #startDate class="input-sm form-control" name="start_date" type="date" required="required">
+                        <span class="input-group-addon"> a </span>
+                        <input #endDate class="input-sm form-control" name="end_date" type="date" required="required">
+                    </div>
+                </div> 
+                
+                <div class="form-group">
+                    <label for="sportSelect">Deporte *</label>
+                    <select #sport class="form-control" name="sport"required="required">
+                      <option>Mountain Bike</option>
+                      <option>Running</option>
+                      <option>Roller</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="eventDesc">Descripcion del evento</label>
+                    <textarea #info class="form-control" name="info" rows="4"></textarea>
+                </div>
+               
+                <div class="form-group">
+                    <label for="eventImage">Imagen *</label>
+                    <input type="file" class="form-control-file" name="file" aria-describedby="fileHelp">
+                    <small id="fileHelp" class="form-text text-muted">Tamaño recomendado 200px x 200px</small>
+                </div>     
+                <div style="text-align:center;">
+                    <input type="submit" class="btn btn-primary btn-form" 
+                    value="Crear evento" (click)="eventcreate(name.value,place.value,price.value,startDate.value,endDate.value,sport.value,info.value)"/>
+                </div>
+            </form>
+        </div>
+    </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="../../assets/js/bootstrap.min.js"></script>
+<script src="../../assets/js/bootstrap-datepicker.min.js"></script>
+<script src="../../assets/js/bootstrap-datepicker.es.min.js"></script>
+<script src="../../assets/js/urTeam-datepicker.js"></script>

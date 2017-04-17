@@ -3,6 +3,7 @@ import { HomeComponent } from './home/home.component';
 
 import { EventsComponent } from './events/events.component';
 import { EventDetailComponent } from './events/event-detail.component';
+import { EventCreateComponent } from './events/event-create.component';
 
 
 import { CommunitiesComponent } from './communities/communities.component';
@@ -16,6 +17,7 @@ const appRoutes = [
     { path: 'home', component: HomeComponent },
     { path: 'events', component: EventsComponent },
     { path: 'events/:id', component: EventDetailComponent },
+    { path: 'create', component: EventCreateComponent },
     { path: 'communities', component: CommunitiesComponent },
     { path: 'communities/:id', component: CommunityDetailComponent },
     { path: 'login', component: LoginComponent },
