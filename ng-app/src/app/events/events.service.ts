@@ -26,6 +26,12 @@ export class EventService {
 			.catch(error => this.handleError(error));
 	}
 
+	getEventsBySport(sport: string){
+		return this.http.get(BASE_URL + "sport/" + sport + "?page=0&size=3")
+		.map(response => response.json())
+			.catch(error => this.handleError(error));
+	}
+
 	getEventMember(id: number | string) {
 		return this.http.get(BASE_URL + id + '/members')
 			.map(response => response.json())

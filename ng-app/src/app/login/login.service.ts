@@ -15,10 +15,10 @@ const BASE_URL_Logout = 'https://localhost:8443/api/logOut';
 @Injectable()
 export class LoginService {
 
-  userLogged: User;
-  authCreds: string;
-  isLogged = false;
-  isAdmin = false;
+  //userLogged: User;
+  //authCreds: string;
+  //isLogged = false;
+  //isAdmin = false;
 
   constructor(private http: HttpClient, private userService: UserService) {
   }
@@ -53,7 +53,10 @@ export class LoginService {
             } 
             
           );
-          this.isLogged = true;
+          //this.isLogged = true;
+          //this.http.sessionData.isLogged = true;
+          //this.userLogged = this.http.sessionData.userLogged;
+
           //return this.userLogged;
       })
       .catch(error => Observable.throw('Server error'));
@@ -73,14 +76,16 @@ export class LoginService {
   // }
 
   logOut(){
-      console.log("logOut");
+        console.log("logOut");
         return this.http.get(BASE_URL_Logout)
         .map(
             response => {
-                this.userLogged = null;
+                this.http.sessionData.userLogged = null;
                 console.log("logOut");
-                this.isLogged = false;
+                console.log(this.http.sessionData.userLogged);
+                this.http.sessionData.isLogged = false;
                 console.log("logOut");
+                console.log( this.http.sessionData.isLogged);
             }
         );
     }

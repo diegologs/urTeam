@@ -4,11 +4,8 @@
       <div class="col-sm-12">
         <br>
         <br>
-        <!--<div *ngIf="sessionService.isLogged" class="btn-events">
-          <a [routerLink]="['/events/add']" class="btn mybtn-succes">Crear evento</a>
-        </div>-->
-        <div class="btn-groups">
-          <a [routerLink]="['/create']">
+        <div *ngIf="sessionService.getisLogged()" class="btn-groups">
+          <a [routerLink]="['/events/create']">
           <button class="btn mybtn-succes">Crear Evento</button>
           </a>
         </div>

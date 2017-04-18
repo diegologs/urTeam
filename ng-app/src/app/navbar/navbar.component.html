@@ -47,31 +47,30 @@
       <li><a [routerLink]="['/events']">Eventos</a></li>
       <li><a [routerLink]="['/communities']">Comunidades</a></li>
     </ul>
-    <ul *ngIf="!sessionService.isLogged" class="nav navbar-nav navbar-right minav">
+    <ul *ngIf="!sessionService.getisLogged()" class="nav navbar-nav navbar-right minav">
       <li>
         <a [routerLink]="['/login']">Iniciar Sesión / Registro</a>
       </li>
     </ul>
 
-    <ul *ngIf="sessionService.isLogged" class="nav navbar-nav navbar-right minav">
+    <ul *ngIf="sessionService.getisLogged()" class="nav navbar-nav navbar-right minav">
       <li class="dropdown active">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
           <span class="user-name">Hola, {{sessionService.getUser()?.nickname}} </span> <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
           <li>
-            <div class="navbar-content">
-              <!--<a [routerLink]="['/users/user1']">Mi perfil,{{sessionService.userLogged?.nickname | async }}</a>-->
-              <!--<a [routerLink]="['/users', sessionService.userLogged?.nickname]">Mi perfil
+            <div *ngIf="sessionService.getUser()" class="navbar-content">
+              <a [routerLink]="['/users/',sessionService.getUser().nickname]">Mi perfil
 							<div class="divider"></div>
-						</a>-->
+						</a>
             </div>
           </li>
           <li>
             <div class="form-group">
               <div class="row">
                 <div class="col-sm-6 col-sm-offset-3">
-                  <input type="submit" name="logout-submit" id="logout-submit" class="form-control btn btn-login" value="Log Out" (click)="sessionService.logOut()">
+                  <input type="submit" name="logout-submit" id="logout-submit" class="btn mybtn-succes" value="Log Out" (click)="logOut()">
                 </div>
               </div>
             </div>
@@ -79,9 +78,5 @@
         </ul>
       </li>
     </ul>
-
-
-
-
   </div>
 </nav>

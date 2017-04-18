@@ -4,13 +4,13 @@ export class Event {
     id?: number;
 	eventId: string;
     constructor(
-        name: string,
-        sport: string,
-        price: number,
-        info: string,
-        place: string,
-        start_date: string,
-        end_date: string,
+        public name: string,
+        public sport: string,
+        public price: number,
+        public info: string,
+        public place: string,
+        public start_date: string,
+        public end_date: string,
        
     ){}
     main_photo: string;

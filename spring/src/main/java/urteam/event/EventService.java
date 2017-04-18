@@ -36,6 +36,10 @@ public class EventService {
 		return eventRepo.findAll(pageable);
 	}
 
+	public Page<Event> findBySport(String sport, Pageable pageable) {
+		return eventRepo.findBySport(sport, pageable);
+	}
+
 	public Page<Event> findAll(PageRequest pageRequest) {
 		return eventRepo.findAll(pageRequest);
 	}
@@ -44,14 +48,16 @@ public class EventService {
 		eventRepo.save(event);
 	}
 
-	public void save(User user, Event event, MultipartFile file, String start_date, String end_date) {
+	public void save(User user, Event event, MultipartFile file,String start_date, String end_date) {
 		// Crear evento
 		try {
 			event.setOwner_id(user);
-			Date final_start_date = new SimpleDateFormat("dd/MM/yyyy").parse(start_date);
-			event.setStart_date(final_start_date);
-			Date final_end_date = new SimpleDateFormat("dd/MM/yyyy").parse(end_date);
-			event.setEnd_date(final_end_date);
+//			String fakeStart = event.getStart_date().toString();
+//			String fakeEnd = event.getEnd_date().toString();
+//			Date final_start_date = new SimpleDateFormat().parse(fakeStart);
+//			event.setStart_date(final_start_date);
+//			Date final_end_date = new SimpleDateFormat().parse(fakeEnd);
+//			event.setEnd_date(final_end_date);
 			Calendar cal = toCalendar(event.getStart_date());
 			event.setDay_date(cal.get(Calendar.DAY_OF_MONTH));
 			event.setMonth_date(cal.get(Calendar.MONTH));
