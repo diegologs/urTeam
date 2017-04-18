@@ -36,6 +36,10 @@ public class EventService {
 		return eventRepo.findAll(pageable);
 	}
 
+	public Page<Event> findBySport(String sport, Pageable pageable) {
+		return eventRepo.findBySport(sport, pageable);
+	}
+
 	public Page<Event> findAll(PageRequest pageRequest) {
 		return eventRepo.findAll(pageRequest);
 	}
