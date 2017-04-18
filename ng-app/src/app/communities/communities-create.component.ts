@@ -20,7 +20,9 @@ export class CommunitiesCreate {
     groupCity: string;
     community: Community;
 
+
     private userLogged:User;
+    
 
 
     imgUrl = "https://localhost:8443/image/event-avatar/aleatorio/default-mainphoto";

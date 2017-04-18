@@ -28,9 +28,9 @@ import urteam.user.User;
 public class CommunityRestController {
 
 
-	interface CompleteCommunity extends Community.BasicCommunity, Community.CommunityNews, News.BasicNews{} 
+	 
 	interface CompleteNews extends News.BasicNews{} 
-	interface FollowersGroup extends Community.CommunityUsers, User.MinimalUser {
+	interface CompleteCommunity extends Community.BasicCommunity, Community.CommunityUsers, Community.CommunityNews, User.MinimalUser {
 	}
 	// 
 	
@@ -166,7 +166,7 @@ public class CommunityRestController {
 	}
 
 	
-	@JsonView(FollowersGroup.class)
+	@JsonView(CompleteCommunity.class)
 	@RequestMapping(value = "/{id}/followers", method = RequestMethod.GET)
 	public ResponseEntity<Community> getfollowers(@PathVariable long id) {
 
