@@ -50,13 +50,13 @@ export class CommunityService {
 	}
 
 	followGroup(id: number | string){
-		return this.http.put(BASE_URL + id, null)
+		return this.http.put(BASE_URL + id + '/followers', null)
             .map(response => response.json())
             .catch(error => this.handleError(error));
 	}
 
 	unfollowGroup(id: number | string){
-		return this.http.delete(BASE_URL + id)
+		return this.http.delete(BASE_URL + id + '/followers')
             .map(response => response.json())
             .catch(error => this.handleError(error));
 	}
