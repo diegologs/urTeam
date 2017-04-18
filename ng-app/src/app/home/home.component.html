@@ -1,34 +1,151 @@
 <div class="video-box">
   <div id="video-container">
-      <div class="container">
-          <br>
-          <br>
-          <img alt="urTeam" src="../../assets/images/logo.png" width="250px">
-          <hr>
-          <h3>Conecta con comunidades y eventos de tus deportes favoritos</h3>
-      </div>
+    <div class="container">
+      <br>
+      <br>
+      <img alt="urTeam" src="../../assets/images/logo.png" width="250px">
+      <hr>
+      <h3>Conecta con comunidades y eventos de tus deportes favoritos</h3>
+    </div>
   </div>
 </div>
 <div class="container">
   <h2 class="sport_title">
-    <i class="fa fa-bicycle" aria-hidden="true" style="color:#c5c0c1;"></i>
-     Mountain Bike 
+    <i class="fa fa-bicycle" aria-hidden="true" style="color:#c5c0c1;"></i> Mountain Bike
   </h2>
   <hr class="hr-yellow">
-  Aqui eventos
+  <div class="col-sm-4" *ngFor="let event of events1">
+    <div class="panel panel-primary event-primary">
+      <div class="panel-heading">
+        <div class="row nopadding">
+          <div class="col-sm-9 nopadding">
+            <span class="name">{{event.name}}</span>
+          </div>
+          <div class="col-sm-3 nopadding">
+            <span class="year">{{event.year_date}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="panel-body nopadding">
+        <p>{{event.sport}}</p>
+        <img [src]="imgUrl" alt="{{event.name}}" class="img-responsive" />
+        <div class="row nopadding">
+          <div class="col-sm-6 nopadding">
+            <time class="start blue">
+              Fecha
+              <span class="day">{{event.day_date}}</span>
+              <span class="month">{{event.month_date}}</span>
+            </time>
+          </div>
+          <div class="col-sm-6 nopadding">
+            <time class="end blue">
+              Precio <span class="day">{{event.price}}</span>
+              <span class="month">€</span>
+            </time>
+          </div>
+        </div>
+      </div>
+      <div class="panel-footer panel-primary">
+        <div class="infoBox">
+          <p>
+            {{event.info}}
+          </p>
+        </div>
+        <a [routerLink]="['/events', event.id]" class="btn btn-success mybtn-succes">Más información</a>
+      </div>
+    </div>
+  </div>
   <br>
   <h2 class="sport_title">
-    <i class="fa fa-bicycle" aria-hidden="true" style="color:#c5c0c1;"></i>
-     Running 
+    <i class="fa fa-bicycle" aria-hidden="true" style="color:#c5c0c1;"></i> Running
   </h2>
   <hr class="hr-yellow">
-  Aqui eventos
-    <br>
+  <div class="col-sm-4" *ngFor="let event of events2">
+    <div class="panel panel-primary event-primary">
+      <div class="panel-heading">
+        <div class="row nopadding">
+          <div class="col-sm-9 nopadding">
+            <span class="name">{{event.name}}</span>
+          </div>
+          <div class="col-sm-3 nopadding">
+            <span class="year">{{event.year_date}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="panel-body nopadding">
+        <p>{{event.sport}}</p>
+        <img [src]="imgUrl" alt="{{event.name}}" class="img-responsive" />
+        <div class="row nopadding">
+          <div class="col-sm-6 nopadding">
+            <time class="start blue">
+              Fecha
+              <span class="day">{{event.day_date}}</span>
+              <span class="month">{{event.month_date}}</span>
+            </time>
+          </div>
+          <div class="col-sm-6 nopadding">
+            <time class="end blue">
+              Precio <span class="day">{{event.price}}</span>
+              <span class="month">€</span>
+            </time>
+          </div>
+        </div>
+      </div>
+      <div class="panel-footer panel-primary">
+        <div class="infoBox">
+          <p>
+            {{event.info}}
+          </p>
+        </div>
+        <a [routerLink]="['/events', event.id]" class="btn btn-success mybtn-succes">Más información</a>
+      </div>
+    </div>
+  </div>
+  <br>
   <h2 class="sport_title">
-    <i class="fa fa-bicycle" aria-hidden="true" style="color:#c5c0c1;"></i>
-     Roller 
+    <i class="fa fa-bicycle" aria-hidden="true" style="color:#c5c0c1;"></i> Roller
   </h2>
   <hr class="hr-yellow">
-  Aqui eventos
+  <div class="col-sm-4" *ngFor="let event of events3">
+    <div class="panel panel-primary event-primary">
+      <div class="panel-heading">
+        <div class="row nopadding">
+          <div class="col-sm-9 nopadding">
+            <span class="name">{{event.name}}</span>
+          </div>
+          <div class="col-sm-3 nopadding">
+            <span class="year">{{event.year_date}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="panel-body nopadding">
+        <p>{{event.sport}}</p>
+        <img [src]="imgUrl" alt="{{event.name}}" class="img-responsive" />
+        <div class="row nopadding">
+          <div class="col-sm-6 nopadding">
+            <time class="start blue">
+              Fecha
+              <span class="day">{{event.day_date}}</span>
+              <span class="month">{{event.month_date}}</span>
+            </time>
+          </div>
+          <div class="col-sm-6 nopadding">
+            <time class="end blue">
+              Precio <span class="day">{{event.price}}</span>
+              <span class="month">€</span>
+            </time>
+          </div>
+        </div>
+      </div>
+      <div class="panel-footer panel-primary">
+        <div class="infoBox">
+          <p>
+            {{event.info}}
+          </p>
+        </div>
+        <a [routerLink]="['/events', event.id]" class="btn btn-success mybtn-succes">Más información</a>
+      </div>
+    </div>
+  </div>
   <br>
 </div>
