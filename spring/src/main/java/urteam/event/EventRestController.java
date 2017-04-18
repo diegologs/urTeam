@@ -29,7 +29,7 @@ import urteam.user.UserService;
 @RequestMapping("/api/events")
 public class EventRestController {
 
-	interface CompleteEvent extends Event.BasicEvent,Event.MembersEvent {
+	interface CompleteEvent extends Event.BasicEvent,Event.MembersEvent,User.MinimalUser {
 	}
 
 	interface FollowersEvent extends Event.MembersEvent, User.MinimalUser {
