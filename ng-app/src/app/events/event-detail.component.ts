@@ -12,7 +12,6 @@ export class EventDetailComponent{
 
   event: Event;
 
-
   constructor(private router:Router, activatedRoute: ActivatedRoute, private service: EventService){
       let id = activatedRoute.snapshot.params['id'];
       service.getEvent(id).subscribe(
@@ -22,6 +21,4 @@ export class EventDetailComponent{
           error => console.error(error)
       );
   }
-
-
 }

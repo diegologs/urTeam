@@ -42,14 +42,10 @@
   <!-- EVENT BAR -->
   <div class="row nav">
     <div class="col-md-12 col-xs-12">
-      <div class="col-md-4 col-xs-3 well" data-toggle="modal" data-target="#myModalEventMembers">
-         <i class="fa fa-users" aria-hidden="true"></i> {{event.participants_IDs.length}} Miembros
+      <div *ngIf="event.participants_IDs" class="col-md-4 col-xs-3 well" data-toggle="modal" data-target="#myModalEventMembers">
+         <!--<i class="fa fa-users" aria-hidden="true"></i> {{event.participants_IDs.length}}-->
+          Miembros
       </div>
-      <!-- 
-                <div class="col-md-3 col-xs-3 well">
-                    <i class="fa fa-thumbs-o-up fa-lg"></i> 26
-                </div>
- 				-->
       <div class="col-md-4 col-xs-3 well">
         {{event.price}} <i class="fa fa-eur fa-lg"></i>
       </div>
@@ -210,16 +206,9 @@
       </div>
       <div class="modal-body">
         <ul>
-          <li *ngFor="let member of event.participants_IDs">
-           <i class="fa fa-user-circle" aria-hidden="true"></i><p>{{member.nickname}}</p>
-          </li>
-          <!--
-          {{#event.participants_IDs}}
-          <li><i class="fa fa-user-circle" aria-hidden="true"></i>
-            
-						<a href="/user/{{nickname}}">{{nickname}}</a></li>
-						{{/event.participants_IDs}}
-                        -->
+          <!--<li *ngFor="let member of event.participants_IDs">
+           <i *ngIf="member" class="fa fa-user-circle" aria-hidden="true"></i><p>{{member.nickname}}</p>
+          </li>-->
         </ul>
       </div>
     </div>
