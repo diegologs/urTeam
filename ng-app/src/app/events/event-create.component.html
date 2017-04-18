@@ -43,7 +43,7 @@
                 </div>     
                 <div style="text-align:center;">
                     <input type="submit" class="btn btn-primary btn-form" 
-                    value="Crear evento" (click)="eventcreate(name.value,place.value,price.value,startDate.value,endDate.value,sport.value,info.value)"/>
+                    value="Crear evento" (click)="eventcreate(name.value,place.value,price.value,startDate.value,endDate.value,sport.value,info.value)" [routerLink]="['/events']"/>
                 </div>
             </form>
         </div>

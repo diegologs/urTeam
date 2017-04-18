@@ -10,4 +10,8 @@ import { User } from '../user/user.model';
 export class NavbarComponent {
 
     constructor(private sessionService: LoginService, private router: Router) {}
+
+    logOut(){
+        this.sessionService.logOut().subscribe()
+    }
 }

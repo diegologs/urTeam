@@ -17,8 +17,8 @@ import { CommunitiesCreate } from "app/communities/communities-create.component"
 const appRoutes = [
     { path: 'home', component: HomeComponent },
     { path: 'events', component: EventsComponent },
+    { path: 'events/create', component: EventCreateComponent },
     { path: 'events/:id', component: EventDetailComponent },
-    { path: 'create', component: EventCreateComponent },
     { path: 'communities', component: CommunitiesComponent },
     { path: 'communities/create', component: CommunitiesCreate },
     { path: 'communities/:id', component: CommunityDetailComponent },
