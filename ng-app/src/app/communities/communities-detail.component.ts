@@ -13,7 +13,7 @@ import { User } from "app/user/user.model";
   templateUrl: './communities-detail.component.html',
   styleUrls: ['./communities-detail.component.css']
 })
-export class CommunityDetailComponent implements AfterViewChecked {
+export class CommunityDetailComponent {
 
 
 
@@ -24,11 +24,11 @@ export class CommunityDetailComponent implements AfterViewChecked {
   groupInfo = "AAA"
   groupCity = "toledo"
   groupSport = "Running"
-  groupUsers: User[] = new Array(1);
+  groupUsers: User[];
 
   imgUrl = "https://localhost:8443/image/event-avatar/aleatorio/default-mainphoto";
 
-  community: Community = { name: this.groupName, info: this.groupInfo, city: this.groupCity, main_photo: this.imgUrl, sport: this.groupSport, communityUsers: this.groupUsers }
+  community: Community;
 
   info: string;
 
@@ -48,33 +48,27 @@ export class CommunityDetailComponent implements AfterViewChecked {
   communityID: number;
 
   constructor(private router: Router, activatedRoute: ActivatedRoute, private service: CommunityService, private sessionService: LoginService) {
+    this.isFollowing = false;
+    this.login = false;
     let id = activatedRoute.snapshot.params['id'];
     this.communityID = id;
     service.getGroup(id).subscribe(
+      
       community => this.community = community,
-      error => console.error(error)
+      error => console.error(error),
+      () => this.checkFollowers()
 
     );
 
-    this.sessionService.userLogged = { generatedId: "user", username: "user", surname: "user", nickname: "user", email: "user", country: "spain" };
+    this.groupUsers = [];
+    this.community = { name: this.groupName, info: this.groupInfo, city: this.groupCity, main_photo: this.imgUrl, sport: this.groupSport, communityUsers: this.groupUsers };
+
 
   }
 
-  ngAfterViewChecked(): void {
-    for (let follower of this.community.communityUsers) {
-      console.log(follower);
+    
+  
 
-
-      if (follower === this.sessionService.userLogged) {
-
-        this.login = true;
-        if (this.sessionService.isLogged) {
-
-          this.isFollowing = true;
-        }
-      }
-    }
-  }
 
 
   editInfo() {
@@ -118,7 +112,7 @@ export class CommunityDetailComponent implements AfterViewChecked {
 
 
   unfollowGroup() {
-    this.service.followGroup(this.communityID).subscribe(
+    this.service.unfollowGroup(this.communityID).subscribe(
       community => console.log(community),
       error => console.error(error)
 
@@ -126,6 +120,34 @@ export class CommunityDetailComponent implements AfterViewChecked {
 
   }
 
+  checkFollowers(){
+     
+   if (this.sessionService.getisLogged) {
 
+     this.login = true;
+
+     for (let follower of this.community.communityUsers) {
+
+      if (follower) {
+
+        //console.log(follower.nickname === this.sessionService.getUser().nickname);
+
+      
+
+        
+          if (follower.nickname === this.sessionService.getUser().nickname) {
+
+
+
+            
+            this.isFollowing = true;
+            console.log(this.isFollowing);
+          }
+        }
+      }
+    }
+
+ 
+  }
 
 }
