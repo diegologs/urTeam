@@ -57,7 +57,7 @@ export class EventService {
 	}
 
 	followEvent(id: number | string){
-		return this.http.put(BASE_URL + id, null)
+		return this.http.put(BASE_URL + id + "/members", null)
             .map(response => response.json())
             .catch(error => this.handleError(error));
 	}

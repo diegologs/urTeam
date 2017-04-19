@@ -14,14 +14,17 @@
         <h1>{{event.name}}</h1>
         <hr class="hr-yellow">
         <h4>
-          <i class="fa fa-calendar-check-o "></i><span>
-							{{event.start_date}} </span><i class="fa fa-user-circle"></i><span>
+          <i class="fa fa-newspaper-o"></i><span>
+							{{event.start_date}} </span><i class="fa fa-newspaper-o"></i><span>
 							{{event.end_date}} </span>
         </h4>
         <h4>
-          <i class="fa fa-map-marker "></i><span> {{event.place}}</span>
+          <i class="fa fa-newspaper-o"></i><span> {{event.place}}</span>
         </h4>
         <h4>{{event.sport}}</h4>
+        <div *ngIf="sessionService.getisLogged()">
+          <button class="btn btn-default group-btn" (click)="follow()">{{followText}}</button>
+        </div>
         <!--
 					<form action="/event/{{id}}/follow" method="post">
                        
@@ -43,21 +46,21 @@
   <div class="row nav">
     <div class="col-md-12 col-xs-12">
       <div *ngIf="event.participants_IDs" class="col-md-4 col-xs-3 well" data-toggle="modal" data-target="#myModalEventMembers">
-         <i class="fa fa-users" aria-hidden="true"></i> {{event.participants_IDs.length}} Miembros
+         <i class="fa fa-newspaper-o" aria-hidden="true"></i> {{event.participants_IDs.length}} Miembros
       </div>
       <div class="col-md-4 col-xs-3 well">
-        {{event.price}} <i class="glyphicon glyphicon-euro"></i>
+        {{event.price}} <i class="fa fa-newspaper-o"></i>
       </div>
 
       <div class="col-md-4 col-xs-3 well" data-toggle="modal" data-target="#modalShareEvent">
-        <i class="fa fa-share-alt"></i>
+        <i class="fa fa-newspaper-o"></i>
       </div>
     </div>
   </div>
   <!-- END EVENT BAR -->
   <!-- EVENT DESCRIPTION -->
   <div class="info">
-    <h2><i class="fa fa-info" aria-hidden="true"></i> Información</h2>
+    <h2><i class="fa fa-newspaper-o" aria-hidden="true"></i> Información</h2>
     <hr>
     <div class="info-text">{{event.info}}</div>
     <!--
@@ -69,7 +72,7 @@
   </div>
   <!-- END EVENT DESCRIPTION -->
   <h3>
-    <i class="fa fa-picture-o" aria-hidden="true"> </i> Fotos
+    <i class="fa fa-newspaper-o" aria-hidden="true"> </i> Fotos
   </h3>
   <!--
 		{{#owner}}
@@ -204,7 +207,7 @@
       <div class="modal-body">
         <ul>
           <li *ngFor="let member of participants_IDs">
-           <i class="fa fa-user-circle" aria-hidden="true"></i> {{member.nickname}}
+           <i class="fa fa-newspaper-o" aria-hidden="true"></i> <a data-dismiss="modal" [routerLink]="['/users/',member.nickname]">{{member.nickname}}</a>
           </li>
         </ul>
       </div>
