@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { EventService } from './events.service';
 import { Event } from './events.model';
+import { User } from '../user/user.model';
 
 @Component({
   templateUrl: './event-detail.component.html',
@@ -11,12 +12,14 @@ import { Event } from './events.model';
 export class EventDetailComponent{
 
   event: Event;
+  participants_IDs: User[];
 
   constructor(private router:Router, activatedRoute: ActivatedRoute, private service: EventService){
       let id = activatedRoute.snapshot.params['id'];
       service.getEvent(id).subscribe(
           event => {
             this.event = event
+            this.participants_IDs = event.participants_IDs;
           },
           error => console.error(error)
       );
