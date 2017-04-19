@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 
+import { HttpClient } from '../HttpClient/httpClient';
 import {Stat} from './stat.model';
 
 
@@ -11,7 +12,7 @@ const BASE_URL = 'https://localhost:8443/api/stats/';
 @Injectable()
 export class StatsService{
 
-    constructor(private http: Http){}
+    constructor(private http: HttpClient){}
 
     getUserStats(nickname: string) {
 		return this.http.get(BASE_URL+nickname)

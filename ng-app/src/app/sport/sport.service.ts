@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 
+import { HttpClient } from '../HttpClient/httpClient';
 import {Sport} from './sport.model';
 
 
@@ -11,7 +12,7 @@ const BASE_URL = 'https://localhost:8443/api/sports/';
 @Injectable()
 export class StatsService{
 
-    constructor(private http: Http){}
+    constructor(private http: HttpClient){}
 
     getSports() {
 		return this.http.get(BASE_URL)

@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 
+import { HttpClient } from '../HttpClient/httpClient';
 import {User} from './user.model';
 
 
@@ -14,7 +15,7 @@ export class UserService{
 	user: User;
 	authCreds: string;
 
-    constructor(private http: Http){}
+    constructor(private http: HttpClient){}
 
 	setAuthHeaders(authCreds: string) {
     this.authCreds = authCreds;

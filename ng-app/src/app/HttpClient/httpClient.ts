@@ -11,8 +11,8 @@ export class HttpClient{
   constructor(private http: Http) {
     this.sessionData = { isLogged: false, isAdmin: false, userLogged: {
         id: 99,
-	    generatedId: "",
-	    username: "",
+	      generatedId: "",
+	      username: "",
         surname: "",
         nickname: "",
         email: "",
