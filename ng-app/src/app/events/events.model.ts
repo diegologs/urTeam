@@ -15,6 +15,6 @@ export interface Event {
     day_date?: string;
     month_date?: string;
     year_date?: string;
-    owner_id?: string;
+    owner_id?: User;
     participants_IDs?: User[];
 }

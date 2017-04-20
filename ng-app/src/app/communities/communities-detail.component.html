@@ -7,15 +7,14 @@
       <div class="col-sm-8 container group-text">
         <h1 class="group-name">{{community.name}}</h1>
         <div class="badge">{{community.sport}}</div>
-        <small>Creado por: {{community.owner_id}}</small>
+        <small>Creado por: {{ownerId.nickname}}</small>
 
-        <h4 class="group-members"><a data-toggle="modal" data-target="#myModal">Nº de miembros: {{groupNumberOfFollowers}}</a></h4>
+        <h4 class="group-members"><a data-toggle="modal" data-target="#myModal">Nº de miembros: {{community.communityUsers.length}}</a></h4>
       </div>
-      <div *ngIf="login">
-      
+      <div *ngIf="sessionService.getisLogged()">
          <div class="col-sm-2 container">
-        <button type="button" class="btn btn-default group-btn" (click)="followGroup()">{{isFollowing}}</button>
-        <!--<button class="btn btn-pdefault group-btn" *ngIf="!isFollwing" (click)="followGroup()">SEGUIR</button>-->
+        <button *ngIf="checkFollow()" class="btn btn-default group-btn" (click)="unfollowGroup()">Dejar de seguir</button>
+        <button *ngIf="!checkFollow()" class="btn btn-default group-btn" (click)="followGroup()">Seguir</button>
       </div>
       </div>
 
@@ -33,7 +32,7 @@
     <div class="info">
       <h2><i class="fa fa-info" aria-hidden="true"></i> Información</h2>
       <hr>
-      <a data-toggle="modal" data-target="#myModal3"><button class="btn mybtn-succes btn_group2">Editar información</button></a>
+      <a  *ngIf="isOwner" data-toggle="modal" data-target="#myModal3"><button class="btn mybtn-succes btn_group2">Editar información</button></a>
       <div class="info-text">
         {{community.info}}
       </div>
@@ -41,7 +40,7 @@
       <div class="photos">
         <h2><i class="fa fa-picture-o" aria-hidden="true"></i> Fotos</h2>
         <hr>
-        <a data-toggle="modal" data-target="#myModal4"><button class="btn mybtn-succes btn_group2">Añadir imágenes</button></a>
+        <a *ngIf="isOwner" data-toggle="modal" data-target="#myModal4"><button class="btn mybtn-succes btn_group2">Añadir imágenes</button></a>
 
         <div class="row">
           <div class="col-sm-3"> </div>
@@ -55,7 +54,7 @@
         <h2><i class="fa fa-newspaper-o" aria-hidden="true"></i> Noticias</h2>
 
         <hr>
-        <a data-toggle="modal" data-target="#myModal2"><button class="btn mybtn-succes btn_group2">Añadir noticia</button></a>
+        <a *ngIf="isOwner" data-toggle="modal" data-target="#myModal2"><button class="btn mybtn-succes btn_group2">Añadir noticia</button></a>
 
         <div class="new" *ngFor="let new of community.news">
           <h4>{{new.title}}</h4>

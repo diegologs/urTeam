@@ -2,12 +2,9 @@
   <!-- EVENT FAST INFO -->
   <div class="row panel">
     <div class="col-md-4 bg_blur ">
-      <!-- <a href="#" class="follow_btn">Seguir</a> 
-				{{#event.main_photo}}
 				<img
-					src="/image/event-avatar/{{event.eventId}}/{{event.main_photo}}">
-				{{/event.main_photo}}
-                -->
+					src="https://localhost:8443/image/event-avatar/aleatorio/default-mainphoto">
+
     </div>
     <div class="col-md-8  col-xs-12">
       <div class="header">
@@ -21,23 +18,12 @@
         <h4>
           <i class="fa fa-newspaper-o"></i><span> {{event.place}}</span>
         </h4>
-        <h4>{{event.sport}}</h4>
+        <h4>Deporte: {{event.sport}}</h4>
+        <h4>Creado por: {{ownerId.nickname}}</h4>
         <div *ngIf="sessionService.getisLogged()">
-          <button class="btn btn-default group-btn" (click)="follow()">{{followText}}</button>
+          <button  *ngIf="checkFollow()" class="btn btn-default group-btn" (click)="follow()">Dejar de seguir</button>
+          <button *ngIf="!checkFollow()" class="btn btn-default group-btn" (click)="follow()">Seguir</button>
         </div>
-        <!--
-					<form action="/event/{{id}}/follow" method="post">
-                       
-						{{#eventFollowed}} 
-							<input type="submit" class="btn btn-default group-btn mybtn-succes" value="Dejar de seguir"> 
-							<input type="hidden" name="_csrf" value="{{token}}" /> 
-						{{/eventFollowed}} {{^eventFollowed}} 
-							<input type="submit" class="btn btn-default group-btn mybtn-succes" value="Seguir">
-							<input type="hidden" name="_csrf" value="{{token}}" />
-						{{/eventFollowed}}
-                        
-					</form>
-                    -->
       </div>
     </div>
   </div>
@@ -45,16 +31,15 @@
   <!-- EVENT BAR -->
   <div class="row nav">
     <div class="col-md-12 col-xs-12">
-      <div *ngIf="event.participants_IDs" class="col-md-4 col-xs-3 well" data-toggle="modal" data-target="#myModalEventMembers">
-         <i class="fa fa-newspaper-o" aria-hidden="true"></i> {{event.participants_IDs.length}} Miembros
+      <div *ngIf="event.participants_IDs" class="col-md-6 col-xs-3 well" data-toggle="modal" data-target="#myModalEventMembers">
+        <i class="fa fa-newspaper-o" aria-hidden="true"></i> {{event.participants_IDs.length}} Miembros
       </div>
-      <div class="col-md-4 col-xs-3 well">
+      <div class="col-md-6 col-xs-3 well">
         {{event.price}} <i class="fa fa-newspaper-o"></i>
       </div>
-
-      <div class="col-md-4 col-xs-3 well" data-toggle="modal" data-target="#modalShareEvent">
+      <!--<div class="col-md-4 col-xs-3 well" data-toggle="modal" data-target="#modalShareEvent">
         <i class="fa fa-newspaper-o"></i>
-      </div>
+      </div>-->
     </div>
   </div>
   <!-- END EVENT BAR -->
@@ -63,12 +48,9 @@
     <h2><i class="fa fa-newspaper-o" aria-hidden="true"></i> Información</h2>
     <hr>
     <div class="info-text">{{event.info}}</div>
-    <!--
-			{{#owner}}
-			<a data-toggle="modal" data-target="#myModal_editEventInfo"><button
-					class="btn mybtn-succes">Editar información</button></a>
-			{{/owner}}
-            -->
+		<a *ngIf="isOwner" data-toggle="modal" data-target="#myModal_editEventInfo">
+      <button class="btn mybtn-succes">Editar información</button>
+    </a>
   </div>
   <!-- END EVENT DESCRIPTION -->
   <h3>
@@ -103,20 +85,15 @@
       </div>
       <div class="modal-body">
         <div class="form-container">
-          <!--
-						<form class="form-group" action="/event/{{id}}/EventEdited"
-							method="post">
-							<label style="color: black;" for="textarea">Información</label>
-							<textarea type="text" id="textarea" class="form-control"
-								rows="15" name="info"></textarea>
-							<br>
-							<hr>							
-							<div class="addButton">
-								<button type="submit" class="btn mybtn-succes addButton">Editar	información</button>
-								<input type="hidden" name="_csrf" value="{{token}}" />
-							</div>
-						</form>
-                        -->
+          <div class="form-group">
+            <label style="color:black;" for="textarea">Información</label>
+            <textarea type="text" id="textarea" class="form-control" rows="15" [(ngModel)]="info" name="info"></textarea>
+            <br>
+            <hr>
+            <div class="addButton">
+              <button class="btn mybtn-succes addButton" (click)="editInfo()">Editar información</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -207,7 +184,7 @@
       <div class="modal-body">
         <ul>
           <li *ngFor="let member of participants_IDs">
-           <i class="fa fa-newspaper-o" aria-hidden="true"></i> <a data-dismiss="modal" [routerLink]="['/users/',member.nickname]">{{member.nickname}}</a>
+            <i class="fa fa-newspaper-o" aria-hidden="true"></i> <a data-dismiss="modal" [routerLink]="['/users/',member.nickname]">{{member.nickname}}</a>
           </li>
         </ul>
       </div>

@@ -4,55 +4,73 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { EventService } from './events.service';
 import { Event } from './events.model';
 import { User } from '../user/user.model';
-import { LoginService } from "app/login/login.service";
+import { LoginService } from "../login/login.service";
+import { UserService } from "../user/user.service";
 
 @Component({
   templateUrl: './event-detail.component.html',
   styleUrls: ['./event-detail.component.css']
 })
 export class EventDetailComponent {
-
   event: Event;
+  eventDescription: "Cargando";
   participants_IDs: User[];
   user: User;
-  followText: string;
-  isFollow: boolean;
+  ownerId: User;
+  isOwner: boolean;
+  eventID: number;
 
-  constructor(private sessionService: LoginService, private router: Router, activatedRoute: ActivatedRoute, private service: EventService) {
-    let id = activatedRoute.snapshot.params['id'];
-    service.getEvent(id).subscribe(
+  constructor(private sessionService: LoginService, private userService: UserService, private router: Router, activatedRoute: ActivatedRoute, private service: EventService) {
+    this.ownerId = {username:"",surname:"",nickname:"",email:"",country:""};
+    this.eventID = activatedRoute.snapshot.params['id'];
+    this.getEvent();
+  }
+
+  getEvent(){
+    this.service.getEvent(this.eventID).subscribe(
       event => {
-        this.event = event
+        this.event = event;
+        this.ownerId = event.owner_id;
         this.participants_IDs = event.participants_IDs;
         this.user = this.sessionService.getUser();
+        this.isOwner = (this.ownerId.nickname === this.user.nickname);
       },
       error => console.error(error),
       () => this.checkFollow()
     );
   }
 
+  getUser(){
+    this.userService.getUser(this.user.nickname).subscribe(
+      user =>{ this.user = user;}
+    )
+  }
+
   follow() {
     this.service.followEvent(this.event.id).subscribe(
       response => {
         this.participants_IDs = response.participants_IDs;
-        console.log(this.participants_IDs);
+        this.getEvent();
+        this.getUser();
       },
       error => console.log(error),
     )
-    this.checkFollow();
+    
   }
 
   checkFollow() {
     if (this.sessionService.getisLogged()) {
-      for (let follower of this.participants_IDs) {
-        if (follower.nickname === this.sessionService.getUser().nickname) {
-          this.followText = "Dejar de seguir";
-          console.log(this.sessionService.getUser());
-        } else {
-          this.followText = "Seguir";
-          console.log(this.sessionService.getUser());
-        }
-      }
+      let cosa: boolean = (this.event.participants_IDs.find(
+        user1 => user1.nickname == this.user.nickname) != undefined);
+      return cosa;
     }
+  }
+
+  editInfo() {
+    this.event.info = this.eventDescription;
+    this.service.updatedEvent(this.event.id, this.event).subscribe(
+      event => console.log(event),
+      error => console.error(error)
+    );
   }
 }

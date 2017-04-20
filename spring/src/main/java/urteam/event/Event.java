@@ -51,6 +51,7 @@ public class Event {
 	@JsonView(BasicEvent.class)
 	private String info;
 	
+	@JsonView(BasicEvent.class)
 	private String main_photo;
 	
 	@JsonView(BasicEvent.class)
@@ -77,6 +78,7 @@ public class Event {
 	private int year_date;
 	
 	@OneToOne
+	@JsonView(BasicEvent.class)
 	private User owner_id;
 	
 	//@JsonView(BasicEvent.class)

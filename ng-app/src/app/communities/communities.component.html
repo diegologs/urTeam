@@ -6,7 +6,7 @@
   
   <div *ngFor="let group of communities" >
    
-     <a href="group.html" [routerLink]="['/communities', group.id]">
+     <a [routerLink]="['/communities', group.id]">
             <div class="row group">
                 <div class="group-info">
                     <div class="col-sm-2 group-image">
@@ -17,11 +17,11 @@
                         <div class="badge">{{group.sport}}</div>
                        
                         <hr>
-                        <div class="group-members">300 miembros</div>
+                        <div class="group-members">Miembros: {{group.communityUsers.length}}</div>
                     </div>
-                    <div class="col-sm-2 group-button">
+                    <!--<div class="col-sm-2 group-button">
                         <button class="btn btn-default group-btn">UNIRME</button>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </a>
