@@ -9,15 +9,12 @@
         <div class="badge">{{community.sport}}</div>
         <small>Creado por: {{community.owner_id}}</small>
 
-        <h4 class="group-members"><a data-toggle="modal" data-target="#myModal">300 miembros</a></h4>
+        <h4 class="group-members"><a data-toggle="modal" data-target="#myModal">Nº de miembros: {{groupNumberOfFollowers}}</a></h4>
       </div>
       <div *ngIf="login">
-      <div class="col-sm-2 container" *ngIf="isFollowing">
-        <button class="btn btn-default group-btn" (click)="unfollowGroup()">DEJAR DE SEGUIR</button>
-        <!--<button class="btn btn-pdefault group-btn" *ngIf="!isFollwing" (click)="followGroup()">SEGUIR</button>-->
-      </div>
-         <div class="col-sm-2 container" *ngIf="!isFollowing">
-        <button class="btn btn-default group-btn" (click)="followGroup()">SEGUIR</button>
+      
+         <div class="col-sm-2 container">
+        <button type="button" class="btn btn-default group-btn" (click)="followGroup()">{{isFollowing}}</button>
         <!--<button class="btn btn-pdefault group-btn" *ngIf="!isFollwing" (click)="followGroup()">SEGUIR</button>-->
       </div>
       </div>
@@ -67,27 +64,7 @@
         </div>
 
       </div>
-      <div class="stats">
-
-        <h2><i class="fa fa-bar-chart" aria-hidden="true"></i> Estadísticas</h2>
-        <hr>
-        <div class="row">
-          <div class="col-md-6">
-            <ul>
-              <li>Eventos asistidos: 7</li>
-              <li>Eventos creados: 2</li>
-              <li>Kilómetros recorridos: 783</li>
-            </ul>
-          </div>
-          <div class="col-md-6">
-            <ul>
-              <li>Fotos: 73</li>
-              <li>Usuarios: 2</li>
-              <li>Fecha de registro: 12/01/2017</li>
-            </ul>
-          </div>
-        </div>
-      </div>
+     
 
 
       <!-- Modal -->

@@ -37,9 +37,13 @@ export class CommunityDetailComponent {
 
   myService: CommunityService;
 
-  isFollowing: boolean;
+  isFollowing: string;
 
   login: boolean;
+
+  groupId: number;
+
+  groupNumberOfFollowers: number;
 
 
 
@@ -48,10 +52,11 @@ export class CommunityDetailComponent {
   communityID: number;
 
   constructor(private router: Router, activatedRoute: ActivatedRoute, private service: CommunityService, private sessionService: LoginService) {
-    this.isFollowing = false;
+    this.isFollowing = "SEGUIR";
     this.login = false;
     let id = activatedRoute.snapshot.params['id'];
     this.communityID = id;
+    this.groupId = id
     service.getGroup(id).subscribe(
       
       community => this.community = community,
@@ -102,11 +107,28 @@ export class CommunityDetailComponent {
   }
 
   followGroup() {
-    this.service.followGroup(this.communityID).subscribe(
-      community => console.log(community),
-      error => console.error(error)
+    
+    if(!this.checkFollowers()){
+    
+      this.service.followGroup(this.communityID).subscribe(
+        community => console.log(community),
+        error => console.error(error),
+      
+      );
 
-    );
+    }else{
+
+      this.unfollowGroup();
+
+    }
+
+      this.refresh();
+
+  
+
+
+
+    
 
   }
 
@@ -121,6 +143,8 @@ export class CommunityDetailComponent {
   }
 
   checkFollowers(){
+
+    this.groupNumberOfFollowers = this.community.communityUsers.length;
      
    if (this.sessionService.getisLogged) {
 
@@ -140,14 +164,27 @@ export class CommunityDetailComponent {
 
 
             
-            this.isFollowing = true;
-            console.log(this.isFollowing);
+            this.isFollowing = "DEJAR DE SEGUIR";
+            return true;
           }
         }
       }
     }
 
  
+  }
+
+
+  refresh(){
+   
+   console.log(this.groupId);
+    this.service.getGroup(this.groupId).subscribe(
+      
+      community => this.community = community,
+      error => console.error(error),
+      () => this.checkFollowers()
+
+    );
   }
 
 }

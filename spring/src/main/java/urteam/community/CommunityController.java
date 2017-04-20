@@ -252,11 +252,14 @@ public class CommunityController {
 			
 			if (!userLogged.getCommunityList().contains(community)) {
 				userLogged.addCommunity(community);
+				communityService.follow(community);
 			}else{
 				userLogged.removeCommunity(community);
+				communityService.unfollow(community);
+	
 			}
 			
-			communityService.follow(community);
+			
 			model.addAttribute("communityFollowed", userLogged.getCommunityList().contains(community));
 
 			
