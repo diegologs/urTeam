@@ -229,19 +229,20 @@ public class CommunityService {
 
 		try {
 
-			if (isOwner(community)) {
+			
 
 				SimpleDateFormat formater = new SimpleDateFormat("mmddyyyy-hhMMss");
 				Date date = new Date();
 
-				String filename = "imageingallery-" + formater.format(date);
+				String filename = "avatar-" + formater.format(date);
 
-				if (urteamService.uploadImageFile(file, filename, ConstantsUrTeam.COMMUNITY_IMGS,
+				if (urteamService.uploadImageFile(file, filename, ConstantsUrTeam.COMMUNITY_AVATAR,
 						community.getCommunityId())) {
 					community.setMain_photo(filename);
+					save(community);
 				}
 
-			}
+			
 
 		} catch (Exception e) {
 			

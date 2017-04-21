@@ -2,7 +2,7 @@
   <div class="group-header">
     <div class="row group-header-info">
       <div class="col-sm-2 container">
-        <img class="img-circle img-responsive group-image" width="120px" [src]="imgUrl">
+        <img class="img-circle img-responsive group-image" width="120px" src="https://localhost:8443/image/community-avatar/{{community.communityId}}/{{community.main_photo}}">
       </div>
       <div class="col-sm-8 container group-text">
         <h1 class="group-name">{{community.name}}</h1>
@@ -46,7 +46,7 @@
           <div *ngFor="let image of community.communityImages">
             <div *ngIf="image">
               <div class="col-sm-2">
-                <img src="https://localhost:8443/image/community-imgs/aleatorio/{{image}}" />
+                <img src="https://localhost:8443/image/community-imgs/{{community.communityId}}/{{image}}" />
               </div>
             </div>
           </div>

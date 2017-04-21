@@ -1,11 +1,9 @@
   <div class="container">
   
   <div *ngIf="sessionService.getisLogged()" class="btn-groups">
-<<<<<<< HEAD
-      <a [routerLink]="['communities/create']"><button class="btn mybtn-succes">Crear comunidad</button></a>
-=======
+
       <a [routerLink]="['/communities/create']"><button class="btn mybtn-succes">Crear comunidad</button></a>
->>>>>>> 2e61da538362e1fd7343066cde458e7d775c285a
+
       </div>
   
   <div *ngFor="let group of communities" >
@@ -16,7 +14,7 @@
                     
                    
                     <div class="col-sm-2 group-image" *ngIf="group.main_photo">
-                        <img class="img-circle img-responsive group-image" width="110px" src="https://localhost:8443/image/community-avatar/aleatorio/{{group.main_photo}}">
+                        <img class="img-circle img-responsive group-image" width="110px" src="https://localhost:8443/image/community-avatar/{{group.communityId}}/{{group.main_photo}}">
                     </div>
 
                     <div class="col-sm-8">

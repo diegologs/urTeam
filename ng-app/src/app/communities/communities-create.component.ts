@@ -37,21 +37,23 @@ export class CommunitiesCreate {
         group = { name: this.groupName, info: this.groupInfo, city: this.groupCity, main_photo: this.imgUrl, sport: this.groupSport}
 
         this.service.createGroup(group).subscribe(
-            community => this.community = community,
+            community =>{ this.community = community;
+            this.updatePhoto(community.id);
+            },
             error => console.error(error),
-            
+           
         );
 
         this.router.navigateByUrl('communities');
 
     }
 
-    updatePhoto(group: Community){
+    updatePhoto(id: number){
          let formData = new FormData();
         formData.append('file', this.groupImage, this.groupImage.name);
 
-        this.service.setPhoto(group.id, formData).subscribe(
-            Community => this.community = Community,
+        this.service.setPhoto(id, formData).subscribe(
+            community => this.community = community,
             error => console.error(error)
         )
     }

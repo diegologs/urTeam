@@ -3,7 +3,7 @@ import { News } from "app/news/news.model";
 
 export interface Community {
     id?: number;
-	groupId?: string;
+	communityId?: string;
 	name: string;
     sport: string;
     info: string;
