@@ -1,3 +1,5 @@
+@import url("app/login/login.component.css");
+
 .spinner{
     display: block;
     margin: 0px auto;

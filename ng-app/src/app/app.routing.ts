@@ -34,12 +34,9 @@ import ChildTwo from './admin/child-two';
 // ]
 
 const appRoutes: Routes = [
-    { path: '', redirectTo: 'public', pathMatch: 'full' },
-    {
-        path: 'public', component: PublicComponent,
+    { path: '', component: PublicComponent,
         children: [
-            { path: '', redirectTo: 'home', pathMatch: 'full' },
-            { path: 'home', component: HomeComponent },
+            { path: '', component: HomeComponent },
             { path: 'events', component: EventsComponent },
             { path: 'events/create', component: EventCreateComponent },
             { path: 'events/:id', component: EventDetailComponent },
@@ -50,8 +47,12 @@ const appRoutes: Routes = [
             { path: 'users/:nickname', component: UserComponent }
         ]
     },
+
+
+
     {
         path: 'admin', component: PrivateComponent,
+
         children: [
             { path: '', redirectTo: 'events', pathMatch: 'full' },
             { path: 'events', component: AdminEvents },
