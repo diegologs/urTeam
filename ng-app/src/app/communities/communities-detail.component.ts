@@ -20,7 +20,7 @@ export class CommunityDetailComponent {
   groupCity = "toledo"
   groupSport = "Running"
   groupUsers: User[];
-  imgUrl = "https://localhost:8443/image/community-imgs/aleatorio/";
+  imgUrl = "https://localhost:8443/image/event-avatar/aleatorio/default-mainphoto";
   community: Community;
   info: string;
 
@@ -39,8 +39,7 @@ export class CommunityDetailComponent {
   ownerId: User;
   isOwner: boolean;
 
-  
-
+  groupImage: any;
 
 
 
@@ -54,9 +53,9 @@ export class CommunityDetailComponent {
     this.getCommunity();
     this.groupUsers = [];
     this.community = { name: this.groupName, info: this.groupInfo, city: this.groupCity, main_photo: this.imgUrl, sport: this.groupSport, communityUsers: this.groupUsers };
-    this.ownerId = {username:"",surname:"",nickname:"",email:"",country:""};
-   
-}
+    this.ownerId = { username: "", surname: "", nickname: "", email: "", country: "" };
+
+  }
 
   getCommunity() {
     this.service.getGroup(this.communityID).subscribe(
@@ -66,7 +65,7 @@ export class CommunityDetailComponent {
         this.user = this.sessionService.getUser();
         this.ownerId = community.owner_id;
         this.isOwner = (this.ownerId.nickname === this.user.nickname);
-     
+
       },
       error => console.error(error),
       () => this.checkFollow()
@@ -139,7 +138,28 @@ export class CommunityDetailComponent {
     }
   }
 
- 
+  uploadImage() {
+
+    let formData = new FormData();
+    formData.append('file', this.groupImage, this.groupImage.name);
+    this.service.addImage(this.communityID, formData).subscribe(
+      response => {
+        this.groupUsers = response.communityUsers;
+        this.getCommunity();
+        this.getUser();
+      },
+      error => console.log(error),
+    )
+  }
+
+  selectFile($event) {
+    this.groupImage = $event.target.files[0];
+    console.log("Selected file: " + this.groupImage.name + " type:" + this.groupImage.type + " size:" + this.groupImage.size);
+  }
+
+}
+
+
   // this.groupNumberOfFollowers = this.community.communityUsers.length;
   // if (this.sessionService.getisLogged) {
   //   this.login = true;
@@ -155,5 +175,3 @@ export class CommunityDetailComponent {
   // }
 
 
-
-}

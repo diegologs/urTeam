@@ -12,10 +12,10 @@
         <h4 class="group-members"><a data-toggle="modal" data-target="#myModal">Nº de miembros: {{community.communityUsers.length}}</a></h4>
       </div>
       <div *ngIf="sessionService.getisLogged()">
-         <div class="col-sm-2 container">
-        <button *ngIf="checkFollow()" class="btn btn-default group-btn" (click)="unfollowGroup()">Dejar de seguir</button>
-        <button *ngIf="!checkFollow()" class="btn btn-default group-btn" (click)="followGroup()">Seguir</button>
-      </div>
+        <div class="col-sm-2 container">
+          <button *ngIf="checkFollow()" class="btn btn-default group-btn" (click)="unfollowGroup()">Dejar de seguir</button>
+          <button *ngIf="!checkFollow()" class="btn btn-default group-btn" (click)="followGroup()">Seguir</button>
+        </div>
       </div>
 
     </div>
@@ -32,7 +32,7 @@
     <div class="info">
       <h2><i class="fa fa-info" aria-hidden="true"></i> Información</h2>
       <hr>
-      <a  *ngIf="isOwner" data-toggle="modal" data-target="#myModal3"><button class="btn mybtn-succes btn_group2">Editar información</button></a>
+      <a *ngIf="isOwner" data-toggle="modal" data-target="#myModal3"><button class="btn mybtn-succes btn_group2">Editar información</button></a>
       <div class="info-text">
         {{community.info}}
       </div>
@@ -41,12 +41,15 @@
         <h2><i class="fa fa-picture-o" aria-hidden="true"></i> Fotos</h2>
         <hr>
         <a *ngIf="isOwner" data-toggle="modal" data-target="#myModal4"><button class="btn mybtn-succes btn_group2">Añadir imágenes</button></a>
-       
-      
-        <div *ngFor="let image of community.communityImages">
-           <div *ngIf="image">
-          <img src="https://localhost:8443/image/community-imgs/aleatorio/{{image}}"/>
-        </div>
+
+        <div class="row">
+          <div *ngFor="let image of community.communityImages">
+            <div *ngIf="image">
+              <div class="col-sm-2">
+                <img src="https://localhost:8443/image/community-imgs/aleatorio/{{image}}" />
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="row">
@@ -70,7 +73,7 @@
         </div>
 
       </div>
-     
+
 
 
       <!-- Modal -->
@@ -93,7 +96,7 @@
                   <br>
                   <hr>
                   <div class="addButton">
-                    <button class="btn mybtn-succes addButton" (click)="addNews()" data-dismiss="modal" >Añadir noticia</button>
+                    <button class="btn mybtn-succes addButton" (click)="addNews()" data-dismiss="modal">Añadir noticia</button>
                   </div>
                 </form>
               </div>
@@ -148,9 +151,10 @@
               <div class="form-container">
                 <form class="form-group">
                   <label style="color:black;" for="groupAvatar">Añadir imágen</label>
-                  <input type="file" class="form-control-file" id="groupAvatar" aria-describedby="fileHelp">
+                  <input type="file" class="form-control-file" id="groupAvatar" aria-describedby="fileHelp" (change)="selectFile($event)">
+                 
                   <div class="addButton">
-                    <a data-toggle="modal" data-target="#myModal2"><button class="btn mybtn-succes addButton" data-dismiss="modal">Añadir imágenes</button></a>
+                    <button class="btn mybtn-succes addButton" data-dismiss="modal" (click)="uploadImage()">Añadir imágenes</button>
                   </div>
 
                 </form>

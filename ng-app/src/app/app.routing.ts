@@ -14,8 +14,8 @@ import { LoginComponent } from './login/login.component';
 import { CommunitiesCreate } from "app/communities/communities-create.component";
 
 import { PublicComponent } from './public.component';
-import { ComponentTwo } from './admin/component-two';
-import ChildOne from './admin/child-one';
+import { PrivateComponent } from './admin/admin.component';
+import AdminEvents from './admin/admin-events.component';
 import ChildTwo from './admin/child-two';
 
 
@@ -47,10 +47,15 @@ const appRoutes: Routes = [
             { path: 'users/:nickname', component: UserComponent }
         ]
     },
+<<<<<<< HEAD
     { path: 'admin', component: ComponentTwo,
+=======
+    {
+        path: 'admin', component: PrivateComponent,
+>>>>>>> 502f5302aa0a37b7eaa9d61577f8bd3f05ed5f80
         children: [
-            { path: '', redirectTo: 'child-one', pathMatch: 'full' },
-            { path: 'child-one', component: ChildOne },
+            { path: '', redirectTo: 'events', pathMatch: 'full' },
+            { path: 'events', component: AdminEvents },
             { path: 'child-two', component: ChildTwo }
         ]
     }
