@@ -20,7 +20,7 @@ export class CommunityDetailComponent {
   groupCity = "toledo"
   groupSport = "Running"
   groupUsers: User[];
-  imgUrl = "https://localhost:8443/image/event-avatar/aleatorio/default-mainphoto";
+  imgUrl = "https://localhost:8443/image/community-imgs/aleatorio/";
   community: Community;
   info: string;
 
@@ -39,6 +39,8 @@ export class CommunityDetailComponent {
   ownerId: User;
   isOwner: boolean;
 
+  
+
 
 
 
@@ -53,6 +55,7 @@ export class CommunityDetailComponent {
     this.groupUsers = [];
     this.community = { name: this.groupName, info: this.groupInfo, city: this.groupCity, main_photo: this.imgUrl, sport: this.groupSport, communityUsers: this.groupUsers };
     this.ownerId = {username:"",surname:"",nickname:"",email:"",country:""};
+   
 }
 
   getCommunity() {
@@ -63,6 +66,7 @@ export class CommunityDetailComponent {
         this.user = this.sessionService.getUser();
         this.ownerId = community.owner_id;
         this.isOwner = (this.ownerId.nickname === this.user.nickname);
+     
       },
       error => console.error(error),
       () => this.checkFollow()
@@ -135,6 +139,7 @@ export class CommunityDetailComponent {
     }
   }
 
+ 
   // this.groupNumberOfFollowers = this.community.communityUsers.length;
   // if (this.sessionService.getisLogged) {
   //   this.login = true;
@@ -149,13 +154,6 @@ export class CommunityDetailComponent {
   //   }
   // }
 
-refresh() {
-  console.log(this.groupId);
-  this.service.getGroup(this.groupId).subscribe(
-    community => this.community = community,
-    error => console.error(error),
-    () => this.checkFollow()
-  );
-}
+
 
 }

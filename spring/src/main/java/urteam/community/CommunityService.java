@@ -112,6 +112,7 @@ public class CommunityService {
 			if (urteamService.uploadImageFile(file, filename, ConstantsUrTeam.COMMUNITY_IMGS,
 					community.getCommunityId())) {
 				community.addImage(filename);
+				save(community);
 			}
 
 		} catch (Exception e) {

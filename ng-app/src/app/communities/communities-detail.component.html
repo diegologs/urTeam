@@ -41,6 +41,13 @@
         <h2><i class="fa fa-picture-o" aria-hidden="true"></i> Fotos</h2>
         <hr>
         <a *ngIf="isOwner" data-toggle="modal" data-target="#myModal4"><button class="btn mybtn-succes btn_group2">Añadir imágenes</button></a>
+       
+      
+        <div *ngFor="let image of community.communityImages">
+           <div *ngIf="image">
+          <img src="https://localhost:8443/image/community-imgs/aleatorio/{{image}}"/>
+        </div>
+        </div>
 
         <div class="row">
           <div class="col-sm-3"> </div>
@@ -116,7 +123,7 @@
                   <br>
                   <hr>
                   <div class="addButton">
-                    <button class="btn mybtn-succes addButton" (click)="editInfo()">Editar información</button>
+                    <button class="btn mybtn-succes addButton" (click)="editInfo()" data-dismiss="modal">Editar información</button>
                   </div>
 
                 </div>
@@ -143,7 +150,7 @@
                   <label style="color:black;" for="groupAvatar">Añadir imágen</label>
                   <input type="file" class="form-control-file" id="groupAvatar" aria-describedby="fileHelp">
                   <div class="addButton">
-                    <a data-toggle="modal" data-target="#myModal2"><button class="btn mybtn-succes addButton">Añadir imágenes</button></a>
+                    <a data-toggle="modal" data-target="#myModal2"><button class="btn mybtn-succes addButton" data-dismiss="modal">Añadir imágenes</button></a>
                   </div>
 
                 </form>
