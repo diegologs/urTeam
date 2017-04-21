@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { routing } from './app.routing';
+import { routing ,appRoutingProviders} from './app.routing';
 import {Ng2PageScrollModule} from 'ng2-page-scroll';
 
 import { AppComponent } from './app.component';
@@ -24,6 +24,11 @@ import { CommunityService} from './communities/communities.service';
 import { UserComponent } from './user/user.component';
 import { UserService } from './user/user.service';
 
+import {PublicComponent} from './public.component';
+import {ComponentTwo} from './admin/component-two';
+import ChildOne from './admin/child-one';
+import ChildTwo from './admin/child-two';
+
 import { LoginComponent } from './login/login.component';
 import { LoginService } from './login/login.service';
 import { HttpClient } from "./HttpClient/httpClient";
@@ -34,7 +39,8 @@ import { HttpClient } from "./HttpClient/httpClient";
 @NgModule({
   declarations: [
     AppComponent, NavbarComponent, FooterComponent, HomeComponent, EventsComponent, EventDetailComponent,
-    CommunitiesComponent,CommunityDetailComponent,CommunitiesCreate, UserComponent, LoginComponent,EventCreateComponent
+    CommunitiesComponent,CommunityDetailComponent,CommunitiesCreate, UserComponent, LoginComponent,EventCreateComponent,
+    ComponentTwo,ChildOne,ChildTwo,PublicComponent
 
   ],
   imports: [
@@ -45,7 +51,7 @@ import { HttpClient } from "./HttpClient/httpClient";
     routing,
     Ng2PageScrollModule.forRoot()
   ],
-  providers: [EventService, CommunityService , LoginService, UserService,HttpClient],
+  providers: [EventService, CommunityService , LoginService, UserService,HttpClient,appRoutingProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

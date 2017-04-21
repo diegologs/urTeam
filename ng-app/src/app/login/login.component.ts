@@ -25,6 +25,10 @@ export class LoginComponent{
     );
   }
 
+  checkLogged(){
+    this.sessionService.getisLogged();
+  }
+
   logOut() {
     this.sessionService.logOut();
   }
