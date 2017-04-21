@@ -28,7 +28,7 @@
     </div>
     <div class="form-group">
       <label for="groupAvatar">Avatar</label>
-      <input type="file" class="form-control-file" id="groupAvatar" aria-describedby="fileHelp">
+      <input type="file" class="form-control-file" id="groupAvatar" aria-describedby="fileHelp" (change)="selectFile($event)">
       <small id="fileHelp" class="form-text text-muted">Tamaño recomendado 200px x 200px</small>
     </div>
 

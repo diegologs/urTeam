@@ -1,6 +1,6 @@
   <div class="container">
   
-  <div *ngIf="sessionService.isLogged" class="btn-groups">
+  <div *ngIf="sessionService.getisLogged()" class="btn-groups">
       <a [routerLink]="['communities/create']"><button class="btn mybtn-succes">Crear comunidad</button></a>
       </div>
   
@@ -9,9 +9,12 @@
      <a [routerLink]="['../communities', group.id]">
             <div class="row group">
                 <div class="group-info">
-                    <div class="col-sm-2 group-image">
-                        <img [src]="imgUrl" class="img-circle img-responsive group-image" width="110px" src="images/avatar.jpg">
+                    
+                   
+                    <div class="col-sm-2 group-image" *ngIf="group.main_photo">
+                        <img class="img-circle img-responsive group-image" width="110px" src="https://localhost:8443/image/community-avatar/aleatorio/{{group.main_photo}}">
                     </div>
+
                     <div class="col-sm-8">
                         <h1 class="group-name">{{group.name}}</h1>
                         <div class="badge">{{group.sport}}</div>

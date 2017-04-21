@@ -74,6 +74,12 @@ export class CommunityService {
          .catch(error => this.handleError(error));
 	}
 
+	setPhoto(id: number | string, formData: FormData){
+		return this.http.put(BASE_URL + id + '/avatar', formData)
+		.map(response => response.json())
+		.catch(error => this.handleError(error));
+	}
+
 	
 
 	

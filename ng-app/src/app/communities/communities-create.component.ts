@@ -20,6 +20,7 @@ export class CommunitiesCreate {
     groupCity: string;
     community: Community;
 
+    groupImage: any;
 
     private userLogged:User;
     
@@ -30,18 +31,36 @@ export class CommunitiesCreate {
     constructor(private router: Router, private service: CommunityService) { }
 
     createCommunity() {
-
+        
+        
         let group: Community;
         group = { name: this.groupName, info: this.groupInfo, city: this.groupCity, main_photo: this.imgUrl, sport: this.groupSport}
 
         this.service.createGroup(group).subscribe(
             community => this.community = community,
-            error => console.error(error)
+            error => console.error(error),
+            
         );
 
         this.router.navigateByUrl('communities');
 
     }
+
+    updatePhoto(group: Community){
+         let formData = new FormData();
+        formData.append('file', this.groupImage, this.groupImage.name);
+
+        this.service.setPhoto(group.id, formData).subscribe(
+            Community => this.community = Community,
+            error => console.error(error)
+        )
+    }
+
+ selectFile($event) {
+    this.groupImage = $event.target.files[0];
+    console.log("Selected file: " + this.groupImage.name + " type:" + this.groupImage.type + " size:" + this.groupImage.size);
+  }
+
 
 
 

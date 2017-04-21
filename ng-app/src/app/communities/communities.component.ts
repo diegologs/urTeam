@@ -29,6 +29,7 @@ export class CommunitiesComponent implements OnInit {
         this.groupsPage++;
         this.communities = communities.content;
         this.groupsPageActual = communities.totalPages;
+       
       },
       error => {
         console.log(error);
@@ -54,6 +55,7 @@ export class CommunitiesComponent implements OnInit {
     }
   }
 
+  
  
 }
 
