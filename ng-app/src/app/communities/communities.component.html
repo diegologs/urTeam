@@ -1,12 +1,12 @@
   <div class="container">
   
   <div *ngIf="sessionService.isLogged" class="btn-groups">
-      <a [routerLink]="['/communities/create']"><button class="btn mybtn-succes">Crear comunidad</button></a>
+      <a [routerLink]="['communities/create']"><button class="btn mybtn-succes">Crear comunidad</button></a>
       </div>
   
   <div *ngFor="let group of communities" >
    
-     <a [routerLink]="['/communities', group.id]">
+     <a [routerLink]="['../communities', group.id]">
             <div class="row group">
                 <div class="group-info">
                     <div class="col-sm-2 group-image">

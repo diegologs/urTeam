@@ -44,12 +44,12 @@
        otro elemento que se pueda ocultar al minimizar la barra -->
   <div class="collapse navbar-collapse navbar-ex1-collapse navbar-inner">
     <ul class="nav navbar-nav minav">
-      <li><a [routerLink]="['/events']">Eventos</a></li>
-      <li><a [routerLink]="['/communities']">Comunidades</a></li>
+      <li><a [routerLink]="['events']">Eventos</a></li>
+      <li><a [routerLink]="['communities']">Comunidades</a></li>
     </ul>
     <ul *ngIf="!sessionService.getisLogged()" class="nav navbar-nav navbar-right minav">
       <li>
-        <a [routerLink]="['/login']">Iniciar Sesión / Registro</a>
+        <a [routerLink]="['login']">Iniciar Sesión / Registro</a>
       </li>
     </ul>
 
@@ -61,7 +61,7 @@
         <ul class="dropdown-menu">
           <li>
             <div *ngIf="sessionService.getUser()" class="navbar-content">
-              <a [routerLink]="['/users/',sessionService.getUser().nickname]">Mi perfil
+              <a [routerLink]="['users/',sessionService.getUser().nickname]">Mi perfil
 							<div class="divider"></div>
 						</a>
             </div>

@@ -5,7 +5,7 @@
         <br>
         <br>
         <div *ngIf="sessionService.getisLogged()" class="btn-groups">
-          <a [routerLink]="['/events/create']">
+          <a [routerLink]="['events/create']">
           <button class="btn mybtn-succes">Crear Evento</button>
           </a>
         </div>
@@ -48,7 +48,7 @@
                   {{event.info}}
                 </p>
               </div>
-              <a [routerLink]="['/events', event.id]" class="btn btn-success mybtn-succes">Más información</a>
+              <a [routerLink]="['../events', event.id]" class="btn btn-success mybtn-succes">Más información</a>
             </div>
           </div>
         </div>
