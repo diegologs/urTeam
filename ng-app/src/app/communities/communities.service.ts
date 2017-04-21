@@ -68,6 +68,12 @@ export class CommunityService {
 
 	}
 
+	addImage(id: number | string, formData: FormData){
+		return this.http.put(BASE_URL + id + '/image', formData)
+		 .map(response => response.json())
+         .catch(error => this.handleError(error));
+	}
+
 	
 
 	
