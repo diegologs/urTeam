@@ -47,12 +47,8 @@ const appRoutes: Routes = [
             { path: 'users/:nickname', component: UserComponent }
         ]
     },
-<<<<<<< HEAD
-    { path: 'admin', component: ComponentTwo,
-=======
     {
         path: 'admin', component: PrivateComponent,
->>>>>>> 502f5302aa0a37b7eaa9d61577f8bd3f05ed5f80
         children: [
             { path: '', redirectTo: 'events', pathMatch: 'full' },
             { path: 'events', component: AdminEvents },

@@ -39,7 +39,7 @@ export class CommunitiesCreate {
             error => console.error(error)
         );
 
-        this.router.navigateByUrl('communities');
+        this.router.navigateByUrl('/communities');
 
     }
 
