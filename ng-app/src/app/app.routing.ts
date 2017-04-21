@@ -48,8 +48,6 @@ const appRoutes: Routes = [
         ]
     },
 
-
-
     {
         path: 'admin', component: PrivateComponent,
 

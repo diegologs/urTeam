@@ -44,7 +44,7 @@ export class CommunitiesCreate {
            
         );
 
-        this.router.navigateByUrl('communities');
+        this.router.navigateByUrl('/communities');
 
     }
 
