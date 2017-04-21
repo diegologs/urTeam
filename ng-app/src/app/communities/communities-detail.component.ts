@@ -20,7 +20,7 @@ export class CommunityDetailComponent {
   groupCity = "toledo"
   groupSport = "Running"
   groupUsers: User[];
-  imgUrl = "https://localhost:8443/image/community-imgs/aleatorio/";
+  imgUrl = "https://localhost:8443/image/event-avatar/aleatorio/default-mainphoto";
   community: Community;
   info: string;
 
@@ -40,9 +40,6 @@ export class CommunityDetailComponent {
   isOwner: boolean;
 
   groupImage: any;
-
-
-
 
 
 

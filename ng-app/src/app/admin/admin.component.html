@@ -1,0 +1,62 @@
+<div class="wrapper">
+  <div class="sidebar" data-color="blue" data-image="../assets/images/cp-left-sidebar.jpg">
+    <div class="sidebar-wrapper">
+      <div class="logo">
+        <a href="index.html" class="simple-text">
+                    urTeam
+                </a>
+      </div>
+      <ul class="nav">
+        <li>
+          <a href="controlPanel.html">
+            <i class="fa fa-user-circle-o"></i>
+            <p>Editar perfil</p>
+          </a>
+        </li>
+        <li>
+          <a href="config-changePass.html">
+            <i class="fa fa-key"></i>
+            <p>Cambiar contraseña</p>
+          </a>
+        </li>
+        <li>
+          <a href="config-manageUsers.html">
+            <i class="fa fa-user"></i>
+            <p>Gestión de usuarios</p>
+          </a>
+        </li>
+        <li>
+          <a href="config-manageGroups.html">
+            <i class="fa fa-users"></i>
+            <p>gestión de comunidades</p>
+          </a>
+        </li>
+        <li>
+          <a href="config-manageEvents.html">
+            <i class="fa fa-flag"></i>
+            <p>Gestión de eventos</p>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="main-panel">
+    <nav class="navbar navbar-default navbar-fixed">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+          <a class="navbar-brand" href="#"><span class="fa fa-reply"></span> Volver</a>
+        </div>
+      </div>
+    </nav>
+    <div class="content">
+       <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
