@@ -87,7 +87,11 @@ export class CommunityDetailComponent {
     let updateNews: News;
     updateNews = { title: this.newsTitle, text: this.newsText }
     this.service.addNews(this.communityID, updateNews).subscribe(
-      community => console.log(community),
+      response => {
+        this.groupUsers = response.communityUsers;
+        this.getCommunity();
+        this.getUser();
+      },
       error => console.error(error)
     );
   }
