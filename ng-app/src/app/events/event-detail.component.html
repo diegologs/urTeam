@@ -48,9 +48,12 @@
     <h2><i class="fa fa-newspaper-o" aria-hidden="true"></i> Información</h2>
     <hr>
     <div class="info-text">{{event.info}}</div>
+    <br>
+    <div *ngIf="sessionService.getisLogged()">
 		<a *ngIf="isOwner" data-toggle="modal" data-target="#myModal_editEventInfo">
       <button class="btn mybtn-succes">Editar información</button>
     </a>
+    </div>
   </div>
   <!-- END EVENT DESCRIPTION -->
   <h3>
@@ -91,7 +94,7 @@
             <br>
             <hr>
             <div class="addButton">
-              <button class="btn mybtn-succes addButton" (click)="editInfo()">Editar información</button>
+              <button class="btn mybtn-succes addButton" data-dismiss="modal" (click)="editInfo()">Editar información</button>
             </div>
           </div>
         </div>
