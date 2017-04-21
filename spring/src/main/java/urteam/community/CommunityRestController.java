@@ -20,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 import urteam.event.Event;
 import urteam.news.News;
+import urteam.news.News.BasicNews;
 import urteam.user.User;
 
 
@@ -30,7 +31,7 @@ public class CommunityRestController {
 
 	 
 	interface CompleteNews extends News.BasicNews{} 
-	interface CompleteCommunity extends Community.BasicCommunity, Community.CommunityUsers, Community.CommunityNews, User.MinimalUser {
+	interface CompleteCommunity extends Community.BasicCommunity, Community.CommunityUsers, Community.CommunityNews, User.MinimalUser, BasicNews {
 	}
 	// 
 	

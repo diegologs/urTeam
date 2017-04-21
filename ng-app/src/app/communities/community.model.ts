@@ -13,5 +13,6 @@ export interface Community {
     owner_id?: User;
     communityUsers?: User[];
     news?: News[];
+    communityImages?: string[];
 }
 
