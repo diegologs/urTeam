@@ -209,9 +209,9 @@ public class Event {
 		return month_date;
 	}
 
-	public void setMonth_date(int month_date) {
-		String[] months = {"ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEPT", "OCT", "NOV", "DIC"};
-		this.month_date =  months[month_date];
+	
+	public void setMonth_date(String month_date) {
+		this.month_date =  month_date;
 	}
 
 	public int getYear_date() {

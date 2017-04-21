@@ -13,7 +13,7 @@ import { UserService } from "../user/user.service";
 })
 export class EventDetailComponent {
   event: Event;
-  eventDescription: "Cargando";
+  info: "Cargando";
   participants_IDs: User[];
   user: User;
   ownerId: User;
@@ -67,7 +67,7 @@ export class EventDetailComponent {
   }
 
   editInfo() {
-    this.event.info = this.eventDescription;
+    this.event.info = this.info;
     this.service.updatedEvent(this.event.id, this.event).subscribe(
       event => console.log(event),
       error => console.error(error)

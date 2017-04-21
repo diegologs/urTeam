@@ -131,7 +131,8 @@ public class DatabaseInitializer {
 
 			Calendar cal = toCalendar(start_date);			
 			event.setDay_date(cal.get(Calendar.DAY_OF_MONTH));
-			event.setMonth_date(cal.get(Calendar.MONTH));
+			String month = monthToString(cal.get(Calendar.MONTH));
+			event.setMonth_date(month);
 			event.setYear_date(cal.get(Calendar.YEAR));
 			
 			event.setOwner_id(userRepo.findOne((long) ((i%5)+1)));
@@ -187,5 +188,9 @@ public class DatabaseInitializer {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
 		return cal;
+	}
+	private String monthToString(int month_date) {
+		String[] months = {"ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEPT", "OCT", "NOV", "DIC"};
+		return months[month_date];
 	}
 }
