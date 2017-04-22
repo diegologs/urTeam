@@ -6,6 +6,7 @@ import { LoginService } from "app/login/login.service";
 @Component({
   selector: 'admin-events',
   templateUrl: './admin-events.component.html',
+  styleUrls: ['../events/events.component.css']
 })
 export default class AdminEvents implements OnInit {
 

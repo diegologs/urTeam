@@ -16,7 +16,7 @@ import { CommunitiesCreate } from "app/communities/communities-create.component"
 import { PublicComponent } from './public.component';
 import { PrivateComponent } from './admin/admin.component';
 import AdminEvents from './admin/admin-events.component';
-import ChildTwo from './admin/child-two';
+import AdminCommunities from './admin/admin-communities.component';
 
 
 
@@ -54,7 +54,7 @@ const appRoutes: Routes = [
         children: [
             { path: '', redirectTo: 'events', pathMatch: 'full' },
             { path: 'events', component: AdminEvents },
-            { path: 'child-two', component: ChildTwo }
+            { path: 'communities', component: AdminCommunities }
         ]
     }
 ]

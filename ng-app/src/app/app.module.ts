@@ -27,7 +27,7 @@ import { UserService } from './user/user.service';
 import {PublicComponent} from './public.component';
 import {PrivateComponent} from './admin/admin.component';
 import AdminEvents from './admin/admin-events.component';
-import ChildTwo from './admin/child-two';
+import AdminCommunities from './admin/admin-communities.component';
 
 import { LoginComponent } from './login/login.component';
 import { LoginService } from './login/login.service';
@@ -40,7 +40,7 @@ import { HttpClient } from "./HttpClient/httpClient";
   declarations: [
     AppComponent, NavbarComponent, FooterComponent, HomeComponent, EventsComponent, EventDetailComponent,
     CommunitiesComponent,CommunityDetailComponent,CommunitiesCreate, UserComponent, LoginComponent,EventCreateComponent,
-    PrivateComponent,AdminEvents,ChildTwo,PublicComponent
+    PrivateComponent,AdminEvents,AdminCommunities,PublicComponent
 
   ],
   imports: [
