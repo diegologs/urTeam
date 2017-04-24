@@ -31,7 +31,7 @@ public class CommunityRestController {
 
 	 
 	interface CompleteNews extends News.BasicNews{} 
-	interface CompleteCommunity extends Community.BasicCommunity, Community.CommunityUsers, Community.CommunityNews, User.MinimalUser, BasicNews {
+	interface CompleteCommunity extends Community.MinimalCommunity,Community.BasicCommunity, Community.CommunityUsers, Community.CommunityNews, User.MinimalUser, BasicNews {
 	}
 	// 
 	
