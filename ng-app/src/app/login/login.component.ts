@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { LoginService } from './login.service';
 import { User } from '../user/user.model';
 import { UserService } from '../user/user.service';
+import { HttpClient } from '../HttpClient/httpClient';
 
 @Component({
   selector: 'navbar2',
@@ -23,7 +24,7 @@ export class LoginComponent{
   passwordHash:string;
 
   
-  constructor(private sessionService: LoginService, private router: Router, private userService: UserService) {
+  constructor(private http: HttpClient,private sessionService: LoginService, private router: Router, private userService: UserService) {
   }
 
   logIn(username: string, password: string) {
@@ -31,7 +32,10 @@ export class LoginComponent{
       user => {
         this.userLogged = user;
       },
-      error => console.log("Fail trying to login.")
+      error => {
+        console.log("Fail trying to login.")
+        this.http.sessionData.isLogged = false;
+      }
     );
   }
 

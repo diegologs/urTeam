@@ -25,5 +25,5 @@ export default class AdminUsers implements OnInit {
         console.log(error);
       }
     )
-  } 
+  }
 }

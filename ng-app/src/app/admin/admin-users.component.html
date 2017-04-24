@@ -1,1 +1,14 @@
-hola
+<div class="container-fluid">
+  <div *ngFor="let user of users">
+    <div class="col-sm-10">
+      <h1 [routerLink]="['../../users', user.nickname]">{{user.nickname}}</h1>
+      <hr>
+      <div *ngFor="let rol of user.roles" class="badge">{{rol}} </div>
+      <!--{{user.roles}}-->
+    </div>
+    <div class="col-sm-2 group-button">
+      <br>
+      <!--<h2 style="color: red;"> <i class="fa fa-trash-o" aria-hidden="true"></i></h2>-->
+    </div>
+  </div>
+</div>

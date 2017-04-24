@@ -70,6 +70,7 @@ public class User{
 	private String avatar = "avatar";
 
 	@ElementCollection(fetch = FetchType.EAGER)
+	@JsonView(MinimalUser.class)
 	private List<String> roles;
 
 	
