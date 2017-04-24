@@ -8,7 +8,7 @@ import { UserService } from '../user/user.service';
 @Component({
   selector: 'navbar2',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent{
 
