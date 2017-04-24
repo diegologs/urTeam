@@ -17,6 +17,7 @@ import { PublicComponent } from './public.component';
 import { PrivateComponent } from './admin/admin.component';
 import AdminEvents from './admin/admin-events.component';
 import AdminCommunities from './admin/admin-communities.component';
+import AdminUsers from './admin/admin-users.component';
 
 
 
@@ -54,7 +55,8 @@ const appRoutes: Routes = [
         children: [
             { path: '', redirectTo: 'events', pathMatch: 'full' },
             { path: 'events', component: AdminEvents },
-            { path: 'communities', component: AdminCommunities }
+            { path: 'communities', component: AdminCommunities },
+            { path: 'users', component: AdminUsers }
         ]
     }
 ]

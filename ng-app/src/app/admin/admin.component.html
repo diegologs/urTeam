@@ -2,37 +2,37 @@
   <div class="sidebar" data-color="blue" data-image="../assets/images/cp-left-sidebar.jpg">
     <div class="sidebar-wrapper">
       <div class="logo">
-        <a href="index.html" class="simple-text">
+        <a href="../" class="simple-text">
                     urTeam
                 </a>
       </div>
       <ul class="nav">
-        <li>
+        <!--<li>
           <a href="controlPanel.html">
             <i class="fa fa-user-circle-o"></i>
             <p>Editar perfil</p>
           </a>
-        </li>
-        <li>
+        </li>-->
+        <!--<li>
           <a href="config-changePass.html">
             <i class="fa fa-key"></i>
             <p>Cambiar contraseña</p>
           </a>
-        </li>
+        </li>-->
         <li>
-          <a href="config-manageUsers.html">
+          <a [routerLink]="['users']">
             <i class="fa fa-user"></i>
             <p>Gestión de usuarios</p>
           </a>
         </li>
         <li>
-          <a href="config-manageGroups.html">
+          <a [routerLink]="['communities']">
             <i class="fa fa-users"></i>
             <p>gestión de comunidades</p>
           </a>
         </li>
         <li>
-          <a href="config-manageEvents.html">
+          <a [routerLink]="['events']">
             <i class="fa fa-flag"></i>
             <p>Gestión de eventos</p>
           </a>
