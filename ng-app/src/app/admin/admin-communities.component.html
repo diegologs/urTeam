@@ -1,25 +1,28 @@
-<div *ngFor="let group of communities" >
-   
-     <a [routerLink]="['../communities', group.id]">
-            <div class="row group">
-                <div class="group-info">
-                    
-                   
-                    <div class="col-sm-2 group-image" *ngIf="group.main_photo">
-                        <img class="img-circle img-responsive group-image" width="110px" src="https://localhost:8443/image/community-avatar/{{group.communityId}}/{{group.main_photo}}">
-                    </div>
+<div class="container">
+    <div *ngFor="let group of communities" >
+    
+    
+                
 
-                    <div class="col-sm-8">
-                        <h1 class="group-name">{{group.name}}</h1>
-                        <div class="badge">{{group.sport}}</div>
-                       
-                        <hr>
-                        <div class="group-members">Miembros: {{group.communityUsers.length}}</div>
-                    </div>
-                    <!--<div class="col-sm-2 group-button">
-                        <button class="btn btn-default group-btn">UNIRME</button>
-                    </div>-->
-                </div>
-            </div>
-        </a>
+                        <div class="col-sm-10">
+                            <h1 [routerLink]="['../../communities', group.id]" class="group-name">{{group.name}}</h1>
+                            <div class="badge">{{group.sport}}</div>
+                        
+                            <hr>
+                            <div class="group-members">Miembros: {{group.communityUsers.length}}</div>
+                        </div>
+                        <div class="col-sm-2 group-button">
+                        <br>
+                        <h2 style="color: red;" (click)="deleteCommunity(group.id)"> <i class="fa fa-trash-o" aria-hidden="true"></i></h2>
+                        </div>
+
+                        
+                
+        
+    </div>
+     
   </div>
+
+  <div class="styleMoreEvents">
+        <button id="btnMoreEvents" type="button" class="btn mybtn-succes btnMoreEvents" (click)="moreGroups()">{{moreGroupsButtonText}}</button>
+      </div>
