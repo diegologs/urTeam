@@ -49,7 +49,7 @@
     </ul>
     <ul *ngIf="!sessionService.getisLogged()" class="nav navbar-nav navbar-right minav">
       <li>
-        <a data-toggle="modal" data-target="#myModal_editEventInfo">Iniciar Sesión / Registro
+        <a [routerLink]="['/login']">Iniciar Sesión / Registro
     </a>
       </li>
     </ul>

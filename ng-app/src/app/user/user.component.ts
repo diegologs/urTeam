@@ -1,16 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-
 import { UserService } from './user.service';
 import { User } from './user.model';
 import { Event } from '../events/events.model';
 import { Community } from '../communities/community.model';
 
 @Component({
+  selector: 'user-profile',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
 })
-export class UserComponent{
+export class UserComponent implements OnInit {
+
   user: User;
 
   constructor(private router:Router, activatedRoute: ActivatedRoute, private service: UserService){
@@ -21,5 +22,10 @@ export class UserComponent{
           },
           error => console.error(error)
       );
+  }
+
+
+  ngOnInit(){
+
   }
 }
