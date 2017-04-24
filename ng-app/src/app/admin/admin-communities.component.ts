@@ -17,6 +17,8 @@ export default class AdminCommunities implements OnInit {
   groupsPageActual: number;
   moreGroupsButtonText: string;
 
+  communityID: number;
+
      imgUrl = "https://localhost:8443/image/event-avatar/aleatorio/default-mainphoto";
 
   constructor(private router:Router, private service: CommunityService, private sessionService: LoginService){}
@@ -55,6 +57,37 @@ export default class AdminCommunities implements OnInit {
     }
   }
 
+  deleteCommunity(id: number){
+
+    this.service.deleteGroup(id).subscribe(
+      response => {
+        
+        this.getCommunitys();
+        
+      },
+      error => console.log(error),
+    )
+   
+
+
+  }
+
+  getCommunitys() {
+   this.groupsPage = 0;
+    this.moreGroupsButtonText = "Ver Más";
+    this.service.getGroups(this.groupsPage).subscribe(
+      communities => {
+        this.groupsPage++;
+        this.communities = communities.content;
+        this.groupsPageActual = communities.totalPages;
+       
+      },
+      error => {
+        console.log(error);
+      }
+    )
+
+  }
   
  
 }

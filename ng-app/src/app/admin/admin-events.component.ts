@@ -51,4 +51,39 @@ export default class AdminEvents implements OnInit {
       this.moreEventsButtonText = 'No hay mas resultados';
     }
   }
+
+deleteEvent(id: number){
+
+    this.service.deleteEvent(id).subscribe(
+      response => {
+        
+        this.getEvents();
+        
+      },
+      error => console.log(error),
+    )
+   
+
+
+  }
+
+  getEvents() {
+   this.eventsPage = 0;
+    this.moreEventsButtonText = "Ver Más";
+    this.service.getEvents(this.eventsPage).subscribe(
+      events => {
+        this.eventsPage++;
+        this.events = events.content;
+        this.eventsPageActual = events.totalPages;
+       
+      },
+      error => {
+        console.log(error);
+      }
+    )
+
+  }
+  
+ 
+
 }
