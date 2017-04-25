@@ -138,7 +138,7 @@ public class EventService {
 
 				if (urteamService.uploadImageFile(file, filename, ConstantsUrTeam.EVENT_AVATAR,event.getEventId())) {
 					event.setMain_photo(filename);
-					save(event);
+					eventRepo.save(event);
 				}
 		} catch (Exception e) {	
 			e.printStackTrace();
