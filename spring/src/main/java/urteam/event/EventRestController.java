@@ -1,6 +1,7 @@
 package urteam.event;
 
 import java.io.IOException;
+import java.text.ParseException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -120,6 +121,23 @@ public class EventRestController {
 		}
 
 	}
+	
+	@JsonView(CompleteEvent.class)
+	@RequestMapping(value = "/{id}/avatar", method = RequestMethod.PUT)
+	public ResponseEntity<Event> setImage(@PathVariable long id, @RequestBody MultipartFile file)
+			throws ParseException {
+
+		Event event = eventService.findOne(id);
+
+		eventService.setImage(event, file);
+
+		if (event != null) {
+			return new ResponseEntity<Event>(event, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Event>(HttpStatus.UNAUTHORIZED);
+		}
+	}
+	
 
 	@JsonView(CompleteEvent.class)
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
