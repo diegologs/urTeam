@@ -19,13 +19,37 @@ export class EventCreateComponent{
   sport:string;
   info:string;
 
+  eventImage: any;
+
+  event: Event;
+
   constructor(private router:Router, activatedRoute: ActivatedRoute, private service: EventService,private sessionService: LoginService){}
 
   eventcreate(){
     let event: Event;
     event = {name: this.name, place: this.place, price:this.price,start_date:this.start_date,end_date:this.end_date,sport:this.sport,info:this.info};
     this.service.createEvent(event).subscribe(
-        event => console.log(event)
+      
+            event =>{ this.event = event;
+            this.updatePhoto(event.id);
+            },
+            error => console.error(error),
+           
     );
+  }
+
+  updatePhoto(id: number){
+         let formData = new FormData();
+        formData.append('file', this.eventImage, this.eventImage.name);
+
+        this.service.setPhoto(id, formData).subscribe(
+            event => this.event = event,
+            error => console.error(error)
+        )
+    }
+
+  selectFile($event) {
+    this.eventImage = $event.target.files[0];
+    console.log("Selected file: " + this.eventImage.name + " type:" + this.eventImage.type + " size:" + this.eventImage.size);
   }
 }
