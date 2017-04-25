@@ -33,6 +33,7 @@ export class LoginComponent{
       },
       error => console.log("Fail trying to login.")
     );
+    this.router.navigateByUrl('');
   }
 
   checkLogged(){
@@ -53,5 +54,6 @@ export class LoginComponent{
     this.userService.createUser(user).subscribe(
         event => console.log(event)
     );
+    this.router.navigateByUrl('');
   }
 }
