@@ -128,5 +128,21 @@ public class EventService {
 		return null;
 	}
 	
+	public void setImage(Event event, MultipartFile file) {
+
+		try {
+				SimpleDateFormat formater = new SimpleDateFormat("mmddyyyy-hhMMss");
+				Date date = new Date();
+
+				String filename = "avatar-" + formater.format(date);
+
+				if (urteamService.uploadImageFile(file, filename, ConstantsUrTeam.EVENT_AVATAR,event.getEventId())) {
+					event.setMain_photo(filename);
+					eventRepo.save(event);
+				}
+		} catch (Exception e) {	
+			e.printStackTrace();
+		}
+	}
 
 }

@@ -38,7 +38,7 @@
                
                 <div class="form-group">
                     <label for="eventImage">Imagen *</label>
-                    <input type="file" class="form-control-file" name="file" aria-describedby="fileHelp">
+                     <input type="file" class="form-control-file" id="eventAvatar" aria-describedby="fileHelp" (change)="selectFile($event)">
                     <small id="fileHelp" class="form-text text-muted">Tamaño recomendado 200px x 200px</small>
                 </div>     
                 <div style="text-align:center;">
