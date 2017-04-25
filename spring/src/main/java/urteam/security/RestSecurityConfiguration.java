@@ -26,7 +26,7 @@ public class RestSecurityConfiguration extends WebSecurityConfigurerAdapter {
 		//http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/events/**").hasRole("USER");		
 		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/events/**").hasRole("USER");
 		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/events/**").hasRole("USER");
-		http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/events/**").hasRole("ADMIN");
+		//http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/events/**").hasRole("ADMIN");
 		
 		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/users/**").hasRole("USER");
 		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/users/**").hasRole("USER");	
@@ -39,7 +39,7 @@ public class RestSecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/sports/**").hasRole("ADMIN");		
 			
 		
-		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/groups/**").hasRole("USER");
+		//http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/groups/**").hasRole("USER");
 		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/groups/**").hasRole("USER");
 		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/groups/**").hasRole("USER");
 		http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/groups/{id}/followers").hasRole("USER");

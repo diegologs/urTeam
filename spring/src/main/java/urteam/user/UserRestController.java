@@ -32,7 +32,7 @@ public class UserRestController {
 	}
 
 	public interface CompleteUser
-			extends User.MinimalUser, User.CompleteUser, User.BasicUser, Event.BasicEvent, Community.BasicCommunity {
+			extends User.MinimalUser, User.CompleteUser, User.BasicUser, Event.BasicEvent, Community.MinimalCommunity {
 	}
 
 	public interface FriendUser extends User.MinimalUser, User.CompleteUser {

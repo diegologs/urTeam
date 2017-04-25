@@ -22,6 +22,7 @@ import urteam.user.User;
 @Entity
 public class Community {
 	
+	public interface MinimalCommunity{}
 	
 	public interface BasicCommunity{}
 	
@@ -30,13 +31,13 @@ public class Community {
 	public interface CommunityNews{}
 	
 	@Id
-	@JsonView(BasicCommunity.class)
+	@JsonView(MinimalCommunity.class)
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	@JsonView(BasicCommunity.class)
 	private String communityId = "aleatorio";
 
-	@JsonView(BasicCommunity.class)
+	@JsonView(MinimalCommunity.class)
 	private String name;
 	@JsonView(BasicCommunity.class)
 	private String info;

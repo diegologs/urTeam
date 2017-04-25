@@ -3,7 +3,7 @@
   <div class="row panel">
     <div class="col-md-4 bg_blur ">
 				<img
-					src="https://localhost:8443/image/event-avatar/aleatorio/default-mainphoto">
+					src="https://localhost:8443/api/events/{{event.id}}/avatar">
 
     </div>
     <div class="col-md-8  col-xs-12">
@@ -11,12 +11,12 @@
         <h1>{{event.name}}</h1>
         <hr class="hr-yellow">
         <h4>
-          <i class="fa fa-newspaper-o"></i><span>
-							{{event.start_date}} </span><i class="fa fa-newspaper-o"></i><span>
-							{{event.end_date}} </span>
+          <span>
+							<strong>Fecha inicio: </strong>{{event.start_date}} </span><br>
+							<strong>Fecha fin: </strong>{{event.end_date}}
         </h4>
         <h4>
-          <i class="fa fa-newspaper-o"></i><span> {{event.place}}</span>
+          <strong>Ubicación: </strong><span> {{event.place}}</span>
         </h4>
         <h4>Deporte: {{event.sport}}</h4>
         <h4>Creado por: {{ownerId.nickname}}</h4>
@@ -32,10 +32,10 @@
   <div class="row nav">
     <div class="col-md-12 col-xs-12">
       <div *ngIf="event.participants_IDs" class="col-md-6 col-xs-3 well" data-toggle="modal" data-target="#myModalEventMembers">
-        <i class="fa fa-newspaper-o" aria-hidden="true"></i> {{event.participants_IDs.length}} Miembros
+        {{event.participants_IDs.length}} Miembros
       </div>
       <div class="col-md-6 col-xs-3 well">
-        {{event.price}} <i class="fa fa-newspaper-o"></i>
+        {{event.price}} <span> €</span>
       </div>
       <!--<div class="col-md-4 col-xs-3 well" data-toggle="modal" data-target="#modalShareEvent">
         <i class="fa fa-newspaper-o"></i>
@@ -45,7 +45,7 @@
   <!-- END EVENT BAR -->
   <!-- EVENT DESCRIPTION -->
   <div class="info">
-    <h2><i class="fa fa-newspaper-o" aria-hidden="true"></i> Información</h2>
+    <h2> Información</h2>
     <hr>
     <div class="info-text">{{event.info}}</div>
     <br>
@@ -57,7 +57,7 @@
   </div>
   <!-- END EVENT DESCRIPTION -->
   <h3>
-    <i class="fa fa-newspaper-o" aria-hidden="true"> </i> Fotos
+   Fotos
   </h3>
   <!--
 		{{#owner}}
@@ -187,7 +187,7 @@
       <div class="modal-body">
         <ul>
           <li *ngFor="let member of participants_IDs">
-            <i class="fa fa-newspaper-o" aria-hidden="true"></i> <a data-dismiss="modal" [routerLink]="['/public/users/',member.nickname]">{{member.nickname}}</a>
+            <a data-dismiss="modal" [routerLink]="['/public/users/',member.nickname]">{{member.nickname}}</a>
           </li>
         </ul>
       </div>
