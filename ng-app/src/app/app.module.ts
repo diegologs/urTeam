@@ -34,6 +34,8 @@ import { LoginComponent } from './login/login.component';
 import { LoginService } from './login/login.service';
 import { HttpClient } from "./HttpClient/httpClient";
 
+import { Ng2GoogleChartsModule } from 'ng2-google-charts';
+
 
 
 
@@ -50,7 +52,8 @@ import { HttpClient } from "./HttpClient/httpClient";
     HttpModule,
     NgbModule.forRoot(),
     routing,
-    Ng2PageScrollModule.forRoot()
+    Ng2PageScrollModule.forRoot(),
+    Ng2GoogleChartsModule
   ],
   providers: [EventService, CommunityService , LoginService, UserService,HttpClient,appRoutingProviders],
   bootstrap: [AppComponent]

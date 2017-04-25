@@ -1,3 +1,4 @@
+
 <div *ngIf="user">
   <div class="row profile">
 
@@ -154,7 +155,11 @@
 					<br>
 					{{/userSportList}}-->
           <hr class="hr-yellow">
-          <div id="donutchart" class="container-fluid " style="width: auto; height: 500px;"></div>
+          <!--<div id="donutchart" class="container-fluid " style="width: auto; height: 500px;"></div>         -->
+
+          <google-chart [data]="pieChartOptions"></google-chart>
+
+
           <!-- 
 					<div id="curve_chart" class="container-fluid"
 						style="width: auto; height: 500px"></div>
