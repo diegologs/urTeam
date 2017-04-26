@@ -23,11 +23,14 @@ export class EventCreateComponent{
 
   event: Event;
 
+  imgUrl = "https://localhost:8443/image/event-avatar/aleatorio/default-mainphoto";
+
+
   constructor(private router:Router, activatedRoute: ActivatedRoute, private service: EventService,private sessionService: LoginService){}
 
   eventcreate(){
     let event: Event;
-    event = {name: this.name, place: this.place, price:this.price,start_date:this.start_date,end_date:this.end_date,sport:this.sport,info:this.info};
+    event = {name: this.name, place: this.place, price:this.price,start_date:this.start_date,end_date:this.end_date,sport:this.sport,info:this.info,main_photo:this.imgUrl};
     this.service.createEvent(event).subscribe(
       
             event =>{ this.event = event;

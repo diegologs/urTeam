@@ -215,22 +215,13 @@
           <!--/row-->
           <hr class="hr-yellow">
           <div class="row friendrow">
-            <!--{{#userFollowing}}
-						<div class="col-sm-6">
-							<a href="/user/{{nickname}}">
-								<div class="friend">
-									<div class="col-sm-3 friend-image">
-										<img class="img-circle img-responsive group-image"
-											width="110px" src="/image/user-avatar/{{id}}/{{avatar}}"
-											alt="following avatar">
-									</div>
-									<div class="col-sm-9 friend-name">
-										<h3>{{username}} {{surname}}</h3>
-									</div>
-								</div>
-							</a>
-						</div>
-						{{/userFollowing}}-->
+
+                <div class="container-fluid">
+                    <div *ngFor="let friend of user.following">
+                        <p>{{friend.name}},{{friend.surname}}</p>
+                    </div>
+                </div>
+        
           </div>
         </div>
       </div>

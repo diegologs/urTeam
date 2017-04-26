@@ -15,24 +15,35 @@ export class UserComponent implements OnInit {
 
   user: User;
 
+
 pieChartOptions =  {
   chartType: 'PieChart',
   dataTable: [
-    ['Task', 'Hours per Day'],
-    ['Work',     11],
-    ['Eat',      2],
-    ['Commute',  2],
-    ['Watch TV', 2],
-    ['Sleep',    7]
+    ['Task', 'Hours per Day']
   ],
-  options: {'title': 'Tasks', 'pieHole': '0.4'},
+  options: {
+    'title': 'Porcentaje mensual',
+     'pieHole': '0.4',
+     'backgroundColor':'transparent',
+     'legend':{'position': 'right', 'textStyle': {'color': 'white', 'fontSize': '16'}},
+     'titleTextStyle':{'color':'white','fontSize':'24'}
+    },
 };
 
   constructor(private router:Router, activatedRoute: ActivatedRoute, private service: UserService){
       let nickname = activatedRoute.snapshot.params['nickname'];
       service.getUser(nickname).subscribe(
           user => {
-            this.user = user
+            this.user = user;
+            if(this.user.sportStats['Running'] != null){
+              this.pieChartOptions.dataTable.push(['Running',this.user.sportStats['Running'].sportTotalTime]);
+            }
+            if(this.user.sportStats['Mountain Bike'] != null){
+              this.pieChartOptions.dataTable.push(['Mountain Bike',this.user.sportStats['Mountain Bike'].sportTotalTime]);
+            }
+            if(this.user.sportStats['Roller'] != null){
+              this.pieChartOptions.dataTable.push(['Roller',this.user.sportStats['Roller'].sportTotalTime]);
+            }
           },
           error => console.error(error)
       );

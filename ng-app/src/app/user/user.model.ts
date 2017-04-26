@@ -1,4 +1,5 @@
 import { Community } from '../communities/community.model';
+import { UserSportStats } from '../stat/userSportsStats.model';
 
 export interface User {
     id?: number;
@@ -17,4 +18,5 @@ export interface User {
     communityList?: Community[];
     eventList?: Event[];
     passwordHash?: string;
+    sportStats?: UserSportStats;
 }
