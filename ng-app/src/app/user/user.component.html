@@ -106,16 +106,15 @@
               <h3>
                 <i class="fa fa-flag-checkered" aria-hidden="true"></i> Logros
               </h3>
+              
             </div>
           </div>
           <!--/row-->
           <hr class="hr-yellow">
           <div class="row">
             <div class="skillBar">
-              <!--<h4>Nivel {{level}}</h4>
-							<div class="skillBarContainer">
-								<div class="skillBarValue" style="width: {{progress}}%"></div>
-							</div>-->
+              <h4>Nivel {{level}}</h4>
+              <p-progressBar [value]="value"></p-progressBar>
             </div>
           </div>
           <br> <br>
@@ -128,7 +127,6 @@
                 <i class="fa fa-line-chart" aria-hidden="true"></i> Progreso
               </h3>
               <div class="col-sm-12">
-
                 <a data-toggle="modal" data-target="#myModal_addStat"><button
 										class="btn mybtn-succes">Añadir sesión</button></a> <br>
               </div>
@@ -155,15 +153,7 @@
 					<br>
 					{{/userSportList}}-->
           <hr class="hr-yellow">
-          <!--<div id="donutchart" class="container-fluid " style="width: auto; height: 500px;"></div>         -->
-
           <google-chart [data]="pieChartOptions"></google-chart>
-
-
-          <!-- 
-					<div id="curve_chart" class="container-fluid"
-						style="width: auto; height: 500px"></div>
-					 -->
         </div>
         <div class="container-fluid info-box" id="communities">
           <div class="row">
@@ -336,17 +326,24 @@
         </div>
         <div class="modal-body">
           <div class="form-container">
-            <!--<form class="form-group" action="/addstats/{{nickname}}" method="post">
-            <label style="color: black;" for="sport">Deporte</label> <select name="sport"> {{#sportList}}
-								<option value="{{name}}">{{name}}</option> {{/sportList}}
-							</select> <br> <label style="color: black;" for="sport">Fecha
-								de realización</label> <input type="date" class="form-control" name="date"> <br> <label style="color: black;" for="sport">Tiempo de sesión</label>            <input type="number" class="form-control" name="sesionTime">
-            <div class="addButton">
+            <form class="form-group" action="" method="post">
+              <label style="color: black;" for="sport">Deporte</label>            
+              <select [(ngModel)]="sport" class="form-control" name="sport"required="required">
+                      <option>Mountain Bike</option>
+                      <option>Running</option>
+                      <option>Roller</option>
+              </select>
               <br>
-              <button type="submit" class="btn mybtn-succes addButton">+</button>
-              <input type="hidden" name="_csrf" value="{{token}}" />
-            </div>
-          </form>-->
+              <label style="color: black;" for="sport">Fecha de realización</label>
+              <input type="date" [(ngModel)]="date" class="form-control" name="date">
+              <br>
+              <label style="color: black;" for="sport">Tiempo de sesión</label>
+              <input type="number" [(ngModel)]="sesionTime" class="form-control" name="sesionTime">
+              <div class="addButton">
+                <br>
+                <button type="submit" class="btn mybtn-succes addButton"  (click)="addStats(sport, date, sesionTime)">+</button>
+              </div>
+            </form>
           </div>
         </div>
       </div>

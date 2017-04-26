@@ -4,7 +4,9 @@ import { UserService } from './user.service';
 import { User } from './user.model';
 import { Event } from '../events/events.model';
 import { Community } from '../communities/community.model';
-import { ChartsModule } from 'ng2-charts';
+import { StatsService } from '../stat/stats.service';
+import { Stat } from '../stat/stat.model';
+
 
 @Component({
   selector: 'user-profile',
@@ -14,6 +16,12 @@ import { ChartsModule } from 'ng2-charts';
 export class UserComponent implements OnInit {
 
   user: User;
+  level: number = 0;
+  value: number = 0;
+  date: string;
+  sport: string;
+  
+
 
 
 pieChartOptions =  {
@@ -30,11 +38,15 @@ pieChartOptions =  {
     },
 };
 
-  constructor(private router:Router, activatedRoute: ActivatedRoute, private service: UserService){
+  constructor(private router:Router, activatedRoute: ActivatedRoute, private service: UserService, 
+  //private statService: StatsService
+  ){
       let nickname = activatedRoute.snapshot.params['nickname'];
       service.getUser(nickname).subscribe(
           user => {
             this.user = user;
+            this.value = (user.score % 1000 ) / 10;
+            this.level = Math.floor(user.score /1000);
             if(this.user.sportStats['Running'] != null){
               this.pieChartOptions.dataTable.push(['Running',this.user.sportStats['Running'].sportTotalTime]);
             }
@@ -49,8 +61,14 @@ pieChartOptions =  {
       );
   }
 
+  addStats(sport: string, date: string, sesionTime: number){
+    let stat: Stat;
+    stat= {date:date, totalSesionTime:sesionTime};
+    this.sport = sport;
+    //this.statService.createUserStats(this.user.nickname, this.sport, this.stat);
+  }
+
 
   ngOnInit(){
-
-  }
+    }
 }

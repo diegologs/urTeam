@@ -20,7 +20,7 @@ export class StatsService{
 			.catch(error => this.handleError(error));
 	}
 
-    createUserStats(nickname: string, sportName: string, userStat) {
+    createUserStats(nickname: string, sportName: string, userStat: Stat) {
 		return this.http.post(BASE_URL + nickname +'/'+sportName,userStat)
 			.map(response => response.json())
 			.catch(error => this.handleError(error));

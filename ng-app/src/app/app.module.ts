@@ -35,6 +35,7 @@ import { LoginService } from './login/login.service';
 import { HttpClient } from "./HttpClient/httpClient";
 
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
+import { ProgressBarModule } from 'primeng/primeng';
 
 
 
@@ -53,7 +54,9 @@ import { Ng2GoogleChartsModule } from 'ng2-google-charts';
     NgbModule.forRoot(),
     routing,
     Ng2PageScrollModule.forRoot(),
-    Ng2GoogleChartsModule
+    Ng2GoogleChartsModule,
+    ProgressBarModule
+
   ],
   providers: [EventService, CommunityService , LoginService, UserService,HttpClient,appRoutingProviders],
   bootstrap: [AppComponent]
