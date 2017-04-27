@@ -18,7 +18,7 @@
           <div class="profile-usertitle-name">@{{user.nickname}}</div>
           <div class="profile-usertitle-name">
             <!--{{numberOfFollowers}} -->
-            Seguidore/s
+            {{user.followers.length}} Seguidore/s
           </div>
           <div class="profile-usertitle-name">{{user.city}}, {{user.country}}
           </div>
@@ -27,17 +27,11 @@
         </div>
         <!-- END SIDEBAR userpage TITLE -->
         <!-- SIDEBAR BUTTONS -->
-        <div class="profile-userbuttons">
-          <!--{{#buttonfollowing}}
-					<form action="/user/{{nickname}}/follow" method="post">
-						{{#isfollowed}} <input type="submit"
-							class="btn btn-sm mybtn-succes" value="Dejar de seguir">
-						<input type="hidden" name="_csrf" value="{{token}}" />
-						{{/isfollowed}} {{^isfollowed}} <input type="submit"
-							class="btn btn-sm mybtn-succes" value="Seguir"> <input
-							type="hidden" name="_csrf" value="{{token}}" /> {{/isfollowed}}
-					</form>
-					{{/buttonfollowing}}-->
+        <div *ngIf="sessionService.getisLogged()" class="profile-userbuttons">
+          <div *ngIf="checkNotMe()">
+            <button  *ngIf="checkIsMyFriend()" class="btn btn-default group-btn" (click)="follow()">Dejar de seguir</button>
+            <button *ngIf="!checkIsMyFriend()" class="btn btn-default group-btn" (click)="follow()">Seguir</button>
+          </div>
         </div>
         <!-- END SIDEBAR BUTTONS -->
         <!-- SIDEBAR MENU -->

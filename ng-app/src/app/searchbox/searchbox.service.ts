@@ -10,7 +10,7 @@ import { HttpClient } from '../HttpClient/httpClient';
 const BASE_URL = 'https://localhost:8443/api/searchbox/';
 
 @Injectable()
-export class NavbarService {
+export class SearchBoxService {
 
 	constructor(private http: HttpClient) { }
 

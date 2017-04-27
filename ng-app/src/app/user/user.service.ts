@@ -59,6 +59,12 @@ export class UserService{
 		.catch(error => this.handleError(error));
 	}
 
+	putUserFriends(userName :string){
+		return this.http.put(BASE_URL+userName+'/friends',null)
+		.map(response => response.json())
+		.catch(error => this.handleError(error));
+	}
+
 	getUserFollowers(userName :string){
 		return this.http.get(BASE_URL+userName+'/followers')
 		.map(response => response.json())
