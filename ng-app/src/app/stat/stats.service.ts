@@ -5,7 +5,7 @@ import 'rxjs/Rx';
 
 import { HttpClient } from '../HttpClient/httpClient';
 import {Stat} from './stat.model';
-
+import { UserSportStats } from './userSportsStats.model';
 
 const BASE_URL = 'https://localhost:8443/api/stats/';
 
@@ -21,8 +21,10 @@ export class StatsService{
 	}
 
     createUserStats(nickname: string, sportName: string, userStat: Stat) {
-		return this.http.post(BASE_URL + nickname +'/'+sportName,userStat)
-			.map(response => response.json())
+		let url = BASE_URL + nickname +'/'+sportName;
+		return this.http.post(url,userStat)
+			.map(response =>
+				response.json())
 			.catch(error => this.handleError(error));
 	}
 

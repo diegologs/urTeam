@@ -18,7 +18,9 @@
     "prefix": "app",
     "styles": ["styles.css"
     ],
-    "scripts": [],
+    "scripts": [
+      "../node_modules/chart.js/dist/Chart.js"
+    ],
     "environmentSource": "environments/environment.ts",
     "environments": {
       "dev": "environments/environment.ts",

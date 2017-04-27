@@ -100,6 +100,7 @@
           <div class="row">{{user.bio}}</div>
           <br> <br>
         </div>
+
         <div class="container-fluid info-box" id="goals">
           <div class="row">
             <div class="col-sm-12">
@@ -117,12 +118,11 @@
               <p-progressBar [value]="value"></p-progressBar>
             </div>
           </div>
-          <br> <br>
         </div>
+
         <div class="container-fluid info-box" id="progress">
           <div class="row">
             <div class="col-sm-12">
-
               <h3>
                 <i class="fa fa-line-chart" aria-hidden="true"></i> Progreso
               </h3>
@@ -132,9 +132,79 @@
               </div>
             </div>
           </div>
-          <!--/row-->
-          <!--{{#userSportList}}
-					<div class="statsTable">
+          <hr class="hr-yellow">
+          <!--/row-->                    
+          <p-tabView>
+              <p-tabPanel header="Runing">
+                <div class="ui-grid-col-3">
+                    <h3>Fecha</h3>
+                </div>
+                <div class="ui-grid-col-3">
+                    <h3> Duracion</h3>
+                </div>
+                <p-dataList [value]="sport1">
+                    <ng-template let-sport1 pTemplate="item1">
+                        <div class="ui-grid ui-grid-responsive ui-fluid">
+                          <div class="ui-grid-row">
+                            <div class="ui-grid-col-3">
+                            {{sport1.date}}
+                            </div>
+                            <div class="ui-grid-col-3">
+                            {{sport1.totalSesionTime}}
+                            </div>
+                          </div>
+                        </div>
+                    </ng-template>
+                </p-dataList>
+              </p-tabPanel>
+              <p-tabPanel header="Roller">
+                <div class="ui-grid-col-3">
+                    <h3>Fecha</h3>
+                </div>
+                <div class="ui-grid-col-3">
+                    <h3> Duracion</h3>
+                </div>
+                <p-dataList [value]="sport2">
+                    <ng-template let-sport2 pTemplate="item2">
+                        <div class="ui-grid ui-grid-responsive ui-fluid">
+                          <div class="ui-grid-row">
+                            <div class="ui-grid-col-3">
+                            {{sport2.date}}
+                            </div>
+                            <div class="ui-grid-col-3">
+                            {{sport2.totalSesionTime}}
+                            </div>
+                          </div>
+                        </div>
+                    </ng-template>
+                </p-dataList>
+              </p-tabPanel>
+              <p-tabPanel header="Mountain Bike"> 
+                <div class="ui-grid-col-3">
+                    <h3>Fecha</h3>
+                </div>
+                <div class="ui-grid-col-3">
+                    <h3> Duracion</h3>
+                </div>                  
+                <p-dataList [value]="sport3">
+                    <ng-template let-sport3 pTemplate="item3">
+                       <div class="ui-grid ui-grid-responsive ui-fluid">
+                          <div class="ui-grid-row">
+                            <div class="ui-grid-col-3">
+                            {{sport3.date}}
+                            </div>
+                            <div class="ui-grid-col-3">
+                            {{sport3.totalSesionTime}}
+                            </div>
+                          </div>
+                        </div>
+                    </ng-template>
+                </p-dataList>
+              </p-tabPanel>
+          </p-tabView>
+
+
+					<!--<div class="statsTable">
 						<h4>{{key}}</h4>
 						<hr class="hr-yellow">
 						<table style="width: 100%">
@@ -142,19 +212,17 @@
 								<th>Fecha</th>
 								<th>Tiempo</th>
 							</tr>
-							{{#value.stats}}
+							ngFor
 							<tr>
 								<td>{{date}}</td>
 								<td>{{totalSesionTime}}</td>
 							</tr>
-							{{/value.stats}}
 						</table>
-					</div>
-					<br>
-					{{/userSportList}}-->
+					</div>-->
           <hr class="hr-yellow">
           <google-chart [data]="pieChartOptions"></google-chart>
         </div>
+
         <div class="container-fluid info-box" id="communities">
           <div class="row">
             <div class="col-sm-12">
@@ -335,13 +403,13 @@
               </select>
               <br>
               <label style="color: black;" for="sport">Fecha de realización</label>
-              <input type="date" [(ngModel)]="date" class="form-control" name="date">
+              <input type="date" [(ngModel)]="formData.date" class="form-control" name="date">
               <br>
               <label style="color: black;" for="sport">Tiempo de sesión</label>
-              <input type="number" [(ngModel)]="sesionTime" class="form-control" name="sesionTime">
+              <input type="number" [(ngModel)]="formData.totalSesionTime" class="form-control" name="sesionTime">
               <div class="addButton">
                 <br>
-                <button type="submit" class="btn mybtn-succes addButton"  (click)="addStats(sport, date, sesionTime)">+</button>
+                <button type="submit" class="btn mybtn-succes addButton"  (click)="addStats()" data-dismiss="modal">+</button>
               </div>
             </form>
           </div>

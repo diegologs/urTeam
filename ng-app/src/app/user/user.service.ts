@@ -4,7 +4,9 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 
 import { HttpClient } from '../HttpClient/httpClient';
-import {User} from './user.model';
+import { User } from './user.model';
+import { Stat } from '../stat/stat.model';
+import { UserSportStats } from '../stat/userSportsStats.model';
 
 
 const BASE_URL = 'https://localhost:8443/api/users/';

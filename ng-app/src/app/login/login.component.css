@@ -117,3 +117,73 @@ body {
 .text-red{
 	color: red;
 }
+
+.ui-widget {
+    background: #1a2930;
+    color: #fff;
+}
+
+.ui-widget-content{
+    color: #fff;
+}
+
+.ui-progressbar {
+    height: 1.6em;
+    width: inherit;
+}
+
+.ui-progressbar .ui-progressbar-label {
+    color: #fff;
+}
+.ui-progressbar .ui-progressbar-value{
+     background-color: #c5a431;
+     width: 3em;
+}
+
+.ui-tabview {
+    background: #1a2930;
+    color: #fff;
+}
+
+.ui-tabview .ui-tabview-nav {
+    background: #1a2930;
+    color: #fff;
+}
+
+.ui-tabview .ui-tabview-nav {
+    background: #1a2930;
+    color: #fff;
+}
+
+.ui-widget-header .ui-state-default a,
+.ui-widget-content .ui-state-default a,
+.ui-state-default a {
+    color: #1a2930;
+    background: #f7ce3e;
+}
+
+.ui-widget-header .ui-state-active a,
+.ui-widget-content .ui-state-active a,
+.ui-state-active a {
+    color: #fff;
+    background: #1a2930;
+}
+
+.ui-tabview .ui-tabview-panels {
+    color: #fff;
+}
+
+.ui-datalist{
+    background: #1a2930;
+    color: #fff;
+    border: none;
+}
+
+.ui-datalist .ui-datalist-content{
+    background: #1a2930;
+    color: #fff;
+}
+
+.ui-widget-content{
+    border: none;
+}

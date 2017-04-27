@@ -23,6 +23,7 @@ import { CommunityService} from './communities/communities.service';
 
 import { UserComponent } from './user/user.component';
 import { UserService } from './user/user.service';
+import { StatsService } from './stat/stats.service';
 
 import {PublicComponent} from './public.component';
 import {PrivateComponent} from './admin/admin.component';
@@ -36,6 +37,10 @@ import { HttpClient } from "./HttpClient/httpClient";
 
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 import { ProgressBarModule } from 'primeng/primeng';
+import { ChartModule } from 'primeng/primeng'; 
+import { TabViewModule } from 'primeng/primeng';
+import {DataListModule} from 'primeng/primeng';
+import {DataTableModule,SharedModule} from 'primeng/primeng';
 
 
 
@@ -55,10 +60,14 @@ import { ProgressBarModule } from 'primeng/primeng';
     routing,
     Ng2PageScrollModule.forRoot(),
     Ng2GoogleChartsModule,
-    ProgressBarModule
-
+    ProgressBarModule,
+    ChartModule,
+    TabViewModule,
+    DataListModule,
+    DataTableModule,
+    SharedModule
   ],
-  providers: [EventService, CommunityService , LoginService, UserService,HttpClient,appRoutingProviders],
+  providers: [EventService, CommunityService , LoginService, UserService,HttpClient,appRoutingProviders, StatsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
