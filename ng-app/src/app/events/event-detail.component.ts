@@ -62,8 +62,10 @@ export class EventDetailComponent {
     if (this.sessionService.getisLogged()) {
       let cosa: boolean = (this.event.participants_IDs.find(
         user1 => user1.nickname == this.user.nickname) != undefined);
+      console.log(cosa);
       return cosa;
     }
+    
   }
 
   editInfo() {

@@ -10,6 +10,8 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
+import { SearchBoxService } from './searchbox/searchbox.service';
+import { SearchBoxComponent } from './searchbox/searchbox.component';
 
 import { EventsComponent } from './events/events.component';
 import { EventService} from './events/events.service';
@@ -49,7 +51,7 @@ import {DataTableModule,SharedModule} from 'primeng/primeng';
   declarations: [
     AppComponent, NavbarComponent, FooterComponent, HomeComponent, EventsComponent, EventDetailComponent,
     CommunitiesComponent,CommunityDetailComponent,CommunitiesCreate, UserComponent, LoginComponent,EventCreateComponent,
-    PrivateComponent,AdminEvents,AdminCommunities,AdminUsers,PublicComponent
+    PrivateComponent,AdminEvents,AdminCommunities,AdminUsers,PublicComponent,SearchBoxComponent
 
   ],
   imports: [
@@ -67,7 +69,7 @@ import {DataTableModule,SharedModule} from 'primeng/primeng';
     DataTableModule,
     SharedModule
   ],
-  providers: [EventService, CommunityService , LoginService, UserService,HttpClient,appRoutingProviders, StatsService],
+  providers: [EventService, CommunityService , LoginService, UserService,HttpClient,appRoutingProviders, SearchBoxService, StatsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -19,6 +19,8 @@ import AdminEvents from './admin/admin-events.component';
 import AdminCommunities from './admin/admin-communities.component';
 import AdminUsers from './admin/admin-users.component';
 
+import { SearchBoxComponent } from './searchbox/searchbox.component';
+
 
 
 // const appRoutes = [
@@ -45,7 +47,8 @@ const appRoutes: Routes = [
             { path: 'communities/create', component: CommunitiesCreate },
             { path: 'communities/:id', component: CommunityDetailComponent },
             { path: 'login', component: LoginComponent },
-            { path: 'users/:nickname', component: UserComponent }
+            { path: 'users/:nickname', component: UserComponent },
+            { path: 'search/:criteria', component: SearchBoxComponent },
         ]
     },
 

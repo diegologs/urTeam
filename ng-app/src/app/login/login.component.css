@@ -187,3 +187,13 @@ body {
 .ui-widget-content{
     border: none;
 }
+
+.ui-widget-header {
+ border: none;
+}
+
+.ui-paginator .ui-paginator-page.ui-state-active {
+    background: #f7ce3e;
+    color: #1a2930;
+    border-color: #f7ce3e;
+}

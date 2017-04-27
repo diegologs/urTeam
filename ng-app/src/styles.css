@@ -429,3 +429,20 @@ video.fillWidth {
 	padding-top: 10px;
 	padding-bottom: 10px;
 }
+
+.searchResults{
+    
+    background-color: black;
+    padding: 20px;
+    left: -150px;
+}
+
+.searchBar{
+    display: inline;
+    margin-top: 10px;
+}
+
+.search{
+    margin-top: 10px;
+    color: white;
+}

@@ -1,0 +1,13 @@
+<div class="searchResults">
+  <div *ngFor="let g of communities">
+    <a [routerLink]="['/communities/',g.id]">{{g.name}}</a>
+  </div>
+
+  <div *ngFor="let e of events">
+    <a [routerLink]="['/events/',e.id]">{{e.name}}</a>
+  </div>
+
+  <div *ngFor="let u of users">
+    <a [routerLink]="['/users/',u.nickname]">{{u.nickname}}</a>
+  </div>
+</div>

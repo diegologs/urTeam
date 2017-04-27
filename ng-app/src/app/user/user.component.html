@@ -18,7 +18,7 @@
           <div class="profile-usertitle-name">@{{user.nickname}}</div>
           <div class="profile-usertitle-name">
             <!--{{numberOfFollowers}} -->
-            Seguidore/s
+            {{user.followers.length}} Seguidore/s
           </div>
           <div class="profile-usertitle-name">{{user.city}}, {{user.country}}
           </div>
@@ -27,17 +27,11 @@
         </div>
         <!-- END SIDEBAR userpage TITLE -->
         <!-- SIDEBAR BUTTONS -->
-        <div class="profile-userbuttons">
-          <!--{{#buttonfollowing}}
-					<form action="/user/{{nickname}}/follow" method="post">
-						{{#isfollowed}} <input type="submit"
-							class="btn btn-sm mybtn-succes" value="Dejar de seguir">
-						<input type="hidden" name="_csrf" value="{{token}}" />
-						{{/isfollowed}} {{^isfollowed}} <input type="submit"
-							class="btn btn-sm mybtn-succes" value="Seguir"> <input
-							type="hidden" name="_csrf" value="{{token}}" /> {{/isfollowed}}
-					</form>
-					{{/buttonfollowing}}-->
+        <div *ngIf="sessionService.getisLogged()" class="profile-userbuttons">
+          <div *ngIf="checkNotMe()">
+            <button  *ngIf="checkIsMyFriend()" class="btn btn-default group-btn" (click)="follow()">Dejar de seguir</button>
+            <button *ngIf="!checkIsMyFriend()" class="btn btn-default group-btn" (click)="follow()">Seguir</button>
+          </div>
         </div>
         <!-- END SIDEBAR BUTTONS -->
         <!-- SIDEBAR MENU -->
@@ -73,12 +67,7 @@
               <a pageScroll href="#friends" class="page-scroll"> <i class="fa fa-address-book" aria-hidden="true"></i> Siguiendo
               </a>
             </li>
-            <!--{{^buttonfollowing}}
-						<li><a data-toggle="modal"
-							data-target="#profile-settings-modal"> <i class="fa fa-cogs"
-								aria-hidden="true"> </i>Configuración
-						</a></li> 
-                        {{/buttonfollowing}}-->
+            
           </ul>
         </div>
         <!-- END MENU -->
@@ -142,7 +131,7 @@
                 <div class="ui-grid-col-3">
                     <h3> Duracion</h3>
                 </div>
-                <p-dataList [value]="sport1">
+                <p-dataList [value]="sport1" [paginator]="true" [rows]="5">
                     <ng-template let-sport1 pTemplate="item1">
                         <div class="ui-grid ui-grid-responsive ui-fluid">
                           <div class="ui-grid-row">
@@ -164,7 +153,7 @@
                 <div class="ui-grid-col-3">
                     <h3> Duracion</h3>
                 </div>
-                <p-dataList [value]="sport2">
+                <p-dataList [value]="sport2" [paginator]="true" [rows]="5">
                     <ng-template let-sport2 pTemplate="item2">
                         <div class="ui-grid ui-grid-responsive ui-fluid">
                           <div class="ui-grid-row">
@@ -186,7 +175,7 @@
                 <div class="ui-grid-col-3">
                     <h3> Duracion</h3>
                 </div>                  
-                <p-dataList [value]="sport3">
+                <p-dataList [value]="sport3" [paginator]="true" [rows]="5">
                     <ng-template let-sport3 pTemplate="item3">
                        <div class="ui-grid ui-grid-responsive ui-fluid">
                           <div class="ui-grid-row">
@@ -202,23 +191,6 @@
                 </p-dataList>
               </p-tabPanel>
           </p-tabView>
-
-
-					<!--<div class="statsTable">
-						<h4>{{key}}</h4>
-						<hr class="hr-yellow">
-						<table style="width: 100%">
-							<tr>
-								<th>Fecha</th>
-								<th>Tiempo</th>
-							</tr>
-							ngFor
-							<tr>
-								<td>{{date}}</td>
-								<td>{{totalSesionTime}}</td>
-							</tr>
-						</table>
-					</div>-->
           <hr class="hr-yellow">
           <google-chart [data]="pieChartOptions"></google-chart>
         </div>
