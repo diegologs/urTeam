@@ -155,7 +155,7 @@ export class UserComponent implements OnInit{
       response => {
           this.getUser();
       },
-      error => console.log(error)
+      error => console.log(error) 
     )
   }
 }
