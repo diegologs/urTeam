@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
+import { NavbarService } from './navbar/navbar.service';
 
 import { EventsComponent } from './events/events.component';
 import { EventService} from './events/events.service';
@@ -58,7 +59,7 @@ import { ProgressBarModule } from 'primeng/primeng';
     ProgressBarModule
 
   ],
-  providers: [EventService, CommunityService , LoginService, UserService,HttpClient,appRoutingProviders],
+  providers: [EventService, CommunityService , LoginService, UserService,HttpClient,appRoutingProviders, NavbarService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
