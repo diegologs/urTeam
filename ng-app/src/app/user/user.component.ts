@@ -77,11 +77,14 @@ export class UserComponent implements OnInit{
 
       this.statService.getUserStats(nickname).subscribe(
         stats => {
-          console.log(stats);
+          
           this.stats = stats;
-          this.sport1 = stats['Running'].stats;
-          this.sport2 = stats['Roller'].stats;
-          this.sport3 = stats['Mountain Bike'].stats;
+          if(this.stats.length != 0){
+            console.log(stats);
+            this.sport1 = stats['Running'].stats;
+            this.sport2 = stats['Roller'].stats;
+            this.sport3 = stats['Mountain Bike'].stats;
+          }
 
           this.cols = [
             {field: 'date', header: 'Fecha'},

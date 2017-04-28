@@ -94,6 +94,20 @@ body {
     color: #666;
 }
 
+.profile-userpic {
+        margin: auto;
+        padding: 15px 15px 15px 15px;
+}
+
+.profile-userpic img {
+    /*width: 70%;
+    height: 70%;*/
+    -webkit-border-radius: 50% !important;
+    -moz-border-radius: 50% !important;
+    border-radius: 50% !important;
+    border: 4px solid #f7ce3e;
+}
+
 .btn-register {
     color: #0a1612;
     background-color: #f7ce3e;

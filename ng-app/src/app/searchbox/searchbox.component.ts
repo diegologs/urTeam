@@ -63,4 +63,5 @@ export class SearchBoxComponent {
             error => console.error(error)
         )
     }
+
 }

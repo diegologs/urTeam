@@ -1,115 +1,99 @@
 <div class="container">
- 
-  <h2>Comunidades</h2>
-  <hr>
-  <div *ngFor="let g of communities">
-    <a [routerLink]="['/communities/',g.id]">
-    
-     <div class="row group">
-                <div class="group-info">
-                    
-                   
-                    <div class="col-sm-2 group-image" *ngIf="g.main_photo">
-                        <img class="img-circle img-responsive group-image" width="110px" src="https://localhost:8443/image/community-avatar/{{g.communityId}}/{{g.main_photo}}">
-                    </div>
 
-                    <div class="col-sm-8">
-                        <h1 class="group-name">{{g.name}}</h1>
-                        <div class="badge">{{g.sport}}</div>
-                       
-                       <br>
-                    </div>
-                   
-                    <!--<div class="col-sm-2 group-button">
+  <div *ngIf="communities?.length > 0" class="col-sm-12">
+    <h2>Comunidades</h2>
+    <hr>
+    <div *ngFor="let g of communities">
+      <a [routerLink]="['/communities/',g.id]">
+        <div class="row group">
+          <div class="group-info">
+            <div class="col-sm-2 group-image" *ngIf="g.main_photo">
+              <img class="img-circle img-responsive group-image" width="110px" src="https://localhost:8443/image/community-avatar/{{g.communityId}}/{{g.main_photo}}">
+            </div>
+            <div class="col-sm-8">
+              <h1 class="group-name">{{g.name}}</h1>
+              <div class="badge">{{g.sport}}</div>
+              <br>
+            </div>
+            <!--<div class="col-sm-2 group-button">
                         <button class="btn btn-default group-btn">UNIRME</button>
                     </div>-->
-                </div>
-            </div>
-                       
-                    
-
-    </a>
+          </div>
+        </div>
+      </a>
+    </div>
   </div>
 
-  
-  <h2>Eventos</h2>
-  <hr>
-
-
-  <div *ngFor="let e of events">
-    <div class="col-sm-4" *ngFor="let event of events">
-          <div class="panel panel-primary event-primary">
-            <div class="panel-heading">
-              <div class="row nopadding">
-                <div class="col-sm-9 nopadding">
-                  <span class="name">{{event.name}}</span>
-                </div>
-                <div class="col-sm-3 nopadding">
-                  <span class="year">{{event.year_date}}</span>
-                </div>
+  <div *ngIf="events?.length > 0" class="col-sm-12">
+    <h2>Eventos</h2>
+    <hr>
+    <div *ngFor="let e of events">
+      <div class="col-sm-4" *ngFor="let event of events">
+        <div class="panel panel-primary event-primary">
+          <div class="panel-heading">
+            <div class="row nopadding">
+              <div class="col-sm-9 nopadding">
+                <span class="name">{{event.name}}</span>
+              </div>
+              <div class="col-sm-3 nopadding">
+                <span class="year">{{event.year_date}}</span>
               </div>
             </div>
-            <div class="panel-body nopadding">
-              <p>{{event.sport}}</p>
-              <img src="https://localhost:8443/api/events/{{event.id}}/avatar" alt="{{event.name}}" class="img-responsive" />
-              <div class="row nopadding">
-                <div class="col-sm-6 nopadding">
-                  <time class="start blue">
-                    Fecha
-                    <span class="day">{{event.day_date}}</span>
-                    <span class="month">{{event.month_date}}</span>
-                  </time>
-                </div>
-                <div class="col-sm-6 nopadding">
-                  <time class="end blue">
-                    Precio <span class="day">{{event.price}}</span>
-                    <span class="month">€</span>
-                  </time>
-                </div>
+          </div>
+          <div class="panel-body nopadding">
+            <p>{{event.sport}}</p>
+            <img src="https://localhost:8443/api/events/{{event.id}}/avatar" alt="{{event.name}}" class="img-responsive" />
+            <div class="row nopadding">
+              <div class="col-sm-6 nopadding">
+                <time class="start blue">
+                  Fecha
+                  <span class="day">{{event.day_date}}</span>
+                  <span class="month">{{event.month_date}}</span>
+                </time>
+              </div>
+              <div class="col-sm-6 nopadding">
+                <time class="end blue">
+                  Precio <span class="day">{{event.price}}</span>
+                  <span class="month">€</span>
+                </time>
               </div>
             </div>
-            <div class="panel-footer panel-primary">
-              <div class="infoBox">
-                <p>
-                  {{event.info}}
-                </p>
-              </div>
-              <a [routerLink]="['../events', event.id]" class="btn btn-success mybtn-succes">Más información</a>
+          </div>
+          <div class="panel-footer panel-primary">
+            <div class="infoBox">
+              <p>
+                {{event.info}}
+              </p>
+            </div>
+            <a [routerLink]="['../events', event.id]" class="btn btn-success mybtn-succes">Más información</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="users?.length > 0" class="container-fluid col-sm-12">
+    <h2>Usuarios</h2>
+    <hr>
+    <div *ngFor="let u of users" class="container-fluid col-sm-6">
+      <a [routerLink]="['/users/',u.nickname]">
+        <div class="row group">
+          <div class="group-info">
+            <div class="profile-userpic col-sm-3">
+              <img src="https://localhost:8443/image/user-avatar/{{u.generatedId}}/avatar-{{u.generatedId}}" class="img-responsive"
+                alt="avatar">
+            </div>
+            <div class="col-sm-8">
+              <h1 class="group-name">{{u.username}} {{u.surname}}</h1>
+              <h2 class="group-name">@{{u.nickname}}</h2>
+              <br>
             </div>
           </div>
         </div>
-  </div>
 
 
-  <h2>Usuarios</h2>
-  <hr>
 
-  <div *ngFor="let u of users">
-   <a [routerLink]="['/users/',u.id]">
-    
-     <div class="row group">
-                <div class="group-info">
-                    
-                   
-                    <div class="col-sm-2 group-image" *ngIf="u.main_photo">
-                    </div>
-
-                    <div class="col-sm-8">
-                        <h1 class="group-name">{{u.username}} {{u.surname}}</h1>
-                        <h2 class="group-name">{{u.nickname}}</h2>
-                        <div class="badge">{{u.sport}}</div>
-                       
-                       <br>
-                    </div>
-                   
-                    <!--<div class="col-sm-2 group-button">
-                        <button class="btn btn-default group-btn">UNIRME</button>
-                    </div>-->
-                </div>
-            </div>
-                       
-                    
-
-    </a>
+      </a>
+    </div>
   </div>
 </div>
