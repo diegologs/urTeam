@@ -1,4 +1,3 @@
-
 <div *ngIf="user">
   <div class="row profile">
 
@@ -29,7 +28,7 @@
         <!-- SIDEBAR BUTTONS -->
         <div *ngIf="sessionService.getisLogged()" class="profile-userbuttons">
           <div *ngIf="checkNotMe()">
-            <button  *ngIf="checkIsMyFriend()" class="btn btn-default group-btn" (click)="follow()">Dejar de seguir</button>
+            <button *ngIf="checkIsMyFriend()" class="btn btn-default group-btn" (click)="follow()">Dejar de seguir</button>
             <button *ngIf="!checkIsMyFriend()" class="btn btn-default group-btn" (click)="follow()">Seguir</button>
           </div>
         </div>
@@ -67,7 +66,7 @@
               <a pageScroll href="#friends" class="page-scroll"> <i class="fa fa-address-book" aria-hidden="true"></i> Siguiendo
               </a>
             </li>
-            
+
           </ul>
         </div>
         <!-- END MENU -->
@@ -96,7 +95,7 @@
               <h3>
                 <i class="fa fa-flag-checkered" aria-hidden="true"></i> Logros
               </h3>
-              
+
             </div>
           </div>
           <!--/row-->
@@ -115,81 +114,82 @@
               <h3>
                 <i class="fa fa-line-chart" aria-hidden="true"></i> Progreso
               </h3>
-              <div class="col-sm-12">
-                <a data-toggle="modal" data-target="#myModal_addStat"><button
+
+              <div *ngIf="sessionService.getisLogged()" class="col-sm-12">
+                <a *ngIf="!checkNotMe()" data-toggle="modal" data-target="#myModal_addStat"><button
 										class="btn mybtn-succes">Añadir sesión</button></a> <br>
               </div>
             </div>
           </div>
           <hr class="hr-yellow">
-          <!--/row-->                    
+          <!--/row-->
           <p-tabView>
-              <p-tabPanel header="Runing">
-                <div class="ui-grid-col-3">
-                    <h3>Fecha</h3>
-                </div>
-                <div class="ui-grid-col-3">
-                    <h3> Duracion</h3>
-                </div>
-                <p-dataList [value]="sport1" [paginator]="true" [rows]="5">
-                    <ng-template let-sport1 pTemplate="item1">
-                        <div class="ui-grid ui-grid-responsive ui-fluid">
-                          <div class="ui-grid-row">
-                            <div class="ui-grid-col-3">
-                            {{sport1.date}}
-                            </div>
-                            <div class="ui-grid-col-3">
-                            {{sport1.totalSesionTime}}
-                            </div>
-                          </div>
-                        </div>
-                    </ng-template>
-                </p-dataList>
-              </p-tabPanel>
-              <p-tabPanel header="Roller">
-                <div class="ui-grid-col-3">
-                    <h3>Fecha</h3>
-                </div>
-                <div class="ui-grid-col-3">
-                    <h3> Duracion</h3>
-                </div>
-                <p-dataList [value]="sport2" [paginator]="true" [rows]="5">
-                    <ng-template let-sport2 pTemplate="item2">
-                        <div class="ui-grid ui-grid-responsive ui-fluid">
-                          <div class="ui-grid-row">
-                            <div class="ui-grid-col-3">
-                            {{sport2.date}}
-                            </div>
-                            <div class="ui-grid-col-3">
-                            {{sport2.totalSesionTime}}
-                            </div>
-                          </div>
-                        </div>
-                    </ng-template>
-                </p-dataList>
-              </p-tabPanel>
-              <p-tabPanel header="Mountain Bike"> 
-                <div class="ui-grid-col-3">
-                    <h3>Fecha</h3>
-                </div>
-                <div class="ui-grid-col-3">
-                    <h3> Duracion</h3>
-                </div>                  
-                <p-dataList [value]="sport3" [paginator]="true" [rows]="5">
-                    <ng-template let-sport3 pTemplate="item3">
-                       <div class="ui-grid ui-grid-responsive ui-fluid">
-                          <div class="ui-grid-row">
-                            <div class="ui-grid-col-3">
-                            {{sport3.date}}
-                            </div>
-                            <div class="ui-grid-col-3">
-                            {{sport3.totalSesionTime}}
-                            </div>
-                          </div>
-                        </div>
-                    </ng-template>
-                </p-dataList>
-              </p-tabPanel>
+            <p-tabPanel header="Runing">
+              <div class="ui-grid-col-3">
+                <h3>Fecha</h3>
+              </div>
+              <div class="ui-grid-col-3">
+                <h3> Duracion</h3>
+              </div>
+              <p-dataList [value]="sport1" [paginator]="true" [rows]="5">
+                <ng-template let-sport1 pTemplate="item1">
+                  <div class="ui-grid ui-grid-responsive ui-fluid">
+                    <div class="ui-grid-row">
+                      <div class="ui-grid-col-3">
+                        {{sport1.date}}
+                      </div>
+                      <div class="ui-grid-col-3">
+                        {{sport1.totalSesionTime}}
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </p-dataList>
+            </p-tabPanel>
+            <p-tabPanel header="Roller">
+              <div class="ui-grid-col-3">
+                <h3>Fecha</h3>
+              </div>
+              <div class="ui-grid-col-3">
+                <h3> Duracion</h3>
+              </div>
+              <p-dataList [value]="sport2" [paginator]="true" [rows]="5">
+                <ng-template let-sport2 pTemplate="item2">
+                  <div class="ui-grid ui-grid-responsive ui-fluid">
+                    <div class="ui-grid-row">
+                      <div class="ui-grid-col-3">
+                        {{sport2.date}}
+                      </div>
+                      <div class="ui-grid-col-3">
+                        {{sport2.totalSesionTime}}
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </p-dataList>
+            </p-tabPanel>
+            <p-tabPanel header="Mountain Bike">
+              <div class="ui-grid-col-3">
+                <h3>Fecha</h3>
+              </div>
+              <div class="ui-grid-col-3">
+                <h3> Duracion</h3>
+              </div>
+              <p-dataList [value]="sport3" [paginator]="true" [rows]="5">
+                <ng-template let-sport3 pTemplate="item3">
+                  <div class="ui-grid ui-grid-responsive ui-fluid">
+                    <div class="ui-grid-row">
+                      <div class="ui-grid-col-3">
+                        {{sport3.date}}
+                      </div>
+                      <div class="ui-grid-col-3">
+                        {{sport3.totalSesionTime}}
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </p-dataList>
+            </p-tabPanel>
           </p-tabView>
           <hr class="hr-yellow">
           <google-chart [data]="pieChartOptions"></google-chart>
@@ -206,11 +206,11 @@
           <!--/row-->
           <hr class="hr-yellow">
           <div class="row">
-                <div class="container-fluid">
-                    <div *ngFor="let userCommunity of user.communityList">
-                        <p>{{userCommunity.name}}</p>
-                    </div>
-                </div>
+            <div class="container-fluid">
+              <div *ngFor="let userCommunity of user.communityList">
+                <p>{{userCommunity.name}}</p>
+              </div>
+            </div>
           </div>
         </div>
         <div class="container-fluid info-box" id="events">
@@ -224,11 +224,11 @@
           <!--/row-->
           <hr class="hr-yellow">
           <div class="row">
-                <div class="container-fluid">
-                    <div *ngFor="let userEvent of user.eventList">
-                        <p>{{userEvent.name}}</p>
-                    </div>
-                </div>
+            <div class="container-fluid">
+              <div *ngFor="let userEvent of user.eventList">
+                <p>{{userEvent.name}}</p>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -246,12 +246,12 @@
           <hr class="hr-yellow">
           <div class="row friendrow">
 
-                <div class="container-fluid">
-                    <div *ngFor="let friend of user.following">
-                        <p>{{friend.name}},{{friend.surname}}</p>
-                    </div>
-                </div>
-        
+            <div class="container-fluid">
+              <div *ngFor="let friend of user.following">
+                <p>{{friend.name}},{{friend.surname}}</p>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -367,8 +367,8 @@
         <div class="modal-body">
           <div class="form-container">
             <form class="form-group" action="" method="post">
-              <label style="color: black;" for="sport">Deporte</label>            
-              <select [(ngModel)]="sport" class="form-control" name="sport"required="required">
+              <label style="color: black;" for="sport">Deporte</label>
+              <select [(ngModel)]="sport" class="form-control" name="sport" required="required">
                       <option>Mountain Bike</option>
                       <option>Running</option>
                       <option>Roller</option>
@@ -381,7 +381,7 @@
               <input type="number" [(ngModel)]="formData.totalSesionTime" class="form-control" name="sesionTime">
               <div class="addButton">
                 <br>
-                <button type="submit" class="btn mybtn-succes addButton"  (click)="addStats()" data-dismiss="modal">+</button>
+                <button type="submit" class="btn mybtn-succes addButton" (click)="addStats()" data-dismiss="modal">+</button>
               </div>
             </form>
           </div>

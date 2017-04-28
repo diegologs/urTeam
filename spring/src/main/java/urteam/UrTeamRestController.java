@@ -23,7 +23,7 @@ public class UrTeamRestController {
 	public interface MinimalSearchUser extends User.MinimalUser {
 	}
 	
-	public interface MinimalSearchEvent extends User.MinimalUser , Event.BasicEvent{	
+	public interface MinimalSearchEvent extends User.MinimalUser , Event.MinimalEvent{	
 	}
 	
 	public interface MinimalSearchCommunity extends User.MinimalUser, Community.MinimalCommunity{

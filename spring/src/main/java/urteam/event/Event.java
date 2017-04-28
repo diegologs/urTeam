@@ -25,19 +25,21 @@ import urteam.user.User;
 @Entity
 public class Event {
 	
+	public interface MinimalEvent{}
+	
 	public interface BasicEvent{}
 	
 	public interface MembersEvent{}
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@JsonView(BasicEvent.class)
+	@JsonView(MinimalEvent.class)
 	private long id;
 	
 	private String eventId = "aleatorio";
 	
 	@Size(min = 2, max = 21)
-	@JsonView(BasicEvent.class)
+	@JsonView(MinimalEvent.class)
 	private String name;
 	
 	//@OneToOne
