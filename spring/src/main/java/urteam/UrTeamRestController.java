@@ -20,13 +20,13 @@ import urteam.user.User;
 @RequestMapping("/api/searchbox")
 public class UrTeamRestController {
 	
-	public interface MinimalSearchUser extends User.MinimalUser {
+	public interface MinimalSearchUser extends User.MinimalUser, User.BasicUser {
 	}
 	
-	public interface MinimalSearchEvent extends User.MinimalUser , Event.MinimalEvent{	
+	public interface MinimalSearchEvent extends User.MinimalUser , Event.MinimalEvent, Event.BasicEvent{	
 	}
 	
-	public interface MinimalSearchCommunity extends User.MinimalUser, Community.MinimalCommunity{
+	public interface MinimalSearchCommunity extends User.MinimalUser, Community.MinimalCommunity, Community.BasicCommunity {
 	}
 	
 	public interface MinimalSearchAll extends User.MinimalUser, Event.BasicEvent,Community.MinimalCommunity{

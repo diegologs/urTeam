@@ -9,7 +9,8 @@ import { SearchBoxService } from './searchbox.service';
 
 @Component({
     selector: 'search',
-    templateUrl: './searchbox.component.html'
+    templateUrl: './searchbox.component.html',
+    styleUrls: ['../events/events.component.css','../communities/communities.component.css', ], 
 })
 export class SearchBoxComponent {
 
