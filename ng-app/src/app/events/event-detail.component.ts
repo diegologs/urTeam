@@ -6,6 +6,7 @@ import { Event } from './events.model';
 import { User } from '../user/user.model';
 import { LoginService } from "../login/login.service";
 import { UserService } from "../user/user.service";
+import {PublicComponent} from '../public.component';
 
 @Component({
   templateUrl: './event-detail.component.html',
@@ -20,7 +21,7 @@ export class EventDetailComponent {
   isOwner: boolean;
   eventID: number;
 
-  constructor(private sessionService: LoginService, private userService: UserService, private router: Router, activatedRoute: ActivatedRoute, private service: EventService) {
+  constructor(private sessionService: LoginService, private userService: UserService, private router: Router, activatedRoute: ActivatedRoute, private service: EventService,private pubComponent: PublicComponent) {
     this.ownerId = {username:"",surname:"",nickname:"",email:"",country:""};
     this.eventID = activatedRoute.snapshot.params['id'];
     this.getEvent();
@@ -52,8 +53,11 @@ export class EventDetailComponent {
         this.participants_IDs = response.participants_IDs;
         this.getEvent();
         this.getUser();
+        this.pubComponent.msgs.push({severity:'success', summary:'Acción realizada'});
       },
-      error => console.log(error),
+      error => {
+        console.log(error);
+        this.pubComponent.msgs.push({severity:'error', summary:'Error', detail:'Se ha producido un error al realizar acción'});},
     )
     
   }
@@ -71,8 +75,14 @@ export class EventDetailComponent {
   editInfo() {
     this.event.info = this.info;
     this.service.updatedEvent(this.event.id, this.event).subscribe(
-      event => console.log(event),
-      error => console.error(error)
+      event => {
+        console.log(event);
+        this.pubComponent.msgs.push({severity:'success', summary:'Evento actualizado', detail:'Información actualizada satisfactoriamente'});
+    },
+      error => {
+        console.error(error);
+        this.pubComponent.msgs.push({severity:'error', summary:'Error', detail:'Se ha producido un fallo durante la actualización del evento'});
+      }
     );
   }
 }

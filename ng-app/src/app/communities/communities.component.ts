@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CommunityService } from './communities.service';
 import { Community } from "app/communities/community.model";
 import { LoginService } from "app/login/login.service";
+import {PublicComponent} from '../public.component';
 
 @Component({
   selector: 'communities',
@@ -19,7 +20,7 @@ export class CommunitiesComponent implements OnInit {
 
    imgUrl = "https://localhost:8443/image/event-avatar/aleatorio/default-mainphoto";
 
-  constructor(private router:Router, private service: CommunityService, private sessionService: LoginService){}
+  constructor(private router:Router, private service: CommunityService, private sessionService: LoginService, private pubComponent: PublicComponent){}
 
    ngOnInit() {
     this.groupsPage = 0;

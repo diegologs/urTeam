@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { EventService } from './events.service';
 import { Event } from './events.model';
 import { LoginService } from '../login/login.service';
+import {PublicComponent} from '../public.component';
 
 @Component({
   templateUrl: './event-create.component.html',
@@ -26,7 +27,7 @@ export class EventCreateComponent{
   imgUrl = "https://localhost:8443/image/event-avatar/aleatorio/default-mainphoto";
 
 
-  constructor(private router:Router, activatedRoute: ActivatedRoute, private service: EventService,private sessionService: LoginService){}
+  constructor(private router:Router, activatedRoute: ActivatedRoute, private service: EventService,private sessionService: LoginService,private pubComponent: PublicComponent){}
 
   eventcreate(){
     let event: Event;
@@ -35,8 +36,12 @@ export class EventCreateComponent{
       
             event =>{ this.event = event;
             this.updatePhoto(event.id);
+            this.pubComponent.msgs.push({severity:'success', summary:'Evento creado', detail:'Creado satisfactoriamente'});
             },
-            error => console.error(error),
+            error => {
+            console.error(error);
+            this.pubComponent.msgs.push({severity:'error', summary:'Error', detail:'Se ha producido un fallo durante la creación del evento'});
+            }
            
     );
   }
