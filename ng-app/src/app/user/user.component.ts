@@ -8,6 +8,7 @@ import { StatsService } from '../stat/stats.service';
 import { Stat } from '../stat/stat.model';
 import { UserSportStats } from '../stat/userSportsStats.model';
 import { LoginService } from "../login/login.service";
+import {PublicComponent} from '../public.component';
 
 
 @Component({
@@ -51,7 +52,7 @@ export class UserComponent implements OnInit{
       },
   };
 
-  constructor(private router:Router, private activatedRoute: ActivatedRoute, private service: UserService, private statService: StatsService, private sessionService: LoginService){ }
+  constructor(private router:Router, private activatedRoute: ActivatedRoute, private service: UserService, private statService: StatsService, private sessionService: LoginService,private pubComponent: PublicComponent){ }
 
   ngOnInit(){    
       let nickname = this.activatedRoute.snapshot.params['nickname'];
@@ -136,8 +137,12 @@ export class UserComponent implements OnInit{
       response => {
         this.pieChartOptions.dataTable.splice(1,3);
         this.getUser();
+        this.pubComponent.msgs.push({severity:'success', summary:'Nuevas estadisticas', detail:'Estadisticas añadidas satisfactoriamente'});
       },
-      error => console.error(error)
+      error => {
+        console.error(error);
+        this.pubComponent.msgs.push({severity:'error', summary:'Error', detail:'Se ha producido un fallo al añadir estadisticas'});
+      }
     );
   }
       
@@ -159,8 +164,12 @@ export class UserComponent implements OnInit{
     this.service.putUserFriends(this.user.nickname).subscribe(
       response => {
           this.getUser();
+          this.pubComponent.msgs.push({severity:'success', summary:'Acción realizada'});
       },
-      error => console.log(error) 
+      error => {
+        console.log(error) ;
+        this.pubComponent.msgs.push({severity:'error', summary:'Error', detail:'Se ha producido un error al realizar acción'});
+      }
     )
   }
 
@@ -175,6 +184,7 @@ export class UserComponent implements OnInit{
     this.service.updateUser(this.editedUser.nickname, this.editedUser).subscribe(
       response =>{
         console.log("Usuario editado.");
+        this.pubComponent.msgs.push({severity:'success', summary:'Información actualizada', detail:'Información actualizada satisfactoriamente'});
         this.user = response;
         //this.sessionService.logIn(this.user.nickname,this.user.passwordHash);
       }
