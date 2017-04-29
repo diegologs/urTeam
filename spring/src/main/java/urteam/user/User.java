@@ -44,7 +44,7 @@ public class User{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@JsonView(MinimalUser.class)
 	private long id;
-	@JsonView(BasicUser.class)
+	@JsonView(MinimalUser.class)
 	private String generatedId = "aleatorio";
 	@JsonView(MinimalUser.class)
 	private String username;

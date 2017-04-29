@@ -35,7 +35,7 @@ public class Event {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@JsonView(MinimalEvent.class)
 	private long id;
-	
+	@JsonView(MinimalEvent.class)
 	private String eventId = "aleatorio";
 	
 	@Size(min = 2, max = 21)

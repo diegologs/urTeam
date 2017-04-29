@@ -24,14 +24,12 @@ export class LoginService {
     }
 
     private generateAuthString(username: String, password: String) {
+        console.log("User:" + username + " pass: " + password)
         return "Basic " + btoa(username + ":" + password);
     }
 
     logIn(username: string, password: string) {
-        console.log("logIn");
-        // this.authCreds = btoa(username + ':' + password);
-        // let headers: Headers = new Headers();
-        // headers.append('Authorization', 'Basic ' + this.authCreds);
+
         this.http.sessionData.authToken = this.generateAuthString(username, password);
         this.http.sessionData.isLogged = true;
         return this.http.get(BASE_URL_Login).map(
@@ -50,7 +48,8 @@ export class LoginService {
                         }
                     },
                     error => {
-                        console.log(error)
+                         console.log("Fallo Login");
+                        console.log(error);
                         this.http.sessionData.isLogged = false;
                     }
                 );
@@ -72,6 +71,7 @@ export class LoginService {
                 console.log(this.http.sessionData.isLogged);
             }
             );
+
     }
 
     public getisLogged() {

@@ -34,7 +34,7 @@ public class Community {
 	@JsonView(MinimalCommunity.class)
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	@JsonView(BasicCommunity.class)
+	@JsonView(MinimalCommunity.class)
 	private String communityId = "aleatorio";
 
 	@JsonView(MinimalCommunity.class)
@@ -45,7 +45,7 @@ public class Community {
 	private String city;
 	@JsonView(BasicCommunity.class)
 	private String sport;
-	@JsonView(BasicCommunity.class)
+	@JsonView(MinimalCommunity.class)
 	private String main_photo;
 	
 	@OneToOne

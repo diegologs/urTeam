@@ -28,16 +28,20 @@ public class CustomUserSerializer extends StdSerializer<List<User>>{
     	
     	class Follower{
     		public long id;
-    		public String name;
+    		public String nickname;
+    		public String username;
     		public String surname;
+    		public String generatedId;
     	}
          
         List<Follower> following = new ArrayList<>();
         for (User user : users) {
         	Follower follower = new Follower();
         	follower.id = user.getId();
-            follower.name = user.getUserName();
+        	follower.nickname = user.getNickname();
+            follower.username = user.getUserName();
             follower.surname = user.getSurname();
+            follower.generatedId = user.getGeneratedId();
             following.add(follower);
         }
         generator.writeObject(following);

@@ -32,8 +32,9 @@ export class HttpClient{
 
   generateHeaders(){
     let headers = new Headers();
-    if(this.sessionData.isLogged)
-      headers.append('Authorization', this.sessionData.authToken);
+    if(this.sessionData.isLogged){
+      console.log("AuthToken: " +  this.sessionData.authToken);
+      headers.append('Authorization', this.sessionData.authToken);}
     return headers;
   }
 

@@ -73,6 +73,8 @@ export class UserService{
 		.catch(error => this.handleError(error));
 	}
 
+	
+
     private handleError(error: any) {
 		console.error(error);
 		return Observable.throw("Server error (" + error.status + "): " + error.text())

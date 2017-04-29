@@ -3,7 +3,7 @@
   <div *ngIf="communities?.length > 0" class="col-sm-12">
     <h2>Comunidades</h2>
     <hr>
-    <div *ngFor="let g of communities">
+    <div *ngFor="let g of communities" class="col-sm-6">
       <a [routerLink]="['/communities/',g.id]">
         <div class="row group">
           <div class="group-info">
@@ -15,9 +15,6 @@
               <div class="badge">{{g.sport}}</div>
               <br>
             </div>
-            <!--<div class="col-sm-2 group-button">
-                        <button class="btn btn-default group-btn">UNIRME</button>
-                    </div>-->
           </div>
         </div>
       </a>
@@ -90,9 +87,6 @@
             </div>
           </div>
         </div>
-
-
-
       </a>
     </div>
   </div>
