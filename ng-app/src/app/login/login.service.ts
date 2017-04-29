@@ -6,7 +6,7 @@ import { Http, Headers } from '@angular/http';
 import { User } from '../user/user.model';
 import { UserService } from '../user/user.service';
 import { HttpClient } from '../HttpClient/httpClient';
-import {PublicComponent} from '../public.component';
+
 
 import 'rxjs/Rx';
 
@@ -23,7 +23,7 @@ export class LoginService {
 
     
 
-    constructor(private http: HttpClient, private userService: UserService,private pubComponent: PublicComponent) {
+    constructor(private http: HttpClient, private userService: UserService) {
     }
 
     private generateAuthString(username: String, password: String) {
@@ -73,11 +73,9 @@ export class LoginService {
             this.http.sessionData.isLogged = false;
             this.http.sessionData.isAdmin = false;
             this.http.sessionData.authToken = "";
-            this.pubComponent.msgs.push({severity:'success', summary:'Log Out', detail:'¡¡Hasta pronto!!'}); 
         },
         error => {
             console.log(error);
-            this.pubComponent.msgs.push({severity:'error', summary:'Log Out', detail:'Se ha producido un error'});
         });
     }
 

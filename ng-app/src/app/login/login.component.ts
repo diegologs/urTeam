@@ -51,10 +51,12 @@ export class LoginComponent{
 
   logOut() {
     this.sessionService.logOut();
+    this.pubComponent.msgs.push({severity:'success', summary:'!!Hasta Pronto!!'});
   }
 
   navbarLogOut(){
         this.sessionService.logOut();
+        this.pubComponent.msgs.push({severity:'success', summary:'!!Hasta Pronto!!'});
     }
 
   register(){
