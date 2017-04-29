@@ -4,6 +4,7 @@ import { EventService } from "app/events/events.service";
 import { LoginService } from "app/login/login.service";
 import { Community } from "app/communities/community.model";
 import { CommunityService } from "app/communities/communities.service";
+import {PublicComponent} from '../public.component';
 
 @Component({
   selector: 'admin-events',
@@ -21,7 +22,7 @@ export default class AdminCommunities implements OnInit {
 
      imgUrl = "https://localhost:8443/image/event-avatar/aleatorio/default-mainphoto";
 
-  constructor(private router:Router, private service: CommunityService, private sessionService: LoginService){}
+  constructor(private router:Router, private service: CommunityService, private sessionService: LoginService,private pubComponent: PublicComponent){}
 
    ngOnInit() {
     this.groupsPage = 0;
@@ -61,15 +62,15 @@ export default class AdminCommunities implements OnInit {
 
     this.service.deleteGroup(id).subscribe(
       response => {
-        
         this.getCommunitys();
+        this.pubComponent.msgs.push({severity:'success', summary:'Comunidad eliminada', detail:'Comunidad eliminada satisfactoriamente'}); 
         
       },
-      error => console.log(error),
+      error => {
+        console.log(error);
+        this.pubComponent.msgs.push({severity:'error', summary:'Error', detail:'Se ha producido un errror durante la eliminación de la comunidad'}); 
+      }
     )
-   
-
-
   }
 
   getCommunitys() {
