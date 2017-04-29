@@ -49,8 +49,6 @@ export class CommunitiesCreate {
            
         );
 
-        this.router.navigateByUrl('/communities');
-
     }
 
     updatePhoto(id: number){
@@ -67,11 +65,5 @@ export class CommunitiesCreate {
     this.groupImage = $event.target.files[0];
     console.log("Selected file: " + this.groupImage.name + " type:" + this.groupImage.type + " size:" + this.groupImage.size);
   }
-
-
-
-
-
-
 }
 
