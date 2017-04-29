@@ -6,6 +6,8 @@ import { User } from '../user/user.model';
 import { UserService } from '../user/user.service';
 import { HttpClient } from '../HttpClient/httpClient';
 
+import {PublicComponent} from '../public.component';
+
 @Component({
   selector: 'navbar2',
   templateUrl: './login.component.html',
@@ -13,7 +15,7 @@ import { HttpClient } from '../HttpClient/httpClient';
 })
 export class LoginComponent{
 
-  private userLogged:User;
+  //private userLogged:User;
 
   username:string;
   surname:string;
@@ -22,18 +24,20 @@ export class LoginComponent{
   city:string;
   country:string;
   passwordHash:string;
-
   
-  constructor(private http: HttpClient,private sessionService: LoginService, private router: Router, private userService: UserService) {
+  constructor(private http: HttpClient,private sessionService: LoginService, private router: Router, private userService: UserService, private pubComponent: PublicComponent) {
   }
 
   logIn(username: string, password: string) {
     this.sessionService.logIn(username, password).subscribe(
       user => {
-        this.userLogged = user;
+        console.log("datos del usuario: ");
+        //this.userLogged = user;
+        console.log(user);
+        this.pubComponent.msgs.push({severity:'info', summary:'Info Message', detail:'PrimeNG rocks'});
       },
       error => {
-        console.log("Fail trying to login.")
+        //console.log("Fail trying to login.")
         this.http.sessionData.isLogged = false;
       }
     );

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { EventService } from '../events/events.service';
 import { LoginService } from '../login/login.service';
+import {PublicComponent} from '../public.component';
 
 @Component({
   selector: 'home',
@@ -14,7 +15,7 @@ export class HomeComponent {
   events2: Event[];
   events3: Event[];
 
-  constructor(private router: Router, private service: EventService, private sessionService: LoginService) { }
+  constructor(private router: Router, private service: EventService, private sessionService: LoginService, private pubComponent: PublicComponent) { }
 
   ngOnInit() {
     this.service.getEventsBySport("Mountain Bike").subscribe(
@@ -42,4 +43,7 @@ export class HomeComponent {
       }
     )
   }
+  show() {
+        this.pubComponent.msgs.push({severity:'info', summary:'Info Message', detail:'PrimeNG rocks'});
+    }
 }

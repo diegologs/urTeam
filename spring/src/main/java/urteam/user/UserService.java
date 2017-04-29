@@ -55,6 +55,7 @@ public class UserService {
 		User userToEdit = userRepository.findByNickname(nickname);
 		if (userToEdit != null) {
 			user.setId(userToEdit.getId());
+			user.setPasswordHash(userToEdit.getPasswordHash());
 			userRepository.save(user);
 			return user;
 		} else {

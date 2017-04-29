@@ -110,11 +110,10 @@ public class EventRestController {
 	@JsonView(CompleteEvent.class)
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<Event> createEvent(@RequestBody Event event, String start_date, String end_date,
-			MultipartFile file) {
+	public ResponseEntity<Event> createEvent(@RequestBody Event event) {
 		User userLogged = userService.findOne(userComponent.getLoggedUser().getId());
 		if (userLogged != null) {
-			eventService.save(userLogged, event, file, start_date, end_date);
+			eventService.save(userLogged, event);
 			return new ResponseEntity<Event>(event, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<Event>(HttpStatus.BAD_REQUEST);
@@ -126,11 +125,12 @@ public class EventRestController {
 	@RequestMapping(value = "/{id}/avatar", method = RequestMethod.PUT)
 	public ResponseEntity<Event> setImage(@PathVariable long id, @RequestBody MultipartFile file)
 			throws ParseException {
-
-		Event event = eventService.findOne(id);
-
+		
+		Event event = null;
+		if (file != null){
+		event = eventService.findOne(id);
 		eventService.setImage(event, file);
-
+		}
 		if (event != null) {
 			return new ResponseEntity<Event>(event, HttpStatus.OK);
 		} else {

@@ -47,6 +47,29 @@ public class EventService {
 	public void save(Event event) {
 		eventRepo.save(event);
 	}
+	
+	public void save(User user, Event event) {
+		// Crear evento
+		try {
+			event.setOwner_id(user);
+			Calendar cal = toCalendar(event.getStart_date());
+			event.setDay_date(cal.get(Calendar.DAY_OF_MONTH));
+			String month = monthToString(cal.get(Calendar.MONTH));
+			event.setMonth_date(month);
+			event.setYear_date(cal.get(Calendar.YEAR));
+			// Filename formater
+			SimpleDateFormat formater = new SimpleDateFormat("mmddyyyy-hhMMss");
+			Date date = new Date();
+			// EventId generator
+			SimpleDateFormat eventIdFormater = new SimpleDateFormat("mmddyyyy-hhMMss");
+			String eventId = eventIdFormater.format(date);
+			event.setEventId(eventId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		// Guardar evento y recargar pagina
+		eventRepo.save(event);
+	}
 
 	public void save(User user, Event event, MultipartFile file,String start_date, String end_date) {
 		// Crear evento
