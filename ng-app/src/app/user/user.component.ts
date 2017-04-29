@@ -18,6 +18,8 @@ import { LoginService } from "../login/login.service";
 export class UserComponent implements OnInit{
 
   user: User;
+  editedUser: User;
+
   level: number = 0;
   value: number = 0;
   date: string;
@@ -57,8 +59,9 @@ export class UserComponent implements OnInit{
       this.service.getUser(nickname).subscribe(
           user => {
             this.user = user;
+            this.editedUser = Object.assign({},user);
             this.followers = user.followers;
-
+    
             this.value = (user.score % 1000 ) / 10;
             this.level = Math.floor(user.score /1000);      
 
@@ -160,5 +163,23 @@ export class UserComponent implements OnInit{
       },
       error => console.log(error) 
     )
+  }
+
+  editUser(){
+    // this.user.username = this.editedUser.username;
+    // this.user.surname = this.editedUser.surname;
+    // this.user.email = this.editedUser.email;
+    // this.user.bio = this.editedUser.bio;
+    // this.user.city = this.editedUser.city;
+    // this.user.country = this.editedUser.country;
+    
+    this.service.updateUser(this.editedUser.nickname, this.editedUser).subscribe(
+      response =>{
+        console.log("Usuario editado.");
+        this.user = response;
+        //this.sessionService.logIn(this.user.nickname,this.user.passwordHash);
+      }
+    )
+
   }
 }

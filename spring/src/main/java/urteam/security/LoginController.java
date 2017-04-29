@@ -42,14 +42,14 @@ public class LoginController {
 	@RequestMapping("/api/logOut")
 	public ResponseEntity<Boolean> logOut(HttpSession session) {
 
-		if (!userComponent.isLoggedUser()) {
-			log.info("No user logged");
-			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-		} else {
+//		if (!userComponent.isLoggedUser()) {
+//			log.info("No user logged");
+//			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+//		} else {
 			session.invalidate();
 			log.info("Logged out");
 			return new ResponseEntity<>(true, HttpStatus.OK);
-		}
+//		}
 	}
 
 }

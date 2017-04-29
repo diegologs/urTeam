@@ -20,15 +20,21 @@ export class LoginService {
     //isLogged = false;
     //isAdmin = false;
 
+    
+
     constructor(private http: HttpClient, private userService: UserService) {
     }
 
     private generateAuthString(username: String, password: String) {
-        return "Basic " + btoa(username + ":" + password);
+        console.log("usuario: "+username + " pass: "+password);
+        let cosica = "Basic " + btoa(username + ":" + password);
+        console.log(cosica);
+        //return "Basic " + btoa(username + ":" + password);
+        return cosica;
     }
 
     logIn(username: string, password: string) {
-        console.log("logIn");
+
         // this.authCreds = btoa(username + ':' + password);
         // let headers: Headers = new Headers();
         // headers.append('Authorization', 'Basic ' + this.authCreds);
@@ -36,6 +42,7 @@ export class LoginService {
         this.http.sessionData.isLogged = true;
         return this.http.get(BASE_URL_Login).map(
             response => {
+                
                 // let nickname = response.json().nickname;
                 // this.userService.setAuthHeaders(this.authCreds);
                 this.userService.getUser(username).subscribe(
@@ -43,6 +50,7 @@ export class LoginService {
                         this.http.sessionData.userLogged = user;
                         this.http.sessionData.isLogged = true;
                         if (this.http.sessionData.isLogged) {
+                            
                             if (this.http.sessionData.userLogged.roles.indexOf("ROLE_ADMIN") > -1) {
                                 this.http.sessionData.isAdmin = true;
                                 console.log("is admin");
@@ -50,28 +58,43 @@ export class LoginService {
                         }
                     },
                     error => {
-                        console.log(error)
+                        
                         this.http.sessionData.isLogged = false;
                     }
                 );
-            })
+                return response.json();
+            }
+            )
             .catch(error => this.loginFailed(error));
     }
 
-    logOut() {
-        console.log("logOut");
-        return this.http.get(BASE_URL_Logout)
-            .map(
-            response => {
-                this.http.sessionData.userLogged = null;
-                console.log("logOut");
-                console.log(this.http.sessionData.userLogged);
-                this.http.sessionData.isLogged = false;
-                this.http.sessionData.isAdmin = false;
-                console.log("logOut");
-                console.log(this.http.sessionData.isLogged);
-            }
-            );
+    // logOut() {
+        
+    //     return this.http.get(BASE_URL_Logout)
+    //         .map(
+    //         response => {
+    //             this.http.sessionData.userLogged = null;
+               
+                
+    //             this.http.sessionData.isLogged = false;
+    //             this.http.sessionData.isAdmin = false;
+                
+    //             this.http.sessionData.authToken = "";
+    //          return response;   
+    //         },
+    //         ).catch(error => console.log(error));
+    // }
+
+    logOut(){
+        return this.http.get(BASE_URL_Logout).map(
+        response => {
+            this.http.sessionData.userLogged = null;     
+            this.http.sessionData.isLogged = false;
+            this.http.sessionData.isAdmin = false;
+            this.http.sessionData.authToken = "";
+        },
+        error => console.log(error)
+        );
     }
 
     public getisLogged() {

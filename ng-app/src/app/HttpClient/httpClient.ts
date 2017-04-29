@@ -1,18 +1,19 @@
-import {Injectable, OnInit} from '@angular/core';
-import {Http, Headers} from '@angular/http';
-import {LoginService} from "../login/login.service";
-import {SessionData} from "../login/sessionData.model";
+import { Injectable, OnInit } from '@angular/core';
+import { Http, Headers } from '@angular/http';
+import { LoginService } from "../login/login.service";
+import { SessionData } from "../login/sessionData.model";
 
 @Injectable()
-export class HttpClient{
+export class HttpClient {
 
-    public sessionData: SessionData;
+  public sessionData: SessionData;
 
   constructor(private http: Http) {
-    this.sessionData = { isLogged: false, isAdmin: false, userLogged: {
+    this.sessionData = {
+      isLogged: false, isAdmin: false, userLogged: {
         id: 99,
-	      generatedId: "",
-	      username: "",
+        generatedId: "",
+        username: "",
         surname: "",
         nickname: "",
         email: "",
@@ -25,14 +26,14 @@ export class HttpClient{
         followers: [],
         communityList: [],
         eventList: [],
-    }, 
-    authToken: ""
-};
+      },
+      authToken: ""
+    };
   }
 
-  generateHeaders(){
+  generateHeaders() {
     let headers = new Headers();
-    if(this.sessionData.isLogged)
+    if (this.sessionData.isLogged) 
       headers.append('Authorization', this.sessionData.authToken);
     return headers;
   }
@@ -55,7 +56,7 @@ export class HttpClient{
     });
   }
 
-  delete(url){
+  delete(url) {
     return this.http.delete(url, {
       headers: this.generateHeaders()
     });

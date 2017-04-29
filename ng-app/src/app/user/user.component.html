@@ -67,6 +67,11 @@
               </a>
             </li>
 
+            <li>
+              <a *ngIf="!checkNotMe()" data-toggle="modal" data-target="#profile-settings-modal"> <i class="fa fa-cogs" aria-hidden="true"></i> Configuracion
+              </a>
+            </li>
+
           </ul>
         </div>
         <!-- END MENU -->
@@ -268,7 +273,7 @@
         <div class="modal-body">
           <div class="row">
             <div class="col-md-9">
-              <form class="form-horizontal" role="form" action="/user/{{nickname}}/edit" method="post" enctype="multipart/form-data">
+              <div class="form-horizontal" role="form"enctype="multipart/form-data">
                 <div class="form-group">
                   <div class="col-md-9">
                     <div class="text-center">
@@ -288,20 +293,20 @@
                 <div class="form-group">
                   <label for="firstName" class="col-sm-3 control-label">Nombre</label>
                   <div class="col-sm-9">
-                    <input type="text" id="firstName" value="{{user.username}}" class="form-control" autofocus required="required" name="username">
+                    <input type="text" id="firstName" [(ngModel)]="this.editedUser.username" class="form-control" autofocus required="required" name="username">
 
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="lastName" class="col-sm-3 control-label">Apellidos</label>
                   <div class="col-sm-9">
-                    <input type="text" id="lastName" value={{user.surname}} class="form-control" autofocus required="required" name="surname">
+                    <input type="text" id="lastName" [(ngModel)]="this.editedUser.surname" class="form-control" autofocus required="required" name="surname">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="email" class="col-sm-3 control-label">Email</label>
                   <div class="col-sm-9">
-                    <input type="email" id="email" value={{user.email}} class="form-control" required="required" name="email">
+                    <input type="email" id="email" [(ngModel)]="this.editedUser.email" class="form-control" required="required" name="email">
                   </div>
                 </div>
                 <!-- 
@@ -316,7 +321,7 @@
                 <div class="form-group">
                   <label for="bio" class="col-sm-3 control-label">Biografia</label>
                   <div class="col-sm-9">
-                    <textarea class="form-control" rows="5" name="bio">{{user.bio}}</textarea>
+                    <textarea class="form-control" rows="5" name="bio" [(ngModel)]="this.editedUser.bio"></textarea>
                   </div>
                 </div>
                 <!-- 
@@ -331,19 +336,19 @@
                 <div class="form-group">
                   <label for="city" class="col-sm-3 control-label">Ciudad</label>
                   <div class="col-sm-9">
-                    <input type="text" id="city" value={{user.city}} class="form-control" name="city">
+                    <input type="text" id="city" [(ngModel)]="this.editedUser.city" class="form-control" name="city">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="country" class="col-sm-3 control-label">Pais</label>
                   <div class="col-sm-9">
-                    <input type="text" id="country" value={{user.country}} class="form-control" name="country">
+                    <input type="text" id="country" [(ngModel)]="this.editedUser.country" class="form-control" name="country">
                   </div>
                 </div>
                 <div class="col-sm-9 col-sm-offset-3">
-                  <button type="submit" class="btn btn-primary btn-block mybtn-succes">Guardar</button>
+                  <button data-dismiss="modal" type="submit" class="btn btn-primary btn-block mybtn-succes" (click)="editUser()">Guardar</button>
                 </div>
-              </form>
+              </div>
               <!-- /form -->
             </div>
           </div>
