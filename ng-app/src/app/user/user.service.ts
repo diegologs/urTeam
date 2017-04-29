@@ -35,8 +35,8 @@ export class UserService{
 			.catch(error => this.handleError(error));
 	}
 
-	createUser(user: User){
-		return this.http.post(BASE_URL,user)
+	createUser(user: User, password: string){
+		return this.http.post(BASE_URL,{user,password})
 		.map(response => response.json())
 		.catch(error => this.handleError(error));
 	}

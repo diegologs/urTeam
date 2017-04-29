@@ -17,6 +17,5 @@ export interface User {
     followers?: User[];
     communityList?: Community[];
     eventList?: Event[];
-    passwordHash?: string;
     sportStats?: UserSportStats;
 }

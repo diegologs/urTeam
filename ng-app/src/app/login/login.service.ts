@@ -65,23 +65,6 @@ export class LoginService {
             .catch(error => this.loginFailed(error));
     }
 
-    // logOut() {
-        
-    //     return this.http.get(BASE_URL_Logout)
-    //         .map(
-    //         response => {
-    //             this.http.sessionData.userLogged = null;
-               
-                
-    //             this.http.sessionData.isLogged = false;
-    //             this.http.sessionData.isAdmin = false;
-                
-    //             this.http.sessionData.authToken = "";
-    //          return response;   
-    //         },
-    //         ).catch(error => console.log(error));
-    // }
-
     logOut(){
         return this.http.get(BASE_URL_Logout).map(
         response => {

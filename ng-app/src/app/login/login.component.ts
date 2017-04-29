@@ -23,7 +23,7 @@ export class LoginComponent{
   email:string;
   city:string;
   country:string;
-  passwordHash:string;
+  password:string;
   
   constructor(private http: HttpClient,private sessionService: LoginService, private router: Router, private userService: UserService, private pubComponent: PublicComponent) {
   }
@@ -54,13 +54,13 @@ export class LoginComponent{
   }
 
   navbarLogOut(){
-        this.sessionService.logOut().subscribe()
+        this.sessionService.logOut();
     }
 
   register(){
     let user: User;
-    user = {username: this.username, surname: this.surname, nickname: this.nickname, email: this.email, city: this.city, country: this.country, passwordHash: this.passwordHash};
-    this.userService.createUser(user).subscribe(
+    user = {username: this.username, surname: this.surname, nickname: this.nickname, email: this.email, city: this.city, country: this.country};
+    this.userService.createUser(user, this.password).subscribe(
         event => console.log(event)
     );
     this.router.navigateByUrl('');
