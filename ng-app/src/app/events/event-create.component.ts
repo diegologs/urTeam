@@ -36,7 +36,7 @@ export class EventCreateComponent{
       
             event =>{ this.event = event;
             this.updatePhoto(event.id);
-            this.pubComponent.msgs.push({severity:'success', summary:'Evento creado', detail:'Creado satisfactoriamente'});
+            this.pubComponent.msgs.push({severity:'success', summary:'Evento creado', detail:'Nuevo evento creado satisfactoriamente'});
             },
             error => {
             console.error(error);

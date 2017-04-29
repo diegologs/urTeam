@@ -4,6 +4,7 @@ import { CommunityService } from './communities.service';
 import { Community } from "app/communities/community.model";
 import { User } from "app/user/user.model";
 import { LoginService } from "app/login/login.service";
+import {PublicComponent} from '../public.component';
 
 
 
@@ -28,7 +29,7 @@ export class CommunitiesCreate {
 
     imgUrl = "https://localhost:8443/image/event-avatar/aleatorio/default-mainphoto";
 
-    constructor(private router: Router, private service: CommunityService) { }
+    constructor(private router: Router, private service: CommunityService,private pubComponent: PublicComponent) { }
 
     createCommunity() {
         
@@ -39,8 +40,12 @@ export class CommunitiesCreate {
         this.service.createGroup(group).subscribe(
             community =>{ this.community = community;
             this.updatePhoto(community.id);
+            this.pubComponent.msgs.push({severity:'success', summary:'Comunidad creada', detail:'Nueva comunidad creada satisfactoriamente'});
             },
-            error => console.error(error),
+            error => {
+                this.pubComponent.msgs.push({severity:'error', summary:'Error', detail:'Se ha producido un fallo durante la creación de la comunidad'});
+                console.error(error);
+            }
            
         );
 

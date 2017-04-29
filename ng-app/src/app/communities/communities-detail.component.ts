@@ -8,6 +8,7 @@ import { News } from "app/news/news.model";
 import { LoginService } from "app/login/login.service";
 import { User } from "app/user/user.model";
 import { UserService } from "../user/user.service";
+import {PublicComponent} from '../public.component';
 
 
 @Component({
@@ -45,7 +46,7 @@ export class CommunityDetailComponent {
 
   communityID: number;
 
-  constructor(private router: Router, private userService: UserService, activatedRoute: ActivatedRoute, private service: CommunityService, private sessionService: LoginService) {
+  constructor(private router: Router, private userService: UserService, activatedRoute: ActivatedRoute, private service: CommunityService, private sessionService: LoginService,private pubComponent: PublicComponent) {
     this.login = false;
     let id = activatedRoute.snapshot.params['id'];
     this.communityID = id;
@@ -81,8 +82,14 @@ export class CommunityDetailComponent {
   editInfo() {
     this.community.info = this.info;
     this.service.updateGroup(this.communityID, this.community).subscribe(
-      community => console.log(community),
-      error => console.error(error)
+      community => {
+        console.log(community);
+        this.pubComponent.msgs.push({severity:'success', summary:'Comunidad actualizada', detail:'Información actualizada satisfactoriamente'});
+      },
+      error => {
+        console.error(error);
+        this.pubComponent.msgs.push({severity:'error', summary:'Error', detail:'Se ha producido un fallo durante la actualización de la comunidad'});
+      }
     );
   }
 
@@ -94,8 +101,12 @@ export class CommunityDetailComponent {
         this.groupUsers = response.communityUsers;
         this.getCommunity();
         this.getUser();
+        this.pubComponent.msgs.push({severity:'success', summary:'Noticia creada', detail:'Nueva noticia creada satisfactoriamente'});
       },
-      error => console.error(error)
+      error => {
+        console.error(error);
+        this.pubComponent.msgs.push({severity:'error', summary:'Error', detail:'Se ha producido un fallo durante la creación de la noticia'});
+      }
     );
   }
 
@@ -105,8 +116,12 @@ export class CommunityDetailComponent {
         this.groupUsers = response.communityUsers;
         this.getCommunity();
         this.getUser();
+        this.pubComponent.msgs.push({severity:'success', summary:'Acción realizada'});
       },
-      error => console.log(error),
+      error => {
+       console.log(error);
+       this.pubComponent.msgs.push({severity:'error', summary:'Error', detail:'Se ha producido un error al realizar acción'});
+      }
     )
     // if (!this.checkFollowers()) {
     //   this.service.followGroup(this.communityID).subscribe(
@@ -125,8 +140,12 @@ export class CommunityDetailComponent {
         this.groupUsers = response.communityUsers;
         this.getCommunity();
         this.getUser();
+        this.pubComponent.msgs.push({severity:'success', summary:'Acción realizada'});
       },
-      error => console.log(error),
+      error => {
+        console.log(error);
+        this.pubComponent.msgs.push({severity:'error', summary:'Error', detail:'Se ha producido un error al realizar acción'});
+      }
     )
   }
 
