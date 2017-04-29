@@ -175,11 +175,7 @@ export class UserComponent implements OnInit{
     this.service.updateUser(this.editedUser.nickname, this.editedUser).subscribe(
       response =>{
         console.log("Usuario editado.");
-<<<<<<< HEAD
-        console.log(response);
-=======
         this.pubComponent.msgs.push({severity:'success', summary:'Información actualizada', detail:'Información actualizada satisfactoriamente'});
->>>>>>> b476d67c33ccc3ebb8d66c7733b5889d7791413c
         this.user = response;
         //this.sessionService.logIn(this.user.nickname,this.user.passwordHash);
       }
