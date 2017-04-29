@@ -34,10 +34,11 @@ export class LoginComponent{
         console.log("datos del usuario: ");
         //this.userLogged = user;
         console.log(user);
-        this.pubComponent.msgs.push({severity:'info', summary:'Info Message', detail:'PrimeNG rocks'});
+        this.pubComponent.msgs.push({severity:'success', summary:'Inicio de sesión', detail:'Bienvenido a urTeam'});
       },
       error => {
         //console.log("Fail trying to login.")
+        this.pubComponent.msgs.push({severity:'error', summary:'Error en inicio sesión', detail:'Revise nombre de usuario y contraseña'});
         this.http.sessionData.isLogged = false;
       }
     );

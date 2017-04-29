@@ -211,3 +211,15 @@ body {
     color: #1a2930;
     border-color: #f7ce3e;
 }
+
+.ui-growl {
+    position: fixed;
+    right: 20px;
+    top: 70px;
+    width: 20em;
+}
+
+.ui-widget {
+    background: transparent none repeat scroll 0 0;
+    color: #fff;
+}
