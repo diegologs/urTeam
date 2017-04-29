@@ -39,8 +39,7 @@ public class UserController {
 
 	@RequestMapping("/newUser")
 	public String newUser(Model model, User user, @RequestParam String password) throws ParseException {
-		user.setPasswordHash(password);
-		userService.createNewUser(user);
+		userService.createNewUser(user, password);
 		return "redirect:/";
 	}
 

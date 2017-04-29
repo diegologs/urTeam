@@ -36,7 +36,7 @@ public class UserService {
 		return userRepository.findOne(id);
 	}
 
-	public User createNewUser(User user) {
+	public User createNewUser(User user, String pass) {
 		if (userRepository.findByNickname(user.getNickname()) == null) {
 			Date date = new Date();
 			SimpleDateFormat userIdFormater = new SimpleDateFormat("mmddyyyy-hhMMss");
@@ -44,6 +44,7 @@ public class UserService {
 			user.setGeneratedId(generatedId);
 			ArrayList<String> roles = new ArrayList<>(Arrays.asList("ROLE_USER"));
 			user.setRoles(roles);
+			user.setPasswordHash(pass);
 			userRepository.save(user);
 			return user;
 		} else {
@@ -55,7 +56,7 @@ public class UserService {
 		User userToEdit = userRepository.findByNickname(nickname);
 		if (userToEdit != null) {
 			user.setId(userToEdit.getId());
-			user.setPasswordHash(userToEdit.getPasswordHash());
+			user.setPassword(userToEdit.getPasswordHash());
 			userRepository.save(user);
 			return user;
 		} else {
