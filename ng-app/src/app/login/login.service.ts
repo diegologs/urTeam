@@ -51,7 +51,6 @@ export class LoginService {
                             
                             if (this.http.sessionData.userLogged.roles.indexOf("ROLE_ADMIN") > -1) {
                                 this.http.sessionData.isAdmin = true;
-                                this.pubComponent.msgs.push({severity:'info', summary:'!!Eres administrador!!', detail:'Recuerda... Un gran poder conlleva una gran responsabilidad'});
                                 console.log("is admin");
                             }
                         }

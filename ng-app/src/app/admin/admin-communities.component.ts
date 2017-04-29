@@ -25,6 +25,7 @@ export default class AdminCommunities implements OnInit {
   constructor(private router:Router, private service: CommunityService, private sessionService: LoginService,private pubComponent: PublicComponent){}
 
    ngOnInit() {
+    this.pubComponent.msgs.push({severity:'info', summary:'!!Eres administrador!!', detail:'Recuerda... Un gran poder conlleva una gran responsabilidad'});
     this.groupsPage = 0;
     this.moreGroupsButtonText = "Ver Más";
     this.service.getGroups(this.groupsPage).subscribe(
