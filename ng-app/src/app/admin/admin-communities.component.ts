@@ -64,12 +64,12 @@ export default class AdminCommunities implements OnInit {
     this.service.deleteGroup(id).subscribe(
       response => {
         this.getCommunitys();
-        this.pubComponent.msgs.push({severity:'success', summary:'Comunidad eliminada', detail:'Comunidad eliminada satisfactoriamente'}); 
+        // this.pubComponent.msgs.push({severity:'success', summary:'Comunidad eliminada', detail:'Comunidad eliminada satisfactoriamente'}); 
         
       },
       error => {
         console.log(error);
-        this.pubComponent.msgs.push({severity:'error', summary:'Error', detail:'Se ha producido un errror durante la eliminación de la comunidad'}); 
+        // this.pubComponent.msgs.push({severity:'error', summary:'Error', detail:'Se ha producido un errror durante la eliminación de la comunidad'}); 
       }
     )
   }

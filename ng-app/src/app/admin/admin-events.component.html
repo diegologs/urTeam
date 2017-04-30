@@ -1,23 +1,23 @@
 <div class="container-fluid">
-<div *ngFor="let event of events" class="row">
-  <div class="col-sm-10">
-  <h2 [routerLink]="['../../events', event.id]">{{event.name}}</h2>
-  <span class="day">{{event.day_date}}</span>
-  <span class="month">{{event.month_date}}</span>
-  <span class="month">{{event.year_date}}</span>
-  <hr>
-  <span>Miembros: {{event.participants_IDs.length}}</span>
+  <div *ngFor="let event of events" class="row">
+    <div class="col-sm-10">
+      <h2 [routerLink]="['../../events', event.id]">{{event.name}}</h2>
+      <span class="day">{{event.day_date}}</span>
+      <span class="month">{{event.month_date}}</span>
+      <span class="month">{{event.year_date}}</span>
+      <hr>
+      <span>Miembros: {{event.participants_IDs.length}}</span>
+    </div>
+
+    <div class="col-sm-2">
+      <br>
+      <h2 style="color: red;" (click)="deleteEvent(event.id)"> <i class="fa fa-trash-o" aria-hidden="true"></i></h2>
+    </div>
+
+
   </div>
 
-  <div class="col-sm-2">
-       <br>
-        <h2 style="color: red;" (click)="deleteEvent(event.id)"> <i class="fa fa-trash-o" aria-hidden="true"></i></h2>
-  </div>
-
-
 </div>
-
+<div class="styleMoreEvents">
+  <button id="btnMoreEvents" type="button" class="btn mybtn-succes btnMoreEvents" (click)="moreEvents()">{{moreEventsButtonText}}</button>
 </div>
- <div class="styleMoreEvents">
-        <button id="btnMoreEvents" type="button" class="btn mybtn-succes btnMoreEvents" (click)="moreEvents()">{{moreEventsButtonText}}</button>
-      </div>

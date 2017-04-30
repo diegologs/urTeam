@@ -31,13 +31,9 @@ export class LoginComponent{
   logIn(username: string, password: string) {
     this.sessionService.logIn(username, password).subscribe(
       user => {
-        console.log("datos del usuario: ");
-        //this.userLogged = user;
-        console.log(user);
         this.pubComponent.msgs.push({severity:'success', summary:'Inicio de sesión', detail:'Bienvenido a urTeam'});
       },
       error => {
-        //console.log("Fail trying to login.")
         this.pubComponent.msgs.push({severity:'error', summary:'Error en inicio sesión', detail:'Revise nombre de usuario y contraseña'});
         this.http.sessionData.isLogged = false;
       }
@@ -51,12 +47,10 @@ export class LoginComponent{
 
   logOut() {
     this.sessionService.logOut();
-    this.pubComponent.msgs.push({severity:'success', summary:'!!Hasta Pronto!!'});
   }
 
   navbarLogOut(){
         this.sessionService.logOut();
-        this.pubComponent.msgs.push({severity:'success', summary:'!!Hasta Pronto!!'});
     }
 
   register(){

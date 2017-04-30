@@ -32,7 +32,7 @@
         
 
       <li *ngIf="sessionService.getisLogged()">
-        <a *ngIf="sessionService.getisAdmin()" [routerLink]="['/admin']">Admin Zone!</a>
+        <a *ngIf="sessionService.getisAdmin()" [routerLink]="['./admin']">Admin Zone!</a>
       </li>
     </ul>
     <ul *ngIf="!sessionService.getisLogged()" class="nav navbar-nav navbar-right minav">

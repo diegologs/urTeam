@@ -79,8 +79,7 @@ export class UserComponent implements OnInit{
       );
 
       this.statService.getUserStats(nickname).subscribe(
-        stats => {
-          
+        stats => {          
           this.stats = stats;
           if(this.stats.length != 0){
             this.sport1 = stats['Running'].stats;
@@ -145,7 +144,10 @@ export class UserComponent implements OnInit{
   }
       
   checkNotMe(){
-    return (!(this.sessionService.getUser().nickname == this.user.nickname));
+    if(this.sessionService.getUser()){
+       return (!(this.sessionService.getUser().nickname == this.user.nickname));
+    }
+    return true;
   }
 
   checkIsMyFriend(){
