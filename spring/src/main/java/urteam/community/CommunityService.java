@@ -1,5 +1,7 @@
 package urteam.community;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -36,6 +38,9 @@ public class CommunityService {
 
 	@Autowired
 	private urTeamService urteamService;
+	
+	@Autowired
+	private urTeamService imageService;
 
 	public Community findOne(long id) {
 		return repository.findOne(id);
@@ -263,6 +268,35 @@ public class CommunityService {
 	public List<User> getfollowers(Community community) {
 		return community.getUsers_IDs();
 		
+	}
+	
+	public byte[] getCommunityAvatar(long id) throws FileNotFoundException, IOException{
+		Community community = repository.findOne(id);
+		if(community != null){
+			 byte[] file = imageService.getFile(ConstantsUrTeam.COMMUNITY_AVATAR, community.getCommunityId(),
+					community.getMain_photo()); 
+			if(file != null){
+				return file;
+			}
+		} else {
+			return null;
+		}
+		return null;
+	}
+	
+	
+	public byte[] getCommunityImg(long id, String img) throws FileNotFoundException, IOException{
+		Community community = repository.findOne(id);
+		if(community != null){
+			 byte[] file = imageService.getFile(ConstantsUrTeam.COMMUNITY_IMGS, community.getCommunityId(),
+					img); 
+			if(file != null){
+				return file;
+			}
+		} else {
+			return null;
+		}
+		return null;
 	}
 
 

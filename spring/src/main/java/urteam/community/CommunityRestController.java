@@ -1,12 +1,15 @@
 package urteam.community;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -219,6 +222,42 @@ public class CommunityRestController {
 	public ResponseEntity<Event> deleteEvent(@PathVariable long id) {
 		service.delete(id);
 		return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+	}
+	
+	@RequestMapping(value = "/{id}/avatar", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
+	public ResponseEntity<byte[]> getCommunityAvatar(@PathVariable long id) {
+		byte[] communityAvatar;
+		try {
+			communityAvatar = service.getCommunityAvatar(id);
+			if (communityAvatar != null) {
+				final HttpHeaders headers = new HttpHeaders();
+				headers.setContentType(MediaType.IMAGE_JPEG);
+				return new ResponseEntity<>(communityAvatar, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@RequestMapping(value = "/{id}/img/{img}", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
+	public ResponseEntity<byte[]> getCommunityImg(@PathVariable long id, @PathVariable String img) {
+		byte[] communityAvatar;
+		try {
+			communityAvatar = service.getCommunityImg(id,img);
+			if (communityAvatar != null) {
+				final HttpHeaders headers = new HttpHeaders();
+				headers.setContentType(MediaType.IMAGE_JPEG);
+				return new ResponseEntity<>(communityAvatar, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 	}
 
 }
