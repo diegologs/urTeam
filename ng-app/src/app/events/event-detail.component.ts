@@ -66,7 +66,6 @@ export class EventDetailComponent {
     if (this.sessionService.getisLogged()) {
       let cosa: boolean = (this.event.participants_IDs.find(
         user1 => user1.nickname == this.user.nickname) != undefined);
-      console.log(cosa);
       return cosa;
     }
     
@@ -76,11 +75,9 @@ export class EventDetailComponent {
     this.event.info = this.info;
     this.service.updatedEvent(this.event.id, this.event).subscribe(
       event => {
-        console.log(event);
         this.pubComponent.msgs.push({severity:'success', summary:'Evento actualizado', detail:'Información actualizada satisfactoriamente'});
     },
       error => {
-        console.error(error);
         this.pubComponent.msgs.push({severity:'error', summary:'Error', detail:'Se ha producido un fallo durante la actualización del evento'});
       }
     );

@@ -43,7 +43,4 @@ export class HomeComponent {
       }
     )
   }
-  show() {
-        this.pubComponent.msgs.push({severity:'info', summary:'Info Message', detail:'PrimeNG rocks'});
-    }
 }

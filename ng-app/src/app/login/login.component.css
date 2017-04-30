@@ -221,3 +221,9 @@ body {
     background: transparent none repeat scroll 0 0;
     color: #fff;
 }
+
+.ui-galleria{
+    display: block;
+    margin: auto;
+    padding: 0 auto;
+}

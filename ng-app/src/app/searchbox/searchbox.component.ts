@@ -38,14 +38,12 @@ export class SearchBoxComponent {
         this.service.searchUsers(criteria).subscribe(
             users => {
                 this.users = users.content;
-                console.log(users);
                 this.users = users.slice();
             },
             error => console.error(error)
         )
         this.service.searchCommunities(criteria).subscribe(
             communities => {
-                console.log(communities);
                 this.communities = communities.slice();
                 for (let group of communities) {
                     this.groups.push(group.name);
@@ -57,7 +55,6 @@ export class SearchBoxComponent {
         this.service.searchEvents(criteria).subscribe(
             events => {
                 this.events = events.content;
-                console.log(events);
                 this.events = events.slice();
             },
             error => console.error(error)

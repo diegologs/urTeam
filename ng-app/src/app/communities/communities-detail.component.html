@@ -2,7 +2,7 @@
   <div class="group-header">
     <div class="row group-header-info">
       <div class="col-sm-2 container">
-        <img class="img-circle img-responsive group-image" width="120px" src="https://localhost:8443/image/community-avatar/{{community.communityId}}/{{community.main_photo}}">
+        <img class="img-circle img-responsive group-image" width="120px" src="https://localhost:8443/api/groups/{{communityID}}/avatar">
       </div>
       <div class="col-sm-8 container group-text">
         <h1 class="group-name">{{community.name}}</h1>
@@ -13,8 +13,8 @@
       </div>
       <div *ngIf="sessionService.getisLogged()">
         <div class="col-sm-2 container">
-          <button *ngIf="checkFollow()" class="btn btn-default group-btn" (click)="unfollowGroup()">Dejar de seguir</button>
-          <button *ngIf="!checkFollow()" class="btn btn-default group-btn" (click)="followGroup()">Seguir</button>
+          <button *ngIf="checkFollow()" class="btn btn-default follow_btn" (click)="unfollowGroup()">Dejar de seguir</button>
+          <button *ngIf="!checkFollow()" class="btn btn-default follow_btn" (click)="followGroup()">Seguir</button>
         </div>
       </div>
 
@@ -43,12 +43,15 @@
         <a *ngIf="isOwner" data-toggle="modal" data-target="#myModal4"><button class="btn mybtn-succes btn_group2">Añadir imágenes</button></a>
 
         <div class="row">
-          <div *ngFor="let image of community.communityImages">
-            <div *ngIf="image">
-              <div class="col-sm-2">
-                <img src="https://localhost:8443/image/community-imgs/{{community.communityId}}/{{image}}" />
-              </div>
-            </div>
+          <div class="container-fluid galleriaImages">
+            <p-galleria [images]="images" panelWidth="500" panelHeight="313" autoPlay="true" [showCaption]="true"></p-galleria>
+              <!--<div *ngFor="let image of community.communityImages">
+                <div *ngIf="image">
+                  <div class="col-sm-2">
+                    <img src="https://localhost:8443/api/groups/{{community.id}}/img/{{image}}" />
+                  </div>
+                </div>
+              </div>-->
           </div>
         </div>
 

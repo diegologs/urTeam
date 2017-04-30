@@ -63,7 +63,7 @@ export class CommunitiesCreate {
 
  selectFile($event) {
     this.groupImage = $event.target.files[0];
-    console.log("Selected file: " + this.groupImage.name + " type:" + this.groupImage.type + " size:" + this.groupImage.size);
+    //console.log("Selected file: " + this.groupImage.name + " type:" + this.groupImage.type + " size:" + this.groupImage.size);
   }
 }
 

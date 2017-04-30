@@ -100,6 +100,24 @@ body {}
     margin-left: -2px;
 }
 
+.follow_btn {
+    text-decoration: none;
+    background-color: #f7ce3e;
+    color: #000;
+    text-align: center;
+    border: 4px solid #f7ce3e;
+    border-radius: 5px;
+}
+
+.follow_btn:hover {
+    text-decoration: none;
+    background-color: #c5a431;
+    color: #000;
+    text-align: center;
+    border: 4px solid #c5a431;
+    border-radius: 5px;
+}
+
 
 /* Profile Content */
 

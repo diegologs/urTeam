@@ -44,6 +44,7 @@ import { TabViewModule } from 'primeng/primeng';
 import {DataListModule} from 'primeng/primeng';
 import {DataTableModule,SharedModule} from 'primeng/primeng';
 import {GrowlModule} from 'primeng/primeng';
+import{GalleriaModule} from 'primeng/primeng';
 
 
 
@@ -69,7 +70,8 @@ import {GrowlModule} from 'primeng/primeng';
     DataListModule,
     DataTableModule,
     SharedModule,
-    GrowlModule
+    GrowlModule,
+    GalleriaModule
   ],
   providers: [EventService, CommunityService , LoginService, UserService,HttpClient,appRoutingProviders, SearchBoxService, StatsService],
   bootstrap: [AppComponent]

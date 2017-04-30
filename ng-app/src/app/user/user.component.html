@@ -29,8 +29,8 @@
         <!-- SIDEBAR BUTTONS -->
         <div *ngIf="sessionService.getisLogged()" class="profile-userbuttons">
           <div *ngIf="checkNotMe()">
-            <button *ngIf="checkIsMyFriend()" class="btn btn-default group-btn" (click)="follow()">Dejar de seguir</button>
-            <button *ngIf="!checkIsMyFriend()" class="btn btn-default group-btn" (click)="follow()">Seguir</button>
+            <button *ngIf="checkIsMyFriend()" class="btn btn-default follow_btn" (click)="follow()">Dejar de seguir</button>
+            <button *ngIf="!checkIsMyFriend()" class="btn btn-default follow_btn" (click)="follow()">Seguir</button>
           </div>
         </div>
         <!-- END SIDEBAR BUTTONS -->

@@ -11,6 +11,7 @@ import { UserService } from "../user/user.service";
 import {PublicComponent} from '../public.component';
 
 
+
 @Component({
   templateUrl: './communities-detail.component.html',
   styleUrls: ['./communities-detail.component.css']
@@ -21,30 +22,23 @@ export class CommunityDetailComponent {
   groupCity = "toledo"
   groupSport = "Running"
   groupUsers: User[];
-  imgUrl = "https://localhost:8443/image/event-avatar/aleatorio/default-mainphoto";
+  imgUrl = "aleatorio/default-mainphoto";
   community: Community;
   info: string;
-
   newsTitle: string;
   newsText: string;
-
   myService: CommunityService;
-
   login: boolean;
-
   groupId: number;
-
   groupNumberOfFollowers: number;
-
   user: User;
   ownerId: User;
   isOwner: boolean;
-
   groupImage: any;
-
-
-
   communityID: number;
+  //Gallery
+  images: any[];
+
 
   constructor(private router: Router, private userService: UserService, activatedRoute: ActivatedRoute, private service: CommunityService, private sessionService: LoginService,private pubComponent: PublicComponent) {
     this.login = false;
@@ -55,7 +49,7 @@ export class CommunityDetailComponent {
     this.groupUsers = [];
     this.community = { name: this.groupName, info: this.groupInfo, city: this.groupCity, main_photo: this.imgUrl, sport: this.groupSport, communityUsers: this.groupUsers };
     this.ownerId = { username: "", surname: "", nickname: "", email: "", country: "" };
-
+    this.images = [];
   }
 
   getCommunity() {
@@ -66,7 +60,10 @@ export class CommunityDetailComponent {
         this.user = this.sessionService.getUser();
         this.ownerId = community.owner_id;
         this.isOwner = (this.ownerId.nickname === this.user.nickname);
-
+        for(let image of this.community.communityImages){
+          console.log("pet api: "+image);
+          this.images.push({source:'https://localhost:8443/api/groups/' + this.community.id + '/img/'+ image});
+        }
       },
       error => console.error(error),
       () => this.checkFollow()
@@ -83,7 +80,6 @@ export class CommunityDetailComponent {
     this.community.info = this.info;
     this.service.updateGroup(this.communityID, this.community).subscribe(
       community => {
-        console.log(community);
         this.pubComponent.msgs.push({severity:'success', summary:'Comunidad actualizada', detail:'Información actualizada satisfactoriamente'});
       },
       error => {
@@ -123,15 +119,6 @@ export class CommunityDetailComponent {
        this.pubComponent.msgs.push({severity:'error', summary:'Error', detail:'Se ha producido un error al realizar acción'});
       }
     )
-    // if (!this.checkFollowers()) {
-    //   this.service.followGroup(this.communityID).subscribe(
-    //     community => console.log(community),
-    //     error => console.error(error),
-    //   );
-    // } else {
-    //   this.unfollowGroup();
-    // }
-    // this.refresh();
   }
 
   unfollowGroup() {
@@ -164,6 +151,7 @@ export class CommunityDetailComponent {
     this.service.addImage(this.communityID, formData).subscribe(
       response => {
         this.groupUsers = response.communityUsers;
+        this.images = [];
         this.getCommunity();
         this.getUser();
       },
@@ -173,24 +161,6 @@ export class CommunityDetailComponent {
 
   selectFile($event) {
     this.groupImage = $event.target.files[0];
-    console.log("Selected file: " + this.groupImage.name + " type:" + this.groupImage.type + " size:" + this.groupImage.size);
+    //console.log("Selected file: " + this.groupImage.name + " type:" + this.groupImage.type + " size:" + this.groupImage.size);
   }
-
 }
-
-
-  // this.groupNumberOfFollowers = this.community.communityUsers.length;
-  // if (this.sessionService.getisLogged) {
-  //   this.login = true;
-  //   for (let follower of this.community.communityUsers) {
-  //     if (follower) {
-  //       //console.log(follower.nickname === this.sessionService.getUser().nickname);
-  //       if (follower.nickname === this.sessionService.getUser().nickname) {
-  //         this.isFollowing = "DEJAR DE SEGUIR";
-  //         return true;
-  //       }
-  //     }
-  //   }
-  // }
-
-

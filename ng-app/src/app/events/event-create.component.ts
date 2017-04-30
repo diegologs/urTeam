@@ -58,6 +58,6 @@ export class EventCreateComponent{
 
   selectFile($event) {
     this.eventImage = $event.target.files[0];
-    console.log("Selected file: " + this.eventImage.name + " type:" + this.eventImage.type + " size:" + this.eventImage.size);
+    //console.log("Selected file: " + this.eventImage.name + " type:" + this.eventImage.type + " size:" + this.eventImage.size);
   }
 }

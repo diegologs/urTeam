@@ -27,9 +27,9 @@ export class LoginService {
     }
 
     private generateAuthString(username: String, password: String) {
-        console.log("usuario: "+username + " pass: "+password);
+        //console.log("usuario: "+username + " pass: "+password);
         let cosica = "Basic " + btoa(username + ":" + password);
-        console.log(cosica);
+        //console.log(cosica);
         //return "Basic " + btoa(username + ":" + password);
         return cosica;
     }
@@ -51,7 +51,7 @@ export class LoginService {
                             
                             if (this.http.sessionData.userLogged.roles.indexOf("ROLE_ADMIN") > -1) {
                                 this.http.sessionData.isAdmin = true;
-                                console.log("is admin");
+                                //console.log("is admin");
                             }
                         }
                     },

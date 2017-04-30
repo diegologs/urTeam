@@ -55,8 +55,4 @@ export class CommunitiesComponent implements OnInit {
       this.moreGroupsButtonText = 'No hay mas resultados';
     }
   }
-
-  
- 
 }
-

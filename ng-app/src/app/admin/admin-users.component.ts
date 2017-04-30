@@ -12,8 +12,6 @@ export default class AdminUsers implements OnInit {
  
   users: User[];
 
-     imgUrl = "https://localhost:8443/image/event-avatar/aleatorio/default-mainphoto";
-
   constructor(private router:Router, private service: UserService, private sessionService: LoginService){}
 
    ngOnInit() {
