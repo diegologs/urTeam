@@ -95,7 +95,7 @@ _Diagrama de clases y relaciones de Spring:_
 Este diagrama es complementario a los anteriores, añadiéndose las clases servicios, y restcontroller necesarios para la APIRest.
 
 _Diagrama de clases y relaciones de Angular:_
-[Diagrama Angular](https://github.com/Frostqui/urTeam/blob/master/ng-app/src/documentation/dependencies.svg)
+[Diagrama Angular](https://frostqui.github.io/urTeam/)
 
 
 _Documentación de la API:_
