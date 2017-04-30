@@ -24,6 +24,11 @@ import urteam.event.Event;
 @RestController
 @RequestMapping("/api/users")
 public class UserRestController {
+	
+	private class Regis{
+		private User user;
+		private String pass;
+	}
 
 	public interface MinimalUser extends User.MinimalUser {
 	}
@@ -126,8 +131,8 @@ public class UserRestController {
 	@JsonView(BasicUser.class)
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<User> createUser(@RequestBody User user) {
-		User newUser = userService.createNewUser(user);
+	public ResponseEntity<User> createUser(@RequestBody Regis data ) {
+		User newUser = userService.createNewUser(data.user, data.pass);
 		if (newUser != null) {
 			return new ResponseEntity<>(newUser, HttpStatus.OK);
 		} else {

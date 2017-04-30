@@ -83,7 +83,6 @@ export class UserComponent implements OnInit{
           
           this.stats = stats;
           if(this.stats.length != 0){
-            console.log(stats);
             this.sport1 = stats['Running'].stats;
             this.sport2 = stats['Roller'].stats;
             this.sport3 = stats['Mountain Bike'].stats;
@@ -117,7 +116,6 @@ export class UserComponent implements OnInit{
     });
     this.statService.getUserStats(this.user.nickname).subscribe(
       stats => {
-       console.log(stats);
         this.stats = stats;
         this.sport1 = stats['Running'].stats;
         this.sport2 = stats['Roller'].stats;
@@ -174,13 +172,6 @@ export class UserComponent implements OnInit{
   }
 
   editUser(){
-    // this.user.username = this.editedUser.username;
-    // this.user.surname = this.editedUser.surname;
-    // this.user.email = this.editedUser.email;
-    // this.user.bio = this.editedUser.bio;
-    // this.user.city = this.editedUser.city;
-    // this.user.country = this.editedUser.country;
-    
     this.service.updateUser(this.editedUser.nickname, this.editedUser).subscribe(
       response =>{
         console.log("Usuario editado.");

@@ -7,6 +7,7 @@ import { User } from '../user/user.model';
 import { UserService } from '../user/user.service';
 import { HttpClient } from '../HttpClient/httpClient';
 
+
 import 'rxjs/Rx';
 
 const BASE_URL_Login = 'https://localhost:8443/api/logIn';
@@ -65,23 +66,6 @@ export class LoginService {
             .catch(error => this.loginFailed(error));
     }
 
-    // logOut() {
-        
-    //     return this.http.get(BASE_URL_Logout)
-    //         .map(
-    //         response => {
-    //             this.http.sessionData.userLogged = null;
-               
-                
-    //             this.http.sessionData.isLogged = false;
-    //             this.http.sessionData.isAdmin = false;
-                
-    //             this.http.sessionData.authToken = "";
-    //          return response;   
-    //         },
-    //         ).catch(error => console.log(error));
-    // }
-
     logOut(){
         return this.http.get(BASE_URL_Logout).map(
         response => {
@@ -90,8 +74,9 @@ export class LoginService {
             this.http.sessionData.isAdmin = false;
             this.http.sessionData.authToken = "";
         },
-        error => console.log(error)
-        );
+        error => {
+            console.log(error);
+        });
     }
 
     public getisLogged() {

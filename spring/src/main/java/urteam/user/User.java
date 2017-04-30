@@ -54,7 +54,7 @@ public class User{
 	@Column(unique=true)
 	@JsonView(MinimalUser.class)
 	private String nickname;
-	@JsonView(BasicUser.class)
+	//@JsonView(BasicUser.class)
 	private String passwordHash;
 	@JsonView(BasicUser.class)
 	private String email;
@@ -171,6 +171,10 @@ public class User{
 
 	public void setPasswordHash(String password) {
 		this.passwordHash = new BCryptPasswordEncoder().encode(password);
+	}
+	
+	public void setPassword(String password){
+		this.passwordHash = password;
 	}
 
 	public String getEmail() {
