@@ -1,0 +1,920 @@
+[
+  {
+    "name": "AppModule",
+    "file": "src/app/app.module.ts",
+    "providers": [
+      {
+        "name": "EventService"
+      },
+      {
+        "name": "CommunityService"
+      },
+      {
+        "name": "LoginService"
+      },
+      {
+        "name": "UserService"
+      },
+      {
+        "name": "HttpClient"
+      },
+      {
+        "name": "appRoutingProviders"
+      },
+      {
+        "name": "SearchBoxService"
+      },
+      {
+        "name": "StatsService"
+      }
+    ],
+    "declarations": [
+      {
+        "name": "AppComponent",
+        "file": "src/app/app.component.ts",
+        "selector": "urteam-app",
+        "providers": [],
+        "templateUrl": [
+          "app.component.html"
+        ],
+        "styleUrls": [
+          "app.component.css"
+        ],
+        "__raw": [
+          {
+            "kind": 253,
+            "pos": 56,
+            "end": 81,
+            "flags": 0,
+            "name": {
+              "kind": 69,
+              "pos": 56,
+              "end": 67,
+              "flags": 0,
+              "text": "selector"
+            },
+            "initializer": {
+              "kind": 9,
+              "pos": 68,
+              "end": 81,
+              "flags": 0,
+              "text": "urteam-app"
+            }
+          },
+          {
+            "kind": 253,
+            "pos": 82,
+            "end": 120,
+            "flags": 0,
+            "name": {
+              "kind": 69,
+              "pos": 82,
+              "end": 96,
+              "flags": 0,
+              "text": "templateUrl"
+            },
+            "initializer": {
+              "kind": 9,
+              "pos": 97,
+              "end": 120,
+              "flags": 0,
+              "text": "./app.component.html"
+            }
+          },
+          {
+            "kind": 253,
+            "pos": 121,
+            "end": 158,
+            "flags": 0,
+            "name": {
+              "kind": 69,
+              "pos": 121,
+              "end": 133,
+              "flags": 0,
+              "text": "styleUrls"
+            },
+            "initializer": {
+              "kind": 170,
+              "pos": 134,
+              "end": 158,
+              "flags": 0,
+              "elements": [
+                {
+                  "kind": 9,
+                  "pos": 136,
+                  "end": 157,
+                  "flags": 0,
+                  "text": "./app.component.css"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "NavbarComponent"
+      },
+      {
+        "name": "FooterComponent"
+      },
+      {
+        "name": "HomeComponent"
+      },
+      {
+        "name": "EventsComponent"
+      },
+      {
+        "name": "EventDetailComponent"
+      },
+      {
+        "name": "CommunitiesComponent"
+      },
+      {
+        "name": "CommunityDetailComponent"
+      },
+      {
+        "name": "CommunitiesCreate"
+      },
+      {
+        "name": "UserComponent"
+      },
+      {
+        "name": "LoginComponent"
+      },
+      {
+        "name": "EventCreateComponent"
+      },
+      {
+        "name": "PrivateComponent",
+        "file": "app/admin/admin.component.ts",
+        "selector": "admin",
+        "providers": [],
+        "templateUrl": [
+          "admin.component.html"
+        ],
+        "styleUrls": [
+          "admin.component.css"
+        ],
+        "__raw": [
+          {
+            "kind": 253,
+            "pos": 195,
+            "end": 217,
+            "flags": 0,
+            "name": {
+              "kind": 69,
+              "pos": 195,
+              "end": 208,
+              "flags": 0,
+              "text": "selector"
+            },
+            "initializer": {
+              "kind": 9,
+              "pos": 209,
+              "end": 217,
+              "flags": 0,
+              "text": "admin"
+            }
+          },
+          {
+            "kind": 253,
+            "pos": 218,
+            "end": 258,
+            "flags": 0,
+            "name": {
+              "kind": 69,
+              "pos": 218,
+              "end": 232,
+              "flags": 0,
+              "text": "templateUrl"
+            },
+            "initializer": {
+              "kind": 9,
+              "pos": 233,
+              "end": 258,
+              "flags": 0,
+              "text": "./admin.component.html"
+            }
+          },
+          {
+            "kind": 253,
+            "pos": 259,
+            "end": 298,
+            "flags": 0,
+            "name": {
+              "kind": 69,
+              "pos": 259,
+              "end": 271,
+              "flags": 0,
+              "text": "styleUrls"
+            },
+            "initializer": {
+              "kind": 170,
+              "pos": 272,
+              "end": 298,
+              "flags": 0,
+              "elements": [
+                {
+                  "kind": 9,
+                  "pos": 274,
+                  "end": 297,
+                  "flags": 0,
+                  "text": "./admin.component.css"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "AdminEvents",
+        "file": "app/admin/admin-events.component.ts",
+        "selector": "admin-events",
+        "providers": [],
+        "templateUrl": [
+          "admin-events.component.html"
+        ],
+        "styleUrls": [
+          ".events/events.component.css"
+        ],
+        "__raw": [
+          {
+            "kind": 253,
+            "pos": 236,
+            "end": 263,
+            "flags": 0,
+            "name": {
+              "kind": 69,
+              "pos": 236,
+              "end": 247,
+              "flags": 0,
+              "text": "selector"
+            },
+            "initializer": {
+              "kind": 9,
+              "pos": 248,
+              "end": 263,
+              "flags": 0,
+              "text": "admin-events"
+            }
+          },
+          {
+            "kind": 253,
+            "pos": 264,
+            "end": 311,
+            "flags": 0,
+            "name": {
+              "kind": 69,
+              "pos": 264,
+              "end": 278,
+              "flags": 0,
+              "text": "templateUrl"
+            },
+            "initializer": {
+              "kind": 9,
+              "pos": 279,
+              "end": 311,
+              "flags": 0,
+              "text": "./admin-events.component.html"
+            }
+          },
+          {
+            "kind": 253,
+            "pos": 312,
+            "end": 360,
+            "flags": 0,
+            "name": {
+              "kind": 69,
+              "pos": 312,
+              "end": 324,
+              "flags": 0,
+              "text": "styleUrls"
+            },
+            "initializer": {
+              "kind": 170,
+              "pos": 325,
+              "end": 360,
+              "flags": 0,
+              "elements": [
+                {
+                  "kind": 9,
+                  "pos": 327,
+                  "end": 359,
+                  "flags": 0,
+                  "text": "../events/events.component.css"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "AdminCommunities",
+        "file": "app/admin/admin-communities.component.ts",
+        "selector": "admin-events",
+        "providers": [],
+        "templateUrl": [
+          "admin-communities.component.html"
+        ],
+        "styleUrls": [
+          ".communities/communities.component.css"
+        ],
+        "__raw": [
+          {
+            "kind": 253,
+            "pos": 369,
+            "end": 396,
+            "flags": 0,
+            "name": {
+              "kind": 69,
+              "pos": 369,
+              "end": 380,
+              "flags": 0,
+              "text": "selector"
+            },
+            "initializer": {
+              "kind": 9,
+              "pos": 381,
+              "end": 396,
+              "flags": 0,
+              "text": "admin-events"
+            }
+          },
+          {
+            "kind": 253,
+            "pos": 397,
+            "end": 449,
+            "flags": 0,
+            "name": {
+              "kind": 69,
+              "pos": 397,
+              "end": 411,
+              "flags": 0,
+              "text": "templateUrl"
+            },
+            "initializer": {
+              "kind": 9,
+              "pos": 412,
+              "end": 449,
+              "flags": 0,
+              "text": "./admin-communities.component.html"
+            }
+          },
+          {
+            "kind": 253,
+            "pos": 450,
+            "end": 508,
+            "flags": 0,
+            "name": {
+              "kind": 69,
+              "pos": 450,
+              "end": 462,
+              "flags": 0,
+              "text": "styleUrls"
+            },
+            "initializer": {
+              "kind": 170,
+              "pos": 463,
+              "end": 508,
+              "flags": 0,
+              "elements": [
+                {
+                  "kind": 9,
+                  "pos": 465,
+                  "end": 507,
+                  "flags": 0,
+                  "text": "../communities/communities.component.css"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "AdminUsers",
+        "file": "app/admin/admin-users.component.ts",
+        "selector": "admin-users",
+        "providers": [],
+        "templateUrl": [
+          "admin-users.component.html"
+        ],
+        "styleUrls": [],
+        "__raw": [
+          {
+            "kind": 253,
+            "pos": 275,
+            "end": 301,
+            "flags": 0,
+            "name": {
+              "kind": 69,
+              "pos": 275,
+              "end": 286,
+              "flags": 0,
+              "text": "selector"
+            },
+            "initializer": {
+              "kind": 9,
+              "pos": 287,
+              "end": 301,
+              "flags": 0,
+              "text": "admin-users"
+            }
+          },
+          {
+            "kind": 253,
+            "pos": 302,
+            "end": 348,
+            "flags": 0,
+            "name": {
+              "kind": 69,
+              "pos": 302,
+              "end": 316,
+              "flags": 0,
+              "text": "templateUrl"
+            },
+            "initializer": {
+              "kind": 9,
+              "pos": 317,
+              "end": 348,
+              "flags": 0,
+              "text": "./admin-users.component.html"
+            }
+          }
+        ]
+      },
+      {
+        "name": "PublicComponent"
+      },
+      {
+        "name": "SearchBoxComponent"
+      }
+    ],
+    "imports": [
+      {
+        "name": "BrowserModule"
+      },
+      {
+        "name": "FormsModule"
+      },
+      {
+        "name": "HttpModule"
+      },
+      {
+        "ns": "NgbModule",
+        "name": "NgbModule.forRoot()"
+      },
+      {
+        "name": "routing"
+      },
+      {
+        "ns": "Ng2PageScrollModule",
+        "name": "Ng2PageScrollModule.forRoot()"
+      },
+      {
+        "name": "Ng2GoogleChartsModule"
+      },
+      {
+        "name": "ProgressBarModule"
+      },
+      {
+        "name": "ChartModule"
+      },
+      {
+        "name": "TabViewModule"
+      },
+      {
+        "name": "DataListModule"
+      },
+      {
+        "name": "DataTableModule"
+      },
+      {
+        "name": "SharedModule"
+      },
+      {
+        "name": "GrowlModule"
+      }
+    ],
+    "exports": [],
+    "bootstrap": [
+      {
+        "name": "AppComponent"
+      }
+    ],
+    "__raw": [
+      {
+        "kind": 253,
+        "pos": 2296,
+        "end": 2642,
+        "flags": 0,
+        "name": {
+          "kind": 69,
+          "pos": 2296,
+          "end": 2311,
+          "flags": 0,
+          "text": "declarations"
+        },
+        "initializer": {
+          "kind": 170,
+          "pos": 2312,
+          "end": 2642,
+          "flags": 0,
+          "multiLine": true,
+          "elements": [
+            {
+              "kind": 69,
+              "pos": 2314,
+              "end": 2331,
+              "flags": 0,
+              "text": "AppComponent"
+            },
+            {
+              "kind": 69,
+              "pos": 2332,
+              "end": 2348,
+              "flags": 0,
+              "text": "NavbarComponent"
+            },
+            {
+              "kind": 69,
+              "pos": 2349,
+              "end": 2365,
+              "flags": 0,
+              "text": "FooterComponent"
+            },
+            {
+              "kind": 69,
+              "pos": 2366,
+              "end": 2380,
+              "flags": 0,
+              "text": "HomeComponent"
+            },
+            {
+              "kind": 69,
+              "pos": 2381,
+              "end": 2397,
+              "flags": 0,
+              "text": "EventsComponent"
+            },
+            {
+              "kind": 69,
+              "pos": 2398,
+              "end": 2419,
+              "flags": 0,
+              "text": "EventDetailComponent"
+            },
+            {
+              "kind": 69,
+              "pos": 2420,
+              "end": 2445,
+              "flags": 0,
+              "text": "CommunitiesComponent"
+            },
+            {
+              "kind": 69,
+              "pos": 2446,
+              "end": 2470,
+              "flags": 0,
+              "text": "CommunityDetailComponent"
+            },
+            {
+              "kind": 69,
+              "pos": 2471,
+              "end": 2488,
+              "flags": 0,
+              "text": "CommunitiesCreate"
+            },
+            {
+              "kind": 69,
+              "pos": 2489,
+              "end": 2503,
+              "flags": 0,
+              "text": "UserComponent"
+            },
+            {
+              "kind": 69,
+              "pos": 2504,
+              "end": 2519,
+              "flags": 0,
+              "text": "LoginComponent"
+            },
+            {
+              "kind": 69,
+              "pos": 2520,
+              "end": 2540,
+              "flags": 0,
+              "text": "EventCreateComponent"
+            },
+            {
+              "kind": 69,
+              "pos": 2541,
+              "end": 2562,
+              "flags": 0,
+              "text": "PrivateComponent"
+            },
+            {
+              "kind": 69,
+              "pos": 2563,
+              "end": 2574,
+              "flags": 0,
+              "text": "AdminEvents"
+            },
+            {
+              "kind": 69,
+              "pos": 2575,
+              "end": 2591,
+              "flags": 0,
+              "text": "AdminCommunities"
+            },
+            {
+              "kind": 69,
+              "pos": 2592,
+              "end": 2602,
+              "flags": 0,
+              "text": "AdminUsers"
+            },
+            {
+              "kind": 69,
+              "pos": 2603,
+              "end": 2618,
+              "flags": 0,
+              "text": "PublicComponent"
+            },
+            {
+              "kind": 69,
+              "pos": 2619,
+              "end": 2637,
+              "flags": 0,
+              "text": "SearchBoxComponent"
+            }
+          ]
+        }
+      },
+      {
+        "kind": 253,
+        "pos": 2643,
+        "end": 2946,
+        "flags": 0,
+        "name": {
+          "kind": 69,
+          "pos": 2643,
+          "end": 2653,
+          "flags": 0,
+          "text": "imports"
+        },
+        "initializer": {
+          "kind": 170,
+          "pos": 2654,
+          "end": 2946,
+          "flags": 0,
+          "multiLine": true,
+          "elements": [
+            {
+              "kind": 69,
+              "pos": 2656,
+              "end": 2674,
+              "flags": 0,
+              "text": "BrowserModule"
+            },
+            {
+              "kind": 69,
+              "pos": 2675,
+              "end": 2691,
+              "flags": 0,
+              "text": "FormsModule"
+            },
+            {
+              "kind": 69,
+              "pos": 2692,
+              "end": 2707,
+              "flags": 0,
+              "text": "HttpModule"
+            },
+            {
+              "kind": 174,
+              "pos": 2708,
+              "end": 2732,
+              "flags": 0,
+              "expression": {
+                "kind": 172,
+                "pos": 2708,
+                "end": 2730,
+                "flags": 0,
+                "expression": {
+                  "kind": 69,
+                  "pos": 2708,
+                  "end": 2722,
+                  "flags": 0,
+                  "text": "NgbModule"
+                },
+                "name": {
+                  "kind": 69,
+                  "pos": 2723,
+                  "end": 2730,
+                  "flags": 0,
+                  "text": "forRoot"
+                }
+              },
+              "arguments": []
+            },
+            {
+              "kind": 69,
+              "pos": 2733,
+              "end": 2745,
+              "flags": 0,
+              "text": "routing"
+            },
+            {
+              "kind": 174,
+              "pos": 2746,
+              "end": 2780,
+              "flags": 0,
+              "expression": {
+                "kind": 172,
+                "pos": 2746,
+                "end": 2778,
+                "flags": 0,
+                "expression": {
+                  "kind": 69,
+                  "pos": 2746,
+                  "end": 2770,
+                  "flags": 0,
+                  "text": "Ng2PageScrollModule"
+                },
+                "name": {
+                  "kind": 69,
+                  "pos": 2771,
+                  "end": 2778,
+                  "flags": 0,
+                  "text": "forRoot"
+                }
+              },
+              "arguments": []
+            },
+            {
+              "kind": 69,
+              "pos": 2781,
+              "end": 2807,
+              "flags": 0,
+              "text": "Ng2GoogleChartsModule"
+            },
+            {
+              "kind": 69,
+              "pos": 2808,
+              "end": 2830,
+              "flags": 0,
+              "text": "ProgressBarModule"
+            },
+            {
+              "kind": 69,
+              "pos": 2831,
+              "end": 2847,
+              "flags": 0,
+              "text": "ChartModule"
+            },
+            {
+              "kind": 69,
+              "pos": 2848,
+              "end": 2866,
+              "flags": 0,
+              "text": "TabViewModule"
+            },
+            {
+              "kind": 69,
+              "pos": 2867,
+              "end": 2886,
+              "flags": 0,
+              "text": "DataListModule"
+            },
+            {
+              "kind": 69,
+              "pos": 2887,
+              "end": 2907,
+              "flags": 0,
+              "text": "DataTableModule"
+            },
+            {
+              "kind": 69,
+              "pos": 2908,
+              "end": 2925,
+              "flags": 0,
+              "text": "SharedModule"
+            },
+            {
+              "kind": 69,
+              "pos": 2926,
+              "end": 2942,
+              "flags": 0,
+              "text": "GrowlModule"
+            }
+          ]
+        }
+      },
+      {
+        "kind": 253,
+        "pos": 2947,
+        "end": 3084,
+        "flags": 0,
+        "name": {
+          "kind": 69,
+          "pos": 2947,
+          "end": 2959,
+          "flags": 0,
+          "text": "providers"
+        },
+        "initializer": {
+          "kind": 170,
+          "pos": 2960,
+          "end": 3084,
+          "flags": 0,
+          "elements": [
+            {
+              "kind": 69,
+              "pos": 2962,
+              "end": 2974,
+              "flags": 0,
+              "text": "EventService"
+            },
+            {
+              "kind": 69,
+              "pos": 2975,
+              "end": 2992,
+              "flags": 0,
+              "text": "CommunityService"
+            },
+            {
+              "kind": 69,
+              "pos": 2994,
+              "end": 3007,
+              "flags": 0,
+              "text": "LoginService"
+            },
+            {
+              "kind": 69,
+              "pos": 3008,
+              "end": 3020,
+              "flags": 0,
+              "text": "UserService"
+            },
+            {
+              "kind": 69,
+              "pos": 3021,
+              "end": 3031,
+              "flags": 0,
+              "text": "HttpClient"
+            },
+            {
+              "kind": 69,
+              "pos": 3032,
+              "end": 3051,
+              "flags": 0,
+              "text": "appRoutingProviders"
+            },
+            {
+              "kind": 69,
+              "pos": 3052,
+              "end": 3069,
+              "flags": 0,
+              "text": "SearchBoxService"
+            },
+            {
+              "kind": 69,
+              "pos": 3070,
+              "end": 3083,
+              "flags": 0,
+              "text": "StatsService"
+            }
+          ]
+        }
+      },
+      {
+        "kind": 253,
+        "pos": 3085,
+        "end": 3113,
+        "flags": 0,
+        "name": {
+          "kind": 69,
+          "pos": 3085,
+          "end": 3097,
+          "flags": 0,
+          "text": "bootstrap"
+        },
+        "initializer": {
+          "kind": 170,
+          "pos": 3098,
+          "end": 3113,
+          "flags": 0,
+          "elements": [
+            {
+              "kind": 69,
+              "pos": 3100,
+              "end": 3112,
+              "flags": 0,
+              "text": "AppComponent"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]
