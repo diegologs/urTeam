@@ -14,5 +14,6 @@ export class PrivateComponent {
     public msgs: Message[] = [];
 
     constructor(private sessionService: LoginService, private router: Router) {
+        this.msgs.push({severity:'infor', summary:'¡¡Eres Administrador!!', detail:'Recuerda... un gran poder conlleva una gran responsabilidad!'});
     }
 }

@@ -59,7 +59,7 @@ deleteEvent(id: number){
     this.service.deleteEvent(id).subscribe(
       response => {
         this.getEvents();
-        this.msgComponent.msgs.push({severity:'success', summary:'Evento eliminado', detail:'Evento eliminado satisfactoriamente'});         
+        this.msgComponent.msgs.push({severity:'success', summary:'Evento eliminado', detail:'Se ha eliminado el evento'});         
       },
       error => {
         console.log(error);
