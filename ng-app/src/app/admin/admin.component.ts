@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router} from '@angular/router';
 import { LoginService } from '../login/login.service';
 import { User } from '../user/user.model';
+import {Message} from 'primeng/primeng';
 
 @Component({
     selector: 'admin',
@@ -9,6 +10,9 @@ import { User } from '../user/user.model';
   styleUrls: ['./admin.component.css']
 })
 export class PrivateComponent {
+    
+    public msgs: Message[] = [];
 
-    constructor(private sessionService: LoginService, private router: Router) {}
+    constructor(private sessionService: LoginService, private router: Router) {
+    }
 }

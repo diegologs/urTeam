@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { EventService } from "app/events/events.service";
 import { LoginService } from "app/login/login.service";
-import {PublicComponent} from '../public.component';
+import {PrivateComponent} from './admin.component';
 
 @Component({
   selector: 'admin-events',
@@ -21,7 +21,7 @@ export default class AdminEvents implements OnInit {
 
   imgUrl = "https://localhost:8443/image/event-avatar/aleatorio/default-mainphoto";
 
-  constructor(private router: Router, private service: EventService, private sessionService: LoginService) { }
+  constructor(private router: Router, private service: EventService, private sessionService: LoginService,private msgComponent: PrivateComponent) { }
 
   ngOnInit() {
     this.eventsPage = 0;
@@ -59,11 +59,11 @@ deleteEvent(id: number){
     this.service.deleteEvent(id).subscribe(
       response => {
         this.getEvents();
-        // this.pubComponent.msgs.push({severity:'success', summary:'Evento eliminado', detail:'Evento eliminado satisfactoriamente'});         
+        this.msgComponent.msgs.push({severity:'success', summary:'Evento eliminado', detail:'Evento eliminado satisfactoriamente'});         
       },
       error => {
         console.log(error);
-        // this.pubComponent.msgs.push({severity:'error', summary:'Error', detail:'Se ha producido un errror durante la eliminación del evento'}); 
+        this.msgComponent.msgs.push({severity:'error', summary:'Error', detail:'Se ha producido un errror durante la eliminación del evento'}); 
       }
     )
    
