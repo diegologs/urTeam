@@ -89,13 +89,19 @@ _Diagrama de la base de datos:_
 
 __Fase 4:__ 
 
-_Diagrama de clases y relaciones:_
+_Diagrama de clases y relaciones de Spring:_
 ![Diagrama de clases y relaciones](https://github.com/Frostqui/urTeam/blob/master/web/screenshots/fase4-diagramadeclases-servicioscontrollerrestcontroller-daw.png)
 
 Este diagrama es complementario a los anteriores, añadiéndose las clases servicios, y restcontroller necesarios para la APIRest.
 
+_Diagrama de clases y relaciones de Angular:_
+[Diagrama Angular](https://github.com/Frostqui/urTeam/blob/master/ng-app/src/documentation/dependencies.svg)
+
+
 _Documentación de la API:_
 [DOCUMENTACION API - API.md](https://github.com/Frostqui/urTeam/blob/master/API.md)
+
+
 
  __Plantillas__ 
  * Control Panel Template [control Panel template](https://www.creative-tim.com/product/light-bootstrap-dashboard)
