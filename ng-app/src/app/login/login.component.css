@@ -133,97 +133,97 @@ body {
 }
 
 .ui-widget {
-    background: #1a2930;
-    color: #fff;
+    background: #1a2930 !important;
+    color: #fff !important;
 }
 
 .ui-widget-content{
-    color: #fff;
+    color: #fff !important;
 }
 
 .ui-progressbar {
-    height: 1.6em;
-    width: inherit;
+    height: 1.6em !important;
+    width: inherit !important;
 }
 
 .ui-progressbar .ui-progressbar-label {
-    color: #fff;
+    color: #fff !important;
 }
 .ui-progressbar .ui-progressbar-value{
-     background-color: #c5a431;
+     background-color: #c5a431 !important;
      width: 3em;
 }
 
 .ui-tabview {
-    background: #1a2930;
-    color: #fff;
+    background: #1a2930 !important;
+    color: #fff !important;
 }
 
 .ui-tabview .ui-tabview-nav {
-    background: #1a2930;
-    color: #fff;
+    background: #1a2930 !important;
+    color: #fff !important;
 }
 
 
 .ui-tabview .ui-tabview-panel {
-    background: #1a2930;
-    color: #fff;
+    background: #1a2930 !important;
+    color: #fff !important;
 }
 
 .ui-widget-header .ui-state-default a,
 .ui-widget-content .ui-state-default a,
 .ui-state-default a {
-    color: #1a2930;
-    background: #f7ce3e;
+    color: #1a2930 !important;
+    background: #f7ce3e !important;
 }
 
 .ui-widget-header .ui-state-active a,
 .ui-widget-content .ui-state-active a,
 .ui-state-active a {
-    color: #fff;
-    background: #1a2930;
+    color: #fff !important;
+    background: #1a2930 !important;
 }
 
 .ui-tabview .ui-tabview-panels {
-    color: #fff;
+    color: #fff !important;
 }
 
 .ui-datalist{
-    background: #1a2930;
-    color: #fff;
-    border: none;
+    background: #1a2930 !important;
+    color: #fff !important;
+    border: none !important;
 }
 
 .ui-datalist .ui-datalist-content{
-    background: #1a2930;
-    color: #fff;
+    background: #1a2930 !important;
+    color: #fff !important;
 }
 
 .ui-widget-content{
-    border: none;
+    border: none !important;
 }
 
 .ui-widget-header {
- border: none;
+ border: none !important;
 }
 
 .ui-paginator .ui-paginator-page.ui-state-active {
-    background: #f7ce3e;
-    color: #1a2930;
-    border-color: #f7ce3e;
+    background: #f7ce3e !important;
+    color: #1a2930 !important;
+    border-color: #f7ce3e !important;
 }
 
 .ui-growl {
-    position: fixed;
-    right: 20px;
-    top: 70px;
-    width: 20em;
-    background: transparent none repeat scroll 0 0;
-    color: #fff;
+    position: fixed !important;
+    right: 20px !important;
+    top: 70px !important;
+    width: 20em !important;
+    background: transparent none repeat scroll 0 0 !important;
+    color: #fff !important;
 }
 
 .ui-galleria{
-    display: block;
-    margin: auto;
-    padding: 0 auto;
+    display: block !important;
+    margin: auto !important;
+    padding: 0 auto !important;
 }

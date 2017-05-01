@@ -18,4 +18,5 @@ export interface User {
     communityList?: Community[];
     eventList?: Event[];
     sportStats?: UserSportStats;
+    password?: string;
 }

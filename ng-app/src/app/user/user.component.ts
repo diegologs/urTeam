@@ -33,6 +33,8 @@ export class UserComponent implements OnInit{
 
   followers: User[];
 
+  userImage: any;
+
   formData: Stat = {
     totalSesionTime: 0,
 	  date: '' 
@@ -99,6 +101,7 @@ export class UserComponent implements OnInit{
     this.service.getUser(this.user.nickname).subscribe(
       user => {
          this.user = user;
+         this.editedUser = Object.assign({},user);
          this.followers = user.followers;
          this.value = (user.score % 1000 ) / 10;
          this.level = Math.floor(user.score /1000);
@@ -178,10 +181,32 @@ export class UserComponent implements OnInit{
       response =>{
         console.log("Usuario editado.");
         this.pubComponent.msgs.push({severity:'success', summary:'Información actualizada', detail:'Información actualizada satisfactoriamente'});
-        this.user = response;
+        this.user.bio = response.bio;
+        this.user.username = response.username;
+        this.user.surname = response.surname;
+        this.user.city = response.city;
+        this.user.country = response.country;
+        this.user.email = response.email;
+        this.user.generatedId = response.generatedId;
+        this.updatePhoto(response.nickname);
+        this.getUser();
         //this.sessionService.logIn(this.user.nickname,this.user.passwordHash);
       }
     )
+  }
 
+  updatePhoto(nickname: string){
+         let formData = new FormData();
+        formData.append('file', this.userImage, this.userImage.name);
+
+        this.service.setAvatar(nickname, formData).subscribe(
+            user => this.user = user,
+            error => console.error(error)
+        )
+    }
+
+ selectFile($event) {
+    this.userImage = $event.target.files[0];
+    //console.log("Selected file: " + this.groupImage.name + " type:" + this.groupImage.type + " size:" + this.groupImage.size);
   }
 }

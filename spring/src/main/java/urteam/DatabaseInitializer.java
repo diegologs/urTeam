@@ -62,7 +62,7 @@ public class DatabaseInitializer {
 		sportRepo.save(sport3);
 		
 		// Sample users
-		for (int i = 0; i < 5; i++) {
+		/*for (int i = 0; i < 5; i++) {
 			String username = "name" + (i+1);
 			String surname = "surname" + i;
 			String nickname = "user" + i;
@@ -75,7 +75,7 @@ public class DatabaseInitializer {
 			String avatar = "default-avatar";
 			
 			User user = new User(username, surname, nickname, password, email, bio, score, city, country, avatar, "ROLE_USER");
-			user.setScore("0");
+			user.setScore("0");*/
 			
 //			Stats_dos statsDos = new Stats_dos();
 //		    statsDos.setDate("12/12/12");
@@ -103,8 +103,8 @@ public class DatabaseInitializer {
 //		    user.addUserSportsList(userSport);
 //		    user.addUserSportsList(userSport2);
 			
-			userRepo.save(user); 
-		}
+		/*	userRepo.save(user); 
+		}*/
 		
 		String avatar = "avatar-aleatorio";
 	 	User admin = new User("admin", "admin", "admin", "admin", "admin@email.com", "admin","9999","admin","España",avatar, "ROLE_USER", "ROLE_ADMIN");
@@ -112,7 +112,7 @@ public class DatabaseInitializer {
 		
 		
 		// Sample events
-		for (int i = 0; i < 10; i++) {	
+		/*for (int i = 0; i < 10; i++) {	
 			String name = "Evento " + i;			
 			double price = i;
 			String info = "Aqui va la descripcion de los eventos";
@@ -138,10 +138,10 @@ public class DatabaseInitializer {
 			event.setOwner_id(userRepo.findOne((long) ((i%5)+1)));
 
 			eventRepo.save(event);
-		}	    
+		}*/	    
 
 		// Sample communities	
-	    for (int i = 0; i < 5; i++) {
+	    /*for (int i = 0; i < 5; i++) {
 			String name = "Comunidad  " + i;
 			String info = "Información de la comunidad.";
 			String main_photo = "default-mainphoto";
@@ -151,7 +151,7 @@ public class DatabaseInitializer {
 			
 			community.setOwner_id(userRepo.findOne((long) ((i%5)+1)));
 			communityRepo.save(community);
-		}
+		}*/
 	   
 	    // Add followers
 /*	    User user1 = userRepo.getOne((long) 1);

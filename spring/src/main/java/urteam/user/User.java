@@ -59,6 +59,22 @@ public class User{
 	@JsonView(BasicUser.class)
 	private String email;
 
+	public void setFollowing(List<User> following) {
+		this.following = following;
+	}
+
+	public void setFollowers(List<User> followers) {
+		this.followers = followers;
+	}
+
+	public void setCommunityList(List<Community> communityList) {
+		this.communityList = communityList;
+	}
+
+	public void setSportStats(Map<String, UserSportStats> sportStats) {
+		this.sportStats = sportStats;
+	}
+
 	@Column(columnDefinition = "TEXT")
 	@JsonView(BasicUser.class)
 	private String bio = "";

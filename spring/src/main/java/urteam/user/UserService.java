@@ -57,6 +57,11 @@ public class UserService {
 		if (userToEdit != null) {
 			user.setId(userToEdit.getId());
 			user.setPassword(userToEdit.getPasswordHash());
+			user.setEventList(userToEdit.getEventList());
+			user.setCommunityList(userToEdit.getCommunityList());
+			user.setFollowers(userToEdit.getFollowers());
+			user.setFollowing(userToEdit.getFollowing());
+			user.setSportStats(userToEdit.getSportStats());
 			userRepository.save(user);
 			return user;
 		} else {

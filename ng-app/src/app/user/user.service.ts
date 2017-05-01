@@ -35,8 +35,8 @@ export class UserService{
 			.catch(error => this.handleError(error));
 	}
 
-	createUser(user: User, password: string){
-		return this.http.post(BASE_URL,{user,password})
+	createUser(user: User){
+		return this.http.post(BASE_URL,user)
 		.map(response => response.json())
 		.catch(error => this.handleError(error));
 	}
@@ -73,7 +73,11 @@ export class UserService{
 		.catch(error => this.handleError(error));
 	}
 
-	
+	setAvatar(userName: string, formData: FormData){
+		return this.http.put(BASE_URL + userName + '/avatar', formData)
+		.map(response => response.json())
+		.catch(error => this.handleError(error));
+	}
 
     private handleError(error: any) {
 		console.error(error);

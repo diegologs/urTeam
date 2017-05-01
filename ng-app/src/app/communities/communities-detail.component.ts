@@ -55,6 +55,7 @@ export class CommunityDetailComponent {
   getCommunity() {
     this.service.getGroup(this.communityID).subscribe(
       community => {
+        this.images = [];
         this.community = community;
         this.groupUsers = community.communityUsers;
         this.user = this.sessionService.getUser();
@@ -151,7 +152,6 @@ export class CommunityDetailComponent {
     this.service.addImage(this.communityID, formData).subscribe(
       response => {
         this.groupUsers = response.communityUsers;
-        this.images = [];
         this.getCommunity();
         this.getUser();
       },

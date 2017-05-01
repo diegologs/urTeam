@@ -55,8 +55,8 @@ export class LoginComponent{
 
   register(){
     let user: User;
-    user = {username: this.username, surname: this.surname, nickname: this.nickname, email: this.email, city: this.city, country: this.country};
-    this.userService.createUser(user, this.password).subscribe(
+    user = {username: this.username, surname: this.surname, nickname: this.nickname, email: this.email, city: this.city, country: this.country, password: this.password};
+    this.userService.createUser(user).subscribe(
         event => console.log(event)
     );
     this.router.navigateByUrl('');
