@@ -1,10 +1,11 @@
 <div class="container" *ngIf="event">
   <!-- EVENT FAST INFO -->
   <div class="row panel">
-    <div class="col-md-4 bg_blur ">
-				<img
-					src="https://localhost:8443/api/events/{{event.id}}/avatar">
-
+    <div class="col-md-4 bg_blur" *ngIf="event.main_photo">
+				<img src="https://localhost:8443/api/events/{{event.id}}/avatar">
+    </div>
+    <div class="col-md-4 bg_blur" *ngIf="!event.main_photo">
+				<img src="http://icons.iconarchive.com/icons/blackvariant/button-ui-system-folders-alt/512/Group-icon.png">
     </div>
     <div class="col-md-8  col-xs-12">
       <div class="header">

@@ -29,7 +29,8 @@
       </div>
       <div class="panel-body nopadding">
         <p>{{event.sport}}</p>
-        <img src="https://localhost:8443/api/events/{{event.id}}/avatar" alt="{{event.name}}" class="img-responsive" />
+          <img *ngIf="event.main_photo" src="https://localhost:8443/api/events/{{event.id}}/avatar" alt="{{event.name}}" class="img-responsive" />
+          <img *ngIf="!event.main_photo" src="http://icons.iconarchive.com/icons/blackvariant/button-ui-system-folders-alt/512/Group-icon.png" alt="{{event.name}}" class="img-responsive" />
         <div class="row nopadding">
           <div class="col-sm-6 nopadding">
             <time class="start blue">
@@ -59,7 +60,7 @@
   </div>
   <br>
   <h2 class="sport_title">
-    <i class="fa fa-bicycle" aria-hidden="true" style="color:#c5c0c1;"></i> Running
+    <i class="fa fa-road" aria-hidden="true" style="color:#c5c0c1;"></i> Running
   </h2>
   <hr class="hr-yellow">
  <div class="col-sm-12">
@@ -77,7 +78,8 @@
       </div>
       <div class="panel-body nopadding">
         <p>{{event.sport}}</p>
-        <img src="https://localhost:8443/api/events/{{event.id}}/avatar" alt="{{event.name}}" class="img-responsive" />
+        <img *ngIf="event.main_photo" src="https://localhost:8443/api/events/{{event.id}}/avatar" alt="{{event.name}}" class="img-responsive" />
+          <img *ngIf="!event.main_photo" src="http://icons.iconarchive.com/icons/blackvariant/button-ui-system-folders-alt/512/Group-icon.png" alt="{{event.name}}" class="img-responsive" />
         <div class="row nopadding">
           <div class="col-sm-6 nopadding">
             <time class="start blue">
@@ -125,7 +127,8 @@
       </div>
       <div class="panel-body nopadding">
         <p>{{event.sport}}</p>
-        <img src="https://localhost:8443/api/events/{{event.id}}/avatar" alt="{{event.name}}" class="img-responsive" />
+        <img *ngIf="event.main_photo" src="https://localhost:8443/api/events/{{event.id}}/avatar" alt="{{event.name}}" class="img-responsive" />
+          <img *ngIf="!event.main_photo" src="http://icons.iconarchive.com/icons/blackvariant/button-ui-system-folders-alt/512/Group-icon.png" alt="{{event.name}}" class="img-responsive" />
         <div class="row nopadding">
           <div class="col-sm-6 nopadding">
             <time class="start blue">

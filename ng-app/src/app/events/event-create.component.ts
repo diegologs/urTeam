@@ -24,7 +24,7 @@ export class EventCreateComponent{
 
   event: Event;
 
-  imgUrl = "https://localhost:8443/image/event-avatar/aleatorio/default-mainphoto";
+  imgUrl = "";
 
 
   constructor(private router:Router, activatedRoute: ActivatedRoute, private service: EventService,private sessionService: LoginService,private pubComponent: PublicComponent){}
@@ -35,9 +35,14 @@ export class EventCreateComponent{
     this.service.createEvent(event).subscribe(
       
             event =>{ this.event = event;
-            this.updatePhoto(event.id);
+            if(this.eventImage != null){
+                    this.updatePhoto(event.id); 
+                }else{
+                    console.log("no hay foto");
+                } 
             this.pubComponent.msgs.push({severity:'success', summary:'Evento creado', detail:'Nuevo evento creado satisfactoriamente'});
-            },
+            this.router.navigate(['/']); 
+          },
             error => {
             console.error(error);
             this.pubComponent.msgs.push({severity:'error', summary:'Error', detail:'Se ha producido un fallo durante la creación del evento'});

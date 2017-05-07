@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Directive,Input,Pipe} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from './user.service';
 import { User } from './user.model';
@@ -16,7 +16,9 @@ import {PublicComponent} from '../public.component';
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
 })
+
 export class UserComponent implements OnInit{
+  
 
   user: User;
   editedUser: User;
@@ -32,7 +34,6 @@ export class UserComponent implements OnInit{
   cols: any[];
 
   followers: User[];
-
   userImage: any;
 
   formData: Stat = {
@@ -54,6 +55,10 @@ export class UserComponent implements OnInit{
       },
   };
 
+
+  imgurl:string = '';
+
+
   constructor(private router:Router, private activatedRoute: ActivatedRoute, private service: UserService, private statService: StatsService, private sessionService: LoginService,private pubComponent: PublicComponent){ }
 
   ngOnInit(){    
@@ -61,6 +66,7 @@ export class UserComponent implements OnInit{
       this.service.getUser(nickname).subscribe(
           user => {
             this.user = user;
+            this.imgurl = 'https://localhost:8443/api/users/'+ user.nickname +'/avatar';
             this.editedUser = Object.assign({},user);
             this.followers = user.followers;
     
@@ -189,18 +195,19 @@ export class UserComponent implements OnInit{
         this.user.email = response.email;
         this.user.generatedId = response.generatedId;
         this.updatePhoto(response.nickname);
-        this.getUser();
+        this.router.navigate(['/']); 
         //this.sessionService.logIn(this.user.nickname,this.user.passwordHash);
       }
     )
   }
 
   updatePhoto(nickname: string){
-         let formData = new FormData();
-        formData.append('file', this.userImage, this.userImage.name);
-
-        this.service.setAvatar(nickname, formData).subscribe(
-            user => this.user = user,
+         let formData2 = new FormData();
+        formData2.append('file', this.userImage, this.userImage.name);
+        this.service.setAvatar(nickname, formData2).subscribe(
+            response => {
+              this.pieChartOptions.dataTable.splice(1,3);
+            },
             error => console.error(error)
         )
     }
@@ -209,4 +216,10 @@ export class UserComponent implements OnInit{
     this.userImage = $event.target.files[0];
     //console.log("Selected file: " + this.groupImage.name + " type:" + this.groupImage.type + " size:" + this.groupImage.size);
   }
+
+  errorHandler(event) {
+    this.imgurl = 'http://icons.iconarchive.com/icons/blackvariant/button-ui-system-folders-alt/512/Group-icon.png';
+  }
+
+
 }

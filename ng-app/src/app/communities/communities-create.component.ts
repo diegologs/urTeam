@@ -27,7 +27,7 @@ export class CommunitiesCreate {
     
 
 
-    imgUrl = "https://localhost:8443/image/event-avatar/aleatorio/default-mainphoto";
+    imgUrl = "";
 
     constructor(private router: Router, private service: CommunityService,private pubComponent: PublicComponent) { }
 
@@ -39,22 +39,24 @@ export class CommunitiesCreate {
 
         this.service.createGroup(group).subscribe(
             community =>{ this.community = community;
-            this.updatePhoto(community.id);
+                if(this.groupImage != null){
+                    this.updatePhoto(community.id); 
+                }else{
+                    console.log("no hay foto");
+                }   
             this.pubComponent.msgs.push({severity:'success', summary:'Comunidad creada', detail:'Nueva comunidad creada satisfactoriamente'});
-            },
+            this.router.navigate(['/']);
+    },
             error => {
                 this.pubComponent.msgs.push({severity:'error', summary:'Error', detail:'Se ha producido un fallo durante la creación de la comunidad'});
                 console.error(error);
-            }
-           
-        );
-
+            }  
+        )
     }
 
     updatePhoto(id: number){
-         let formData = new FormData();
+        let formData = new FormData();
         formData.append('file', this.groupImage, this.groupImage.name);
-
         this.service.setPhoto(id, formData).subscribe(
             community => this.community = community,
             error => console.error(error)

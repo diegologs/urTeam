@@ -7,8 +7,7 @@
       <div class="profile-sidebar">
         <!-- SIDEBAR userpagePIC -->
         <div class="profile-userpic">
-          <img src="https://localhost:8443/image/user-avatar/{{user.generatedId}}/avatar-{{user.generatedId}}" class="img-responsive"
-            alt="avatar">
+           <img [src]="imgurl" (error)="errorHandler($event)">
         </div>
         <!-- END SIDEBAR userpagePIC -->
         <!-- SIDEBAR userpage TITLE -->
@@ -222,8 +221,8 @@
                 <a [routerLink]="['/communities/',g.id]">
                   <div class="row group">
                     <div class="group-info">
-                      <div class="profile-userpic col-sm-4" *ngIf="g.main_photo">
-                        <img class="img-circle img-responsive group-image" width="110px" src="https://localhost:8443/image/community-avatar/{{g.communityId}}/{{g.main_photo}}">
+                      <div class="profile-userpic col-sm-4">
+                        
                       </div>
                       <div class="col-sm-8">
                         <h1 class="group-name">{{g.name}}</h1>
@@ -254,7 +253,7 @@
                   <div class="row group">
                     <div class="group-info">
                       <div class="profile-userpic col-sm-4">
-                        <img src="https://localhost:8443/api/events/{{e.id}}/avatar" class="img-responsive" alt="avatar">
+                        
                       </div>
                       <div class="col-sm-8">
                         <h1 class="group-name">{{e.name}}</h1>
@@ -287,7 +286,7 @@
                     <div class="row group">
                       <div class="group-info">
                         <div class="profile-userpic col-sm-4">
-                          <img src="https://localhost:8443/image/user-avatar/{{u.generatedId}}/avatar-{{u.generatedId}}" class="img-responsive" alt="avatar">
+                          
                         </div>
                         <div class="col-sm-8">
                           <h1 class="group-name">{{u.username}} {{u.surname}}</h1>

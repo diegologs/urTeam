@@ -19,4 +19,5 @@ export interface User {
     eventList?: Event[];
     sportStats?: UserSportStats;
     password?: string;
+    avatar?: string;
 }

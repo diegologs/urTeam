@@ -9,7 +9,7 @@ export interface Community {
     info: string;
     country?: string;
     city: string;
-    main_photo: string;
+    main_photo?: string;
     owner_id?: User;
     communityUsers?: User[];
     news?: News[];

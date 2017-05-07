@@ -24,6 +24,8 @@ export class LoginComponent{
   city:string;
   country:string;
   password:string;
+
+  imgUrl: "";
   
   constructor(private http: HttpClient,private sessionService: LoginService, private router: Router, private userService: UserService, private pubComponent: PublicComponent) {
   }

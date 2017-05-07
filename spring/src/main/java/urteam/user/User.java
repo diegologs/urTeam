@@ -84,7 +84,8 @@ public class User{
 	private String country;
 	@JsonView(BasicUser.class)
 	private String score = "0";
-	private String avatar = "avatar";
+	@JsonView(MinimalUser.class)
+	private String avatar;
 
 	@ElementCollection(fetch = FetchType.EAGER)
 	@JsonView(MinimalUser.class)

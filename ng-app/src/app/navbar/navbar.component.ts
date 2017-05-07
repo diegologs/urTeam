@@ -17,7 +17,8 @@ export class NavbarComponent {
     }
 
     logOut() {
-        this.sessionService.logOut().subscribe()
+        this.sessionService.logOut().subscribe();
+        this.router.navigate(['/']); 
     }
     search() {
         if (this.criteria != null) {

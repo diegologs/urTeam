@@ -117,11 +117,11 @@ public class UserRestController {
 				headers.setContentType(MediaType.IMAGE_JPEG);
 				return new ResponseEntity<>(userAvatar, HttpStatus.OK);
 			} else {
-				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
 

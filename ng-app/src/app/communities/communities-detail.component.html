@@ -1,8 +1,11 @@
 <div class="group" *ngIf="community">
   <div class="group-header">
     <div class="row group-header-info">
-      <div class="col-sm-2 container">
+      <div class="col-sm-2 container" *ngIf="community.main_photo">
         <img class="img-circle img-responsive group-image" width="120px" src="https://localhost:8443/api/groups/{{communityID}}/avatar">
+      </div>
+      <div class="col-sm-2 container" *ngIf="!community.main_photo">
+        <img class="img-circle img-responsive group-image" width="120px" src="http://icons.iconarchive.com/icons/blackvariant/button-ui-system-folders-alt/512/Group-icon.png">
       </div>
       <div class="col-sm-8 container group-text">
         <h1 class="group-name">{{community.name}}</h1>
