@@ -103,6 +103,8 @@ __Fase 5:__
 
 _Diagrama de clases y relaciones de Angular:_
 [Diagrama Angular](https://frostqui.github.io/urTeam/)
+[Diagramas Angular](https://github.com/Frostqui/urTeam/tree/docker/web/screenshots/diagrams)
+
 
 _Video demostracin de uso:_
 [![Video Demostracion](https://i.imgur.com/MlwydWz.jpg)](https://youtu.be/h2w2BToKEFI "urTeam : Video Demostracion")
