@@ -4,6 +4,8 @@
 * La parte pública de la web constará de los eventos, los grupos y de la página personal de cada usuario.  
 * La parte privada se compone del panel de control de cada usuario donde podrá modificar su perfil, añadir eventos y administrar sus grupos.
 
+[![Video Demostracion](https://i.imgur.com/MlwydWz.jpg)](https://youtu.be/h2w2BToKEFI "urTeam : Video Demostracion")
+
 __Entidades:__
 * ___Usuarios:___ Personas que se registran en la aplicacion con el animo de asistir y crear eventos de su deporte favorito.
 * ___Grupos:___ Los usuarios podran crear grupos o asociaciones las cuales creen e incentiven la participacion en eventos, estas podran ser privadas o publicadas.
@@ -94,14 +96,16 @@ _Diagrama de clases y relaciones de Spring:_
 
 Este diagrama es complementario a los anteriores, añadiéndose las clases servicios, y restcontroller necesarios para la APIRest.
 
-_Diagrama de clases y relaciones de Angular:_
-[Diagrama Angular](https://frostqui.github.io/urTeam/)
-
-
 _Documentación de la API:_
 [DOCUMENTACION API - API.md](https://github.com/Frostqui/urTeam/blob/master/API.md)
 
+__Fase 5:__ 
 
+_Diagrama de clases y relaciones de Angular:_
+[Diagrama Angular](https://frostqui.github.io/urTeam/)
+
+_Video demostracin de uso:_
+[![Video Demostracion](https://i.imgur.com/MlwydWz.jpg)](https://youtu.be/h2w2BToKEFI "urTeam : Video Demostracion")
 
  __Plantillas__ 
  * Control Panel Template [control Panel template](https://www.creative-tim.com/product/light-bootstrap-dashboard)
