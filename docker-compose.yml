@@ -1,0 +1,24 @@
+version: '2'
+ 
+services:
+  mysql:
+    image: mysql
+    container_name: mysql-spring
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=db_urTeam
+    #restart: always
+
+ 
+  spring-repository:
+    depends_on:
+      - mysql
+    image: pablogb/urteam:latest
+    container_name: urteam_apirest_angular
+    ports:
+      - 8443:8443
+    links:
+      - mysql:mysql
+    #restart: always
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/db_urTeam
