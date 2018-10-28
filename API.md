@@ -217,3 +217,36 @@ GET | /api/searchbox/users/{criteria} | Devuelve los resultados por usuarios. | 
 GET | /api/searchbox/events/{criteria} | Devuelve los resultados por eventos. | `200 OK` | `404 NOT FOUND`
 GET | /api/searchbox/groups/{criteria} | Devuelve los resultados por grupos. | `200 OK` | `404 NOT FOUND`
 GET | /api/searchbox/all/{criteria} | Devuelve los resultados para todos. | `200 OK` | `404 NOT FOUND`
+
+
+
+----
+## Company service usage
+
+ Method | URL | Description | Response | Error
+--- | --- | --- | --- | --- |
+POST | /api/v1/company-management/companies | Return sorted companies collection. | `200 OK` | `400 BAD REQUEST` `500 INTERNAL SERVER ERROR`
+
+**PUT /api/v1/company-management/companies**
+
+Body:
+```json
+[
+  {
+    "custNo": 20,
+    "name": "British Airways",
+    "country": "United Kingdom"
+  },
+  {
+    "custNo": 5,
+    "name": "AIMIA",
+    "country": "Canada"
+  },
+  {
+    "custNo": 18,
+    "name": "VECI",
+    "country": "Spain"
+  }
+]
+  ```
+
